@@ -149,7 +149,8 @@ def merge_results_leveled(leveled_df, results):
     
     # Create a column list for the new df
     column_list = ['row_id']
-    column_list.extend(word_cols)
+    for word_col in reversed(word_cols):
+        column_list.append(word_col)    
     for i in range(1, max_book+1):
         column_list.append('book_{}'.format(i))
     
