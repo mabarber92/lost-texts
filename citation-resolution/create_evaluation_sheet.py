@@ -38,8 +38,8 @@ def loop_through_ms(text, fn, arg1, arg2, splitter = r"ms(\d+)", separate_lists 
     
     return output
 
-def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+"):
-    """Identify a set of results in a ms, for each result split on splitter and output a list of lists"""
+def search_ms(text, start_phrase, capture_window):
+    """Identify a set of results in a ms"""
     # build regex
     regex = start_phrase + '(?:\W\w+){' + str(capture_window) + '}'
     
@@ -48,10 +48,14 @@ def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+"):
 
     # findall matches
     matches_list = re.findall(regex, text)
-    
-    
 
+    return matches_list
 
+def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+"):
+    """Identify a set of results in a ms, for each result split on splitter and output a list of lists"""
+
+    # Pass the text, start phrase and capture window to search function    
+    matches_list = search_ms(text, start_phrase, capture_window)
 
     # Loop through matches, split and append to output
     for match in matches_list:
