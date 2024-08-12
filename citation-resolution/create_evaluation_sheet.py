@@ -43,8 +43,7 @@ def search_ms(text, start_phrase, capture_window):
     # build regex
     regex = start_phrase + '(?:\W\w+){' + str(capture_window) + '}'
     
-    # Create output list
-    output = []
+
 
     # findall matches
     matches_list = re.findall(regex, text)
@@ -56,6 +55,9 @@ def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+"):
 
     # Pass the text, start phrase and capture window to search function    
     matches_list = search_ms(text, start_phrase, capture_window)
+
+    # Create output list
+    output = []
 
     # Loop through matches, split and append to output
     for match in matches_list:
