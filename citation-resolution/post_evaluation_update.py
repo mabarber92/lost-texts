@@ -26,19 +26,19 @@ def locate_level_ids(id_string, leveled_df_ids):
     ids_df = leveled_df_ids[leveled_df_ids["row_id"].isin(ids)]
     return ids_df
 
-def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_map_json, map_only = False):
+def create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clusters_df, uri_citation_map_json, map_only = False):
     
     # Check if the json already exists - if it does read in the existing data - otherwise initiate empty data
-    if os.path.isfile(uri_citation_map_path):
-        with open(uri_citation_map_path) as f:
+    if os.path.isfile(uri_citation_map_json):
+        with open(uri_citation_map_json, encoding='utf-8-sig') as f:
             mapping_data = json.load(f)
     else:
         mapping_data = {} 
 
     # Get the columns that have the words of the citation in them
     word_cols = get_pattern_cols(evaluation_df, 'word_')
-    level_cols = get_pattern_cols(leveled_df_ids, 'level_')
-
+    level_cols = get_pattern_cols(leveled_df_ids, '_book')
+    
     
     # Create a new column that is the reassembled citation string - for looking up shared citations later
     evaluation_df["full_string"] = evaluation_df[word_cols].agg(' '.join, axis=1)
@@ -48,11 +48,13 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_m
     found_citations = found_citations[found_citations["extend"].isna()]
     found_citations = found_citations.replace({np.nan:None})
 
+    
 
 
 
-
-    # Create intermediary dictionary for storing new data
+    # Get the citations that are the full length- we will use these to check against later
+    full_length_citations = found_citations[found_citations["word_start"].isna()]
+    full_length_citations = full_length_citations[full_length_citations["word_end"].isna()]["full_string"].to_list()
     
 
     # Loop through the found_citations and use them to repopulate the intermediary dictionary - first pass just populate with new strings
@@ -81,23 +83,53 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_m
         if word_start == None or word_end == None:
             word_start = 0
             word_end = len(word_cols)
+            full_length = True
         else:
             word_start = word_start - 1
+            full_length = False
         cit_words = []
         for word_col in word_cols[int(word_start):int(word_end)]:
             cit_words.append(citation[word_col])
         final_string = " ".join(cit_words)
 
 
-
+        # Filter the evaluation_df to find strings that start and end at specified point
+        all_citations = evaluation_df.copy()
+        for word_col in word_cols[int(word_start):int(word_end)]:
+            all_citations = all_citations[all_citations[word_col] == citation[word_col]]
         
+        
+        
+
+        # To avoid taking cases where the additional length allows us to disambiguate - e.g. where a nisba after the first two words means it's a different name - we use the full-length citations to filter out those cases
+        if not full_length:
+            all_citations = all_citations[~all_citations["full_string"].isin(full_length_citations)]
+            
+                  
+
         # Use the full_string to look up identical strings and collect up the ids - transform those into ms
         
-        cit_ids = evaluation_df[evaluation_df["full_string"] == citation["full_string"]]["row_id"].to_list()
+        cit_ids = all_citations["row_id"].to_list()
         
         
         cit_ms = locate_level_ids(".".join(cit_ids), leveled_df_ids)["ms"].drop_duplicates().to_list()
         
+        # Fetch shared citations from results_no_clusters and add to ms list
+        results_no_clusters_df["full_string"] = results_no_clusters_df[word_cols].agg(' '.join, axis=1)
+        
+        # Filter the results_no_clusters_df to find strings that start and end at specified point
+        all_citations = results_no_clusters_df.copy()
+        for word_col in word_cols[int(word_start):int(word_end)]:
+            all_citations = all_citations[all_citations[word_col] == citation[word_col]]
+        
+        # To avoid taking cases where the additional length allows us to disambiguate - e.g. where a nisba after the first two words means it's a different name - we use the full-length citations to filter out those cases
+        if not full_length:
+            all_citations = all_citations[~all_citations["full_string"].isin(full_length_citations)]
+            
+
+        add_ms = all_citations["ms"].to_list()
+        cit_ms.extend(add_ms)
+
         # Use the list of cit_ms to look up the ms and record matches
         ms_reuse = []
         post_ms_reuse = []
@@ -106,9 +138,10 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_m
             for uri_list in uri_lists:
                 for uri_item in uri_list:
                     if type(uri_item) == str:
-                        uri_item = parse_list_item(uri_item)
+                        uri_item = parse_list_item(uri_item)                        
                         if uri in uri_item:
                             ms_reuse.append(ms)
+                            
             uri_lists = leveled_df_ids[leveled_df_ids["ms"] == ms + 1][level_cols].values.tolist()            
             for uri_list in uri_lists:
                 for uri_item in uri_list:
@@ -125,11 +158,14 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_m
 
         
         # Check if a previous loop has added the uri to dict - if so append - else create a new entry in the dict - populate dict with the data
-        if uri in mapping_data.keys():            
-            mapping_data[uri]["citation_strings"].append(final_string)
+        if uri in mapping_data.keys():
+            if final_string not in mapping_data[uri]["citation_strings"]:            
+                mapping_data[uri]["citation_strings"].append(final_string)
             mapping_data[uri]["cit_ms"].extend(cit_ms)
             mapping_data[uri]["ms_reuse"].extend(ms_reuse)
             mapping_data[uri]["post_ms_reuse"].extend(post_ms_reuse)
+            for key in ["cit_ms", "ms_reuse", "post_ms_reuse"]:
+                mapping_data[uri][key] = list(dict.fromkeys(mapping_data[uri][key]))
         else:
             mapping_data[uri] = {"citation_strings" : [final_string],
                                  "cit_ms": cit_ms,
@@ -147,8 +183,8 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_m
 
     
     # At the end write out the data to the place it came from
-    json_out = json.dumps(mapping_data, indent=2)
-    with open(uri_citation_map_path, 'w') as f:
+    json_out = json.dumps(mapping_data, indent=2, ensure_ascii=False)
+    with open(uri_citation_map_json, 'w', encoding='utf-8-sig') as f:
         f.write(json_out)
 
 
@@ -169,15 +205,16 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_m
 
 
 
-def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_ids, new_evaluation_round = True, text_path = None, new_evaluation_csv=None):        
+def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_ids, results_no_clusters_csv, new_evaluation_round = True, text_path = None, new_evaluation_csv=None):        
 
     # Load in data
     evaluation_df = pd.read_csv(evaluation_csv)
     leveled_df_ids = pd.read_csv(leveled_csv_ids)
+    results_no_clusters_df = pd.read_csv(results_no_clusters_csv)
 
     if not new_evaluation_round:
         # Just update the uri_citation_map_path - in future run other functions to check or analyse data
-        create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_map_path, map_only = True)
+        create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clusters_df, uri_citation_map_path, map_only = True)
 
     else:
         # Run the processes that create a new evaluation_csv based on the old one
@@ -189,7 +226,7 @@ def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_id
         print("Based on previous evaluation df, the new capture window is: {}".format(capture_window))
 
         # Create the exclusion list and update the mapping json
-        exclusion_list = create_update_uri_citation_map(evaluation_df, leveled_df_ids, uri_citation_map_path)
+        exclusion_list = create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clusters_df, uri_citation_map_path)
         
  
 
@@ -197,6 +234,7 @@ if __name__ == "__main__":
     evaluation_csv = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv'
     uri_citation_map_path = './outputs/data/uri_cit_map.json'
     leveled_csv = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv'
+    results_no_clusters = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'
     text_path = '../data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown'
     new_evaluation_csv = ''
-    post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, text_path = text_path, new_evaluation_csv=new_evaluation_csv)
+    post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, results_no_clusters, text_path = text_path, new_evaluation_csv=new_evaluation_csv)
