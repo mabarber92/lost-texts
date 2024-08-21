@@ -9,12 +9,16 @@ def parse_list_item(string_list):
     list_items = string_list.strip('][').strip('\'').split(', \'')
     return list_items
 
-def loop_through_ms(text, fn, arg1, arg2, splitter = r"ms(\d+)", separate_lists = True):
+def loop_through_ms(text, fn=None, arg1=None, arg2=None, splitter = r"ms(\d+)", separate_lists = True):
     """A script that loops through a text and applies a function to the text, returning a list of dictionaries with the structure
     {'ms': ms-no, result : 'output'}. If the result of the function is a list and separate_lists is True then it will loop through the list and create a separate
     output line for each"""
     
-    print("Processing milestones using {}...".format(fn))
+    if fn == None:
+        print("No function specified... creating a ms_dict with full text of ms")
+
+    else:
+        print("Processing milestones using {}...".format(fn))
 
     # Remove everything before metaheader
     text = text.split(r'#META#Header#End#')[-1]
@@ -29,7 +33,10 @@ def loop_through_ms(text, fn, arg1, arg2, splitter = r"ms(\d+)", separate_lists 
     # Loop through the splits - if a split is an ms - perform the function
     for idx, split in enumerate(tqdm(splits)):
         if re.match(r'\d+', split):
-            results = fn(splits[idx-1], arg1, arg2)
+            if fn:
+                results = fn(splits[idx-1], arg1, arg2)
+            else:
+                results = splits[idx-1]
             if type(results) == list and separate_lists:
                 for result in results:
                     output.append({'ms': split, 'result': result})
