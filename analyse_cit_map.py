@@ -6,24 +6,61 @@ from tqdm import tqdm
 import re
 import os
 
-def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri):
+def identify_continuous_corpus_df(corpus_df, cluster_obj):
+    """Take a corpus df loop through each text_uri within it and pass it to identify_continuous_cited_ms to use the reuse
+    to infer extended citations"""
+
+    text_uri_list = corpus_df["text_uri"].drop_duplicates().to_list()
+    df_out = pd.DataFrame()
+    
+    for text_uri in text_uri_list:
+        print(text_uri)
+        uri_df = corpus_df[corpus_df["text_uri"] == text_uri]
+        continuous_df = identify_continuous_cited_ms(uri_df, cluster_obj, text_uri, input_type='corpus_df')
+        continuous_df["text_uri"] = text_uri
+        df_out = pd.concat([df_out, continuous_df])
+        df_out.to_csv('outputs/continuous_corpus_citations.csv')
+    
+    return df_out
+
+
+def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri, all_cits=True, input_type = 'cit_map'):
     """Using a cit_map of verified citations, lookup the milestones listed with the citation and a verified extant text, log it as a
     ms. Check if the following ms matches with the book (either as citation or reuse). If not the book, check for author match on same
     principles. When storing continuous reuse, use the identification of a book as precedent - to try and disambiguate citations.
-    Continue for each proceeding ms until a match is not found. Outputs df with uri column and ms column """
+    Continue for each proceeding ms until a match is not found. Outputs df with uri column and ms column 
+    
+    Takes 2 input types - cit_map or corpus_df - if latter, a slightly different process followed"""
     
     print("Verifying citations against the map and reuse data...")
     
     out_dict_list = []
     # Loop through the keys of the cit_map
-    uris = list(cit_map.keys())
+    if input_type == 'cit_map':
+        uris = list(cit_map.keys())
+    elif input_type == 'corpus_df':
+        uris = cit_map["result"].drop_duplicates().to_list()
+        int_cit_map = {}
+        for uri in uris:
+            int_cit_map[uri] = {"cit_ms": cit_map[cit_map["result"] == uri]["ms"].drop_duplicates().to_list(), "in_corpus": None}
+        cit_map = int_cit_map.copy()
+            
+    else:
+        print("Invalid input_type - you specified {}".format(input_type))
+        exit()
     for uri in tqdm(uris):
         data = cit_map[uri]
+        cit_mss = data["cit_ms"]
+        cit_mss.sort()
+        resolved_ms = []
+        # If the URI is the same as the text - do not try to extend as text reuse evidence is not helpful - just pass it directly into the output
+        if uri == main_book_uri:            
+            for cit_ms in cit_mss:
+                out_dict_list.append({"uri": uri, "ms": cit_ms})                            
+                
         # Only treat citations that reference texts or authors in the corpus
-        if data["in_corpus"]:
-            cit_mss = data["cit_ms"]
-            cit_mss.sort()
-            resolved_ms = []
+        elif data["in_corpus"] or all_cits == True:
+            
             # Go through each cited ms and perform series of checks
             for cit_ms in cit_mss:
                 # If one of the previous processes has resolved the ms then skip
@@ -33,7 +70,8 @@ def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri):
                     
                     # If we keep finding ms that match the criteria then continued_quote is true - as soon as we find an ms without a match we break the while loop
                     while continued_quote == True:                                              
-                        book_list = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, current_ms)["book"].to_list()                        
+                        book_list = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, current_ms)["book"].to_list()
+                                               
                         
                         # If the URI is just an author URI (when split on a . it produces a list of 1) - then create a list for checking a matching author URI - otherwise initiate that list empty
                         if len(uri.split(".")) == 1:
@@ -196,14 +234,14 @@ def infer_source_from_aligned_citation(corpus_citations, verified_citations, clu
         new_additions = []
         for cited_ms in cited_mss:
             new_additions.append({
-                "uri": cited_ms["result"],
+                "uri": cited_ms["uri"],
                 "ms": ms,
                 "origin": cited_ms["uri.ms"],
                 "origin_prev_ms": False 
             })
         for cited_ms_prev in cited_mss_prev:
             new_additions.append({
-                "uri": cited_ms_prev["result"],
+                "uri": cited_ms_prev["uri"],
                 "ms": ms,
                 "origin": cited_ms_prev["uri.ms"],
                 "origin_prev_ms": True 
@@ -218,7 +256,7 @@ def infer_source_from_aligned_citation(corpus_citations, verified_citations, clu
 
 
 
-def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, corpus_base_path, verified_csv = None, corpus_citations = None):
+def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, corpus_base_path, verified_csv = None, corpus_citations = None, corpus_citations_continuous = None):
     """Experimental functions to try out ways of converting the cit_map into models of lost text use
     Output finding as a reuse map that can be fed into cluster graphing scripts for reuse maps"""
 
@@ -241,10 +279,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 
     # Seperate ms that have a verified citation - or follow from a verified citation - this includes texts for which the author can be linked to an author uri, but for which we might posit a lost text
     if verified_csv:
+        print("Loading existing verified csv")
         verified_df = pd.read_csv(verified_csv)
-    else:
+    else:        
         verified_df = identify_continuous_cited_ms(cit_dict, cluster_obj, main_book_uri)
-        verified_df.to_csv("test_verified.csv")
+        verified_df.to_csv("outputs/verified{}.csv".format(main_text_uri))
     
     # Fetch ms that have no verified source
     unmatched_ms = find_unresolved_ms(ms_df, verified_df)
@@ -252,12 +291,21 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
     # Search aligned text for verified citations
     if not corpus_citations:
         corpus_citations_df = query_cit_map_corpus(main_book_uri, cit_dict, cluster_obj, corpus_base_path, meta_path)
+        corpus_citations_df.to_csv("outputs/corpus_citations.csv")
     else:
+        print("Loading corpus citations...")
         corpus_citations_df = pd.read_csv(corpus_citations)
+
+    # Run corpus_citations through identify_continuous_citations to expand cited segments using reuse evidence
+    if corpus_citations_continuous:
+        corpus_citations_df = pd.read_csv(corpus_citations_continuous)
+    else:
+        corpus_citations_df = identify_continuous_corpus_df(corpus_citations_df, cluster_obj)
+        corpus_citations_df.to_csv("outputs/continuous_corpus_citations.csv")
 
     # Use clusters and corpus citations to suggest sources for texts
     aligned_cit_df = infer_source_from_aligned_citation(corpus_citations_df, verified_df, cluster_obj, main_book_uri)
-    aligned_cit_df.to_csv("citations_with_aligned.csv")
+    aligned_cit_df.to_csv("outputs/citations_with_aligned.csv")
 
     unmatched_ms = find_unresolved_ms(ms_df, aligned_cit_df)
 
