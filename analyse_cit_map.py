@@ -109,9 +109,18 @@ def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri, all_cits=T
     out_df = out_df.drop_duplicates()
     return out_df
 
-def find_unresolved_ms(full_ms_df, ms_matched_df):
+def find_unresolved_ms(full_ms_df, ms_matched, data_type = 'ms_df'):
     full_ms_list = full_ms_df["ms"].astype('int32').to_list()
-    ms_matched_list = ms_matched_df["ms"].to_list()
+    if data_type == 'cit_map':
+        ms_matched_list = []
+        for uri in ms_matched.keys():
+            data=ms_matched[uri]["cit_ms"]
+            for ms in data:
+                if ms not in ms_matched_list:
+                    ms_matched_list.append(ms)
+    else:    
+        ms_matched_list = ms_matched["ms"].to_list()
+    
     unmatched = []
     for ms in full_ms_list:
         if ms not in ms_matched_list:
@@ -282,8 +291,9 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
         print("Loading existing verified csv")
         verified_df = pd.read_csv(verified_csv)
     else:        
+        unmatched_ms = find_unresolved_ms(ms_df, cit_dict, data_type='cit_map')
         verified_df = identify_continuous_cited_ms(cit_dict, cluster_obj, main_book_uri)
-        verified_df.to_csv("outputs/verified{}.csv".format(main_text_uri))
+        verified_df.to_csv("outputs/verified{}.csv".format(main_book_uri))
     
     # Fetch ms that have no verified source
     unmatched_ms = find_unresolved_ms(ms_df, verified_df)
@@ -318,10 +328,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 if __name__ == '__main__':
     cit_map = "citation_resolution/outputs/data/uri_cit_map.json"
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "E:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
     verified_csv = "test_verified.csv"
     corpus_citations = "text_corpus_results.csv"
-    corpus_base_path = "E:/OpenITI Corpus/corpus_2023_1_8/"
-    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path, verified_csv, corpus_citations)
+    corpus_base_path = "D:/OpenITI Corpus/corpus_2023_1_8/"
+    corpus_citations_continuous = "outputs/continuous_corpus_citations.csv"
+    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path, corpus_citations= corpus_citations, corpus_citations_continuous= corpus_citations_continuous)
