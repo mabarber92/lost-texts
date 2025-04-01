@@ -70,6 +70,10 @@ def search_ms_split(text, start_phrase, capture_window, exclusion_list, splitter
 
     # Normalize the exclusion list (in case normalisation was not used for the original pass)
     exclusion_list = [normalize_ara_heavy(text) for text in exclusion_list]
+    
+    # Get the word length of the words in exclusion list (we should only ever exclude phrases of a set length from previous eval) 
+    # this is used to subset the match and see if we've already evaluated some of the words in the string in a previous round
+    phrase_len = len(exclusion_list[0].split())
 
     # Pass the text, start phrase and capture window to search function    
     matches_list = search_ms(text, start_phrase, capture_window)
@@ -81,7 +85,7 @@ def search_ms_split(text, start_phrase, capture_window, exclusion_list, splitter
     for match in matches_list:  
         split_match = re.split(splitter, match)
         split_match.remove('')
-        relevant_words = split_match[1:]
+        relevant_words = split_match[1:phrase_len+1]
         if " ".join(relevant_words) not in exclusion_list:              
             output.append(split_match[1:])
 

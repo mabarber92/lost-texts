@@ -253,4 +253,4 @@ if __name__ == "__main__":
     text_path = '../data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown'
     main_book_uri = "O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
     new_evaluation_folder = './outputs/round-2/'
-    post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, results_no_clusters, text_path = text_path, new_evaluation_folder=new_evaluation_folder)
+    post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, results_no_clusters, text_path = text_path, new_evaluation_folder=new_evaluation_folder, main_text_uri=main_book_uri)
