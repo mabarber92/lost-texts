@@ -91,10 +91,11 @@ def search_ms_split(text, start_phrase, capture_window, exclusion_list, splitter
 
     return output      
 
-def merge_results_leveled(leveled_df, results):
+def merge_results_leveled(leveled_df, results, merge_books = True):
     """Merge the results lists with the levels table by milestone. Keep back and separate results that do not
     have clusters in the table - so that they might be used later. Post merge, copy the df and drop duplicates (to minimise results to evaluate).
-    Then add a list of ms for which that row is relevant"""
+    Then add a list of ms for which that row is relevant
+    If merge_books = True, then the groupby is performed only on the word columns and the book list is extended"""
 
     print("Merging the results with the leveled cluster data...")
 
@@ -178,29 +179,60 @@ def merge_results_leveled(leveled_df, results):
     
     # Create a column list for the new df
     column_list = ['row_id']
+    book_cols_list = []
     for word_col in reversed(word_cols):
         column_list.append(word_col)    
     for i in range(1, max_book+1):
-        column_list.append('book_{}'.format(i))
+        book_cols_list.append('book_{}'.format(i))
+        column_list.extend(book_cols_list)
     
 
     # Transform output list into df
     results_df = pd.DataFrame(row_list, columns=column_list)
     
-    
     # Use groupby to collapse rows that have same book URIs and citations - concatenate the id column with '.' separator for mapping back in later stages
 
     # Begin by dropping duplicates - so we do not concenate repeated ids
     results_df = results_df.drop_duplicates()
-
-    # Set the cols to groupby
-    groupby_cols = column_list[:]
-    groupby_cols.remove('row_id')
-
-
-    # Use groupby
     
-    results_df = results_df.groupby(by = groupby_cols, dropna=False)['row_id'].apply('.'.join).reset_index()
+    # If merge_books, then groupby takes only the word cols
+    if merge_books:
+        groupby_cols = word_cols
+        results_df_dict = results_df.groupby(by = groupby_cols, dropna=False)['row_id'].apply('.'.join).reset_index().to_dict("records")
+
+        row_list = []
+        max_book = 0
+        for row in results_df_dict:
+            row_ids = row["row_id"].split(".")
+            all_books = []
+            for row_id in row_ids:
+                row_books = results_df[results_df["row_id"] == row_id][book_cols_list].values.to_list()[0]
+                for book in row_books:
+                    if book not in all_books:
+                        all_books.append(book)
+            all_books_count = len(all_books)
+            if all_books_count > max_book:
+                max_book = all_books_count
+            new_row = row[:]
+            new_row.extend(all_books)
+            row_list.append(new_row)
+
+        # Create a column list for the new df
+        column_list = ['row_id']
+        for word_col in reversed(word_cols):
+            column_list.append(word_col)    
+        for i in range(1, max_book+1):
+            column_list.append('book_{}'.format(i))
+
+    else:
+    # Set all the cols to groupby
+        groupby_cols = column_list[:]
+        groupby_cols.remove('row_id')
+
+
+        # Use groupby
+    
+        results_df = results_df.groupby(by = groupby_cols, dropna=False)['row_id'].apply('.'.join).reset_index()
     
     return pd.DataFrame(non_leveled_dict), results_df, no_cit_df, return_leveled_df
 
