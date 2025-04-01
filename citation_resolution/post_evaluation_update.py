@@ -224,15 +224,29 @@ def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_id
         # Choose the new capture window based on the mode extend
         capture_window = evaluation_df["extend"].dropna().mode().values[0]
         print("Based on previous evaluation df, the new capture window is: {}".format(capture_window))
+        print("Proceed with capture window? (y/n)")
+        proceed = input()
+        while proceed != "y" and proceed != "n":
+            print("Invalid - enter y or n")
+            proceed = input()
+        if proceed == "n":
+            print("Enter new capture window")
+            capture_window = input()
+            while re.match(r"\d+", capture_window) is None:
+                print("Enter a valid integer")
+                capture_window = input()
+            
+        capture_window = int(capture_window)
+
 
         # Create the exclusion list and update the mapping json
         exclusion_list = create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clusters_df, uri_citation_map_path)
         
- 
+        print(exclusion_list)
 
 if __name__ == "__main__":
     evaluation_csv = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv'
-    uri_citation_map_path = './outputs/data/uri_cit_map.json'
+    uri_citation_map_path = './outputs/data/uri_cit_map2.json'
     leveled_csv = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv'
     results_no_clusters = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'
     text_path = '../data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown'

@@ -66,6 +66,28 @@ def filter_on_ms_agreement(citation_df, agreement_limit = 2):
     print("Number of milestones with sources with agreement of {} is {}".format(agreement_limit, len(final_df["ms"].drop_duplicates())))
     return final_df
 
+def count_lost_sources(citation_df, meta_df):
+
+    lost_authors = []
+    lost_books = []
+    citation_uris = citation_df["uri"].drop_duplicates().to_list()
+    for uri in citation_uris:
+        uri_split = uri.split(".")
+        
+        if len(uri_split) == 1:
+            print(uri_split)
+            matching_uris = meta_df[meta_df["author_from_uri"] == uri_split[0]]
+            if len(matching_uris) == 0:
+                lost_authors.append(uri)
+        else:
+            matching_uris = meta_df[meta_df["book"] == uri]
+            if len(matching_uris) == 0:
+                lost_books.append(uri)
+    
+    print(lost_authors)
+    print(lost_books)
+
+  
 
 
 
@@ -74,19 +96,22 @@ def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_boo
 
     # cluster_obj = clusterDf(cluster_path, meta_path)
     citation_df = pd.read_csv(citation_csv)
+    meta_df = pd.read_csv(meta_path, sep='\t')
 
     # fetch_source_counts(citation_df).to_csv("outputs/cited_source_counts.csv")
     # fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri).to_csv("outputs/uncited_ms_reusers.csv")
 
-    for i in range(2,5):
-        agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
-        agreement_df.to_csv("outputs/citations_filtered_by_agreement_of_{}.csv".format(i))
+    # for i in range(2,5):
+    #     agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
+    #     agreement_df.to_csv("outputs/citations_filtered_by_agreement_of_{}.csv".format(i))
+
+    count_lost_sources(citation_df, meta_df)
 
 if __name__ == "__main__":
     
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
     minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
     citation_csv = "outputs/citations_with_aligned.csv"
 

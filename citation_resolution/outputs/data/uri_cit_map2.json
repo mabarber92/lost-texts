@@ -1,0 +1,800 @@
+﻿{
+  "0820IbnMutawwaj": {
+    "citation_strings": [
+      "ابن المتوج"
+    ],
+    "cit_ms": [
+      1293,
+      1394,
+      1688,
+      753,
+      785
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0276IbnQutaybaDinawari": {
+    "citation_strings": [
+      "ابن قتيبة"
+    ],
+    "cit_ms": [
+      46,
+      676,
+      1907
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0695SarrajDinWaraq": {
+    "citation_strings": [
+      "السراج الوراق"
+    ],
+    "cit_ms": [
+      1970
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0151IbnIshaq.Sira": {
+    "citation_strings": [
+      "محمد بن إسحاق"
+    ],
+    "cit_ms": [
+      51,
+      656,
+      1292
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0529AbuSalt": {
+    "citation_strings": [
+      "أبو الصلت الأندلسي"
+    ],
+    "cit_ms": [
+      270
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0588IbnMamun.AkhbarMisr": {
+    "citation_strings": [
+      "ابن المأمون البطائحي"
+    ],
+    "cit_ms": [
+      484
+    ],
+    "ms_reuse": [
+      484
+    ],
+    "post_ms_reuse": [
+      485
+    ],
+    "in_corpus": true
+  },
+  "0629CabdLatifBaghdadi": {
+    "citation_strings": [
+      "عبد اللطيف البغدادي"
+    ],
+    "cit_ms": [
+      1944
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0487AbuCubaydBakri.MucjamMaIstacjama": {
+    "citation_strings": [
+      "أبو عبيد البكري"
+    ],
+    "cit_ms": [
+      420,
+      467,
+      429,
+      525,
+      654
+    ],
+    "ms_reuse": [
+      467
+    ],
+    "post_ms_reuse": [
+      430
+    ],
+    "in_corpus": true
+  },
+  "0440AbuRayhanBiruni": {
+    "citation_strings": [
+      "أبو الريحان البيروتي"
+    ],
+    "cit_ms": [
+      270
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0346Mascudi": {
+    "citation_strings": [
+      "المسعودي في التاريخ"
+    ],
+    "cit_ms": [
+      59
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "Anonymous": {
+    "citation_strings": [
+      "جامع السيرة التركية",
+      "في المعجم المترجم"
+    ],
+    "cit_ms": [
+      241,
+      497
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0257IbnCabdHakam.FutuhMisr": {
+    "citation_strings": [
+      "ابن عبد الحكم"
+    ],
+    "cit_ms": [
+      61,
+      64,
+      83,
+      85,
+      129,
+      131,
+      158,
+      160,
+      173,
+      307,
+      321,
+      323,
+      326,
+      336,
+      339,
+      361,
+      378,
+      381,
+      388,
+      433,
+      468,
+      470,
+      476,
+      477,
+      569,
+      656,
+      674,
+      675,
+      1421,
+      1515,
+      1938,
+      2230,
+      47,
+      110,
+      167,
+      167,
+      172,
+      362,
+      373,
+      475,
+      557,
+      654,
+      1432,
+      1697
+    ],
+    "ms_reuse": [
+      61,
+      64,
+      83,
+      85,
+      158,
+      160,
+      173,
+      307,
+      323,
+      339,
+      361,
+      378,
+      381,
+      388,
+      476,
+      477,
+      569,
+      656,
+      674,
+      675,
+      1421,
+      1515,
+      1938,
+      2230
+    ],
+    "post_ms_reuse": [
+      62,
+      65,
+      84,
+      86,
+      130,
+      132,
+      174,
+      327,
+      337,
+      340,
+      379,
+      382,
+      471,
+      477,
+      657,
+      675,
+      676,
+      48,
+      168,
+      173,
+      363,
+      374,
+      476,
+      1433
+    ],
+    "in_corpus": true
+  },
+  "0458IbnSidaMursi.MuhkamWaMuhit": {
+    "citation_strings": [
+      "ابن سيدة"
+    ],
+    "cit_ms": [
+      1227,
+      1387
+    ],
+    "ms_reuse": [
+      1227
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0665AbuShama.Rawdatayn": {
+    "citation_strings": [
+      "جامع السيرة الصلاحية"
+    ],
+    "cit_ms": [
+      1760
+    ],
+    "ms_reuse": [
+      1760
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0310Tabari.Tarikh": {
+    "citation_strings": [
+      "أبو جعفر الطبري"
+    ],
+    "cit_ms": [
+      350
+    ],
+    "ms_reuse": [
+      350
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0350Balawi.SiratAhmadIbnTulun": {
+    "citation_strings": [
+      "جامع السيرة الطولونية"
+    ],
+    "cit_ms": [
+      524,
+      1393,
+      2129,
+      391,
+      1717,
+      2025
+    ],
+    "ms_reuse": [
+      1393,
+      2129
+    ],
+    "post_ms_reuse": [
+      2130
+    ],
+    "in_corpus": true
+  },
+  "0692IbnCabdZahir.RawdaBahiyya": {
+    "citation_strings": [
+      "جامع سيرة الظاهر",
+      "ابن عبد الظاهر",
+      "جامع السيرة الظاهرية"
+    ],
+    "cit_ms": [
+      2038,
+      285,
+      820,
+      884,
+      919,
+      985,
+      999,
+      1035,
+      1038,
+      1052,
+      1056,
+      1080,
+      1128,
+      1129,
+      1141,
+      1153,
+      1155,
+      1167,
+      1254,
+      1293,
+      1320,
+      1392,
+      1439,
+      1440,
+      1443,
+      1573,
+      1574,
+      1575,
+      1638,
+      1722,
+      1774,
+      1947,
+      2041,
+      914,
+      921,
+      962,
+      987,
+      1001,
+      1002,
+      1003,
+      1014,
+      1030,
+      1077,
+      1092,
+      1112,
+      1120,
+      1138,
+      1147,
+      1148,
+      1191,
+      1301,
+      1309,
+      1322,
+      1323,
+      1329,
+      1344,
+      1395,
+      1397,
+      1406,
+      1426,
+      1717,
+      1740,
+      1746,
+      1782,
+      1946,
+      1958,
+      2037,
+      1796,
+      976,
+      1364
+    ],
+    "ms_reuse": [
+      2038,
+      1035,
+      1155,
+      1167,
+      1254,
+      1293,
+      1320,
+      1443,
+      1574,
+      1722,
+      1774
+    ],
+    "post_ms_reuse": [
+      1574,
+      963,
+      1093,
+      1121,
+      1396,
+      1747,
+      2038
+    ],
+    "in_corpus": true
+  },
+  "0350MuhammadKindi.WulatMisr": {
+    "citation_strings": [
+      "أبو عمر الكندي"
+    ],
+    "cit_ms": [
+      1521,
+      1477,
+      1531,
+      2025
+    ],
+    "ms_reuse": [
+      1521
+    ],
+    "post_ms_reuse": [
+      1522
+    ],
+    "in_corpus": true
+  },
+  "0487Bakri": {
+    "citation_strings": [
+      "البكري"
+    ],
+    "cit_ms": [
+      282
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0346Mascudi.MurujDhahab": {
+    "citation_strings": [
+      "المسعودي رحمه الله",
+      "أبو الحسن المسعودي"
+    ],
+    "cit_ms": [
+      119,
+      263,
+      452,
+      462,
+      1391
+    ],
+    "ms_reuse": [
+      119,
+      452,
+      462
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0748Adfuwi": {
+    "citation_strings": [
+      "الأدفوي في تاريخ"
+    ],
+    "cit_ms": [
+      539
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0420Musabbihi.AkhbarMisr": {
+    "citation_strings": [
+      "المسبحي في تاريخه",
+      "المسبحي"
+    ],
+    "cit_ms": [
+      605,
+      1682,
+      166,
+      487,
+      1015,
+      1046,
+      1172,
+      1357,
+      1441,
+      2032,
+      415,
+      1757,
+      1786
+    ],
+    "ms_reuse": [
+      1441
+    ],
+    "post_ms_reuse": [
+      606
+    ],
+    "in_corpus": true
+  },
+  "0337QudamaIbnJacfar": {
+    "citation_strings": [
+      "قدامة بن جعفر"
+    ],
+    "cit_ms": [
+      119
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0241IbnHanbal": {
+    "citation_strings": [
+      "أحمد بن حنبل"
+    ],
+    "cit_ms": [
+      1700
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0596QadiFadil": {
+    "citation_strings": [
+      "القاضي الفاضل رحمه"
+    ],
+    "cit_ms": [
+      144
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0150AbuHanifa": {
+    "citation_strings": [
+      "أبو حنيفة رحمه"
+    ],
+    "cit_ms": [
+      224
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0774IbnKathir": {
+    "citation_strings": [
+      "ابن كثير رحمه"
+    ],
+    "cit_ms": [
+      1736
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0230IbnSacd.TabaqatKubra": {
+    "citation_strings": [
+      "محمد بن سعد"
+    ],
+    "cit_ms": [
+      1728
+    ],
+    "ms_reuse": [
+      1728
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0596QadiFadil.Mutajaddidat": {
+    "citation_strings": [
+      "في متجددات"
+    ],
+    "cit_ms": [
+      197,
+      613,
+      198,
+      199,
+      240
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0596IbnWasifShah.MukhtasarCajaibDunya": {
+    "citation_strings": [
+      "ابن وصيف شاه"
+    ],
+    "cit_ms": [
+      159,
+      295,
+      321,
+      322,
+      335,
+      358,
+      402,
+      417,
+      521,
+      529,
+      536,
+      547,
+      550,
+      789,
+      2182,
+      170,
+      330,
+      403,
+      533,
+      537,
+      540,
+      543,
+      545,
+      612
+    ],
+    "ms_reuse": [
+      358,
+      417,
+      529,
+      536
+    ],
+    "post_ms_reuse": [
+      296,
+      530,
+      548,
+      551,
+      534
+    ],
+    "in_corpus": true
+  },
+  "0262CumarIbnShabba": {
+    "citation_strings": [
+      "عمر بن شبه"
+    ],
+    "cit_ms": [
+      112
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0367IbnHawqal.SuratArd": {
+    "citation_strings": [
+      "الحوقلي"
+    ],
+    "cit_ms": [
+      261
+    ],
+    "ms_reuse": [
+      261
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0630IbnAbiTayyi": {
+    "citation_strings": [
+      "ابن أبي طي"
+    ],
+    "cit_ms": [
+      924,
+      961,
+      985,
+      998,
+      1028,
+      1555,
+      991,
+      1758
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": false
+  },
+  "0730ShaficIbnCali": {
+    "citation_strings": [
+      "شافع بن علي"
+    ],
+    "cit_ms": [
+      523,
+      2106
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0300IbnKhurdadhbih": {
+    "citation_strings": [
+      "ابن خرداذبة"
+    ],
+    "cit_ms": [
+      487
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0209AbuCubayda": {
+    "citation_strings": [
+      "أبو عبيدة"
+    ],
+    "cit_ms": [
+      915
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0198SufyanIbnCuyayna": {
+    "citation_strings": [
+      "سفيان بن عيينة"
+    ],
+    "cit_ms": [
+      219
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0454Qudaci": {
+    "citation_strings": [
+      "القضاعي"
+    ],
+    "cit_ms": [
+      378,
+      1436,
+      1515,
+      1720,
+      2126,
+      1473
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0646IbnBaytarAndalusi.JamicLiMufradat": {
+    "citation_strings": [
+      "ابن البيطار"
+    ],
+    "cit_ms": [
+      1403
+    ],
+    "ms_reuse": [
+      1403
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0606IbnMamati.QawaninDawawin": {
+    "citation_strings": [
+      "الأسعد بن مماتي"
+    ],
+    "cit_ms": [
+      161
+    ],
+    "ms_reuse": [
+      161
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0375AnonymousTranslator.TarikhCalamUrusiyus": {
+    "citation_strings": [
+      "في كتاب هروشيش",
+      "في كتاب هروشيوس",
+      "في كتاب هروشيوش"
+    ],
+    "cit_ms": [
+      544,
+      19,
+      352
+    ],
+    "ms_reuse": [
+      352
+    ],
+    "post_ms_reuse": [
+      20
+    ],
+    "in_corpus": true
+  },
+  "0182AbuYusufYacqub": {
+    "citation_strings": [
+      "القاضي أبو يوسف"
+    ],
+    "cit_ms": [
+      1389
+    ],
+    "ms_reuse": [],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  },
+  "0182AbuYusufYacqub.Kharaj": {
+    "citation_strings": [
+      "القاضي أبو يوسف"
+    ],
+    "cit_ms": [
+      1389
+    ],
+    "ms_reuse": [
+      1389
+    ],
+    "post_ms_reuse": [],
+    "in_corpus": true
+  }
+}

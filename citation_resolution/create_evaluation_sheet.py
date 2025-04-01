@@ -2,6 +2,7 @@ import pandas as pd
 from tqdm import tqdm
 import re
 import os
+from OpenITI.helper.ara import normalise_ara_heavy, text_cleaner
 
 def parse_list_item(string_list):
     """Pass a cell to this function containing a list that is in a string representation and it 
@@ -47,6 +48,11 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, splitter = r"ms(\d+)", 
 
 def search_ms(text, start_phrase, capture_window):
     """Identify a set of results in a ms"""
+    
+    # Clean and normalise the text
+    text = text_cleaner(text)
+    text = normalise_ara_heavy(text)
+
     # build regex
     regex = start_phrase + '(?:\W\w+){' + str(capture_window) + '}'
     
@@ -57,8 +63,12 @@ def search_ms(text, start_phrase, capture_window):
 
     return matches_list
 
-def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+"):
-    """Identify a set of results in a ms, for each result split on splitter and output a list of lists"""
+def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+", exclusion_list = []):
+    """Identify a set of results in a ms, for each result split on splitter and output a list of lists
+    exclusion_list is a list of strings to exclude from matches"""
+
+    # Normalise the exclusion list (in case normalisation was not used for the original pass)
+    exclusion_list = [normalise_ara_heavy(text) for text in exclusion_list]
 
     # Pass the text, start phrase and capture window to search function    
     matches_list = search_ms(text, start_phrase, capture_window)
@@ -67,13 +77,15 @@ def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+"):
     output = []
 
     # Loop through matches, split and append to output
-    for match in matches_list:
+    for match in matches_list:    
         
         split_match = re.split(splitter, match)
-        split_match.remove('')              
-        output.append(split_match[1:])
+        split_match.remove('')
+        relevant_words = split_match[1:]
+        if " ".join(relevant_words) not in exclusion_list:              
+            output.append(split_match[1:])
 
-    return output            
+    return output      
 
 def merge_results_leveled(leveled_df, results):
     """Merge the results lists with the levels table by milestone. Keep back and separate results that do not
@@ -217,7 +229,7 @@ def build_evaluation(evaluation_df, csv_path, readme_path,
     with open(readme_path, 'w') as f:
         f.write(readme_text)
 
-def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path, main_book_uri, start_phrase = "\s[وف]?قال", capture_window=3):
+def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path, main_book_uri, start_phrase = "\s[وف]?قال", capture_window=3, exclusion_list = []):
 
     # Load in data
     leveled_df = pd.read_csv(leveled_csv)
@@ -225,7 +237,7 @@ def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path,
         main_text = f.read()
 
     # Loop through ms and capture the start_phrase and the window
-    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window)
+    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_list=exclusion_list)
     
 
     # Merge results with table - keep those that are not merged in separate table?
