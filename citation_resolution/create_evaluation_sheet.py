@@ -64,7 +64,7 @@ def search_ms(text, start_phrase, capture_window):
 
     return matches_list
 
-def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+", exclusion_list = []):
+def search_ms_split(text, start_phrase, capture_window, exclusion_list, splitter=r"\W+"):
     """Identify a set of results in a ms, for each result split on splitter and output a list of lists
     exclusion_list is a list of strings to exclude from matches"""
 
@@ -78,8 +78,7 @@ def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+", exclusi
     output = []
 
     # Loop through matches, split and append to output
-    for match in matches_list:    
-        
+    for match in matches_list:  
         split_match = re.split(splitter, match)
         split_match.remove('')
         relevant_words = split_match[1:]

@@ -241,9 +241,9 @@ def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_id
 
         # Create the exclusion list and update the mapping json
         exclusion_list = create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clusters_df, uri_citation_map_path)
-        print(text_path)
+        
         create_evaluation_sheet(leveled_csv_ids, text_path, new_evaluation_folder, main_text_uri, capture_window=capture_window, exclusion_list = exclusion_list)
-        print(exclusion_list)
+        
 
 if __name__ == "__main__":
     evaluation_csv = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv'
