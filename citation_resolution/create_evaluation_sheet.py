@@ -2,7 +2,8 @@ import pandas as pd
 from tqdm import tqdm
 import re
 import os
-from OpenITI.helper.ara import normalise_ara_heavy, text_cleaner
+from openiti.helper.ara import normalize_ara_heavy 
+from openiti.helper.funcs import text_cleaner
 
 def parse_list_item(string_list):
     """Pass a cell to this function containing a list that is in a string representation and it 

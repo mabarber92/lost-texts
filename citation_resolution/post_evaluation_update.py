@@ -241,8 +241,8 @@ def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_id
 
         # Create the exclusion list and update the mapping json
         exclusion_list = create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clusters_df, uri_citation_map_path)
-        
-        create_evaluation_sheet(leveled_csv_ids, new_evaluation_folder, main_text_path = text_path, main_book_uri = main_text_uri, capture_window=capture_window, exclusion_list = exclusion_list)
+        print(text_path)
+        create_evaluation_sheet(leveled_csv_ids, text_path, new_evaluation_folder, main_text_uri, capture_window=capture_window, exclusion_list = exclusion_list)
         print(exclusion_list)
 
 if __name__ == "__main__":
@@ -251,6 +251,6 @@ if __name__ == "__main__":
     leveled_csv = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv'
     results_no_clusters = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'
     text_path = '../data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown'
-    main_book_uri =
-    new_evaluation_folder = './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown2'
+    main_book_uri = "O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
+    new_evaluation_folder = './outputs/round-2/'
     post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, results_no_clusters, text_path = text_path, new_evaluation_folder=new_evaluation_folder)
