@@ -184,8 +184,8 @@ def merge_results_leveled(leveled_df, results, merge_books = True):
         column_list.append(word_col)    
     for i in range(1, max_book+1):
         book_cols_list.append('book_{}'.format(i))
-        column_list.extend(book_cols_list)
-    
+    column_list.extend(book_cols_list)
+ 
 
     # Transform output list into df
     results_df = pd.DataFrame(row_list, columns=column_list)
@@ -197,32 +197,39 @@ def merge_results_leveled(leveled_df, results, merge_books = True):
     
     # If merge_books, then groupby takes only the word cols
     if merge_books:
+        results_df_words = results_df[["row_id"] + word_cols]
         groupby_cols = word_cols
-        results_df_dict = results_df.groupby(by = groupby_cols, dropna=False)['row_id'].apply('.'.join).reset_index().to_dict("records")
-
+        results_df_dict = results_df_words.groupby(by = groupby_cols, dropna=False)['row_id'].apply('.'.join).reset_index().to_dict("records")
+        
         row_list = []
         max_book = 0
-        for row in results_df_dict:
+        for row in tqdm(results_df_dict):
             row_ids = row["row_id"].split(".")
             all_books = []
             for row_id in row_ids:
-                row_books = results_df[results_df["row_id"] == row_id][book_cols_list].values.to_list()[0]
+                row_books = results_df[results_df["row_id"] == row_id][book_cols_list].values.tolist()[0]
                 for book in row_books:
-                    if book not in all_books:
+                    if book not in all_books and book is not None:
                         all_books.append(book)
             all_books_count = len(all_books)
             if all_books_count > max_book:
                 max_book = all_books_count
-            new_row = row[:]
+            new_row= [row["row_id"]]
+            for word_no in reversed(word_cols):
+                word = row[word_no]
+                new_row.append(word)
             new_row.extend(all_books)
             row_list.append(new_row)
 
         # Create a column list for the new df
-        column_list = ['row_id']
+        column_list = []
+        column_list.append("row_id")
         for word_col in reversed(word_cols):
-            column_list.append(word_col)    
+            column_list.append(word_col)
         for i in range(1, max_book+1):
             column_list.append('book_{}'.format(i))
+        
+        results_df = pd.DataFrame(row_list, columns=column_list)
 
     else:
     # Set all the cols to groupby
