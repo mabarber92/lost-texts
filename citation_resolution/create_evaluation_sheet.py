@@ -50,9 +50,9 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r
 def search_ms(text, start_phrase, capture_window):
     """Identify a set of results in a ms"""
     
-    # Clean and normalise the text
+    # Clean and normalize the text
     text = text_cleaner(text)
-    text = normalise_ara_heavy(text)
+    text = normalize_ara_heavy(text)
 
     # build regex
     regex = start_phrase + '(?:\W\w+){' + str(capture_window) + '}'
@@ -68,8 +68,8 @@ def search_ms_split(text, start_phrase, capture_window, splitter=r"\W+", exclusi
     """Identify a set of results in a ms, for each result split on splitter and output a list of lists
     exclusion_list is a list of strings to exclude from matches"""
 
-    # Normalise the exclusion list (in case normalisation was not used for the original pass)
-    exclusion_list = [normalise_ara_heavy(text) for text in exclusion_list]
+    # Normalize the exclusion list (in case normalisation was not used for the original pass)
+    exclusion_list = [normalize_ara_heavy(text) for text in exclusion_list]
 
     # Pass the text, start phrase and capture window to search function    
     matches_list = search_ms(text, start_phrase, capture_window)
