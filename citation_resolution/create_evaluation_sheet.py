@@ -229,7 +229,7 @@ def build_evaluation(evaluation_df, csv_path, readme_path,
     with open(readme_path, 'w') as f:
         f.write(readme_text)
 
-def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path, main_book_uri, start_phrase = "\s[وف]?قال", capture_window=3, exclusion_list = []):
+def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path, main_book_uri, start_phrase = "\s[وف]?(?:قال|ذكر)", capture_window=3, exclusion_list = []):
 
     # Load in data
     leveled_df = pd.read_csv(leveled_csv)
