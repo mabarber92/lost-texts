@@ -11,7 +11,7 @@ def parse_list_item(string_list):
     list_items = string_list.strip('][').strip('\'').split(', \'')
     return list_items
 
-def loop_through_ms(text, fn=None, arg1=None, arg2=None, splitter = r"ms(\d+)", separate_lists = True):
+def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r"ms(\d+)", separate_lists = True):
     """A script that loops through a text and applies a function to the text, returning a list of dictionaries with the structure
     {'ms': ms-no, result : 'output'}. If the result of the function is a list and separate_lists is True then it will loop through the list and create a separate
     output line for each"""
@@ -36,7 +36,7 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, splitter = r"ms(\d+)", 
     for idx, split in enumerate(tqdm(splits)):
         if re.match(r'\d+', split):
             if fn:
-                results = fn(splits[idx-1], arg1, arg2)
+                results = fn(splits[idx-1], arg1, arg2, arg3)
             else:
                 results = splits[idx-1]
             if type(results) == list and separate_lists:
@@ -238,7 +238,7 @@ def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path,
         main_text = f.read()
 
     # Loop through ms and capture the start_phrase and the window
-    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_list=exclusion_list)
+    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_list)
     
 
     # Merge results with table - keep those that are not merged in separate table?
