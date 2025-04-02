@@ -1,0 +1,527 @@
+﻿parent_cl_book,level_1_book,level_2_book,level_3_book,ms,row_id
+['0930IbnIyas.NuzhatUmam'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1,0
+['0845Maqrizi.MusawwadatMawaciz'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,2,1
+['0845Maqrizi.MusawwadatMawaciz'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,7,11
+['0845Maqrizi.MusawwadatMawaciz'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,7,12
+['0845Maqrizi.MusawwadatMawaciz'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,7,13
+['0845Maqrizi.MusawwadatMawaciz'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,7,14
+['0375IkhwanSafa.Rasail'],No Cluster,No Cluster,No Cluster,10,16
+['0375IkhwanSafa.Rasail'],No Cluster,No Cluster,No Cluster,11,17
+['0845Maqrizi.KhabarCanBashar'],['0375IkhwanSafa.Rasail'],No Cluster,No Cluster,16,23
+['0845Maqrizi.KhabarCanBashar'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,20,30
+['0845Maqrizi.KhabarCanBashar'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,20,31
+['0845Maqrizi.KhabarCanBashar'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,20,32
+['0845Maqrizi.KhabarCanBashar'],['0375IkhwanSafa.Rasail'],No Cluster,No Cluster,20,33
+['0930IbnIyas.NuzhatUmam'],['0375IkhwanSafa.Rasail'],No Cluster,No Cluster,21,34
+['0375IkhwanSafa.Rasail'],['0292Yacqubi.Tarikh'],No Cluster,No Cluster,21,35
+['0845Maqrizi.KhabarCanBashar'],['0300IbnRusta.AclaqNafisa'],No Cluster,No Cluster,23,37
+['0845Maqrizi.KhabarCanBashar'],['0300IbnRusta.AclaqNafisa'],No Cluster,No Cluster,23,38
+['0845Maqrizi.KhabarCanBashar'],['0218HajjajIbnYusufIbnMatar.Majisti'],No Cluster,No Cluster,24,39
+['0845Maqrizi.KhabarCanBashar'],['0300IbnRusta.AclaqNafisa'],No Cluster,No Cluster,25,40
+['0845Maqrizi.KhabarCanBashar'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,31,43
+['0930IbnIyas.NuzhatUmam'],['0845Maqrizi.KhabarCanBashar'],['0733Nuwayri.NihayatArab'],No Cluster,34,44
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,34,45
+['0821Qalqashandi.SubhAcsha'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,67,102
+['0930IbnIyas.NuzhatUmam'],['0350MuhammadKindi.FadailMisr'],No Cluster,No Cluster,67,103
+['0930IbnIyas.NuzhatUmam'],['0814IbnZayyat.KawakibSayyara'],['0692IbnCabdZahir.RawdaBahiyya'],['0350MuhammadKindi.FadailMisr'],68,104
+['0930IbnIyas.NuzhatUmam'],['0911Suyuti.HusnMuhadara'],No Cluster,No Cluster,68,105
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,72,114
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,72,115
+['0930IbnIyas.NuzhatUmam'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,72,116
+['0930IbnIyas.NuzhatUmam'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,No Cluster,74,120
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,74,121
+['0733Nuwayri.NihayatArab'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,77,127
+['0733Nuwayri.NihayatArab'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,77,128
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,78,129
+['0930IbnIyas.NuzhatUmam'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,78,130
+['0930IbnIyas.NuzhatUmam'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,No Cluster,79,131
+['0930IbnIyas.NuzhatUmam'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,79,132
+['0346Mascudi.MurujDhahab'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,88,151
+['0346Mascudi.MurujDhahab'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,88,152
+['0346Mascudi.MurujDhahab'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,88,153
+['0346Mascudi.MurujDhahab'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,88,154
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,99,165
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,114,175
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,121,190
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,123,192
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,124,193
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,128,196
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,129,197
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,129,198
+['0346Mascudi.MurujDhahab'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,135,211
+['0930IbnIyas.NuzhatUmam'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,135,212
+['0808IbnCimadDinShihabDinAqfahsi.AkhbarNilMisr'],['0346Mascudi.MurujDhahab'],No Cluster,No Cluster,135,213
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,164,245
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,165,246
+['0257IbnCabdHakam.FutuhMisr'],['0257IbnCabdHakam.FutuhMisr'],No Cluster,No Cluster,177,265
+['0257IbnCabdHakam.FutuhMisr'],['0257IbnCabdHakam.FutuhMisr'],No Cluster,No Cluster,177,266
+['0257IbnCabdHakam.FutuhMisr'],['0911Suyuti.HusnMuhadara'],No Cluster,No Cluster,177,267
+['0930IbnIyas.NuzhatUmam'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,184,277
+['0350MuhammadKindi.WulatMisr'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,185,278
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,191,285
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,191,286
+['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,No Cluster,195,288
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,201,291
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,203,292
+['0733Nuwayri.NihayatArab'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,234,319
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,235,320
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,235,321
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,243,324
+['0930IbnIyas.NuzhatUmam'],['0807IbnFurat.TarikhDuwal'],No Cluster,No Cluster,244,325
+['0733Nuwayri.NihayatArab'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,257,337
+['0911Suyuti.TuhfatKiram'],['0911Suyuti.HusnMuhadara'],['0649MuhammadIdrisi.Anwar'],['0600PseudoMascudi.AkhbarZaman'],258,338
+['0911Suyuti.TuhfatKiram'],['0600PseudoMascudi.AkhbarZaman'],['0911Suyuti.HusnMuhadara'],No Cluster,258,339
+['0733Nuwayri.NihayatArab'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,258,340
+['0814IbnZayyat.KawakibSayyara'],['0626YaqutHamawi.MucjamBuldan'],No Cluster,No Cluster,267,346
+['0626YaqutHamawi.MucjamBuldan'],['0626YaqutHamawi.MucjamBuldan'],No Cluster,No Cluster,271,356
+['0626YaqutHamawi.MucjamBuldan'],['0528HakamIbnAbiSalt.Diwan'],No Cluster,No Cluster,271,357
+['0626YaqutHamawi.MucjamBuldan'],['0930IbnIyas.NuzhatUmam'],['0649MuhammadIdrisi.Anwar'],No Cluster,271,358
+['0681IbnKhallikan.WafayatAcyan'],['0597CimadDinKatibIsfahani.BustanJamic'],No Cluster,No Cluster,271,359
+['0681IbnKhallikan.WafayatAcyan'],['0626YaqutHamawi.MucjamBuldan'],['0626YaqutHamawi.MucjamBuldan'],No Cluster,272,360
+['0681IbnKhallikan.WafayatAcyan'],['0626YaqutHamawi.MucjamBuldan'],['0565AbuHamidGharnati.TuhfatAlbab'],No Cluster,272,361
+['0681IbnKhallikan.WafayatAcyan'],['0649MuhammadIdrisi.Anwar'],No Cluster,No Cluster,272,362
+['0649MuhammadIdrisi.Anwar'],['0450AbuHasanMawardi.AdabDunyaWaDin'],No Cluster,No Cluster,272,363
+['0930IbnIyas.NuzhatUmam'],['0629CabdLatifBaghdadi.IfadaWaIctibar'],['0629CabdLatifBaghdadi.IfadaWaIctibar'],No Cluster,277,366
+['0930IbnIyas.NuzhatUmam'],['0629CabdLatifBaghdadi.IfadaWaIctibar'],['0629CabdLatifBaghdadi.IfadaWaIctibar'],No Cluster,277,367
+['0596IbnWasifShah.MukhtasarCajaibDunya'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,296,384
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,299,385
+['0930IbnIyas.NuzhatUmam'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,300,386
+['0930IbnIyas.NuzhatUmam'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,No Cluster,300,387
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,301,388
+['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,No Cluster,302,389
+['0930IbnIyas.NuzhatUmam'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,304,392
+['0930IbnIyas.NuzhatUmam'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,304,393
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,304,394
+['0487AbuCubaydBakri.MasalikWaMamalik'],['0487AbuCubaydBakri.MasalikWaMamalik'],No Cluster,No Cluster,310,399
+['0596IbnWasifShah.MukhtasarCajaibDunya'],['0257IbnCabdHakam.FutuhMisr'],No Cluster,No Cluster,310,400
+['0596IbnWasifShah.MukhtasarCajaibDunya'],['0814IbnZayyat.KawakibSayyara'],No Cluster,No Cluster,310,401
+['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,No Cluster,312,402
+['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,No Cluster,316,404
+['0375AnonymousTranslator.TarikhCalamUrusiyus'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,328,412
+['0346Mascudi.MurujDhahab'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,342,434
+['0845Maqrizi.KhabarCanBashar'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,345,439
+['0845Maqrizi.KhabarCanBashar'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,346,440
+['0845Maqrizi.KhabarCanBashar'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,346,441
+['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,No Cluster,349,442
+['0346Mascudi.TanbihWaIshraf'],['0346Mascudi.TanbihWaIshraf'],['0346Mascudi.TanbihWaIshraf'],No Cluster,359,460
+['0346Mascudi.TanbihWaIshraf'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,359,461
+['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,No Cluster,410,521
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,413,522
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,434,538
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,438,540
+['0458IbnSidaMursi.MuhkamWaMuhit'],['0711IbnManzurIfriqi.LisanCarab'],No Cluster,No Cluster,457,550
+['0911Suyuti.HusnMuhadara'],['0257IbnCabdHakam.FutuhMisr'],['0257IbnCabdHakam.FutuhMisr'],No Cluster,457,551
+['0845Maqrizi.Bayan'],No Cluster,No Cluster,No Cluster,458,552
+['0930IbnIyas.NuzhatUmam'],['0614IbnJubayr.Rihla'],No Cluster,No Cluster,465,554
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,485,577
+['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,485,578
+['0902Sakhawi.AjwibaMurdiyya'],['0902Sakhawi.AjwibaMurdiyya'],No Cluster,No Cluster,489,582
+['0930IbnIyas.NuzhatUmam'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,489,583
+['0930IbnIyas.NuzhatUmam'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,491,585
+['0845Maqrizi.Suluk'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,493,586
+['0630IbnAthirCizzDin.Kamil'],['0630IbnAthirCizzDin.Kamil'],No Cluster,No Cluster,494,587
+['0845Maqrizi.Suluk'],['0845Maqrizi.Suluk'],No Cluster,No Cluster,494,588
+['0630IbnAthirCizzDin.Kamil'],"['0749IbnFadlAllahCumari.MasalikAbsar', '0749ZaynDinIbnWardi.Tarikh']",No Cluster,No Cluster,499,591
+['0930IbnIyas.NuzhatUmam'],['0845Maqrizi.Suluk'],No Cluster,No Cluster,500,592
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,500,593
+['0809IbnDuqmaq.NuzhatAnam'],['0809IbnDuqmaq.NuzhatAnam'],No Cluster,No Cluster,501,594
+['0845Maqrizi.Suluk'],['0809IbnDuqmaq.NuzhatAnam'],No Cluster,No Cluster,501,595
+['0845Maqrizi.Suluk'],['0809IbnDuqmaq.NuzhatAnam'],['0809IbnDuqmaq.NuzhatAnam'],No Cluster,502,596
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,506,597
+['0930IbnIyas.NuzhatUmam'],['0845Maqrizi.Suluk'],No Cluster,No Cluster,509,600
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,511,605
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,512,606
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,512,607
+['0596IbnWasifShah.MukhtasarCajaibDunya'],['0487AbuCubaydBakri.MasalikWaMamalik'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,530,620
+['0596IbnWasifShah.MukhtasarCajaibDunya'],['0487AbuCubaydBakri.MasalikWaMamalik'],No Cluster,No Cluster,530,621
+['0733Nuwayri.NihayatArab'],['0487AbuCubaydBakri.MasalikWaMamalik'],No Cluster,No Cluster,542,635
+['0733Nuwayri.NihayatArab'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,No Cluster,548,639
+['0600PseudoMascudi.AkhbarZaman'],['0596IbnWasifShah.MukhtasarCajaibDunya'],No Cluster,No Cluster,549,640
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,565,659
+['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,No Cluster,574,664
+['0600PseudoMascudi.AkhbarZaman'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,No Cluster,583,667
+['0440AbuRayhanBiruni.AtharBaqiya'],No Cluster,No Cluster,No Cluster,593,675
+['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,No Cluster,594,676
+['0440AbuRayhanBiruni.AtharBaqiya'],['0440AbuRayhanBiruni.AtharBaqiya'],['0845Maqrizi.KhabarCanBashar'],No Cluster,596,677
+['0440AbuRayhanBiruni.AtharBaqiya'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,596,678
+['0930IbnIyas.NuzhatUmam'],['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,600,681
+['0930IbnIyas.NuzhatUmam'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,603,683
+['0930IbnIyas.NuzhatUmam'],['0764Safadi.WafiBiWafayat'],No Cluster,No Cluster,604,684
+['0930IbnIyas.NuzhatUmam'],['0375AnonymousTranslator.TarikhCalamUrusiyus'],No Cluster,No Cluster,608,690
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,615,693
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,616,694
+['0930IbnIyas.NuzhatUmam'],['0367IbnHawqal.SuratArd'],No Cluster,No Cluster,620,695
+['0930IbnIyas.NuzhatUmam'],No Cluster,No Cluster,No Cluster,621,696
+['0821Qalqashandi.SubhAcsha'],"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir']",No Cluster,No Cluster,633,705
+['0821Qalqashandi.SubhAcsha'],['0654SibtIbnJawzi.MiratZaman'],No Cluster,No Cluster,635,707
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,638,709
+['0845Maqrizi.KhabarCanBashar'],['0440AbuRayhanBiruni.AtharBaqiya'],No Cluster,No Cluster,643,710
+['0930IbnIyas.NuzhatUmam'],['0440AbuRayhanBiruni.AtharBaqiya'],No Cluster,No Cluster,644,711
+['0318AbuCarubaHarrani.Awail'],['0440AbuRayhanBiruni.AtharBaqiya'],No Cluster,No Cluster,645,712
+['0845Maqrizi.ImtacAsmac'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,645,713
+['0845Maqrizi.ImtacAsmac'],['0213IbnHisham.SiraNabawiyya'],['0634AbuRabicHimyari.Iktifa'],No Cluster,645,714
+['0845Maqrizi.ImtacAsmac'],['0328AbuBakrIbnAnbari.SharhQasaidSabc'],No Cluster,No Cluster,645,715
+['0213IbnHisham.SiraNabawiyya'],['0236AbuCabdAllahZubayri.NasabQuraysh'],No Cluster,No Cluster,646,716
+['0213IbnHisham.SiraNabawiyya'],['0213IbnHisham.SiraNabawiyya'],['0213IbnHisham.SiraNabawiyya'],['0845Maqrizi.KhabarCanBashar'],646,717
+['0213IbnHisham.SiraNabawiyya'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,646,718
+['0845Maqrizi.KhabarCanBashar'],['0845Maqrizi.KhabarCanBashar'],No Cluster,No Cluster,646,719
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,678,785
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,680,786
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,683,788
+['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,684,789
+['0874IbnTaghribirdi.NujumZahira'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,685,790
+['0874IbnTaghribirdi.NujumZahira'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,685,791
+['0874IbnTaghribirdi.NujumZahira'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,685,792
+['0350MuhammadKindi.WulatMisr'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,691,794
+['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,No Cluster,695,795
+['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,No Cluster,697,796
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,699,797
+['0350MuhammadKindi.WulatMisr'],['0571IbnCasakir.TarikhDimashq'],No Cluster,No Cluster,700,798
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,702,799
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,705,801
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,705,802
+['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,No Cluster,706,803
+['0808IbnKhaldun.Tarikh'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,709,804
+['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,No Cluster,710,805
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,711,806
+['0845Maqrizi.Muqaffa'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,711,807
+['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,712,808
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,714,809
+['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,No Cluster,716,810
+['0350Balawi.SiratAhmadIbnTulun'],['0350Balawi.SiratAhmadIbnTulun'],No Cluster,No Cluster,717,811
+['0597IbnJawzi.Muntazam'],['0711IbnManzurIfriqi.MukhtasarTarikhDimashq'],No Cluster,No Cluster,717,812
+['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,No Cluster,720,814
+['0350Balawi.SiratAhmadIbnTulun'],['0350Balawi.SiratAhmadIbnTulun'],No Cluster,No Cluster,721,815
+['0350Balawi.SiratAhmadIbnTulun'],No Cluster,No Cluster,No Cluster,722,816
+['0874IbnTaghribirdi.NujumZahira'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,726,821
+['0874IbnTaghribirdi.NujumZahira'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,726,822
+['0874IbnTaghribirdi.NujumZahira'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,728,823
+['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],No Cluster,736,825
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.Muqaffa'],No Cluster,736,826
+['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],No Cluster,740,833
+['0350MuhammadKindi.WulatMisr'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,740,834
+['0874IbnTaghribirdi.NujumZahira'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,748,836
+['0874IbnTaghribirdi.NujumZahira'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,749,837
+['0845Maqrizi.Muqaffa'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,749,838
+['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,No Cluster,750,839
+['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,No Cluster,764,842
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,769,843
+['0845Maqrizi.Muqaffa'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,793,848
+['0808IbnKhaldun.Tarikh'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,794,849
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,795,850
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,809,859
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,812,862
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,820,866
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,825,867
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,827,868
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,829,869
+['0845Maqrizi.MusawwadatMawaciz'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,836,874
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,847,877
+['0692IbnCabdZahir.RawdaBahiyya'],['0736IbnDawadari.KanzDurar'],No Cluster,No Cluster,856,879
+['0845Maqrizi.Muqaffa'],['0692IbnCabdZahir.RawdaBahiyya'],No Cluster,No Cluster,856,880
+['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,No Cluster,862,884
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,865,887
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,867,888
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,868,889
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,874,893
+['0736IbnDawadari.KanzDurar'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,887,911
+['0736IbnDawadari.KanzDurar'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,887,912
+['0733Nuwayri.NihayatArab'],['0736IbnDawadari.KanzDurar'],No Cluster,No Cluster,888,913
+['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,No Cluster,891,917
+['0733Nuwayri.NihayatArab'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,893,918
+['0733Nuwayri.NihayatArab'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,897,922
+['0845Maqrizi.MusawwadatMawaciz'],['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,898,923
+['0733Nuwayri.NihayatArab'],['0733Nuwayri.NihayatArab'],['0505Ghazali.Fadaih'],No Cluster,898,924
+['0733Nuwayri.NihayatArab'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,898,925
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,901,929
+['0588IbnMamun.AkhbarMisr'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,904,932
+['0845Maqrizi.ItticazHunafa'],['0617IbnTuwayr.NuzhatMuqlatayn'],['0821Qalqashandi.SubhAcsha'],No Cluster,909,935
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,909,936
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,910,937
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,910,938
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,929,950
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,929,951
+['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,930,952
+['0845Maqrizi.MusawwadatMawaciz'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,930,953
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,931,954
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,931,955
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,935,960
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,940,964
+['0588IbnMamun.AkhbarMisr'],"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz']",['0588IbnMamun.AkhbarMisr'],No Cluster,948,974
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,948,975
+['0460Anonymous.DhakhairTuhaf'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,955,983
+['0845Maqrizi.MusawwadatMawaciz'],['0692IbnCabdZahir.RawdaBahiyya'],No Cluster,No Cluster,955,984
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,956,985
+['0845Maqrizi.MusawwadatMawaciz'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,959,987
+['0845Maqrizi.MusawwadatMawaciz'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,959,988
+['0845Maqrizi.MusawwadatMawaciz'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,959,989
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,959,990
+['0821Qalqashandi.SubhAcsha'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,984,1022
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1005,1042
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1005,1043
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1005,1044
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1005,1045
+['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1005,1046
+['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.MusawwadatMawaciz'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,1006,1047
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1006,1048
+['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1006,1049
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1007,1050
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,1007,1051
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1007,1052
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1008,1053
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1008,1054
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1008,1055
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,1008,1056
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1009,1057
+['0874IbnTaghribirdi.NujumZahira'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,1009,1058
+['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.MusawwadatMawaciz'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,1009,1059
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1009,1060
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1011,1064
+['0821Qalqashandi.SubhAcsha'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1011,1065
+['0821Qalqashandi.SubhAcsha'],['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,1011,1066
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1012,1067
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1012,1068
+['0821Qalqashandi.SubhAcsha'],['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,1012,1069
+['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1020,1076
+['0588IbnMamun.AkhbarMisr'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,1020,1077
+['0845Maqrizi.MusawwadatMawaciz'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,1020,1078
+['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1021,1079
+['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1021,1080
+['0845Maqrizi.MusawwadatMawaciz'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,1021,1081
+['0588IbnMamun.AkhbarMisr'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1022,1082
+['0845Maqrizi.MusawwadatMawaciz'],['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,1022,1083
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,1024,1086
+['0874IbnTaghribirdi.NujumZahira'],['0845Maqrizi.MusawwadatMawaciz'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,1024,1087
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1024,1088
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,1027,1092
+"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']",['0845Maqrizi.MusawwadatMawaciz'],['0588IbnMamun.AkhbarMisr'],No Cluster,1040,1103
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1058,1119
+['0588IbnMamun.AkhbarMisr'],No Cluster,No Cluster,No Cluster,1062,1121
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1073,1122
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1084,1128
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1087,1130
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1087,1131
+['0874IbnTaghribirdi.NujumZahira'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1087,1132
+['0654SibtIbnJawzi.MiratZaman'],['0654SibtIbnJawzi.MiratZaman'],['0665AbuShama.Rawdatayn'],No Cluster,1110,1145
+['0654SibtIbnJawzi.MiratZaman'],['0665AbuShama.Rawdatayn'],['0697IbnWasil.MufarrijKurub'],['0845Maqrizi.ItticazHunafa'],1110,1146
+['0845Maqrizi.ItticazHunafa'],"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz']",No Cluster,No Cluster,1118,1149
+['0845Maqrizi.Muqaffa'],['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,1118,1150
+['0845Maqrizi.MusawwadatMawaciz'],['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,1122,1154
+['0845Maqrizi.MusawwadatMawaciz'],['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,1123,1155
+['0845Maqrizi.MusawwadatMawaciz'],['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,1123,1156
+['0845Maqrizi.MusawwadatMawaciz'],['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,1123,1157
+['0845Maqrizi.Muqaffa'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,1131,1161
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,1132,1162
+['0677IbnMuyassar.AkhbarMisr'],No Cluster,No Cluster,No Cluster,1143,1167
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1164,1177
+['0764Safadi.WafiBiWafayat'],No Cluster,No Cluster,No Cluster,1176,1183
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,1183,1186
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,1185,1187
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",No Cluster,No Cluster,No Cluster,1187,1188
+"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']",['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,1192,1193
+['0832TaqiFasi.CiqdThamin'],['0845Maqrizi.DhahabMasbuk'],No Cluster,No Cluster,1194,1195
+['0845Maqrizi.DhahabMasbuk'],['0832TaqiFasi.CiqdThamin'],No Cluster,No Cluster,1195,1196
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1206,1198
+['0764Safadi.AcyanCasr'],No Cluster,No Cluster,No Cluster,1208,1199
+['0764Safadi.AcyanCasr'],No Cluster,No Cluster,No Cluster,1210,1200
+['0764Safadi.AcyanCasr'],No Cluster,No Cluster,No Cluster,1212,1201
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,1223,1204
+['0458IbnSidaMursi.MuhkamWaMuhit'],No Cluster,No Cluster,No Cluster,1227,1205
+['0764IbnShakirKutubi.FawatWafayat'],No Cluster,No Cluster,No Cluster,1234,1207
+['0845Maqrizi.DurarCuqud'],['0807IbnFurat.TarikhDuwal'],['0807IbnFurat.TarikhDuwal'],No Cluster,1242,1209
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1247,1213
+"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa']",No Cluster,No Cluster,No Cluster,1248,1214
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",['0764Safadi.AcyanCasr'],No Cluster,No Cluster,1256,1216
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",['0583SibtIbnTacawidhiShacir.Diwan'],No Cluster,No Cluster,1256,1217
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",['0764Safadi.AcyanCasr'],No Cluster,No Cluster,1256,1218
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1263,1220
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1268,1222
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1270,1223
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1271,1224
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1272,1225
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1274,1226
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",No Cluster,No Cluster,No Cluster,1277,1228
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",No Cluster,No Cluster,No Cluster,1278,1229
+['0845Maqrizi.DurarCuqud'],['0845Maqrizi.Suluk'],No Cluster,No Cluster,1282,1231
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,1321,1241
+['0855BadrDinCayni.CiqdJuman'],No Cluster,No Cluster,No Cluster,1336,1243
+['0692IbnCabdZahir.RawdZahir'],No Cluster,No Cluster,No Cluster,1365,1248
+['0650JamalDinJawbari.MukhtarFiKashfAsrar'],['0650JamalDinJawbari.MukhtarFiKashfAsrar'],No Cluster,No Cluster,1400,1259
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,1414,1263
+['0816AbuBakrMaraghi.TahqiqNusra'],No Cluster,No Cluster,No Cluster,1416,1264
+['0845Maqrizi.Muqaffa'],['0764Safadi.AcyanCasr'],No Cluster,No Cluster,1417,1265
+['0615MuwaffaqDinShafici.MurshidZuwwar'],No Cluster,No Cluster,No Cluster,1464,1303
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,1468,1306
+['0542IbnBassamShantarini.Dhakhira'],['0660IbnCadim.BughyatTalab'],No Cluster,No Cluster,1469,1307
+['0660IbnCadim.BughyatTalab'],['0660IbnCadim.BughyatTalab'],No Cluster,No Cluster,1469,1308
+['0660IbnCadim.BughyatTalab'],['0420Musabbihi.AkhbarMisr'],['0845Maqrizi.Muqaffa'],No Cluster,1470,1309
+['0606IbnMamati.QawaninDawawin'],['0606IbnMamati.QawaninDawawin'],No Cluster,No Cluster,1475,1311
+['0606IbnMamati.QawaninDawawin'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,1475,1312
+['0606IbnMamati.QawaninDawawin'],['0606IbnMamati.QawaninDawawin'],No Cluster,No Cluster,1475,1313
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",No Cluster,No Cluster,No Cluster,1500,1319
+['0732AbuFida.MukhtasarFiAkhbar'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,1502,1320
+['0749ZaynDinIbnWardi.Tarikh'],['0732AbuFida.MukhtasarFiAkhbar'],No Cluster,No Cluster,1503,1321
+['0749ZaynDinIbnWardi.Tarikh'],['0732AbuFida.MukhtasarFiAkhbar'],['0690IbnMujawirDimashqi.TarikhMustabsir'],No Cluster,1503,1322
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0732AbuFida.MukhtasarFiAkhbar'],No Cluster,No Cluster,1504,1323
+['0732AbuFida.MukhtasarFiAkhbar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1504,1324
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1507,1325
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,1508,1326
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1509,1327
+['0845Maqrizi.Muqaffa'],['0350Balawi.SiratAhmadIbnTulun'],No Cluster,No Cluster,1517,1330
+['0845Maqrizi.Muqaffa'],['0350Balawi.SiratAhmadIbnTulun'],No Cluster,No Cluster,1517,1331
+['0350Balawi.SiratAhmadIbnTulun'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,1518,1332
+['0350Balawi.SiratAhmadIbnTulun'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,1519,1333
+['0350Balawi.SiratAhmadIbnTulun'],"['0350Balawi.SiratAhmadIbnTulun', '0350MuhammadKindi.WulatMisr']",No Cluster,No Cluster,1519,1334
+['0350Balawi.SiratAhmadIbnTulun'],No Cluster,No Cluster,No Cluster,1520,1335
+['0911Suyuti.HusnMuhadara'],['0685IbnSacidMaghribi.Muqtataf'],No Cluster,No Cluster,1529,1343
+['0911Suyuti.HusnMuhadara'],['0692IbnCabdZahir.RawdZahir'],No Cluster,No Cluster,1529,1344
+['0257IbnCabdHakam.FutuhMisr'],No Cluster,No Cluster,No Cluster,1537,1346
+['0617IbnTuwayr.NuzhatMuqlatayn'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1549,1357
+['0845Maqrizi.MusawwadatMawaciz'],['0617IbnTuwayr.NuzhatMuqlatayn'],No Cluster,No Cluster,1550,1358
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1566,1360
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1567,1361
+['0697IbnWasil.MufarrijKurub'],['0414AbuHayyanTawhidi.Basair'],No Cluster,No Cluster,1583,1375
+['0725BaybarsMansuri.TuhfaMulukiyya'],No Cluster,No Cluster,No Cluster,1587,1377
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1588,1378
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1588,1379
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1591,1380
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1594,1381
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,1601,1383
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1606,1386
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1610,1387
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,1612,1389
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1615,1390
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1620,1391
+['0458Bayhaqi.SunanKubra'],No Cluster,No Cluster,No Cluster,1624,1392
+['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,No Cluster,1625,1393
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,1626,1394
+['0845Maqrizi.DurarCuqud'],"['0845Maqrizi.Suluk', '0845Maqrizi.DurarCuqud']",No Cluster,No Cluster,1641,1397
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1643,1398
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1644,1399
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1648,1400
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1651,1402
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1652,1403
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,1657,1404
+['0911Suyuti.HusnMuhadara'],['0928MujirDinCulaymi.TarikhMuctabar'],No Cluster,No Cluster,1658,1405
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1660,1406
+['0845Maqrizi.DurarCuqud'],['0845Maqrizi.Muqaffa'],['0759MufaddalIbnAbiFadail.NahjSadid'],No Cluster,1663,1407
+['0845Maqrizi.DurarCuqud'],"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa']",No Cluster,No Cluster,1663,1408
+['0845Maqrizi.DurarCuqud'],['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,1664,1409
+"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir']",No Cluster,No Cluster,No Cluster,1665,1410
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1666,1411
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,1668,1412
+['0911Suyuti.HusnMuhadara'],['0626YaqutHamawi.MucjamBuldan'],No Cluster,No Cluster,1681,1420
+['0350MuhammadKindi.WulatMisr'],['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,1708,1438
+['0692IbnCabdZahir.RawdaBahiyya'],['0261Khassaf.Hiyal'],No Cluster,No Cluster,1738,1448
+['0692IbnCabdZahir.RawdaBahiyya'],['0692IbnCabdZahir.RawdaBahiyya'],No Cluster,No Cluster,1739,1449
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1744,1451
+['0677IbnMuyassar.AkhbarMisr'],['0677IbnMuyassar.AkhbarMisr'],['0845Maqrizi.ItticazHunafa'],No Cluster,1762,1461
+['0677IbnMuyassar.AkhbarMisr'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,1762,1462
+['0677IbnMuyassar.AkhbarMisr'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,1763,1463
+['0677IbnMuyassar.AkhbarMisr'],['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,1763,1464
+['0808IbnKhaldun.Tarikh'],No Cluster,No Cluster,No Cluster,1768,1466
+['0458YahyaIbnSacidAntaki.Tarikh'],No Cluster,No Cluster,No Cluster,1769,1467
+['0874IbnTaghribirdi.NujumZahira'],No Cluster,No Cluster,No Cluster,1780,1470
+['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,1795,1473
+['0692IbnCabdZahir.RawdZahir'],['0692IbnCabdZahir.RawdZahir'],['0845Maqrizi.Muqaffa'],No Cluster,1800,1476
+['0692IbnCabdZahir.RawdZahir'],['0692IbnCabdZahir.RawdZahir'],No Cluster,No Cluster,1800,1477
+['0726Yunini.DhaylMiratZaman'],"['0726Yunini.DhaylMiratZaman', '0726IbnSuqaci.TaliWafayat']",No Cluster,No Cluster,1801,1478
+['0684IbnShaddad.TarikhMalikZahir'],No Cluster,No Cluster,No Cluster,1803,1479
+['0874IbnTaghribirdi.ManhalSafi'],['0764Safadi.AcyanCasr'],No Cluster,No Cluster,1812,1482
+['0874IbnTaghribirdi.ManhalSafi'],"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",['0845Maqrizi.Muqaffa'],No Cluster,1812,1483
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",No Cluster,No Cluster,No Cluster,1826,1488
+['0911Suyuti.HusnMuhadara'],No Cluster,No Cluster,No Cluster,1831,1490
+"['0874IbnTaghribirdi.NujumZahira', '0874IbnTaghribirdi.ManhalSafi', '0874IbnTaghribirdi.MawridLatafa']",No Cluster,No Cluster,No Cluster,1834,1492
+['0626YaqutHamawi.MucjamUdaba'],['0764Safadi.WafiBiWafayat'],No Cluster,No Cluster,1839,1494
+['0626YaqutHamawi.MucjamUdaba'],['0626YaqutHamawi.MucjamUdaba'],No Cluster,No Cluster,1839,1495
+['0764Safadi.WafiBiWafayat'],['0626YaqutHamawi.MucjamUdaba'],No Cluster,No Cluster,1839,1496
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1841,1498
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1842,1499
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1844,1500
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,1847,1503
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,1857,1504
+['0852IbnHajarCasqalani.InbaGhumr'],['0911Suyuti.HusnMuhadara'],No Cluster,No Cluster,1858,1505
+['0456IbnHazm.IhkamFiUsulAhkam'],No Cluster,No Cluster,No Cluster,1863,1506
+['0456IbnHazm.IhkamFiUsulAhkam'],['0456IbnHazm.IhkamFiUsulAhkam'],No Cluster,No Cluster,1864,1507
+['0456IbnHazm.IhkamFiUsulAhkam'],['0456IbnHazm.IhkamFiUsulAhkam'],No Cluster,No Cluster,1864,1508
+['0456IbnHazm.IhkamFiUsulAhkam'],['0726CallamaHilli.NihayatWusul'],No Cluster,No Cluster,1864,1509
+['0456IbnHazm.IhkamFiUsulAhkam'],['0456IbnHazm.IhkamFiUsulAhkam'],No Cluster,No Cluster,1864,1510
+['0456IbnHazm.IhkamFiUsulAhkam'],['0360Ramhurmuzi.MuhaddithFasil'],No Cluster,No Cluster,1866,1511
+['0456IbnHazm.IhkamFiUsulAhkam'],['0488IbnFutuhHumaydi.JamcBaynaSahihayn'],No Cluster,No Cluster,1866,1512
+['0456IbnHazm.IhkamFiUsulAhkam'],No Cluster,No Cluster,No Cluster,1867,1513
+['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,1881,1524
+['0350MuhammadKindi.WulatMisr'],['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,1882,1525
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,1887,1529
+['0808IbnKhaldun.Tarikh'],No Cluster,No Cluster,No Cluster,1888,1530
+['0808IbnKhaldun.Tarikh'],No Cluster,No Cluster,No Cluster,1889,1531
+['0845Maqrizi.ItticazHunafa'],No Cluster,No Cluster,No Cluster,1890,1532
+['0726CallamaHilli.NihayatWusul'],No Cluster,No Cluster,No Cluster,1892,1534
+['0764Safadi.WafiBiWafayat'],No Cluster,No Cluster,No Cluster,1906,1540
+['0324Ashcari.MaqalatIslamiyyin'],['0324Ashcari.MaqalatIslamiyyin'],No Cluster,No Cluster,1911,1544
+['0324Ashcari.MaqalatIslamiyyin'],['0548Shahrastani.MilalWaNihal'],No Cluster,No Cluster,1911,1545
+['0429IbnTahirBaghdadi.FarqBaynaFiraq'],No Cluster,No Cluster,No Cluster,1917,1548
+['0630IbnAthirCizzDin.Kamil'],No Cluster,No Cluster,No Cluster,1924,1549
+['0334Azdi.TarikhMawsil'],No Cluster,No Cluster,No Cluster,1927,1550
+['0656IbnCabdQawiMundhiri.TakmilaLiWafayatNaqala'],No Cluster,No Cluster,No Cluster,1941,1561
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,1948,1567
+['0759MufaddalIbnAbiFadail.NahjSadid'],['0845Maqrizi.Suluk'],No Cluster,No Cluster,1952,1569
+['0656IbnCabdQawiMundhiri.TakmilaLiWafayatNaqala'],['0656IbnCabdQawiMundhiri.TakmilaLiWafayatNaqala'],['0733Nuwayri.NihayatArab'],No Cluster,1954,1571
+['0845Maqrizi.Muqaffa'],"['0764Safadi.WafiBiWafayat', '0764IbnShakirKutubi.FawatWafayat']",No Cluster,No Cluster,1957,1573
+['0748Dhahabi.TarikhIslam'],No Cluster,No Cluster,No Cluster,1964,1574
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1965,1575
+['0597IbnJawzi.Muntazam'],No Cluster,No Cluster,No Cluster,1971,1579
+['0733Nuwayri.NihayatArab'],No Cluster,No Cluster,No Cluster,1975,1580
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1976,1581
+['0807IbnFurat.TarikhDuwal'],No Cluster,No Cluster,No Cluster,1985,1583
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1990,1586
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,1993,1587
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2002,1588
+['0845Maqrizi.DurarCuqud'],No Cluster,No Cluster,No Cluster,2014,1589
+['0733Nuwayri.NihayatArab'],['0911Suyuti.HusnMuhadara'],No Cluster,No Cluster,2015,1590
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2016,1591
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,2017,1592
+['0764Safadi.AcyanCasr'],No Cluster,No Cluster,No Cluster,2023,1594
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2026,1596
+['0843IbnKhatibNasiriyya.DurrMuntakhab'],['0843IbnKhatibNasiriyya.DurrMuntakhab'],No Cluster,No Cluster,2034,1600
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,2039,1604
+['0911Suyuti.HusnMuhadara'],No Cluster,No Cluster,No Cluster,2044,1607
+['0845Maqrizi.DurarCuqud'],['0852IbnHajarCasqalani.InbaGhumr'],No Cluster,No Cluster,2055,1610
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,2058,1611
+['0772IbnHasanJamalDinIsnawi.TabaqatShaficiyya'],No Cluster,No Cluster,No Cluster,2062,1612
+"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']",No Cluster,No Cluster,No Cluster,2066,1614
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2079,1620
+['0562Samcani.Ansab'],['0631SayfDinAmidi.AbkarAfkar'],No Cluster,No Cluster,2084,1623
+['0562Samcani.Ansab'],['0562Samcani.Ansab'],No Cluster,No Cluster,2084,1624
+['0889IbnAhmadSakhawi.TuhfatAhbab'],['0749IbnFadlAllahCumari.MasalikAbsar'],No Cluster,No Cluster,2085,1625
+['0214IbnCabdHakamMisri.SiratCumarIbnCabdCaziz'],['0277IbnSufyanFasawi.MacrifaWaTarikh'],No Cluster,No Cluster,2098,1656
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2100,1659
+['0814IbnZayyat.KawakibSayyara'],['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,2108,1668
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2109,1669
+"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']",No Cluster,No Cluster,No Cluster,2112,1670
+['0528HakamIbnAbiSalt.Diwan'],No Cluster,No Cluster,No Cluster,2136,1680
+['0889IbnAhmadSakhawi.TuhfatAhbab'],No Cluster,No Cluster,No Cluster,2143,1683
+['0845Maqrizi.KhabarCanBashar'],['0600PseudoMascudi.AkhbarZaman'],['0487AbuCubaydBakri.MasalikWaMamalik'],No Cluster,2148,1687
+['0845Maqrizi.KhabarCanBashar'],['0808IbnKhaldun.Tarikh'],['0600PseudoMascudi.AkhbarZaman'],No Cluster,2149,1688
+['0845Maqrizi.KhabarCanBashar'],['0808IbnKhaldun.Tarikh'],No Cluster,No Cluster,2153,1692
+['0845Maqrizi.KhabarCanBashar'],['0440AbuRayhanBiruni.AtharBaqiya'],No Cluster,No Cluster,2163,1696
+"['0845Maqrizi.KhabarCanBashar', '0845Maqrizi.DawSari']",['0845Maqrizi.DawSari'],No Cluster,No Cluster,2180,1699
+['0808IbnKhaldun.Tarikh'],No Cluster,No Cluster,No Cluster,2200,1704
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,2207,1705
+['0845Maqrizi.Muqaffa'],No Cluster,No Cluster,No Cluster,2208,1706
+['0310Tabari.Tarikh'],['0630IbnAthirCizzDin.Kamil'],No Cluster,No Cluster,2211,1707
+['0310Tabari.Tarikh'],['0310Tabari.Tarikh'],No Cluster,No Cluster,2211,1708
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,2212,1709
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,2213,1710
+['0821Qalqashandi.SubhAcsha'],No Cluster,No Cluster,No Cluster,2216,1712
+['0400IbnTahirMaqdisi.BadWaTarikh'],No Cluster,No Cluster,No Cluster,2225,1715
+['0400IbnTahirMaqdisi.BadWaTarikh'],['0400IbnTahirMaqdisi.BadWaTarikh'],No Cluster,No Cluster,2226,1716
+['0400IbnTahirMaqdisi.BadWaTarikh'],['0400IbnTahirMaqdisi.BadWaTarikh'],No Cluster,No Cluster,2226,1717
+['0388Shabushti.Diyarat'],['0388Shabushti.Diyarat'],No Cluster,No Cluster,2234,1722
+['0388Shabushti.Diyarat'],['0388Shabushti.Diyarat'],No Cluster,No Cluster,2234,1723
+['0388Shabushti.Diyarat'],No Cluster,No Cluster,No Cluster,2240,1725
+['0350MuhammadKindi.WulatMisr'],No Cluster,No Cluster,No Cluster,2247,1729
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,2250,1731
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,2254,1733
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,2258,1735
+['0845Maqrizi.Suluk'],No Cluster,No Cluster,No Cluster,2259,1736
+['0845Maqrizi.MusawwadatMawaciz'],No Cluster,No Cluster,No Cluster,2265,1737
