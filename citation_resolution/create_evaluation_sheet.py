@@ -11,7 +11,7 @@ def parse_list_item(string_list):
     list_items = string_list.strip('][').strip('\'').split(', \'')
     return list_items
 
-def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r"ms(\d+)", separate_lists = True):
+def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, arg4=None, splitter = r"ms(\d+)", separate_lists = True):
     """A script that loops through a text and applies a function to the text, returning a list of dictionaries with the structure
     {'ms': ms-no, result : 'output'}. If the result of the function is a list and separate_lists is True then it will loop through the list and create a separate
     output line for each"""
@@ -36,7 +36,7 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r
     for idx, split in enumerate(tqdm(splits)):
         if re.match(r'\d+', split):
             if fn:
-                results = fn(splits[idx-1], arg1, arg2, arg3)
+                results = fn(splits[idx-1], arg1, arg2, arg3, arg4)
             else:
                 results = splits[idx-1]
             if type(results) == list and separate_lists:
@@ -64,28 +64,24 @@ def search_ms(text, start_phrase, capture_window):
 
     return matches_list
 
-def search_ms_split(text, start_phrase, capture_window, exclusion_list, splitter=r"\W+"):
+def search_ms_split(text, start_phrase, capture_window, exclusion_list, phrase_len, splitter=r"\W+"):
     """Identify a set of results in a ms, for each result split on splitter and output a list of lists
     exclusion_list is a list of strings to exclude from matches"""
-
-    # Normalize the exclusion list (in case normalisation was not used for the original pass)
-    exclusion_list = [normalize_ara_heavy(text) for text in exclusion_list]
-    
-    # Get the word length of the words in exclusion list (we should only ever exclude phrases of a set length from previous eval) 
-    # this is used to subset the match and see if we've already evaluated some of the words in the string in a previous round
-    phrase_len = len(exclusion_list[0].split())
 
     # Pass the text, start phrase and capture window to search function    
     matches_list = search_ms(text, start_phrase, capture_window)
 
     # Create output list
     output = []
-
     # Loop through matches, split and append to output
     for match in matches_list:  
         split_match = re.split(splitter, match)
         split_match.remove('')
-        relevant_words = split_match[1:phrase_len+1]
+   
+        if phrase_len is not None:
+            relevant_words = split_match[1:phrase_len+1]
+        else:
+            relevant_words = split_match[:]
         if " ".join(relevant_words) not in exclusion_list:              
             output.append(split_match[1:])
 
@@ -279,8 +275,20 @@ def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path,
     with open(main_text_path, encoding='utf-8-sig') as f:
         main_text = f.read()
 
+    # If exclusion list is not empty
+    if len(exclusion_list) > 0:
+        # Normalize the exclusion list
+        exclusion_list = [normalize_ara_heavy(text) for text in exclusion_list]
+        # Shorten the items in exclusion list to capture window - if they are longer than capture window - IF THIS IS WRONG CERTAIN DATA LIKELY TO THROW IndexError
+        if len(exclusion_list[0]) > capture_window:
+            exclusion_list = [" ".join(i.split()[:capture_window]) for i in exclusion_list]
+        # Get a phrase length to pass to the loop function - this helps us only match the words in the match to the length of the exclusion phrases
+        phrase_len = len(exclusion_list[0].split())
+    else:
+        # If there is no exclusion list, make phrase_len
+        phrase_len = None
     # Loop through ms and capture the start_phrase and the window
-    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_list)
+    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_list, phrase_len)
     
 
     # Merge results with table - keep those that are not merged in separate table?
