@@ -55,7 +55,7 @@ def search_ms(text, start_phrase, capture_window):
     text = normalize_ara_heavy(text)
 
     # build regex
-    regex = start_phrase + '(?:\W\w+){' + str(capture_window) + '}'
+    regex = start_phrase + '(?:\W+\w+){' + str(capture_window) + '}'
     
 
 
