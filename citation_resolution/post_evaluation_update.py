@@ -198,7 +198,7 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clu
         
         # Add found citations from the evaluation map to exclusion list
         for uri in mapping_data.keys():
-            non_citations.extend(mapping_data[uri["citation_strings"]])
+            non_citations.extend(mapping_data[uri]["citation_strings"])
 
         return non_citations
 

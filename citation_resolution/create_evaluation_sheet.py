@@ -82,9 +82,9 @@ def search_ms_split(text, start_phrase, capture_window, exclusion_dict = None, s
         if exclusion_dict is not None:
             # Go through all of the available phrase lengths in the exclusion dictionary - if there is an item that matches a part of the found phrase we call it an existing_match
             for phrase_len in exclusion_dict.keys():            
-                relevant_words = split_match[1:phrase_len]
+                relevant_words = split_match[1:phrase_len+1]
                 if " ".join(relevant_words) in exclusion_dict[phrase_len]:
-                    existing_match = True`
+                    existing_match = True
         # If there isn't an existing match anywhere we append to the evaluation sheet
         if not existing_match:        
             output.append(split_match[1:])
