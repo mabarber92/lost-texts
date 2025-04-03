@@ -5,6 +5,8 @@ from utilities.clusterDf import clusterDf
 from tqdm import tqdm
 import re
 import os
+from openiti.helper.ara import normalize_ara_heavy 
+from openiti.helper.funcs import text_cleaner
 
 def identify_continuous_corpus_df(corpus_df, cluster_obj):
     """Take a corpus df loop through each text_uri within it and pass it to identify_continuous_cited_ms to use the reuse
@@ -130,11 +132,33 @@ def find_unresolved_ms(full_ms_df, ms_matched, data_type = 'ms_df'):
 
 def search_text_for_cits(text, cit_map, arg2=None, arg3=None):
     """Use a citation map to lookup the citation_strings within a text"""
+    # Clean and normalise the text prior to search
+    text = text_cleaner(text)
+    text = normalize_ara_heavy(text)
+
+    # Run the search
     results = []
-    for term in cit_map:        
+    for term in cit_map:
+        
+        # Use finditer to output a list of dicts [{"citation_uri": uri, "start": start, "end": stop}]
+        # Will require finding and fixing a column rename for 'results' in the code somewhere!
+        # term_result = re.finditer(term["regex"], text)
+        # for result in term_result:
+            # result_dict = {"citation_uri": term["citation_uri"], "start": result.start(), "end": result.end()}
+            # results.append(result_dict)
+
         if len(re.findall(term["regex"], text)) > 0:
             results.append(term["citation_uri"])
     return results
+
+def normalize_cit_dict(cit_dict):
+    """Normalise the citation_strings in the cit_dict so that we match normalised against normalised"""
+    for uri in cit_dict.keys():
+        strings_in = cit_dict[uri]["citation_strings"]
+        cit_dict[uri]["citation_strings"] = [normalize_ara_heavy(string_in) for string_in in strings_in]
+    return cit_dict
+        
+
 
 def check_uri_extension(uri_path):
     extensions = ['inProgress', 'completed', 'mARkdown']
@@ -199,6 +223,15 @@ def query_cit_map_corpus(main_book_uri, cit_map, cluster_obj, corpus_base_path, 
                 text = f.read()
             new_results = loop_through_ms(text, search_text_for_cits, uri_cit_list)
             print(len(new_results))
+            
+            # If using finditer - refactor so that we parse out the different parts of the results dict into columns
+            # In finditer approach return a list of dicts, so:
+            # for ms in new_results.keys():
+                # new_results_df = pd.DataFrame(new_results[ms]["results"])
+                # new_results_df["ms"] = ms
+                # new_results_df["text_uri"] = text_path["book"]
+                # results_df = pd.concat([results_df, new_results_df]) 
+
             new_results_df = pd.DataFrame(new_results)
             new_results_df["text_uri"] = text_path["book"]
             results_df = pd.concat([results_df, new_results_df])
@@ -272,6 +305,9 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
     # Load in json as dict
     with open(cit_map, encoding='utf-8-sig') as f:
         cit_dict = json.load(f)
+
+    # Normalize citation_strings in the cit_dict
+    cit_dict = normalize_cit_dict(cit_dict)
 
     # Load main text
     with open(main_text, encoding='utf-8-sig') as f:
