@@ -128,7 +128,7 @@ def find_unresolved_ms(full_ms_df, ms_matched, data_type = 'ms_df'):
     print("Of {} total ms {} are not matched".format(len(full_ms_list), len(unmatched)))
     return unmatched
 
-def search_text_for_cits(text, cit_map, arg2=None):
+def search_text_for_cits(text, cit_map, arg2=None, arg3=None):
     """Use a citation map to lookup the citation_strings within a text"""
     results = []
     for term in cit_map:        
@@ -181,8 +181,8 @@ def query_cit_map_corpus(main_book_uri, cit_map, cluster_obj, corpus_base_path, 
         citation_strings = cit_map[uri]["citation_strings"]
         # For each citation string build a regex and search in text
         for citation_string in citation_strings:
-            prefix = r"\W[فو]?قال"
-            separator = r"\W"
+            prefix = r"\W+[وف]?(?:قال|ذكر)"
+            separator = r"\W+"
             regex = prefix + separator + separator.join(citation_string.split(" "))            
             uri_cit_list.append({"citation_uri": uri, "regex": regex})
 
@@ -328,11 +328,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 if __name__ == '__main__':
     cit_map = "citation_resolution/outputs/data/uri_cit_map2.json"
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
     # verified_csv = "test_verified.csv"
     # corpus_citations = "text_corpus_results.csv"
-    corpus_base_path = "D:/OpenITI Corpus/corpus_2023_1_8/"
+    corpus_base_path = "F:/OpenITI Corpus/corpus_2023_1_8/"
     # corpus_citations_continuous = "outputs/continuous_corpus_citations.csv"
     analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path)
