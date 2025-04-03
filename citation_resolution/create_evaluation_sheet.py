@@ -11,7 +11,7 @@ def parse_list_item(string_list):
     list_items = string_list.strip('][').strip('\'').split(', \'')
     return list_items
 
-def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, arg4=None, splitter = r"ms(\d+)", separate_lists = True):
+def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r"ms(\d+)", separate_lists = True):
     """A script that loops through a text and applies a function to the text, returning a list of dictionaries with the structure
     {'ms': ms-no, result : 'output'}. If the result of the function is a list and separate_lists is True then it will loop through the list and create a separate
     output line for each"""
@@ -36,7 +36,7 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, arg4=None, s
     for idx, split in enumerate(tqdm(splits)):
         if re.match(r'\d+', split):
             if fn:
-                results = fn(splits[idx-1], arg1, arg2, arg3, arg4)
+                results = fn(splits[idx-1], arg1, arg2, arg3)
             else:
                 results = splits[idx-1]
             if type(results) == list and separate_lists:
@@ -64,7 +64,7 @@ def search_ms(text, start_phrase, capture_window):
 
     return matches_list
 
-def search_ms_split(text, start_phrase, capture_window, exclusion_list, phrase_len, splitter=r"\W+"):
+def search_ms_split(text, start_phrase, capture_window, exclusion_dict = None, splitter=r"\W+"):
     """Identify a set of results in a ms, for each result split on splitter and output a list of lists
     exclusion_list is a list of strings to exclude from matches"""
 
@@ -77,12 +77,16 @@ def search_ms_split(text, start_phrase, capture_window, exclusion_list, phrase_l
     for match in matches_list:  
         split_match = re.split(splitter, match)
         split_match.remove('')
-   
-        if phrase_len is not None:
-            relevant_words = split_match[1:phrase_len+1]
-        else:
-            relevant_words = split_match[:]
-        if " ".join(relevant_words) not in exclusion_list:              
+        existing_match = False
+        # If the exclusion_dict is not None - then run the process to exclude matches
+        if exclusion_dict is not None:
+            # Go through all of the available phrase lengths in the exclusion dictionary - if there is an item that matches a part of the found phrase we call it an existing_match
+            for phrase_len in exclusion_dict.keys():            
+                relevant_words = split_match[1:phrase_len]
+                if " ".join(relevant_words) in exclusion_dict[phrase_len]:
+                    existing_match = True`
+        # If there isn't an existing match anywhere we append to the evaluation sheet
+        if not existing_match:        
             output.append(split_match[1:])
 
     return output      
@@ -268,27 +272,32 @@ def build_evaluation(evaluation_df, csv_path, readme_path,
     with open(readme_path, 'w') as f:
         f.write(readme_text)
 
-def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path, main_book_uri, start_phrase = "\s[وف]?(?:قال|ذكر)", capture_window=3, exclusion_list = []):
+def create_evaluation_sheet(leveled_csv, main_text_path, evaluation_folder_path, main_book_uri, start_phrase = "\s[وف]?(?:قال|ذكر)", capture_window=3, exclusion_list = None):
 
     # Load in data
     leveled_df = pd.read_csv(leveled_csv)
     with open(main_text_path, encoding='utf-8-sig') as f:
         main_text = f.read()
 
-    # If exclusion list is not empty
-    if len(exclusion_list) > 0:
+    # If exclusion list exists
+    if exclusion_list is not None:
         # Normalize the exclusion list
         exclusion_list = [normalize_ara_heavy(text) for text in exclusion_list]
-        # Shorten the items in exclusion list to capture window - if they are longer than capture window - IF THIS IS WRONG CERTAIN DATA LIKELY TO THROW IndexError
-        if len(exclusion_list[0]) > capture_window:
-            exclusion_list = [" ".join(i.split()[:capture_window]) for i in exclusion_list]
-        # Get a phrase length to pass to the loop function - this helps us only match the words in the match to the length of the exclusion phrases
-        phrase_len = len(exclusion_list[0].split())
-    else:
-        # If there is no exclusion list, make phrase_len
-        phrase_len = None
+        # Refactor to create a dictionaries that stores the phrase len for each case 
+        # {phrase_len : [exclusions]}
+        exclusion_dict = {}
+        for exclusion in exclusion_list:
+            word_list = exclusion.split()            
+            word_len = len(word_list)
+            if word_len > capture_window:
+                exclusion = word_list[:capture_window]
+            if word_len not in exclusion_dict.keys():
+                exclusion_dict[word_len] = [exclusion]
+            else:
+                exclusion_dict[word_len].append(exclusion)
+
     # Loop through ms and capture the start_phrase and the window
-    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_list, phrase_len)
+    results = loop_through_ms(main_text, search_ms_split, start_phrase, capture_window, exclusion_dict)
     
 
     # Merge results with table - keep those that are not merged in separate table?

@@ -195,8 +195,10 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clu
     # If not map_only produce a list of strings that we need to exclude strings from future matching
     if not map_only:
         non_citations = evaluation_df[evaluation_df["cit"] == 0][word_cols].agg(' '.join, axis=1).to_list()        
-        non_citations.extend(found_citations["full_string"].to_list())
         
+        # Add found citations from the evaluation map to exclusion list
+        for uri in mapping_data.keys():
+            non_citations.extend(mapping_data[uri["citation_strings"]])
 
         return non_citations
 
