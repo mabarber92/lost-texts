@@ -248,11 +248,11 @@ def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_id
         
 
 if __name__ == "__main__":
-    evaluation_csv = './outputs/round-2/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv'
+    evaluation_csv = './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv'
     uri_citation_map_path = './outputs/data/uri_cit_map2.json'
-    leveled_csv = './outputs/round-2/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv'
-    results_no_clusters = './outputs/round-2/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'
+    leveled_csv = './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv'
+    results_no_clusters = './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'
     text_path = '../data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown'
     main_book_uri = "O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    new_evaluation_folder = './outputs/round-3/'
+    new_evaluation_folder = './outputs/round-4/'
     post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, results_no_clusters, text_path = text_path, new_evaluation_folder=new_evaluation_folder, main_text_uri=main_book_uri)
