@@ -271,8 +271,7 @@
   "Anonymous": {
     "citation_strings": [
       "جامع السيرة التركية",
-      "في المعجم المترجم",
-      "اخر"
+      "في المعجم المترجم"
     ],
     "cit_ms": [
       241,
@@ -1014,29 +1013,6 @@
     "ms_reuse": [
       1389
     ],
-    "post_ms_reuse": [],
-    "in_corpus": true
-  },
-  "AnonymousPlural": {
-    "citation_strings": [
-      "اخرون"
-    ],
-    "cit_ms": [
-      36,
-      70,
-      118,
-      160,
-      272,
-      350,
-      671,
-      672,
-      675,
-      1909,
-      291,
-      545,
-      1932
-    ],
-    "ms_reuse": [],
     "post_ms_reuse": [],
     "in_corpus": true
   },
