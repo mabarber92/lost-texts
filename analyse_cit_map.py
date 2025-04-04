@@ -1,3 +1,7 @@
+# Global Variables
+multiprocess = True
+pool_size = 16
+
 import json
 import pandas as pd
 from citation_resolution.create_evaluation_sheet import loop_through_ms
@@ -7,6 +11,8 @@ import re
 import os
 from openiti.helper.ara import normalize_ara_heavy 
 from openiti.helper.funcs import text_cleaner
+if multiprocess:
+    from multiprocessing import Pool
 
 def identify_continuous_corpus_df(corpus_df, cluster_obj):
     """Take a corpus df loop through each text_uri within it and pass it to identify_continuous_cited_ms to use the reuse
@@ -21,7 +27,7 @@ def identify_continuous_corpus_df(corpus_df, cluster_obj):
         continuous_df = identify_continuous_cited_ms(uri_df, cluster_obj, text_uri, input_type='corpus_df')
         continuous_df["text_uri"] = text_uri
         df_out = pd.concat([df_out, continuous_df])
-        df_out.to_csv('outputs/continuous_corpus_citations.csv')
+        df_out.to_csv('outputs_2/continuous_corpus_citations.csv')
     
     return df_out
 
@@ -41,10 +47,10 @@ def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri, all_cits=T
     if input_type == 'cit_map':
         uris = list(cit_map.keys())
     elif input_type == 'corpus_df':
-        uris = cit_map["result"].drop_duplicates().to_list()
+        uris = cit_map["uri"].drop_duplicates().to_list()
         int_cit_map = {}
         for uri in uris:
-            int_cit_map[uri] = {"cit_ms": cit_map[cit_map["result"] == uri]["ms"].drop_duplicates().to_list(), "in_corpus": None}
+            int_cit_map[uri] = {"cit_ms": cit_map[cit_map["uri"] == uri]["ms"].drop_duplicates().to_list(), "in_corpus": None}
         cit_map = int_cit_map.copy()
             
     else:
@@ -142,13 +148,13 @@ def search_text_for_cits(text, cit_map, arg2=None, arg3=None):
         
         # Use finditer to output a list of dicts [{"citation_uri": uri, "start": start, "end": stop}]
         # Will require finding and fixing a column rename for 'results' in the code somewhere!
-        # term_result = re.finditer(term["regex"], text)
-        # for result in term_result:
-            # result_dict = {"citation_uri": term["citation_uri"], "start": result.start(), "end": result.end()}
-            # results.append(result_dict)
+        term_result = re.finditer(term["regex"], text)
+        for result in term_result:
+            result_dict = {"uri": term["citation_uri"], "start": result.start(), "end": result.end()}
+            results.append(result_dict)
 
-        if len(re.findall(term["regex"], text)) > 0:
-            results.append(term["citation_uri"])
+        # if len(re.findall(term["regex"], text)) > 0:
+        #     results.append(term["citation_uri"])
     return results
 
 def normalize_cit_dict(cit_dict):
@@ -183,6 +189,26 @@ def check_uri_extension(uri_path):
     if not path_found:
         return None
 
+def text_path_to_results(text_path, uri_cit_list):        
+    print(text_path)
+    verified_path = check_uri_extension(text_path["full_path"])
+    if verified_path is None:
+        print("No related path found")
+    else:
+        with open(verified_path, encoding='utf-8-sig') as f:
+            text = f.read()        
+        new_results = loop_through_ms(text, search_text_for_cits, uri_cit_list, separate_lists=False)
+        print(len(new_results))            
+        
+        # If using finditer - refactor so that we parse out the different parts of the results dict into columns
+        # In finditer approach return a list of dicts, so:
+        results_df = pd.DataFrame()
+        for ms in new_results:
+            new_results_df = pd.DataFrame(ms["result"])
+            new_results_df["ms"] = int(ms["ms"])
+            new_results_df["text_uri"] = text_path["book"]
+            results_df = pd.concat([results_df, new_results_df])
+        return(results_df)
 
 
 def query_cit_map_corpus(main_book_uri, cit_map, cluster_obj, corpus_base_path, meta_path):
@@ -213,27 +239,46 @@ def query_cit_map_corpus(main_book_uri, cit_map, cluster_obj, corpus_base_path, 
 
     results_df = pd.DataFrame()
 
-    for text_path in text_paths:
-        print(text_path)
-        verified_path = check_uri_extension(text_path["full_path"])
-        if verified_path is None:
-            print("No related path found")
-        else:
-            with open(verified_path, encoding='utf-8-sig') as f:
-                text = f.read()
-            new_results = loop_through_ms(text, search_text_for_cits, uri_cit_list)
-            print(len(new_results))
-            
-            # If using finditer - refactor so that we parse out the different parts of the results dict into columns
-            # In finditer approach return a list of dicts, so:
-            # for ms in new_results.keys():
-                # new_results_df = pd.DataFrame(new_results[ms]["results"])
-                # new_results_df["ms"] = ms
-                # new_results_df["text_uri"] = text_path["book"]
-                # results_df = pd.concat([results_df, new_results_df]) 
+    # Set a global variable uri_cit_list_corpus for
 
-            new_results_df = pd.DataFrame(new_results)
-            new_results_df["text_uri"] = text_path["book"]
+    if multiprocess:
+        # Pass the text_paths to a the function using pool
+        print("Processing texts using multiprocessing")
+
+        # Prepare list of tuples as input
+        print("Preparing input for multiprocessing...")
+        input_data = []
+        for text_path in tqdm(text_paths):
+            input_data.append((text_path, uri_cit_list))
+        
+        with Pool(pool_size) as p:
+            results_dfs = p.starmap(text_path_to_results, input_data[-150:-100])
+        
+        results_df = pd.concat(results_dfs)
+        
+    else:
+        for text_path in text_paths[-100:-95]:
+            new_results_df = text_path_to_results(text_path, uri_cit_list)
+            # print(text_path)
+            # verified_path = check_uri_extension(text_path["full_path"])
+            # if verified_path is None:
+            #     print("No related path found")
+            # else:
+            #     with open(verified_path, encoding='utf-8-sig') as f:
+            #         text = f.read()
+            #     new_results = loop_through_ms(text, search_text_for_cits, uri_cit_list, separate_lists=False)
+            #     print(len(new_results))            
+                
+            #     # If using finditer - refactor so that we parse out the different parts of the results dict into columns
+            #     # In finditer approach return a list of dicts, so:
+            #     for ms in new_results:
+            #         new_results_df = pd.DataFrame(ms["result"])
+            #         new_results_df["ms"] = int(ms["ms"])
+            #         new_results_df["text_uri"] = text_path["book"]
+            #         results_df = pd.concat([results_df, new_results_df]) 
+
+            #     # new_results_df = pd.DataFrame(new_results)
+            #     # new_results_df["text_uri"] = text_path["book"]
             results_df = pd.concat([results_df, new_results_df])
     
     return results_df
@@ -364,11 +409,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 if __name__ == '__main__':
     cit_map = "citation_resolution/outputs/data/uri_cit_map2.json"
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
-    # verified_csv = "test_verified.csv"
+    verified_csv = "./outputs_2/verified0845Maqrizi.Mawaciz.csv"
     # corpus_citations = "text_corpus_results.csv"
-    corpus_base_path = "F:/OpenITI Corpus/corpus_2023_1_8/"
+    corpus_base_path = "D:/OpenITI Corpus/corpus_2023_1_8/"
     # corpus_citations_continuous = "outputs/continuous_corpus_citations.csv"
-    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path)
+    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path, verified_csv=verified_csv)

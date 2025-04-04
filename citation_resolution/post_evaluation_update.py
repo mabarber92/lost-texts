@@ -80,12 +80,16 @@ def create_update_uri_citation_map(evaluation_df, leveled_df_ids, results_no_clu
         word_start = citation["word_start"]
         word_end = citation["word_end"]
         # If word start and end are none - then we create indexes based on the full length of the cols
-        if word_start == None or word_end == None:
+        if word_start is None:
             word_start = 0
+        else:
+            word_start = word_start -1
+            full_length = False
+        if word_end is None:
             word_end = len(word_cols)
             full_length = True
         else:
-            word_start = word_start - 1
+            word_end = word_end
             full_length = False
         cit_words = []
         for word_col in word_cols[int(word_start):int(word_end)]:
@@ -249,10 +253,22 @@ def post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv_id
 
 if __name__ == "__main__":
     evaluation_csv = './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv'
-    uri_citation_map_path = './outputs/data/uri_cit_map2.json'
+    uri_citation_map_path = './outputs/data/uri_cit_map3.json'
     leveled_csv = './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv'
     results_no_clusters = './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'
     text_path = '../data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown'
     main_book_uri = "O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
     new_evaluation_folder = './outputs/round-4/'
-    post_evaluation_update(evaluation_csv, uri_citation_map_path, leveled_csv, results_no_clusters, text_path = text_path, new_evaluation_folder=new_evaluation_folder, main_text_uri=main_book_uri)
+    
+    csvs = [['./outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv', 
+             './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv',
+             './outputs/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'],
+             ['./outputs/round-2/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv', 
+             './outputs/round-2/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv',
+             './outputs/round-2/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv'],
+             ['./outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_evaluation/evaluation_sheet.csv', 
+             './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/leveled_clusters_ids.csv',
+             './outputs/round-3/O845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown_supporting_data/results_no_clusters.csv']]
+    
+    for csv_list in csvs:
+        post_evaluation_update(csv_list[0], uri_citation_map_path, csv_list[1], csv_list[2], text_path = text_path, new_evaluation_round = False)
