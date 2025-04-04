@@ -1,6 +1,6 @@
 # Global Variables
 multiprocess = True
-pool_size = 16
+pool_size = 12
 
 import json
 import pandas as pd
@@ -252,12 +252,12 @@ def query_cit_map_corpus(main_book_uri, cit_map, cluster_obj, corpus_base_path, 
             input_data.append((text_path, uri_cit_list))
         
         with Pool(pool_size) as p:
-            results_dfs = p.starmap(text_path_to_results, input_data[-150:-100])
+            results_dfs = p.starmap(text_path_to_results, input_data)
         
         results_df = pd.concat(results_dfs)
         
     else:
-        for text_path in text_paths[-100:-95]:
+        for text_path in text_paths:
             new_results_df = text_path_to_results(text_path, uri_cit_list)
             # print(text_path)
             # verified_path = check_uri_extension(text_path["full_path"])
@@ -407,13 +407,12 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 
 
 if __name__ == '__main__':
-    cit_map = "citation_resolution/outputs/data/uri_cit_map2.json"
+    cit_map = "citation_resolution/outputs/data/uri_cit_map3.json"
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
     minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
     meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
-    verified_csv = "./outputs_2/verified0845Maqrizi.Mawaciz.csv"
     # corpus_citations = "text_corpus_results.csv"
     corpus_base_path = "D:/OpenITI Corpus/corpus_2023_1_8/"
     # corpus_citations_continuous = "outputs/continuous_corpus_citations.csv"
-    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path, verified_csv=verified_csv)
+    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path)
