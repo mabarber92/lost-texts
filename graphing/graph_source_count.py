@@ -22,5 +22,5 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out):
 
 
 if __name__ == "__main__":
-    csv = "../outputs/citations_with_aligned.csv"
+    csv = "../outputs_2/citations_with_aligned.csv"
     graph_source_count(csv, "", "milestones-count-by-sources-found.csv")

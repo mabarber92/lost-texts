@@ -94,16 +94,16 @@ def count_lost_sources(citation_df, meta_df):
 def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_book_uri):
     """Main script for analysis"""
 
-    # cluster_obj = clusterDf(cluster_path, meta_path)
+    cluster_obj = clusterDf(cluster_path, meta_path)
     citation_df = pd.read_csv(citation_csv)
     meta_df = pd.read_csv(meta_path, sep='\t')
 
-    # fetch_source_counts(citation_df).to_csv("outputs/cited_source_counts.csv")
-    # fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri).to_csv("outputs/uncited_ms_reusers.csv")
+    fetch_source_counts(citation_df).to_csv("outputs_2/cited_source_counts.csv")
+    fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri).to_csv("outputs_2/uncited_ms_reusers.csv")
 
-    # for i in range(2,5):
-    #     agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
-    #     agreement_df.to_csv("outputs/citations_filtered_by_agreement_of_{}.csv".format(i))
+    for i in range(2,5):
+        agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
+        agreement_df.to_csv("outputs/citations_filtered_by_agreement_of_{}.csv".format(i))
 
     count_lost_sources(citation_df, meta_df)
 
@@ -111,9 +111,9 @@ if __name__ == "__main__":
     
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
     minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
-    citation_csv = "outputs/citations_with_aligned.csv"
+    citation_csv = "outputs_2/citations_with_aligned.csv"
 
     analyse_cits(citation_csv, minified_clusters, meta_path, main_text, main_book_uri)
 
