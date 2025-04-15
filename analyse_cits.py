@@ -9,13 +9,17 @@ def fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main
     with open(main_text_path, encoding='utf-8-sig') as f:
         text = f.read()
     
-    ms_dict = loop_through_ms(text)
+    ms_dict = loop_through_ms(text, ms_as_int=True)
     ms_list = pd.DataFrame(ms_dict)["ms"].to_list()
     ms_matched = citation_df["ms"].to_list()
+
+    print(ms_list[0:10])
+    print(ms_matched[0:10])
 
     # Create a dictionary listing main_text milestones for each reuser
     reuser_dict = {}
     non_reuse = []
+    ms_reuser_list = []
     for ms in tqdm(ms_list):
         if not ms in ms_matched:
             book_df = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, int(ms))
@@ -30,7 +34,13 @@ def fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main
                     else:
                         if ms not in reuser_dict[book]:
                             reuser_dict[book].append(ms)
+
+            # Add count of books to ms_reuser_list and list of books
+            row = {"ms": ms, "reuser_count": len(book_list), "reusers": book_list}
+            ms_reuser_list.append(row)
     
+    reuser_df = pd.DataFrame(ms_reuser_list)
+
     # Loop through dictionary to create a df with counts
     df_dicts = []
     for reuser in tqdm(reuser_dict.keys()):
@@ -42,7 +52,7 @@ def fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main
     
     df_out = pd.DataFrame(df_dicts)
     df_out = df_out.sort_values(by=["ms_count"])
-    return df_out
+    return df_out, reuser_df
 
 
 def fetch_source_counts(citation_df):
@@ -99,19 +109,21 @@ def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_boo
     meta_df = pd.read_csv(meta_path, sep='\t')
 
     fetch_source_counts(citation_df).to_csv("outputs_2/cited_source_counts.csv")
-    fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri).to_csv("outputs_2/uncited_ms_reusers.csv")
+    top_reusers, ms_reusers = fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri)
+    top_reusers.to_csv("outputs_2/uncited_ms_reusers.csv")
+    ms_reusers.to_csv("uncited_ms_reuser_counts.csv")
 
     for i in range(2,5):
         agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
-        agreement_df.to_csv("outputs/citations_filtered_by_agreement_of_{}.csv".format(i))
+        agreement_df.to_csv("outputs_2/citations_filtered_by_agreement_of_{}.csv".format(i))
 
     count_lost_sources(citation_df, meta_df)
 
 if __name__ == "__main__":
     
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "D:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "D:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
     citation_csv = "outputs_2/citations_with_aligned.csv"
 

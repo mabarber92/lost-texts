@@ -11,7 +11,7 @@ def parse_list_item(string_list):
     list_items = string_list.strip('][').strip('\'').split(', \'')
     return list_items
 
-def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r"ms(\d+)", separate_lists = True):
+def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r"ms(\d+)", separate_lists = True, ms_as_int = False):
     """A script that loops through a text and applies a function to the text, returning a list of dictionaries with the structure
     {'ms': ms-no, result : 'output'}. If the result of the function is a list and separate_lists is True then it will loop through the list and create a separate
     output line for each"""
@@ -35,6 +35,8 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r
     # Loop through the splits - if a split is an ms - perform the function
     for idx, split in enumerate(tqdm(splits)):
         if re.match(r'\d+', split):
+            if ms_as_int:
+                split = int(split)
             if fn:
                 results = fn(splits[idx-1], arg1, arg2, arg3)
             else:
