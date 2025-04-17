@@ -311,7 +311,7 @@ def infer_source_from_aligned_citation(corpus_citations, verified_citations, clu
         prev_uri_ms = []
         for ms_cluster in ms_clusters_dict:
             uri_ms.append(ms_cluster["book"] + "." + str(ms_cluster["seq"]))
-            prev_uri_ms.append(ms_cluster["book"] + "." + str(ms_cluster["seq"]+1))
+            prev_uri_ms.append(ms_cluster["book"] + "." + str(ms_cluster["seq"]-1))
         
         # Locate corresponding ms with citations from the clusters
         cited_mss = corpus_citations[corpus_citations["uri.ms"].isin(uri_ms)].to_dict("records")
