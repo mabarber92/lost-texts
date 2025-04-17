@@ -6,10 +6,10 @@ import seaborn as sns
 import re
 import json
 
-def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, total_milestones, bin_size = 5, period_map = None, lost_source_list = None):
+def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, total_milestones, bin_size = 5, period_map = None, lost_source_list = None, use_agreement = None):
     """period_map_example = [{"period_name": "Fatimid", "start": 350, "end": 580, colour: "green"}]"""
 
-    sns.set_style("whitegrid")
+    sns.set_style("whitegrid")    
     # Read in csv
     ms_citations_df = pd.read_csv(ms_citations_csv)
 
@@ -24,10 +24,29 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
     group_by_count = pd.concat([group_by_count, new_row])
     group_by_count.to_csv(summary_csv_out)
 
+    # use_agreement - if a number is specified, filter the df so that we only take sources that are either supported by self (i.e. they're cited in the text) or where more than one author agrees this is the source
+    if use_agreement is not None:
+        print("Filtering the data to only use cases where reuse is used as evidence {} or more authors agree on the attribution".format(use_agreement))
+        print(len(ms_citations_df))
+        ms_list = ms_citations_df["ms"].to_list()
+        new_df = pd.DataFrame()
+        for ms in ms_list:
+            filtered_ms_df = ms_citations_df[ms_citations_df["ms"] == ms]
+            non_self = filtered_ms_df[filtered_ms_df["origin"] != 'self']
+            sources = non_self["uri"].drop_duplicates().to_list()
+            for source in sources:
+                source_filtered = non_self[non_self["uri"] == "source"]
+                if len(source_filtered["origin"].drop_duplicates()) > 1:
+                    new_df = pd.concat([new_df, source_filtered])
+            new_df = pd.concat([new_df, filtered_ms_df[filtered_ms_df["origin"] == 'self']])
+        ms_citations_df = new_df.drop_duplicates()
+
+
+
     # Manually create a histogram-type graph using patches - group together frequencies into 'bins' to create wider, easier to see bars
     if bin_size > 0:
         ms_citations_df = ms_citations_df[["uri","ms"]].drop_duplicates()
-        fig, axs = plt.subplots(1, 1)
+        fig, axs = plt.subplots(2, 1, gridspec_kw={'height_ratios': [9, 1]})
         fig.set_size_inches(10, 6)
         y_lim = 0
         ms_list = ms_citations_df["ms"].drop_duplicates().to_list()
@@ -37,9 +56,10 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
             ms_citations_df["source_date"] = pd.to_numeric(ms_citations_df["uri"].str.split("(\d+)", expand=True)[1])
             
 
-        for i in range(0, total_milestones, bin_size):
+        for i in range(1, total_milestones, bin_size):
             last_ms = i+bin_size
-            filtered_ms_list = list(range(i, last_ms))
+            filtered_ms_list = list(range(i, last_ms))            
+            
             
             if ms_type != int:
                 filtered_ms_list = [int(i) for i in filtered_ms_list]
@@ -53,11 +73,11 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
                         period_df = period_df[period_df["source_date"] < period["end"]]
                         source_count = len(period_df)
                         if source_count > 0:
-                            if period["period_name"] not in plt.gca().get_legend_handles_labels()[1]:
-                                bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size -1, height=source_count, color=period["colour"], label=period["period_name"])
+                            if period["period_name"] not in axs[0].get_legend_handles_labels()[1]:
+                                bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size, height=source_count, color=period["colour"], label=period["period_name"], linewidth=0)
                             else:
-                                bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size -1, height=source_count, color=period["colour"])                          
-                            axs.add_patch(bin_patch)
+                                bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size, height=source_count, color=period["colour"], linewidth=0)                          
+                            axs[0].add_patch(bin_patch)
                             current_h += source_count
                             if current_h > y_lim:                            
                                 y_lim = current_h
@@ -75,19 +95,21 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
                     
                     current_h = 0
                     if extant_count > 0:
-                        if "Extant Sources" not in plt.gca().get_legend_handles_labels()[1]:
-                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size -1, height=extant_count, color="grey", label="Extant Sources")
+                        if "Extant Sources" not in axs[0].get_legend_handles_labels()[1]:
+                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size, height=extant_count, color="grey", label="Extant Sources", linewidth=0)
                         else:
-                             bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size -1, height=extant_count, color="grey")
+                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size, height=extant_count, color="grey", linewidth=0)
                     
-                        axs.add_patch(bin_patch)
+                        
+                        axs[0].add_patch(bin_patch)
                         current_h += extant_count
                     if lost_count > 0:
-                        if "Lost Sources" not in plt.gca().get_legend_handles_labels()[1]:
-                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size -1, height=lost_count, color="lightgrey", label="Lost Sources")
+                        if "Lost Sources" not in axs[0].get_legend_handles_labels()[1]:
+                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size, height=lost_count, color="lightgrey", label="Lost Sources", linewidth=0)
                         else:
-                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size -1, height=lost_count, color="lightgrey")
-                        axs.add_patch(bin_patch)
+                            bin_patch = patches.Rectangle(xy = (i,current_h), width=bin_size, height=lost_count, color="lightgrey", linewidth=0)
+                        
+                        axs[0].add_patch(bin_patch)
                         current_h += lost_count
                     
                     if current_h > y_lim:                            
@@ -98,17 +120,28 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
                 
                 else:
 
-                    bin_patch = patches.Rectangle(xy=(i,0), width = bin_size-1, height= total_source_count, color = "lightgrey")
+                    bin_patch = patches.Rectangle(xy=(i,0), width = bin_size, height= total_source_count, color = "lightgrey", linewidth=0)
                     if total_source_count > y_lim:
                         y_lim = total_source_count
-                    axs.add_patch(bin_patch)
-                    
+                    axs[0].add_patch(bin_patch)
         
-        axs.set_xlim(0, total_milestones)
-        axs.set_ylim(0, y_lim + 1)
-        axs.set_xlabel("Milestone in the {}".format(source_name))
-        axs.set_ylabel("Number of sources per {} milestones".format(bin_size))
-        axs.legend()
+
+        # Add second graph with vertical lines for cases where no source identified
+        all_ms = list(range(1, total_milestones))
+        unattributed_ms = [ms for ms in all_ms if ms not in ms_list]
+        axs[1].vlines(ms_list, ymin=0, ymax= 1, color = 'black', linewidth=0.1)
+
+
+        axs[0].set_xlim(0, total_milestones)
+        axs[1].set_xlim(0, total_milestones)
+        axs[0].set_ylim(0, y_lim + 1)
+        axs[0].set_xlabel("Milestones in the {} grouped into {} for purpose of counting sources\n\n".format(source_name, bin_size))
+        axs[1].set_xlabel("Milestones for which at least one source has been identified in the {}".format(source_name))
+        axs[0].set_ylabel("Number of sources per {} milestones".format(bin_size))
+        axs[1].set_yticks([])
+        axs[0].xaxis.grid(False)
+        axs[1].xaxis.grid(False)
+        axs[0].legend()
         fig.savefig(png_out, dpi=300, bbox_inches = "tight")
                     
                     
@@ -125,7 +158,7 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
 if __name__ == "__main__":
     
     period_map = [ 
-        {'start': 1, 'end': 357, 'period_name': 'pre-Fatimid',  "colour": "lightgray"}, 
+        {'start': 0, 'end': 357, 'period_name': 'pre-Fatimid',  "colour": "lightgray"}, 
         {'start': 358, 'end': 567, 'period_name': 'Fatimid',  "colour": "darkgray"},
         {'start': 568, 'end': 648, 'period_name': 'Ayyubid',  "colour": "gray"},
         {'start': 649, 'end': 922, 'period_name': 'Mamluk', "colour": "black"},
@@ -155,8 +188,11 @@ if __name__ == "__main__":
         else:
             lost_sources.append(item)
     
+    reconstructed_texts = ["0588IbnMamun.AkhbarMisr", "0617IbnTuwayr.NuzhatMuqlatayn", "0454Qudaci"]
+    lost_sources.extend(reconstructed_texts)
+
     print(lost_sources)
 
 
     csv = "../outputs_2/citations_with_aligned.csv"
-    graph_source_count(csv, "test-patches-sources-by-period.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, period_map = period_map)
+    graph_source_count(csv, "group-by-10-lost-sources-agreement-2.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, lost_source_list=lost_sources, bin_size=10, use_agreement=2)

@@ -1,0 +1,1449 @@
+,ms,reuser_count,reusers
+0,1,2,"['0845Maqrizi.MusawwadatMawaciz', '0930IbnIyas.NuzhatUmam']"
+1,2,1,['0845Maqrizi.MusawwadatMawaciz']
+2,4,1,['0845Maqrizi.MusawwadatMawaciz']
+3,5,2,"['0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.KhabarCanBashar']"
+4,6,1,['0845Maqrizi.MusawwadatMawaciz']
+5,7,1,['0845Maqrizi.MusawwadatMawaciz']
+6,9,2,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar']"
+7,10,1,['0375IkhwanSafa.Rasail']
+8,11,1,['0375IkhwanSafa.Rasail']
+9,12,19,"['0458IbnSidaMursi.MuhkamWaMuhit', '0711IbnManzurIfriqi.LisanCarab', '0821Qalqashandi.SubhAcsha', '0804IbnMulaqqin.Tawdih', '0654SibtIbnJawzi.MiratZaman', '0845Maqrizi.KhabarCanBashar', '0393IbnHammadJawhari.SihahTajLugha', '0910MuhammadIbnZahiraQurashi.ManhalMahul', '0666IbnAbiBakrZaynDinRazi.MukhtarSihah', '0942IbnYusufShami.SubulHuda', '0736IbnDawadari.KanzDurar', '0817MajdDinFiruzabadi.QamusMuhit', '0393IbnHammadJawhari.MuntakhabMinSihahJawhari', '0276IbnQutaybaDinawari.AdabKatib', '0682ZakariyaQazwini.CajaibMakhluqat', '0770IbnMuhammadFayyumiHamawi.MisbahMunir', '0375IkhwanSafa.Rasail', '0284Bandaniji.Taqfiya', '0375IkhwanSafa.RisalatJamica']"
+10,16,4,"['0749IbnFadlAllahCumari.MasalikAbsar', '0626YaqutHamawi.MucjamBuldan', '0845Maqrizi.KhabarCanBashar', '0375IkhwanSafa.Rasail']"
+11,17,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0375IkhwanSafa.Rasail', '0930IbnIyas.NuzhatUmam']"
+12,21,4,"['0845Maqrizi.KhabarCanBashar', '0375IkhwanSafa.Rasail', '0930IbnIyas.NuzhatUmam', '0292Yacqubi.Tarikh']"
+13,23,10,"['0597IbnJawzi.Muntazam', '0654SibtIbnJawzi.MiratZaman', '0626YaqutHamawi.MucjamBuldan', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0300IbnRusta.AclaqNafisa', '0355IbnQass.DalailQibla', '0597IbnJawzi.TanwirGhabash', '0383IbnCabbasKhwarizmi.MufidCulum']"
+14,24,2,"['0845Maqrizi.KhabarCanBashar', '0218HajjajIbnYusufIbnMatar.Majisti']"
+15,25,8,"['0660IbnCadim.BughyatTalab', '0597IbnJawzi.Muntazam', '0654SibtIbnJawzi.MiratZaman', '0845Maqrizi.KhabarCanBashar', '0400IbnTahirMaqdisi.BadWaTarikh', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0300IbnRusta.AclaqNafisa']"
+16,26,1,['0845Maqrizi.KhabarCanBashar']
+17,27,2,"['0845Maqrizi.KhabarCanBashar', '0360HamzaIsfahani.TarikhSini']"
+18,28,1,['0375AnonymousTranslator.TarikhCalamUrusiyus']
+19,31,5,"['0626YaqutHamawi.MucjamBuldan', '0845Maqrizi.KhabarCanBashar', '0739SafiDinHanbali.Marasid', '0930IbnIyas.NuzhatUmam', '0911Suyuti.AsmaBiqac']"
+20,32,2,"['0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam']"
+21,33,2,"['0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam']"
+22,34,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam']"
+23,37,5,"['0733Nuwayri.NihayatArab', '0874IbnTaghribirdi.NujumZahira', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+24,43,3,"['0821Qalqashandi.SubhAcsha', '0911Suyuti.HusnMuhadara', '0257IbnCabdHakam.FutuhMisr']"
+25,52,9,"['0845Maqrizi.ImtacAsmac', '0807NurDinHaythami.MajmacZawaid', '0360Tabarani.MucjamKabir', '0942IbnYusufShami.SubulHuda', '0736IbnDawadari.KanzDurar', '0460ShaykhTusi.Amali', '0911Suyuti.HusnMuhadara', '0783IbnHadida.MisbahMudi', '0257IbnCabdHakam.FutuhMisr']"
+26,57,2,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam']"
+27,70,7,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+28,71,7,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600KatibMarrakushi.Istibsar', '0600PseudoMascudi.AkhbarZaman']"
+29,73,4,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+30,74,3,"['0733Nuwayri.NihayatArab', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam']"
+31,75,3,"['0733Nuwayri.NihayatArab', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam']"
+32,76,3,"['0733Nuwayri.NihayatArab', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam']"
+33,77,3,"['0733Nuwayri.NihayatArab', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam']"
+34,78,6,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+35,79,5,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+36,80,3,"['0733Nuwayri.NihayatArab', '0487AbuCubaydBakri.MasalikWaMamalik', '0930IbnIyas.NuzhatUmam']"
+37,82,4,"['0385IbnNadim.Fihrist', '0930IbnIyas.NuzhatUmam', '0300IbnRusta.AclaqNafisa', '0440AbuRayhanBiruni.AtharBaqiya']"
+38,93,10,"['0571IbnCasakir.TarikhDimashq', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0671AbuCabdAllahQurtubi.JamicLiAhkamQuran', '0745AbuHayyanGharnati.TafsirBahrMuhit', '0468IbnAhmadWahidiNaysaburi.WasitFiTafsir', '0654SibtIbnJawzi.MiratZaman', '0333IbnMarwanDinawari.MujalasaWaJawahirCilm', '0338AbuJacfarNahhas.IcrabQuran', '0930IbnIyas.NuzhatUmam', '0716NajmDinTufi.Isharat']"
+39,95,0,[]
+40,96,0,[]
+41,97,0,[]
+42,98,0,[]
+43,99,1,['0930IbnIyas.NuzhatUmam']
+44,101,0,[]
+45,102,0,[]
+46,103,0,[]
+47,104,0,[]
+48,105,0,[]
+49,115,1,['0930IbnIyas.NuzhatUmam']
+50,116,5,"['0733Nuwayri.NihayatArab', '0874IbnTaghribirdi.NujumZahira', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+51,121,1,['0930IbnIyas.NuzhatUmam']
+52,122,1,['0930IbnIyas.NuzhatUmam']
+53,123,1,['0930IbnIyas.NuzhatUmam']
+54,124,1,['0930IbnIyas.NuzhatUmam']
+55,125,1,['0930IbnIyas.NuzhatUmam']
+56,126,1,['0930IbnIyas.NuzhatUmam']
+57,127,1,['0930IbnIyas.NuzhatUmam']
+58,128,1,['0930IbnIyas.NuzhatUmam']
+59,139,3,"['0646IbnBaytarAndalusi.JamicLiMufradat', '0428IbnSina.QanunFiTibb', '0930IbnIyas.NuzhatUmam']"
+60,140,5,"['0646IbnBaytarAndalusi.JamicLiMufradat', '0428IbnSina.QanunFiTibb', '0696AshrafIbnYusufTurkumani.Muctamid', '0750IbnQasimKilani.SharhFusulAbuqrat', '0930IbnIyas.NuzhatUmam']"
+61,146,0,[]
+62,154,1,['0930IbnIyas.NuzhatUmam']
+63,155,2,"['0930IbnIyas.NuzhatUmam', '0440AbuRayhanBiruni.AtharBaqiya']"
+64,156,1,['0930IbnIyas.NuzhatUmam']
+65,162,1,['0930IbnIyas.NuzhatUmam']
+66,171,3,"['0850ShihabDinIbshihi.Mustatraf', '0736IbnDawadari.KanzDurar', '0520IbnWalidTurtushi.SirajMuluk']"
+67,181,1,['0350MuhammadKindi.WulatMisr']
+68,186,1,['0930IbnIyas.NuzhatUmam']
+69,187,0,[]
+70,188,4,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.ItticazHunafa']"
+71,191,2,"['0588IbnMamun.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+72,192,1,['0588IbnMamun.AkhbarMisr']
+73,193,1,['0588IbnMamun.AkhbarMisr']
+74,196,1,['0845Maqrizi.ItticazHunafa']
+75,201,1,['0845Maqrizi.Suluk']
+76,202,1,['0845Maqrizi.Suluk']
+77,203,1,['0845Maqrizi.Suluk']
+78,204,0,[]
+79,205,0,[]
+80,206,0,[]
+81,207,0,[]
+82,208,13,"['0893CamiriHaradi.BahjatMahafil', '0986IbnCaliFattani.MajmacBihar', '0733Nuwayri.NihayatArab', '0821Qalqashandi.SubhAcsha', '0626YaqutHamawi.MucjamBuldan', '0450AbuHasanMawardi.AhkamSultaniyya', '0676Nawawi.TahdhibAsma', '0458AbuYaclaIbnFarra.AhkamSultaniyya', '0709IbnAbiFathShamsDinBacli.MatlacCalaAbwabMuqnic', '0930IbnIyas.NuzhatUmam', '0367IbnHawqal.SuratArd', '0733IbnJamacaBadrDinHamawi.TahrirAhkam', '0911Suyuti.AsmaBiqac']"
+83,211,13,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0597IbnJawzi.Muntazam', '0597IbnJawzi.KashfMushkil', '0654SibtIbnJawzi.MiratZaman', '0310Tabari.Tarikh', '0749ZaynDinIbnWardi.Tarikh', '0774IbnKathir.MusnadCumarIbnKhattab', '0597IbnJawzi.ShudhurCuqud', '0732AbuFida.MukhtasarFiAkhbar', '0662HusaynIbnBadrDin.ShifaUwam', '0909IbnMabrid.MahdSawab', '0815MuhibbDinIbnShihna.RawdMunazir']"
+84,212,9,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0656IbnAbiHadid.SharhNahjBalagha', '0597IbnJawzi.Muntazam', '0597IbnJawzi.KashfMushkil', '0310Tabari.Tarikh', '0774IbnKathir.MusnadCumarIbnKhattab', '0662HusaynIbnBadrDin.ShifaUwam', '0909IbnMabrid.MahdSawab']"
+85,213,1,['0310Tabari.Tarikh']
+86,215,5,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0930IbnIyas.NuzhatUmam', '0350MuhammadKindi.WulatMisr', '0845Maqrizi.Bayan']"
+87,217,0,[]
+88,218,0,[]
+89,220,11,"['0450AbuHasanMawardi.HawiKabir', '0845Maqrizi.ImtacAsmac', '0620IbnQudamaMaqdisi.Mughni', '0279Baladhuri.FutuhBuldan', '0279Baladhuri.AnsabAshraf', '0502CabdWahidRuyani.BahrMadhhab', '0450AbuHasanMawardi.AhkamSultaniyya', '0251IbnZanjawayh.Amwal', '0224QasimIbnSallam.Amwal', '0458AbuYaclaIbnFarra.AhkamSultaniyya', '0845Maqrizi.DawSari']"
+90,222,1,['0930IbnIyas.NuzhatUmam']
+91,223,7,"['0450AbuHasanMawardi.HawiKabir', '0821Qalqashandi.SubhAcsha', '0502CabdWahidRuyani.BahrMadhhab', '0450AbuHasanMawardi.AhkamSultaniyya', '0224QasimIbnSallam.Amwal', '0458AbuYaclaIbnFarra.AhkamSultaniyya', '0852IbnHajarCasqalani.JawabJalil']"
+92,227,5,"['0597IbnJawzi.Muntazam', '0699IbnCabdMalikMurjani.BahjatNufus', '0930IbnIyas.NuzhatUmam', '0300IbnRusta.AclaqNafisa', '0300IbnKhurdadhbih.MasalikWaMamalik']"
+93,228,1,['0845Maqrizi.Muqaffa']
+94,230,2,"['0821Qalqashandi.SubhAcsha', '0930IbnIyas.NuzhatUmam']"
+95,231,0,[]
+96,232,1,['0930IbnIyas.NuzhatUmam']
+97,233,1,['0930IbnIyas.NuzhatUmam']
+98,234,2,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam']"
+99,235,2,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam']"
+100,239,1,['0764Safadi.WafiBiWafayat']
+101,242,3,"['0845Maqrizi.Suluk', '0692IbnCabdZahir.RawdZahir', '0725BaybarsMansuri.ZubdatFikra']"
+102,243,1,['0930IbnIyas.NuzhatUmam']
+103,244,4,"['0845Maqrizi.Suluk', '0874IbnTaghribirdi.NujumZahira', '0807IbnFurat.TarikhDuwal', '0930IbnIyas.NuzhatUmam']"
+104,246,1,['0733Nuwayri.NihayatArab']
+105,249,0,[]
+106,253,0,[]
+107,254,0,[]
+108,255,11,"['0733Nuwayri.NihayatArab', '0874IbnTaghribirdi.NujumZahira', '0736IbnDawadari.KanzDurar', '0911Suyuti.HusnMuhadara', '0596IbnWasifShah.MukhtasarCajaibDunya', '0649MuhammadIdrisi.Anwar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman', '0749ZaynDinIbnWardi.FathRahim', '0629CabdLatifBaghdadi.IfadaWaIctibar', '0911Suyuti.TuhfatKiram']"
+109,256,7,"['0733Nuwayri.NihayatArab', '0874IbnTaghribirdi.NujumZahira', '0736IbnDawadari.KanzDurar', '0596IbnWasifShah.MukhtasarCajaibDunya', '0649MuhammadIdrisi.Anwar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+110,257,6,"['0733Nuwayri.NihayatArab', '0911Suyuti.HusnMuhadara', '0649MuhammadIdrisi.Anwar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman', '0911Suyuti.TuhfatKiram']"
+111,258,7,"['0733Nuwayri.NihayatArab', '0874IbnTaghribirdi.NujumZahira', '0911Suyuti.HusnMuhadara', '0649MuhammadIdrisi.Anwar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman', '0911Suyuti.TuhfatKiram']"
+112,259,8,"['0733Nuwayri.NihayatArab', '0855BadrDinCayni.SayfMuhannad', '0736IbnDawadari.KanzDurar', '0911Suyuti.HusnMuhadara', '0649MuhammadIdrisi.Anwar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman', '0911Suyuti.TuhfatKiram']"
+113,268,10,"['0814IbnZayyat.KawakibSayyara', '0626YaqutHamawi.MucjamBuldan', '0900IbnCabdMuncimHimyari.RawdMictar', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0682ZakariyaQazwini.AtharBilad', '0596IbnWasifShah.MukhtasarCajaibDunya', '0649MuhammadIdrisi.Anwar', '0600KatibMarrakushi.Istibsar', '0600PseudoMascudi.AkhbarZaman']"
+114,275,3,"['0649MuhammadIdrisi.Anwar', '0930IbnIyas.NuzhatUmam', '0629CabdLatifBaghdadi.IfadaWaIctibar']"
+115,276,2,"['0930IbnIyas.NuzhatUmam', '0629CabdLatifBaghdadi.IfadaWaIctibar']"
+116,281,1,['0930IbnIyas.NuzhatUmam']
+117,286,2,"['0845Maqrizi.MusawwadatMawaciz', '0930IbnIyas.NuzhatUmam']"
+118,287,0,[]
+119,288,0,[]
+120,289,0,[]
+121,290,0,[]
+122,291,0,[]
+123,292,3,"['0745AbuHayyanGharnati.TafsirBahrMuhit', '0458IbnSidaMursi.IcrabQuran', '0930IbnIyas.NuzhatUmam']"
+124,293,1,['0930IbnIyas.NuzhatUmam']
+125,298,4,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+126,299,7,"['0733Nuwayri.NihayatArab', '0487AbuCubaydBakri.MasalikWaMamalik', '0911Suyuti.HusnMuhadara', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.BadaicZuhur', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+127,300,4,"['0733Nuwayri.NihayatArab', '0596IbnWasifShah.MukhtasarCajaibDunya', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+128,301,1,['0930IbnIyas.NuzhatUmam']
+129,302,2,"['0733Nuwayri.NihayatArab', '0600PseudoMascudi.AkhbarZaman']"
+130,303,3,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+131,304,3,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+132,305,3,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+133,306,1,['0930IbnIyas.NuzhatUmam']
+134,309,1,['0646IbnQifti.IkhbarCulama']
+135,311,0,[]
+136,312,3,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0600PseudoMascudi.AkhbarZaman']"
+137,313,2,"['0736IbnDawadari.KanzDurar', '0600PseudoMascudi.AkhbarZaman']"
+138,314,0,[]
+139,315,3,"['0733Nuwayri.NihayatArab', '0487AbuCubaydBakri.MasalikWaMamalik', '0600PseudoMascudi.AkhbarZaman']"
+140,316,1,['0733Nuwayri.NihayatArab']
+141,317,0,[]
+142,318,3,"['0733Nuwayri.NihayatArab', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+143,319,1,['0733Nuwayri.NihayatArab']
+144,320,1,['0733Nuwayri.NihayatArab']
+145,324,2,"['0733Nuwayri.NihayatArab', '0600PseudoMascudi.AkhbarZaman']"
+146,325,5,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0596IbnWasifShah.MukhtasarCajaibDunya']"
+147,331,2,"['0733Nuwayri.NihayatArab', '0600PseudoMascudi.AkhbarZaman']"
+148,332,3,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik']"
+149,333,2,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar']"
+150,334,3,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0596IbnWasifShah.MukhtasarCajaibDunya']"
+151,344,2,"['0845Maqrizi.KhabarCanBashar', '0375AnonymousTranslator.TarikhCalamUrusiyus']"
+152,345,2,"['0845Maqrizi.KhabarCanBashar', '0375AnonymousTranslator.TarikhCalamUrusiyus']"
+153,348,3,"['0845Maqrizi.KhabarCanBashar', '0346Mascudi.TanbihWaIshraf', '0276IbnQutaybaDinawari.AnwaFiMawasim']"
+154,349,1,['0845Maqrizi.KhabarCanBashar']
+155,366,1,['0930IbnIyas.NuzhatUmam']
+156,367,4,"['0671AbuCabdAllahQurtubi.JamicLiAhkamQuran', '0548IbnHasanTabarsi.TafsirMajmacBayan', '0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam']"
+157,369,5,"['0850ShihabDinIbshihi.Mustatraf', '0845Maqrizi.KhabarCanBashar', '0565AbuHamidGharnati.TuhfatAlbab', '0885BurhanDinBiqaci.CunwanZaman', '0930IbnIyas.NuzhatUmam']"
+158,370,1,['0845Maqrizi.KhabarCanBashar']
+159,389,0,[]
+160,390,0,[]
+161,395,1,['0350MuhammadKindi.WulatMisr']
+162,396,1,['0350MuhammadKindi.WulatMisr']
+163,397,1,['0350MuhammadKindi.WulatMisr']
+164,398,2,"['0845Maqrizi.Muqaffa', '0350MuhammadKindi.WulatMisr']"
+165,399,0,[]
+166,400,0,[]
+167,401,0,[]
+168,406,6,"['0845Maqrizi.Muqaffa', '0900IbnCabdMuncimHimyari.RawdMictar', '0487AbuCubaydBakri.MasalikWaMamalik', '0350MuhammadKindi.WulatMisr', '0600KatibMarrakushi.Istibsar', '0845Maqrizi.Bayan']"
+169,407,1,['0350MuhammadKindi.WulatMisr']
+170,408,1,['0350MuhammadKindi.WulatMisr']
+171,409,1,['0350MuhammadKindi.WulatMisr']
+172,410,1,['0350MuhammadKindi.WulatMisr']
+173,411,0,[]
+174,413,1,['0930IbnIyas.NuzhatUmam']
+175,414,1,['0930IbnIyas.NuzhatUmam']
+176,416,1,['0930IbnIyas.NuzhatUmam']
+177,418,2,"['0930IbnIyas.NuzhatUmam', '0367IbnHawqal.SuratArd']"
+178,419,1,['0930IbnIyas.NuzhatUmam']
+179,421,2,"['0902Sakhawi.Buldaniyyat', '0300IbnKhurdadhbih.MasalikWaMamalik']"
+180,423,52,"['0743SharafDinTibi.FutuhGhayb', '0310Tabari.JamicBayan', '0748Dhahabi.Muhadhdhab', '0911Suyuti.DurrManthur', '0923AhmadQastallani.IrshadSari', '0730NizamDinNaysaburi.GharaibQuran', '0430AbuNucaymIsbahani.HilyatAwliya', '0741KhazinBaghdadi.LubabTawil', '0537AbuHafsNasafi.TaysirFiTafsir', '0427AbuIshaqThaclabi.KashfWaBayan', '0541IbnCatiyyaAndalusi.MuharrarWajiz', '0671AbuCabdAllahQurtubi.JamicLiAhkamQuran', '0745AbuHayyanGharnati.TafsirBahrMuhit', '0468IbnAhmadWahidiNaysaburi.WasitFiTafsir', '0852IbnHajarCasqalani.IthafMahara', '0810IbnHadi.JawharShaffaf', '0988FathAllahKashani.ZubdatTafasir', '0950MuhyiDinShaykhZada.HashiyaCalaTafsirBaydawi', '0880IbnCadilHanbali.LubabFiCulumKitab', '0774IbnKathir.TafsirQuran', '0280HudHawwari.Tafsir', '0977KhatibShirbini.SirajMunir', '0728IbnTaymiyya.FatawaKubra', '0606FakhrDinRazi.MafatihGhayb', '0548IbnHasanTabarsi.TafsirMajmacBayan', '0405HakimNaysaburi.Mustadrak', '0548IbnHasanTabarsi.TafsirJawamicJamic', '0458Bayhaqi.SunanKubra', '0458Bayhaqi.MacrifatSunanWaAthar', '0928MujirDinCulaymi.FathRahman', '0510IbnMascudBaghawi.Tafsir', '0845Maqrizi.KhabarCanBashar', '0808MuhammadDamiri.HayatHayawanKubra', '0856IbnDawudHanbali.KanzAkbar', '0494HakimJushami.TahdhibFiTafsir', '0982IbnMuhammadAbuSucud.IrshadCaqlSalim', '0685NasirDinBaydawi.AnwarTanzil', '0710IbnAhmadHafizDinNasafi.Tafsir', '0360Tabarani.TafsirKabir', '0360Tabarani.Tafsir', '0538JarAllahZamakhshari.Kashshaf', '0327IbnAbiHatimRazi.Tafsir', '0373AbuLaythSamarqandi.BahrCulum', '0682ZakariyaQazwini.AtharBilad', '0211CabdRazzaqSancani.Tafsir', '0458Bayhaqi.AhkamQuranLiShafici', '0548Shahrastani.MafatihAsrar', '0204Shafici.TafsirShafici', '0850Acqam.Tafsir', '0520IbnWalidTurtushi.Hawadith', '0204Shafici.AhkamQuran', '0281IbnAbiDunya.Cuqubat']"
+181,425,2,"['0736IbnDawadari.KanzDurar', '0600PseudoMascudi.AkhbarZaman']"
+182,426,2,"['0845Maqrizi.Muqaffa', '0626YaqutHamawi.MucjamBuldan']"
+183,427,2,"['0745AbuHayyanGharnati.TafsirBahrMuhit', '0930IbnIyas.NuzhatUmam']"
+184,431,1,['0900IbnCabdMuncimHimyari.RawdMictar']
+185,434,1,['0930IbnIyas.NuzhatUmam']
+186,436,1,['0930IbnIyas.NuzhatUmam']
+187,437,0,[]
+188,439,1,['0930IbnIyas.NuzhatUmam']
+189,440,1,['0930IbnIyas.NuzhatUmam']
+190,441,0,[]
+191,442,1,['0930IbnIyas.NuzhatUmam']
+192,445,0,[]
+193,446,1,['0930IbnIyas.NuzhatUmam']
+194,447,2,"['0900IbnCabdMuncimHimyari.RawdMictar', '0257IbnCabdHakam.FutuhMisr']"
+195,448,0,[]
+196,449,0,[]
+197,450,0,[]
+198,451,1,['0845Maqrizi.Muqaffa']
+199,456,2,"['0845Maqrizi.Muqaffa', '0930IbnIyas.NuzhatUmam']"
+200,458,1,['0845Maqrizi.Bayan']
+201,459,0,[]
+202,460,0,[]
+203,461,0,[]
+204,463,0,[]
+205,464,2,"['0930IbnIyas.NuzhatUmam', '0614IbnJubayr.Rihla']"
+206,465,2,"['0930IbnIyas.NuzhatUmam', '0614IbnJubayr.Rihla']"
+207,466,3,"['0748Adfuwi.TalicSacid', '0930IbnIyas.BadaicZuhur', '0930IbnIyas.NuzhatUmam']"
+208,472,1,['0775IbnAbiWafa.JawahirMudiya']
+209,474,2,"['0845Maqrizi.ItticazHunafa', '0420Musabbihi.AkhbarMisr']"
+210,483,2,"['0749IbnFadlAllahCumari.MasalikAbsar', '0367IbnHawqal.SuratArd']"
+211,488,3,"['0902Sakhawi.AjwibaMurdiyya', '0207Waqidi.FutuhSham', '0930IbnIyas.NuzhatUmam']"
+212,489,4,"['0902Sakhawi.AjwibaMurdiyya', '0626YaqutHamawi.MucjamBuldan', '0930IbnIyas.NuzhatUmam', '0350MuhammadKindi.WulatMisr']"
+213,490,3,"['0626YaqutHamawi.MucjamBuldan', '0930IbnIyas.NuzhatUmam', '0350MuhammadKindi.WulatMisr']"
+214,491,2,"['0845Maqrizi.ItticazHunafa', '0930IbnIyas.NuzhatUmam']"
+215,492,1,['0930IbnIyas.NuzhatUmam']
+216,493,2,"['0845Maqrizi.Suluk', '0930IbnIyas.NuzhatUmam']"
+217,494,5,"['0845Maqrizi.Suluk', '0630IbnAthirCizzDin.Kamil', '0808IbnKhaldun.Tarikh', '0807IbnFurat.TarikhDuwal', '0697IbnWasil.MufarrijKurub']"
+218,495,8,"['0733Nuwayri.NihayatArab', '0947BamakhramaHimyari.QiladatNahr', '0768Yafici.MiratJinan', '0764Safadi.WafiBiWafayat', '0845Maqrizi.Suluk', '0681IbnKhallikan.WafayatAcyan', '0726Yunini.DhaylMiratZaman', '0807IbnFurat.TarikhDuwal']"
+219,496,2,"['0845Maqrizi.Suluk', '0930IbnIyas.NuzhatUmam']"
+220,498,1,['0845Maqrizi.Suluk']
+221,499,6,"['0845Maqrizi.Suluk', '0630IbnAthirCizzDin.Kamil', '0749IbnFadlAllahCumari.MasalikAbsar', '0749ZaynDinIbnWardi.Tarikh', '0697IbnWasil.MufarrijKurub', '0927Culaymi.UnsJalil']"
+222,500,2,"['0845Maqrizi.Suluk', '0930IbnIyas.NuzhatUmam']"
+223,501,2,"['0845Maqrizi.Suluk', '0809IbnDuqmaq.NuzhatAnam']"
+224,502,3,"['0845Maqrizi.Suluk', '0930IbnIyas.NuzhatUmam', '0809IbnDuqmaq.NuzhatAnam']"
+225,503,2,"['0845Maqrizi.Suluk', '0930IbnIyas.NuzhatUmam']"
+226,504,1,['0845Maqrizi.Suluk']
+227,505,1,['0845Maqrizi.Suluk']
+228,506,1,['0845Maqrizi.Suluk']
+229,507,3,"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa', '0726Yunini.DhaylMiratZaman']"
+230,509,3,"['0845Maqrizi.Suluk', '0874IbnTaghribirdi.NujumZahira', '0930IbnIyas.NuzhatUmam']"
+231,511,2,"['0902Sakhawi.DawLamic', '0930IbnIyas.NuzhatUmam']"
+232,512,1,['0930IbnIyas.NuzhatUmam']
+233,513,1,['0930IbnIyas.NuzhatUmam']
+234,514,0,[]
+235,515,1,['0930IbnIyas.NuzhatUmam']
+236,516,1,['0930IbnIyas.NuzhatUmam']
+237,517,1,['0930IbnIyas.NuzhatUmam']
+238,518,2,"['0930IbnIyas.NuzhatUmam', '0300IbnKhurdadhbih.MasalikWaMamalik']"
+239,519,2,"['0845Maqrizi.Suluk', '0930IbnIyas.NuzhatUmam']"
+240,520,4,"['0671AbuCabdAllahQurtubi.JamicLiAhkamQuran', '0845Maqrizi.KhabarCanBashar', '0346Mascudi.MurujDhahab', '0548Shahrastani.MilalWaNihal']"
+241,526,2,"['0749IbnFadlAllahCumari.MasalikAbsar', '0930IbnIyas.NuzhatUmam']"
+242,527,4,"['0845Maqrizi.Suluk', '0736IbnDawadari.KanzDurar', '0697IbnWasil.MufarrijKurub', '0930IbnIyas.NuzhatUmam']"
+243,528,12,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Suluk', '0815Ghuzuli.MatalicBudur', '0774IbnKathir.Bidaya', '0654SibtIbnJawzi.MiratZaman', '0749IbnFadlAllahCumari.MasalikAbsar', '0874IbnTaghribirdi.NujumZahira', '0726Yunini.DhaylMiratZaman', '0692IbnCabdZahir.RawdZahir', '0764IbnShakirKutubi.FawatWafayat', '0930IbnIyas.NuzhatUmam', '0730ShaficIbnCali.HusnManaqib']"
+244,532,3,"['0764Safadi.WafiBiWafayat', '0749IbnFadlAllahCumari.MasalikAbsar', '0930IbnIyas.NuzhatUmam']"
+245,535,3,"['0733Nuwayri.NihayatArab', '0736IbnDawadari.KanzDurar', '0600PseudoMascudi.AkhbarZaman']"
+246,542,3,"['0733Nuwayri.NihayatArab', '0487AbuCubaydBakri.MasalikWaMamalik', '0600PseudoMascudi.AkhbarZaman']"
+247,554,2,"['0928MujirDinCulaymi.FathRahman', '0487AbuCubaydBakri.MasalikWaMamalik']"
+248,555,5,"['0928MujirDinCulaymi.FathRahman', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0600PseudoMascudi.AkhbarZaman']"
+249,556,5,"['0733Nuwayri.NihayatArab', '0928MujirDinCulaymi.FathRahman', '0487AbuCubaydBakri.MasalikWaMamalik', '0596IbnWasifShah.MukhtasarCajaibDunya', '0600PseudoMascudi.AkhbarZaman']"
+250,565,1,['0930IbnIyas.NuzhatUmam']
+251,566,0,[]
+252,567,0,[]
+253,568,0,[]
+254,571,1,['0845Maqrizi.KhabarCanBashar']
+255,572,2,"['0845Maqrizi.KhabarCanBashar', '0375IkhwanSafa.Rasail']"
+256,573,1,['0845Maqrizi.KhabarCanBashar']
+257,574,1,['0845Maqrizi.KhabarCanBashar']
+258,575,1,['0845Maqrizi.KhabarCanBashar']
+259,576,1,['0845Maqrizi.KhabarCanBashar']
+260,577,1,['0845Maqrizi.KhabarCanBashar']
+261,578,1,['0845Maqrizi.KhabarCanBashar']
+262,579,0,[]
+263,580,0,[]
+264,581,0,[]
+265,583,3,"['0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0600PseudoMascudi.AkhbarZaman']"
+266,584,2,"['0845Maqrizi.KhabarCanBashar', '0600PseudoMascudi.AkhbarZaman']"
+267,589,1,['0456IbnHazm.FisalFiMilal']
+268,590,4,"['0571IbnCasakir.TarikhDimashq', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0597IbnJawzi.Muntazam', '0456IbnHazm.FisalFiMilal']"
+269,591,2,"['0845Maqrizi.KhabarCanBashar', '0440AbuRayhanBiruni.AtharBaqiya']"
+270,592,1,['0845Maqrizi.KhabarCanBashar']
+271,593,2,"['0845Maqrizi.KhabarCanBashar', '0440AbuRayhanBiruni.AtharBaqiya']"
+272,594,1,['0845Maqrizi.KhabarCanBashar']
+273,595,3,"['0845Maqrizi.KhabarCanBashar', '0360HamzaIsfahani.TarikhSini', '0440AbuRayhanBiruni.AtharBaqiya']"
+274,596,2,"['0845Maqrizi.KhabarCanBashar', '0440AbuRayhanBiruni.AtharBaqiya']"
+275,597,1,['0845Maqrizi.KhabarCanBashar']
+276,599,1,['0930IbnIyas.NuzhatUmam']
+277,600,1,['0930IbnIyas.NuzhatUmam']
+278,601,1,['0930IbnIyas.NuzhatUmam']
+279,602,1,['0930IbnIyas.NuzhatUmam']
+280,603,2,"['0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam']"
+281,607,4,"['0733Nuwayri.NihayatArab', '0821Qalqashandi.SubhAcsha', '0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam']"
+282,608,2,"['0375AnonymousTranslator.TarikhCalamUrusiyus', '0930IbnIyas.NuzhatUmam']"
+283,615,1,['0930IbnIyas.NuzhatUmam']
+284,616,1,['0930IbnIyas.NuzhatUmam']
+285,617,1,['0930IbnIyas.NuzhatUmam']
+286,618,1,['0930IbnIyas.NuzhatUmam']
+287,619,1,['0930IbnIyas.NuzhatUmam']
+288,620,2,"['0930IbnIyas.NuzhatUmam', '0367IbnHawqal.SuratArd']"
+289,621,1,['0930IbnIyas.NuzhatUmam']
+290,622,1,['0930IbnIyas.NuzhatUmam']
+291,623,0,[]
+292,624,0,[]
+293,625,1,['0930IbnIyas.NuzhatUmam']
+294,626,1,['0930IbnIyas.NuzhatUmam']
+295,628,3,"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir', '0930IbnIyas.NuzhatUmam']"
+296,629,2,"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir']"
+297,630,1,['0821Qalqashandi.SubhAcsha']
+298,631,2,"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir']"
+299,632,2,"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir']"
+300,633,2,"['0821Qalqashandi.SubhAcsha', '0821Qalqashandi.Maathir']"
+301,634,2,"['0821Qalqashandi.SubhAcsha', '0654SibtIbnJawzi.MiratZaman']"
+302,635,4,"['0748Dhahabi.TarikhIslam', '0821Qalqashandi.SubhAcsha', '0654SibtIbnJawzi.MiratZaman', '0874IbnTaghribirdi.NujumZahira']"
+303,636,1,['0821Qalqashandi.SubhAcsha']
+304,642,1,['0930IbnIyas.NuzhatUmam']
+305,643,3,"['0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam', '0440AbuRayhanBiruni.AtharBaqiya']"
+306,644,4,"['0845Maqrizi.ImtacAsmac', '0845Maqrizi.KhabarCanBashar', '0930IbnIyas.NuzhatUmam', '0440AbuRayhanBiruni.AtharBaqiya']"
+307,649,3,"['0845Maqrizi.KhabarCanBashar', '0360HamzaIsfahani.TarikhSini', '0930IbnIyas.NuzhatUmam']"
+308,650,1,['0930IbnIyas.NuzhatUmam']
+309,651,0,[]
+310,652,0,[]
+311,678,1,['0821Qalqashandi.SubhAcsha']
+312,679,0,[]
+313,680,1,['0821Qalqashandi.SubhAcsha']
+314,696,1,['0874IbnTaghribirdi.NujumZahira']
+315,697,1,['0588IbnMamun.AkhbarMisr']
+316,698,0,[]
+317,699,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+318,700,4,"['0571IbnCasakir.TarikhDimashq', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+319,701,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+320,702,4,"['0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+321,703,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+322,704,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+323,705,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+324,706,1,['0350MuhammadKindi.WulatMisr']
+325,707,3,"['0660IbnCadim.BughyatTalab', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+326,708,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+327,709,3,"['0808IbnKhaldun.Tarikh', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+328,710,1,['0874IbnTaghribirdi.NujumZahira']
+329,711,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+330,712,4,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr', '0845Maqrizi.Bayan']"
+331,713,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+332,714,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+333,715,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+334,716,1,['0874IbnTaghribirdi.NujumZahira']
+335,717,5,"['0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0597IbnJawzi.Muntazam', '0808IbnKhaldun.Tarikh', '0874IbnTaghribirdi.NujumZahira', '0350Balawi.SiratAhmadIbnTulun']"
+336,718,3,"['0845Maqrizi.Muqaffa', '0646IbnQifti.IkhbarCulama', '0350Balawi.SiratAhmadIbnTulun']"
+337,719,2,"['0845Maqrizi.Muqaffa', '0350Balawi.SiratAhmadIbnTulun']"
+338,720,2,"['0845Maqrizi.Muqaffa', '0350MuhammadKindi.WulatMisr']"
+339,721,2,"['0874IbnTaghribirdi.NujumZahira', '0350Balawi.SiratAhmadIbnTulun']"
+340,722,1,['0350Balawi.SiratAhmadIbnTulun']
+341,723,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350Balawi.SiratAhmadIbnTulun']"
+342,724,1,['0874IbnTaghribirdi.NujumZahira']
+343,725,1,['0874IbnTaghribirdi.NujumZahira']
+344,726,1,['0874IbnTaghribirdi.NujumZahira']
+345,731,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+346,732,7,"['0571IbnCasakir.TarikhDimashq', '0845Maqrizi.Muqaffa', '0654SibtIbnJawzi.MiratZaman', '0874IbnTaghribirdi.NujumZahira', '0626YaqutHamawi.MucjamBuldan', '0350Balawi.SiratAhmadIbnTulun', '0350MuhammadKindi.WulatMisr']"
+347,733,2,"['0845Maqrizi.Muqaffa', '0350MuhammadKindi.WulatMisr']"
+348,734,4,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350Balawi.SiratAhmadIbnTulun', '0350MuhammadKindi.WulatMisr']"
+349,735,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+350,736,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+351,737,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+352,738,3,"['0874IbnTaghribirdi.NujumZahira', '0292Yacqubi.Buldan', '0350MuhammadKindi.WulatMisr']"
+353,739,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+354,741,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+355,742,0,[]
+356,743,2,"['0874IbnTaghribirdi.NujumZahira', '0292Yacqubi.Buldan']"
+357,744,0,[]
+358,745,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+359,746,1,['0350MuhammadKindi.WulatMisr']
+360,747,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+361,748,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+362,749,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+363,750,1,['0874IbnTaghribirdi.NujumZahira']
+364,752,2,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira']"
+365,754,0,[]
+366,756,0,[]
+367,757,1,['0347IbnYunusSadafi.Tarikh']
+368,758,1,['0347IbnYunusSadafi.Tarikh']
+369,759,1,['0347IbnYunusSadafi.Tarikh']
+370,760,0,[]
+371,762,2,"['0444AbuCamrDani.SunanWarida', '0685IbnYahyaSulami.CiqdDurar']"
+372,763,5,"['0664IbnTawus.MalahimWaFitan', '0538JarAllahZamakhshari.RabicAbrar', '0664IbnTawus.Tashrif', '0470MuayyadFiDinShirazi.Sira', '0128IbnAbiHabibMisri.AhadithYazid']"
+373,764,3,"['0677IbnMuyassar.AkhbarMisr', '0874IbnTaghribirdi.NujumZahira', '0845Maqrizi.ItticazHunafa']"
+374,765,2,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+375,766,0,[]
+376,767,0,[]
+377,768,3,"['0733Nuwayri.NihayatArab', '0626YaqutHamawi.MucjamBuldan', '0845Maqrizi.ItticazHunafa']"
+378,769,1,['0845Maqrizi.ItticazHunafa']
+379,770,0,[]
+380,771,0,[]
+381,772,0,[]
+382,774,0,[]
+383,776,2,"['0874IbnTaghribirdi.NujumZahira', '0367IbnHawqal.SuratArd']"
+384,778,0,[]
+385,779,1,['0845Maqrizi.Muqaffa']
+386,780,1,['0845Maqrizi.MusawwadatMawaciz']
+387,781,1,['0845Maqrizi.MusawwadatMawaciz']
+388,782,0,[]
+389,783,1,['0626YaqutHamawi.MucjamBuldan']
+390,784,0,[]
+391,786,0,[]
+392,787,0,[]
+393,788,0,[]
+394,790,0,[]
+395,791,0,[]
+396,792,1,['0255Jahiz.Hayawan']
+397,793,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+398,794,3,"['0845Maqrizi.Muqaffa', '0808IbnKhaldun.Tarikh', '0845Maqrizi.ItticazHunafa']"
+399,795,1,['0845Maqrizi.ItticazHunafa']
+400,796,3,"['0630IbnAthirCizzDin.Kamil', '0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+401,797,1,['0845Maqrizi.ItticazHunafa']
+402,798,5,"['0630IbnAthirCizzDin.Kamil', '0808IbnKhaldun.Tarikh', '0749ZaynDinIbnWardi.Tarikh', '0732AbuFida.MukhtasarFiAkhbar', '0845Maqrizi.ItticazHunafa']"
+403,799,3,"['0630IbnAthirCizzDin.Kamil', '0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+404,800,1,['0845Maqrizi.ItticazHunafa']
+405,801,1,['0845Maqrizi.ItticazHunafa']
+406,802,1,['0845Maqrizi.ItticazHunafa']
+407,803,1,['0845Maqrizi.ItticazHunafa']
+408,804,1,['0845Maqrizi.ItticazHunafa']
+409,805,1,['0845Maqrizi.ItticazHunafa']
+410,806,4,"['0749IbnFadlAllahCumari.MasalikAbsar', '0874IbnTaghribirdi.NujumZahira', '0821Qalqashandi.Maathir', '0717CabbasSafadi.NuzhatMalikWaMamluk']"
+411,807,1,['0845Maqrizi.ItticazHunafa']
+412,808,0,[]
+413,809,1,['0845Maqrizi.ItticazHunafa']
+414,810,1,['0470MuayyadFiDinShirazi.Sira']
+415,811,2,"['0845Maqrizi.ItticazHunafa', '0845Maqrizi.IghathaUmma']"
+416,812,1,['0845Maqrizi.ItticazHunafa']
+417,813,1,['0845Maqrizi.ItticazHunafa']
+418,814,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+419,815,0,[]
+420,816,0,[]
+421,817,1,['0845Maqrizi.ItticazHunafa']
+422,818,0,[]
+423,819,0,[]
+424,821,1,['0845Maqrizi.MusawwadatMawaciz']
+425,822,1,['0845Maqrizi.MusawwadatMawaciz']
+426,824,1,['0845Maqrizi.MusawwadatMawaciz']
+427,825,1,['0845Maqrizi.MusawwadatMawaciz']
+428,826,2,"['0845Maqrizi.MusawwadatMawaciz', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+429,827,1,['0845Maqrizi.MusawwadatMawaciz']
+430,828,1,['0845Maqrizi.MusawwadatMawaciz']
+431,829,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+432,830,1,['0845Maqrizi.MusawwadatMawaciz']
+433,831,1,['0845Maqrizi.MusawwadatMawaciz']
+434,832,1,['0845Maqrizi.MusawwadatMawaciz']
+435,834,1,['0845Maqrizi.MusawwadatMawaciz']
+436,835,1,['0845Maqrizi.MusawwadatMawaciz']
+437,836,1,['0845Maqrizi.MusawwadatMawaciz']
+438,837,1,['0845Maqrizi.MusawwadatMawaciz']
+439,838,0,[]
+440,839,0,[]
+441,840,0,[]
+442,841,0,[]
+443,842,3,"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0626YaqutHamawi.MucjamUdaba']"
+444,843,0,[]
+445,844,0,[]
+446,845,0,[]
+447,846,1,['0845Maqrizi.MusawwadatMawaciz']
+448,847,1,['0845Maqrizi.MusawwadatMawaciz']
+449,848,1,['0845Maqrizi.MusawwadatMawaciz']
+450,849,1,['0845Maqrizi.MusawwadatMawaciz']
+451,850,0,[]
+452,851,1,['0845Maqrizi.MusawwadatMawaciz']
+453,852,0,[]
+454,853,0,[]
+455,854,1,['0845Maqrizi.MusawwadatMawaciz']
+456,855,2,"['0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.ItticazHunafa']"
+457,857,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0362IbnHaniAndalusi.Diwan']"
+458,858,0,[]
+459,859,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz']"
+460,860,5,"['0845Maqrizi.MusawwadatMawaciz', '0414AbuHayyanTawhidi.Basair', '0845Maqrizi.ItticazHunafa', '0421AbuSacdAbi.NathrDurr', '0542IbnMunjibTajRiyasaIbnSayrafi.Ishara']"
+461,861,9,"['0733Nuwayri.NihayatArab', '0665AbuShama.Rawdatayn', '0845Maqrizi.MusawwadatMawaciz', '0749IbnFadlAllahCumari.MasalikAbsar', '0874IbnTaghribirdi.NujumZahira', '0697IbnWasil.MufarrijKurub', '0643FathBundari.MukhtasarSanaBarqShami', '0911Suyuti.HusnMuhadara', '0692IbnCabdZahir.RawdaBahiyya']"
+462,864,1,['0845Maqrizi.Muqaffa']
+463,865,1,['0845Maqrizi.Muqaffa']
+464,866,0,[]
+465,867,1,['0845Maqrizi.MusawwadatMawaciz']
+466,868,1,['0845Maqrizi.MusawwadatMawaciz']
+467,869,1,['0845Maqrizi.MusawwadatMawaciz']
+468,870,2,"['0845Maqrizi.MusawwadatMawaciz', '0692IbnCabdZahir.RawdaBahiyya']"
+469,871,1,['0845Maqrizi.MusawwadatMawaciz']
+470,872,4,"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn', '0845Maqrizi.ItticazHunafa']"
+471,874,3,"['0821Qalqashandi.SubhAcsha', '0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn']"
+472,875,3,"['0821Qalqashandi.SubhAcsha', '0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn']"
+473,879,0,[]
+474,886,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0736IbnDawadari.KanzDurar']"
+475,887,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz', '0736IbnDawadari.KanzDurar']"
+476,888,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz', '0736IbnDawadari.KanzDurar']"
+477,889,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz', '0736IbnDawadari.KanzDurar']"
+478,890,1,['0845Maqrizi.MusawwadatMawaciz']
+479,891,2,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz']"
+480,892,0,[]
+481,893,2,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz']"
+482,894,2,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz']"
+483,895,2,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz']"
+484,896,1,['0845Maqrizi.MusawwadatMawaciz']
+485,897,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz', '0429IbnTahirBaghdadi.FarqBaynaFiraq', '0505Ghazali.Fadaih']"
+486,898,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz', '0505Ghazali.Fadaih']"
+487,916,1,['0845Maqrizi.MusawwadatMawaciz']
+488,917,0,[]
+489,918,3,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.ItticazHunafa', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+490,935,1,['0845Maqrizi.ItticazHunafa']
+491,936,3,"['0815Ghuzuli.MatalicBudur', '0845Maqrizi.ItticazHunafa', '0460Anonymous.DhakhairTuhaf']"
+492,937,2,"['0845Maqrizi.ItticazHunafa', '0460Anonymous.DhakhairTuhaf']"
+493,938,2,"['0845Maqrizi.ItticazHunafa', '0460Anonymous.DhakhairTuhaf']"
+494,940,1,['0845Maqrizi.ItticazHunafa']
+495,944,0,[]
+496,945,1,['0845Maqrizi.ItticazHunafa']
+497,953,2,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+498,956,1,['0845Maqrizi.MusawwadatMawaciz']
+499,957,1,['0845Maqrizi.MusawwadatMawaciz']
+500,965,30,"['0733Nuwayri.NihayatArab', '0947BamakhramaHimyari.QiladatNahr', '0768Yafici.MiratJinan', '0656AbuCabbasAnsariQurtubi.Mufhim', '0630IbnAthirCizzDin.Kamil', '0660IbnCadim.BughyatTalab', '0463IbnCabdBarr.IsticabFiMacrifatAshab', '0774IbnKathir.Bidaya', '0597IbnJawzi.Muntazam', '0955MuhammadKarakiHairi.TasliyatMujalis', '0654SibtIbnJawzi.MiratZaman', '0314IbnActhamKufi.Futuh', '0588IbnShahrAshub.ManaqibAlAbiTalib', '0966HusaynDiyarbakri.TarikhKhamis', '0310Tabari.Tarikh', '0871IbnAhmadShamsDinBacuni.JawahirMatalib', '0855IbnSabbaghMakki.FusulMuhimma', '0671AbuCabdAllahQurtubi.TadhkiraFiAhwalMawta', '0508FattalNaysaburi.RawdatWacizin', '0664IbnHatimCamiliShami.DurrNazim', '0421Miskawayh.Tajarib', '0413ShaykhMufid.Irshad', '0548IbnHasanTabarsi.IclamWara', '0905IbnCabdRahmanIjiShafici.FadailThaqalayn', '0282AbuHanifaDinawari.AkhbarTiwal', '0320IbnMuhammadBayhaqi.Mahasin', '0568MuwaffaqKhwarazmi.MaqtalHusayn', '0660IbnCadim.TarjamatHusayn', '0157AbuMikhnafAzdi.MaqtalHusayn', '0157AbuMikhnafAzdi.WaqcatTaff']"
+501,966,21,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0279Baladhuri.AnsabAshraf', '0660IbnCadim.BughyatTalab', '0774IbnKathir.Bidaya', '0597IbnJawzi.Muntazam', '0955MuhammadKarakiHairi.TasliyatMujalis', '0654SibtIbnJawzi.MiratZaman', '0314IbnActhamKufi.Futuh', '0588IbnShahrAshub.ManaqibAlAbiTalib', '0310Tabari.Tarikh', '0718AbuIshaqWatwat.GhurarKhasais', '0508FattalNaysaburi.RawdatWacizin', '0421Miskawayh.Tajarib', '0413ShaykhMufid.Irshad', '0548IbnHasanTabarsi.IclamWara', '0282AbuHanifaDinawari.AkhbarTiwal', '0568MuwaffaqKhwarazmi.MaqtalHusayn', '0660IbnCadim.TarjamatHusayn', '0157AbuMikhnafAzdi.MaqtalHusayn', '0157AbuMikhnafAzdi.WaqcatTaff']"
+502,967,22,"['0571IbnCasakir.TarikhDimashq', '0733Nuwayri.NihayatArab', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0748Dhahabi.TarikhIslam', '0630IbnAthirCizzDin.Kamil', '0279Baladhuri.AnsabAshraf', '0660IbnCadim.BughyatTalab', '0774IbnKathir.Bidaya', '0597IbnJawzi.Muntazam', '0955MuhammadKarakiHairi.TasliyatMujalis', '0654SibtIbnJawzi.MiratZaman', '0588IbnShahrAshub.ManaqibAlAbiTalib', '0310Tabari.Tarikh', '0508FattalNaysaburi.RawdatWacizin', '0421Miskawayh.Tajarib', '0413ShaykhMufid.Irshad', '0548IbnHasanTabarsi.IclamWara', '0282AbuHanifaDinawari.AkhbarTiwal', '0568MuwaffaqKhwarazmi.MaqtalHusayn', '0660IbnCadim.TarjamatHusayn', '0157AbuMikhnafAzdi.MaqtalHusayn', '0157AbuMikhnafAzdi.WaqcatTaff']"
+503,969,14,"['0571IbnCasakir.TarikhDimashq', '0733Nuwayri.NihayatArab', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0748Dhahabi.SiyarAclamNubala', '0748Dhahabi.TadhhibTahdhib', '0654SibtIbnJawzi.MiratZaman', '0310Tabari.Tarikh', '0664IbnHatimCamiliShami.DurrNazim', '0499MurshidYahyaIbnShajari.Amali', '0413ShaykhMufid.Irshad', '0568MuwaffaqKhwarazmi.MaqtalHusayn', '0157AbuMikhnafAzdi.MaqtalHusayn']"
+504,977,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Suluk', '0692IbnCabdZahir.RawdZahir', '0725BaybarsMansuri.MukhtarAkhbar']"
+505,978,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn']"
+506,979,1,['0845Maqrizi.MusawwadatMawaciz']
+507,980,0,[]
+508,981,0,[]
+509,988,1,['0845Maqrizi.MusawwadatMawaciz']
+510,989,0,[]
+511,1027,1,['0821Qalqashandi.SubhAcsha']
+512,1036,0,[]
+513,1040,4,"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0588IbnMamun.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+514,1043,0,[]
+515,1059,1,['0588IbnMamun.AkhbarMisr']
+516,1060,1,['0588IbnMamun.AkhbarMisr']
+517,1061,1,['0588IbnMamun.AkhbarMisr']
+518,1062,1,['0588IbnMamun.AkhbarMisr']
+519,1063,1,['0588IbnMamun.AkhbarMisr']
+520,1064,1,['0588IbnMamun.AkhbarMisr']
+521,1065,1,['0588IbnMamun.AkhbarMisr']
+522,1066,1,['0588IbnMamun.AkhbarMisr']
+523,1089,1,['0845Maqrizi.Muqaffa']
+524,1090,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+525,1091,0,[]
+526,1099,0,[]
+527,1100,0,[]
+528,1109,15,"['0733Nuwayri.NihayatArab', '0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0821Qalqashandi.SubhAcsha', '0665AbuShama.Rawdatayn', '0774IbnKathir.Bidaya', '0654SibtIbnJawzi.MiratZaman', '0749IbnFadlAllahCumari.MasalikAbsar', '0749ZaynDinIbnWardi.Tarikh', '0697IbnWasil.TarikhSalihi', '0697IbnWasil.MufarrijKurub', '0732AbuFida.MukhtasarFiAkhbar', '0911Suyuti.HusnMuhadara', '0845Maqrizi.ItticazHunafa', '0837IbnHijjaHamawi.ThamaratAwraq']"
+529,1110,15,"['0733Nuwayri.NihayatArab', '0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0821Qalqashandi.SubhAcsha', '0665AbuShama.Rawdatayn', '0774IbnKathir.Bidaya', '0654SibtIbnJawzi.MiratZaman', '0749IbnFadlAllahCumari.MasalikAbsar', '0749ZaynDinIbnWardi.Tarikh', '0697IbnWasil.TarikhSalihi', '0697IbnWasil.MufarrijKurub', '0732AbuFida.MukhtasarFiAkhbar', '0911Suyuti.HusnMuhadara', '0845Maqrizi.ItticazHunafa', '0837IbnHijjaHamawi.ThamaratAwraq']"
+530,1111,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+531,1114,1,['0845Maqrizi.MusawwadatMawaciz']
+532,1115,0,[]
+533,1116,0,[]
+534,1117,1,['0845Maqrizi.ItticazHunafa']
+535,1124,0,[]
+536,1125,0,[]
+537,1127,1,['0845Maqrizi.MusawwadatMawaciz']
+538,1130,0,[]
+539,1131,5,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Muqaffa', '0736IbnDawadari.KanzDurar', '0845Maqrizi.ItticazHunafa', '0555IbnQalanisi.TarikhDimashq']"
+540,1132,1,['0845Maqrizi.ItticazHunafa']
+541,1133,2,"['0874IbnTaghribirdi.NujumZahira', '0845Maqrizi.ItticazHunafa']"
+542,1134,3,"['0630IbnAthirCizzDin.Kamil', '0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+543,1135,3,"['0630IbnAthirCizzDin.Kamil', '0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+544,1136,0,[]
+545,1137,0,[]
+546,1139,0,[]
+547,1140,1,['0845Maqrizi.ItticazHunafa']
+548,1142,0,[]
+549,1143,3,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+550,1144,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+551,1145,1,['0845Maqrizi.ItticazHunafa']
+552,1146,1,['0845Maqrizi.ItticazHunafa']
+553,1149,0,[]
+554,1150,2,"['0845Maqrizi.ItticazHunafa', '0692IbnCabdZahir.RawdaBahiyya']"
+555,1151,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+556,1152,2,"['0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+557,1154,3,"['0665AbuShama.Rawdatayn', '0697IbnWasil.MufarrijKurub', '0597CimadDinKatibIsfahani.Diwan']"
+558,1157,1,['0845Maqrizi.ItticazHunafa']
+559,1158,2,"['0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.ItticazHunafa']"
+560,1159,1,['0692IbnCabdZahir.RawdaBahiyya']
+561,1160,1,['0845Maqrizi.MusawwadatMawaciz']
+562,1161,3,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr', '0764IbnShakirKutubi.FawatWafayat']"
+563,1162,1,['0764Safadi.WafiBiWafayat']
+564,1164,1,['0845Maqrizi.Suluk']
+565,1168,0,[]
+566,1169,1,['0850ShihabDinIbshihi.Mustatraf']
+567,1170,0,[]
+568,1174,0,[]
+569,1175,0,[]
+570,1176,1,['0764Safadi.WafiBiWafayat']
+571,1177,1,['0845Maqrizi.ItticazHunafa']
+572,1178,3,"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.ItticazHunafa']"
+573,1179,1,['0845Maqrizi.MusawwadatMawaciz']
+574,1180,3,"['0845Maqrizi.Suluk', '0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.ItticazHunafa']"
+575,1181,1,['0845Maqrizi.Suluk']
+576,1182,0,[]
+577,1183,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+578,1184,0,[]
+579,1185,1,['0845Maqrizi.Muqaffa']
+580,1186,0,[]
+581,1187,4,"['0764Safadi.WafiBiWafayat', '0874IbnTaghribirdi.NujumZahira', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+582,1188,5,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+583,1189,1,['0764Safadi.AcyanCasr']
+584,1190,0,[]
+585,1192,3,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.Muqaffa', '0845Maqrizi.ItticazHunafa']"
+586,1193,1,['0845Maqrizi.Muqaffa']
+587,1194,2,"['0832TaqiFasi.CiqdThamin', '0845Maqrizi.DhahabMasbuk']"
+588,1197,0,[]
+589,1198,2,"['0821Qalqashandi.SubhAcsha', '0764Safadi.AcyanCasr']"
+590,1199,1,['0821Qalqashandi.SubhAcsha']
+591,1200,0,[]
+592,1201,0,[]
+593,1202,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+594,1203,0,[]
+595,1204,0,[]
+596,1205,0,[]
+597,1206,1,['0845Maqrizi.DurarCuqud']
+598,1207,0,[]
+599,1208,1,['0764Safadi.AcyanCasr']
+600,1209,0,[]
+601,1210,1,['0764Safadi.AcyanCasr']
+602,1211,0,[]
+603,1212,2,"['0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+604,1213,0,[]
+605,1214,2,"['0874IbnTaghribirdi.NujumZahira', '0845Maqrizi.ItticazHunafa']"
+606,1215,0,[]
+607,1216,0,[]
+608,1217,0,[]
+609,1218,0,[]
+610,1219,0,[]
+611,1220,0,[]
+612,1221,0,[]
+613,1222,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+614,1223,1,['0845Maqrizi.Muqaffa']
+615,1224,0,[]
+616,1225,0,[]
+617,1226,0,[]
+618,1228,0,[]
+619,1229,0,[]
+620,1230,0,[]
+621,1231,0,[]
+622,1232,0,[]
+623,1233,6,"['0764Safadi.WafiBiWafayat', '0852IbnHajarCasqalani.DurarKamina', '0764Safadi.AcyanCasr', '0764IbnShakirKutubi.FawatWafayat', '0874IbnTaghribirdi.ManhalSafi', '0927Nucaymi.DarisFiMadaris']"
+624,1234,2,"['0845Maqrizi.Muqaffa', '0764IbnShakirKutubi.FawatWafayat']"
+625,1235,0,[]
+626,1236,0,[]
+627,1238,7,"['0733Nuwayri.NihayatArab', '0764Safadi.WafiBiWafayat', '0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0845Maqrizi.DurarCuqud', '0764IbnShakirKutubi.FawatWafayat']"
+628,1239,0,[]
+629,1240,0,[]
+630,1241,1,['0845Maqrizi.Muqaffa']
+631,1242,4,"['0845Maqrizi.Muqaffa', '0845Maqrizi.DurarCuqud', '0807IbnFurat.TarikhDuwal', '0852IbnHajarCasqalani.InbaGhumr']"
+632,1243,2,"['0821Qalqashandi.SubhAcsha', '0845Maqrizi.Muqaffa']"
+633,1244,0,[]
+634,1245,1,['0845Maqrizi.Suluk']
+635,1246,0,[]
+636,1247,1,['0845Maqrizi.Suluk']
+637,1248,2,"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa']"
+638,1249,2,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira']"
+639,1250,2,"['0845Maqrizi.Suluk', '0764Safadi.AcyanCasr']"
+640,1251,0,[]
+641,1252,0,[]
+642,1253,0,[]
+643,1255,0,[]
+644,1256,8,"['0764Safadi.WafiBiWafayat', '0681IbnKhallikan.WafayatAcyan', '0845Maqrizi.MusawwadatMawaciz', '0654SibtIbnJawzi.MiratZaman', '0749ZaynDinIbnWardi.Tarikh', '0583SibtIbnTacawidhiShacir.Diwan', '0764Safadi.AcyanCasr', '0732AbuFida.MukhtasarFiAkhbar']"
+645,1257,3,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+646,1258,0,[]
+647,1259,0,[]
+648,1260,0,[]
+649,1261,1,['0733Nuwayri.NihayatArab']
+650,1262,0,[]
+651,1263,1,['0845Maqrizi.MusawwadatMawaciz']
+652,1264,1,['0845Maqrizi.MusawwadatMawaciz']
+653,1265,1,['0845Maqrizi.MusawwadatMawaciz']
+654,1266,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+655,1267,2,"['0845Maqrizi.MusawwadatMawaciz', '0759Yusufi.NuzhatNazir']"
+656,1268,1,['0845Maqrizi.MusawwadatMawaciz']
+657,1269,0,[]
+658,1270,1,['0845Maqrizi.MusawwadatMawaciz']
+659,1271,1,['0845Maqrizi.MusawwadatMawaciz']
+660,1272,1,['0845Maqrizi.MusawwadatMawaciz']
+661,1273,0,[]
+662,1274,1,['0845Maqrizi.MusawwadatMawaciz']
+663,1275,0,[]
+664,1276,1,['0845Maqrizi.Suluk']
+665,1277,4,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi', '0843IbnKhatibNasiriyya.DurrMuntakhab']"
+666,1278,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+667,1279,1,['0845Maqrizi.MusawwadatMawaciz']
+668,1280,7,"['0911Suyuti.HawiLiFatawi', '0911Samhudi.WafaWafa', '0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.DurarCuqud', '0816AbuBakrMaraghi.TahqiqNusra', '0911Samhudi.wafa', '0911Suyuti.ShaddAthwab']"
+669,1281,0,[]
+670,1282,2,"['0845Maqrizi.Suluk', '0845Maqrizi.DurarCuqud']"
+671,1283,1,['0845Maqrizi.MusawwadatMawaciz']
+672,1284,3,"['0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.DurarCuqud', '0852IbnHajarCasqalani.RafcIsr']"
+673,1285,0,[]
+674,1286,0,[]
+675,1287,0,[]
+676,1288,0,[]
+677,1289,0,[]
+678,1290,0,[]
+679,1291,1,['0764Safadi.WafiBiWafayat']
+680,1294,0,[]
+681,1295,0,[]
+682,1296,0,[]
+683,1297,0,[]
+684,1298,0,[]
+685,1299,0,[]
+686,1300,0,[]
+687,1302,0,[]
+688,1303,1,['0845Maqrizi.Muqaffa']
+689,1304,0,[]
+690,1305,0,[]
+691,1306,2,"['0748Dhahabi.TarikhIslam', '0927Culaymi.UnsJalil']"
+692,1307,1,['0927Culaymi.UnsJalil']
+693,1308,0,[]
+694,1310,0,[]
+695,1311,0,[]
+696,1312,0,[]
+697,1313,2,"['0845Maqrizi.Suluk', '0697IbnWasil.MufarrijKurub']"
+698,1314,0,[]
+699,1315,0,[]
+700,1316,0,[]
+701,1317,2,"['0845Maqrizi.Suluk', '0809IbnDuqmaq.NuzhatAnam']"
+702,1318,0,[]
+703,1319,0,[]
+704,1321,1,['0845Maqrizi.MusawwadatMawaciz']
+705,1324,0,[]
+706,1325,0,[]
+707,1326,0,[]
+708,1327,1,['0845Maqrizi.MusawwadatMawaciz']
+709,1328,0,[]
+710,1330,0,[]
+711,1331,0,[]
+712,1332,0,[]
+713,1333,0,[]
+714,1334,0,[]
+715,1335,0,[]
+716,1336,1,['0855BadrDinCayni.CiqdJuman']
+717,1337,3,"['0749IbnFadlAllahCumari.MasalikAbsar', '0633IbnDihyaJumayyilKalbi.NibrasFiTarikh', '0613CaliIbnZafir.AkhbarDuwalMunqatica']"
+718,1338,0,[]
+719,1340,0,[]
+720,1341,0,[]
+721,1342,0,[]
+722,1343,2,"['0845Maqrizi.MusawwadatMawaciz', '0692IbnCabdZahir.RawdaBahiyya']"
+723,1345,0,[]
+724,1346,0,[]
+725,1347,0,[]
+726,1348,0,[]
+727,1349,0,[]
+728,1350,0,[]
+729,1351,0,[]
+730,1352,0,[]
+731,1353,0,[]
+732,1354,0,[]
+733,1355,0,[]
+734,1358,1,['0845Maqrizi.ItticazHunafa']
+735,1359,0,[]
+736,1360,0,[]
+737,1361,0,[]
+738,1362,0,[]
+739,1363,0,[]
+740,1365,1,['0692IbnCabdZahir.RawdZahir']
+741,1366,0,[]
+742,1367,0,[]
+743,1368,0,[]
+744,1369,0,[]
+745,1370,0,[]
+746,1371,1,['0347IbnYunusSadafi.Tarikh']
+747,1372,1,['0692IbnCabdZahir.RawdaBahiyya']
+748,1373,0,[]
+749,1374,0,[]
+750,1375,0,[]
+751,1376,0,[]
+752,1377,2,"['0458IbnSidaMursi.MuhkamWaMuhit', '0711IbnManzurIfriqi.LisanCarab']"
+753,1378,0,[]
+754,1379,0,[]
+755,1380,0,[]
+756,1381,0,[]
+757,1382,0,[]
+758,1383,0,[]
+759,1384,0,[]
+760,1385,0,[]
+761,1386,0,[]
+762,1398,0,[]
+763,1399,0,[]
+764,1400,1,['0650JamalDinJawbari.MukhtarFiKashfAsrar']
+765,1401,0,[]
+766,1402,0,[]
+767,1407,0,[]
+768,1408,0,[]
+769,1409,0,[]
+770,1410,0,[]
+771,1411,0,[]
+772,1412,0,[]
+773,1413,0,[]
+774,1414,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+775,1415,0,[]
+776,1416,6,"['0911Suyuti.HawiLiFatawi', '0911Samhudi.WafaWafa', '0845Maqrizi.DurarCuqud', '0816AbuBakrMaraghi.TahqiqNusra', '0911Samhudi.wafa', '0911Suyuti.ShaddAthwab']"
+777,1417,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0764Safadi.AcyanCasr']"
+778,1418,0,[]
+779,1419,0,[]
+780,1420,0,[]
+781,1427,0,[]
+782,1428,1,['0911Suyuti.HusnMuhadara']
+783,1430,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar']"
+784,1431,7,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Muqaffa', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0487AbuCubaydBakri.MasalikWaMamalik', '0911Suyuti.HusnMuhadara', '0596IbnWasifShah.MukhtasarCajaibDunya']"
+785,1438,0,[]
+786,1442,0,[]
+787,1444,0,[]
+788,1445,0,[]
+789,1446,0,[]
+790,1447,0,[]
+791,1448,0,[]
+792,1449,0,[]
+793,1450,0,[]
+794,1451,0,[]
+795,1452,0,[]
+796,1453,0,[]
+797,1454,0,[]
+798,1455,0,[]
+799,1458,0,[]
+800,1459,1,['0911Suyuti.HusnMuhadara']
+801,1462,3,"['0845Maqrizi.Muqaffa', '0597CimadDinKatibIsfahani.KharidatQasr', '0658IbnAbbar.HullaSiyara']"
+802,1464,2,"['0845Maqrizi.Muqaffa', '0615MuwaffaqDinShafici.MurshidZuwwar']"
+803,1466,1,['0845Maqrizi.Muqaffa']
+804,1467,2,"['0660IbnCadim.BughyatTalab', '0845Maqrizi.Muqaffa']"
+805,1468,1,['0845Maqrizi.Muqaffa']
+806,1469,5,"['0748Dhahabi.TarikhIslam', '0660IbnCadim.BughyatTalab', '0748Dhahabi.SiyarAclamNubala', '0845Maqrizi.Muqaffa', '0542IbnBassamShantarini.Dhakhira']"
+807,1470,8,"['0660IbnCadim.BughyatTalab', '0845Maqrizi.Muqaffa', '0542IbnBassamShantarini.Dhakhira', '0619AbuCabbasSharishi.SharhMaqamatHariri', '0470MuayyadFiDinShirazi.Sira', '0606IbnMamati.LataifDhakhira', '0658IbnAbbar.IctabKitab', '0420Musabbihi.AkhbarMisr']"
+808,1472,0,[]
+809,1475,2,"['0845Maqrizi.Muqaffa', '0606IbnMamati.QawaninDawawin']"
+810,1476,3,"['0845Maqrizi.Muqaffa', '0654IbnShaccarMawsili.Qalaid', '0606IbnMamati.QawaninDawawin']"
+811,1479,0,[]
+812,1480,0,[]
+813,1483,0,[]
+814,1484,0,[]
+815,1485,0,[]
+816,1486,0,[]
+817,1487,0,[]
+818,1488,0,[]
+819,1489,0,[]
+820,1490,0,[]
+821,1491,0,[]
+822,1492,0,[]
+823,1493,0,[]
+824,1494,0,[]
+825,1495,0,[]
+826,1496,1,['0874IbnTaghribirdi.NujumZahira']
+827,1498,2,"['0845Maqrizi.Suluk', '0911Suyuti.HusnMuhadara']"
+828,1499,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+829,1500,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+830,1501,3,"['0821Qalqashandi.SubhAcsha', '0749ZaynDinIbnWardi.Tarikh', '0732AbuFida.MukhtasarFiAkhbar']"
+831,1502,3,"['0821Qalqashandi.SubhAcsha', '0749ZaynDinIbnWardi.Tarikh', '0732AbuFida.MukhtasarFiAkhbar']"
+832,1503,3,"['0749ZaynDinIbnWardi.Tarikh', '0732AbuFida.MukhtasarFiAkhbar', '0690IbnMujawirDimashqi.TarikhMustabsir']"
+833,1504,3,"['0749IbnFadlAllahCumari.MasalikAbsar', '0749ZaynDinIbnWardi.Tarikh', '0732AbuFida.MukhtasarFiAkhbar']"
+834,1505,0,[]
+835,1507,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+836,1508,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+837,1509,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+838,1510,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+839,1511,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+840,1512,3,"['0821Qalqashandi.SubhAcsha', '0739ShamsDinJazari.HawadithZaman', '0749IbnFadlAllahCumari.MasalikAbsar']"
+841,1516,2,"['0845Maqrizi.Muqaffa', '0350Balawi.SiratAhmadIbnTulun']"
+842,1517,2,"['0845Maqrizi.Muqaffa', '0350Balawi.SiratAhmadIbnTulun']"
+843,1518,2,"['0845Maqrizi.Muqaffa', '0350Balawi.SiratAhmadIbnTulun']"
+844,1519,3,"['0845Maqrizi.Muqaffa', '0350Balawi.SiratAhmadIbnTulun', '0350MuhammadKindi.WulatMisr']"
+845,1520,1,['0350Balawi.SiratAhmadIbnTulun']
+846,1526,2,"['0845Maqrizi.Suluk', '0911Suyuti.HusnMuhadara']"
+847,1527,1,['0911Suyuti.HusnMuhadara']
+848,1528,1,['0911Suyuti.HusnMuhadara']
+849,1529,8,"['0733Nuwayri.NihayatArab', '0764Safadi.WafiBiWafayat', '0692IbnCabdZahir.RawdZahir', '0764IbnShakirKutubi.FawatWafayat', '0736IbnDawadari.KanzDurar', '0685IbnSacidMaghribi.Muqtataf', '0911Suyuti.HusnMuhadara', '0809IbnDuqmaq.NuzhatAnam']"
+850,1532,0,[]
+851,1533,0,[]
+852,1534,0,[]
+853,1536,3,"['0885CalaDinMardawi.Insaf', '0763IbnMuflihMaqdisi.FurucWaTashihFuruc', '0795IbnRajabHanbali.DhaylTabaqatHanabila']"
+854,1537,1,['0257IbnCabdHakam.FutuhMisr']
+855,1538,2,"['0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn']"
+856,1539,1,['0845Maqrizi.MusawwadatMawaciz']
+857,1540,6,"['0630IbnAthirCizzDin.Kamil', '0774IbnKathir.Bidaya', '0310Tabari.Tarikh', '0900IbnCabdMuncimHimyari.RawdMictar', '0634AbuRabicHimyari.Iktifa', '0421Miskawayh.Tajarib']"
+858,1541,9,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0774IbnKathir.Bidaya', '0808IbnKhaldun.Tarikh', '0845Maqrizi.KhabarCanBashar', '0310Tabari.Tarikh', '0900IbnCabdMuncimHimyari.RawdMictar', '0634AbuRabicHimyari.Iktifa', '0421Miskawayh.Tajarib']"
+859,1544,4,"['0808IbnKhaldun.Tarikh', '0626YaqutHamawi.MucjamBuldan', '0930IbnIyas.NuzhatUmam', '0350MuhammadKindi.WulatMisr']"
+860,1545,4,"['0774IbnKathir.Bidaya', '0597IbnJawzi.Muntazam', '0310Tabari.Tarikh', '0346Mascudi.TanbihWaIshraf']"
+861,1546,1,['0346Mascudi.TanbihWaIshraf']
+862,1547,1,['0346Mascudi.TanbihWaIshraf']
+863,1548,1,['0346Mascudi.TanbihWaIshraf']
+864,1549,2,"['0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn']"
+865,1550,2,"['0845Maqrizi.MusawwadatMawaciz', '0617IbnTuwayr.NuzhatMuqlatayn']"
+866,1551,0,[]
+867,1552,0,[]
+868,1553,0,[]
+869,1554,0,[]
+870,1556,0,[]
+871,1557,0,[]
+872,1558,0,[]
+873,1559,0,[]
+874,1561,0,[]
+875,1562,0,[]
+876,1564,0,[]
+877,1565,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+878,1566,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+879,1567,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+880,1577,0,[]
+881,1578,2,"['0692IbnCabdZahir.RawdZahir', '0807IbnFurat.TarikhDuwal']"
+882,1579,3,"['0845Maqrizi.Suluk', '0692IbnCabdZahir.RawdZahir', '0807IbnFurat.TarikhDuwal']"
+883,1580,2,"['0845Maqrizi.Suluk', '0807IbnFurat.TarikhDuwal']"
+884,1581,0,[]
+885,1583,6,"['0821Qalqashandi.SubhAcsha', '0845Maqrizi.MusawwadatMawaciz', '0414AbuHayyanTawhidi.Basair', '0697IbnWasil.MufarrijKurub', '0845Maqrizi.ItticazHunafa', '0421AbuSacdAbi.NathrDurr']"
+886,1585,0,[]
+887,1586,3,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar', '0911Suyuti.HusnMuhadara']"
+888,1587,1,['0725BaybarsMansuri.TuhfaMulukiyya']
+889,1588,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+890,1589,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+891,1590,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+892,1591,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+893,1592,0,[]
+894,1593,0,[]
+895,1594,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+896,1595,1,['0654SibtIbnJawzi.MiratZaman']
+897,1596,0,[]
+898,1597,0,[]
+899,1598,0,[]
+900,1599,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+901,1600,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+902,1601,3,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar', '0911Suyuti.HusnMuhadara']"
+903,1602,3,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar', '0911Suyuti.HusnMuhadara']"
+904,1603,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+905,1604,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+906,1605,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+907,1606,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+908,1607,0,[]
+909,1608,0,[]
+910,1609,0,[]
+911,1610,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+912,1611,1,['0970IbnIbrahimIbnNujaymMisri.BahrRaiq']
+913,1612,2,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar']"
+914,1613,0,[]
+915,1614,0,[]
+916,1615,1,['0845Maqrizi.Suluk']
+917,1616,3,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar', '0911Suyuti.HusnMuhadara']"
+918,1617,0,[]
+919,1618,0,[]
+920,1619,0,[]
+921,1620,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+922,1621,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+923,1622,0,[]
+924,1623,0,[]
+925,1624,1,['0458Bayhaqi.SunanKubra']
+926,1625,3,"['0821Qalqashandi.SubhAcsha', '0749IbnFadlAllahCumari.MasalikAbsar', '0759Yusufi.NuzhatNazir']"
+927,1626,3,"['0815Ghuzuli.MatalicBudur', '0749IbnFadlAllahCumari.MasalikAbsar', '0911Suyuti.HusnMuhadara']"
+928,1627,0,[]
+929,1628,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+930,1629,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+931,1630,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+932,1631,0,[]
+933,1632,1,['0749IbnFadlAllahCumari.MasalikAbsar']
+934,1633,1,['0845Maqrizi.Suluk']
+935,1634,0,[]
+936,1635,0,[]
+937,1636,0,[]
+938,1637,0,[]
+939,1639,0,[]
+940,1640,4,"['0855BadrDinCayni.SayfMuhannad', '0845Maqrizi.MusawwadatMawaciz', '0276IbnQutaybaDinawari.Macarif', '0346Mascudi.MurujDhahab']"
+941,1641,2,"['0845Maqrizi.Suluk', '0845Maqrizi.DurarCuqud']"
+942,1642,0,[]
+943,1643,1,['0845Maqrizi.Suluk']
+944,1644,1,['0845Maqrizi.Suluk']
+945,1645,0,[]
+946,1646,2,"['0845Maqrizi.DurarCuqud', '0874IbnTaghribirdi.MawridLatafa']"
+947,1647,0,[]
+948,1648,1,['0845Maqrizi.DurarCuqud']
+949,1649,3,"['0845Maqrizi.Suluk', '0821Qalqashandi.SubhAcsha', '0845Maqrizi.DurarCuqud']"
+950,1650,2,"['0845Maqrizi.DurarCuqud', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+951,1651,1,['0845Maqrizi.Suluk']
+952,1652,1,['0845Maqrizi.DurarCuqud']
+953,1653,3,"['0832TaqiFasi.CiqdThamin', '0911Suyuti.HusnMuhadara', '0832TaqiFasi.Muqnic']"
+954,1654,0,[]
+955,1655,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Muqaffa', '0807IbnFurat.TarikhDuwal', '0832TaqiFasi.Muqnic']"
+956,1656,0,[]
+957,1657,1,['0845Maqrizi.Muqaffa']
+958,1658,9,"['0821Qalqashandi.SubhAcsha', '0928MujirDinCulaymi.TarikhMuctabar', '0845Maqrizi.DurarCuqud', '0852IbnHajarCasqalani.DurarKamina', '0832TaqiFasi.CiqdThamin', '0821Qalqashandi.Maathir', '0874IbnTaghribirdi.ManhalSafi', '0911Suyuti.HusnMuhadara', '0874IbnTaghribirdi.MawridLatafa']"
+959,1659,0,[]
+960,1660,1,['0845Maqrizi.Suluk']
+961,1661,0,[]
+962,1662,1,['0845Maqrizi.DurarCuqud']
+963,1663,4,"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa', '0845Maqrizi.DurarCuqud', '0759MufaddalIbnAbiFadail.NahjSadid']"
+964,1664,3,"['0821Qalqashandi.SubhAcsha', '0928MujirDinCulaymi.TarikhMuctabar', '0845Maqrizi.DurarCuqud']"
+965,1665,3,"['0821Qalqashandi.SubhAcsha', '0845Maqrizi.DurarCuqud', '0821Qalqashandi.Maathir']"
+966,1666,1,['0845Maqrizi.Suluk']
+967,1667,0,[]
+968,1669,0,[]
+969,1670,0,[]
+970,1676,5,"['0571IbnCasakir.TarikhDimashq', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0814IbnZayyat.KawakibSayyara', '0874IbnTaghribirdi.NujumZahira', '0347IbnYunusSadafi.Tarikh']"
+971,1677,1,['0874IbnTaghribirdi.NujumZahira']
+972,1678,1,['0874IbnTaghribirdi.NujumZahira']
+973,1679,0,[]
+974,1680,3,"['0845Maqrizi.Muqaffa', '0911Suyuti.HusnMuhadara', '0852IbnHajarCasqalani.RafcIsr']"
+975,1681,2,"['0626YaqutHamawi.MucjamBuldan', '0911Suyuti.HusnMuhadara']"
+976,1683,0,[]
+977,1685,0,[]
+978,1686,0,[]
+979,1687,0,[]
+980,1692,0,[]
+981,1693,0,[]
+982,1696,0,[]
+983,1698,0,[]
+984,1699,0,[]
+985,1701,0,[]
+986,1702,1,['0311IbnBajirBajiri.JamicMusnad']
+987,1707,3,"['0257IbnCabdHakam.FutuhMisr', '0350MuhammadKindi.WulatMisr', '0845Maqrizi.Bayan']"
+988,1708,3,"['0845Maqrizi.Muqaffa', '0930IbnIyas.NuzhatUmam', '0350MuhammadKindi.WulatMisr']"
+989,1709,0,[]
+990,1710,0,[]
+991,1711,0,[]
+992,1712,0,[]
+993,1713,0,[]
+994,1716,0,[]
+995,1724,0,[]
+996,1725,0,[]
+997,1726,1,['0911Suyuti.HusnMuhadara']
+998,1727,7,"['0845Maqrizi.ImtacAsmac', '0279Baladhuri.AnsabAshraf', '0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.MusawwadatMawaciz', '0845Maqrizi.ItticazHunafa', '0463KhatibBaghdadi.AsmaMubhama', '0360Ramhurmuzi.MuhaddithFasil']"
+999,1729,1,['0874IbnTaghribirdi.NujumZahira']
+1000,1732,2,"['0911Suyuti.HawiLiFatawi', '0845Maqrizi.ItticazHunafa']"
+1001,1733,0,[]
+1002,1734,0,[]
+1003,1735,0,[]
+1004,1737,2,"['0733Nuwayri.NihayatArab', '0692IbnCabdZahir.RawdaBahiyya']"
+1005,1738,2,"['0692IbnCabdZahir.RawdaBahiyya', '0261Khassaf.Hiyal']"
+1006,1739,1,['0692IbnCabdZahir.RawdaBahiyya']
+1007,1741,2,"['0692IbnCabdZahir.RawdZahir', '0911Suyuti.HusnMuhadara']"
+1008,1742,1,['0911Suyuti.HusnMuhadara']
+1009,1743,0,[]
+1010,1744,1,['0845Maqrizi.Suluk']
+1011,1745,1,['0845Maqrizi.Suluk']
+1012,1748,3,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Suluk', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1013,1749,1,['0845Maqrizi.DurarCuqud']
+1014,1750,0,[]
+1015,1751,0,[]
+1016,1752,0,[]
+1017,1753,0,[]
+1018,1761,2,"['0874IbnTaghribirdi.NujumZahira', '0845Maqrizi.ItticazHunafa']"
+1019,1762,2,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+1020,1763,2,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+1021,1764,0,[]
+1022,1765,1,['0845Maqrizi.ItticazHunafa']
+1023,1766,1,['0845Maqrizi.ItticazHunafa']
+1024,1767,0,[]
+1025,1768,2,"['0808IbnKhaldun.Tarikh', '0845Maqrizi.ItticazHunafa']"
+1026,1769,1,['0458YahyaIbnSacidAntaki.Tarikh']
+1027,1770,2,"['0845Maqrizi.ItticazHunafa', '0542IbnMunjibTajRiyasaIbnSayrafi.Ishara']"
+1028,1771,0,[]
+1029,1772,1,['0845Maqrizi.ItticazHunafa']
+1030,1773,0,[]
+1031,1775,0,[]
+1032,1776,4,"['0630IbnAthirCizzDin.LubabFiTahdhibAnsab', '0749ZaynDinIbnWardi.Tarikh', '0845Maqrizi.ItticazHunafa', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1033,1777,2,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.ItticazHunafa']"
+1034,1778,3,"['0677IbnMuyassar.AkhbarMisr', '0845Maqrizi.DurarCuqud', '0845Maqrizi.ItticazHunafa']"
+1035,1779,2,"['0845Maqrizi.Suluk', '0845Maqrizi.DurarCuqud']"
+1036,1780,1,['0874IbnTaghribirdi.NujumZahira']
+1037,1783,0,[]
+1038,1784,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1039,1787,0,[]
+1040,1788,0,[]
+1041,1789,2,"['0814IbnZayyat.KawakibSayyara', '0615MuwaffaqDinShafici.MurshidZuwwar']"
+1042,1790,0,[]
+1043,1791,0,[]
+1044,1792,0,[]
+1045,1793,0,[]
+1046,1794,2,"['0845Maqrizi.Muqaffa', '0726Yunini.DhaylMiratZaman']"
+1047,1797,0,[]
+1048,1798,4,"['0845Maqrizi.Suluk', '0726Yunini.DhaylMiratZaman', '0736IbnDawadari.KanzDurar', '0809IbnDuqmaq.NuzhatAnam']"
+1049,1799,3,"['0845Maqrizi.Suluk', '0726Yunini.DhaylMiratZaman', '0809IbnDuqmaq.NuzhatAnam']"
+1050,1800,15,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Suluk', '0774IbnKathir.Bidaya', '0845Maqrizi.Muqaffa', '0966HusaynDiyarbakri.TarikhKhamis', '0692IbnCabdZahir.RawdZahir', '0807IbnFurat.TarikhDuwal', '0855BadrDinCayni.CiqdJuman', '0874IbnTaghribirdi.ManhalSafi', '0843IbnKhatibNasiriyya.DurrMuntakhab', '0725BaybarsMansuri.ZubdatFikra', '0725BaybarsMansuri.MukhtarAkhbar', '0874IbnTaghribirdi.MawridLatafa', '0809IbnDuqmaq.NuzhatAnam', '0730ShaficIbnCali.HusnManaqib']"
+1051,1801,8,"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa', '0726Yunini.DhaylMiratZaman', '0821Qalqashandi.Maathir', '0736IbnDawadari.KanzDurar', '0759MufaddalIbnAbiFadail.NahjSadid', '0809IbnDuqmaq.NuzhatAnam', '0726IbnSuqaci.TaliWafayat']"
+1052,1802,0,[]
+1053,1803,9,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Suluk', '0874IbnTaghribirdi.NujumZahira', '0726Yunini.DhaylMiratZaman', '0950IbnSabat.SidqAkhbar', '0764IbnShakirKutubi.FawatWafayat', '0736IbnDawadari.KanzDurar', '0759MufaddalIbnAbiFadail.NahjSadid', '0684IbnShaddad.TarikhMalikZahir']"
+1054,1804,0,[]
+1055,1805,0,[]
+1056,1806,4,"['0845Maqrizi.Suluk', '0832TaqiFasi.CiqdThamin', '0845Maqrizi.DhahabMasbuk', '0832TaqiFasi.Muqnic']"
+1057,1807,0,[]
+1058,1808,0,[]
+1059,1809,0,[]
+1060,1810,0,[]
+1061,1811,0,[]
+1062,1812,4,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1063,1813,0,[]
+1064,1814,0,[]
+1065,1815,1,['0764Safadi.AcyanCasr']
+1066,1816,4,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1067,1817,0,[]
+1068,1818,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+1069,1819,2,"['0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1070,1820,4,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi', '0843IbnKhatibNasiriyya.DurrMuntakhab']"
+1071,1821,3,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira']"
+1072,1822,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+1073,1823,0,[]
+1074,1824,4,"['0764Safadi.WafiBiWafayat', '0874IbnTaghribirdi.NujumZahira', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1075,1825,0,[]
+1076,1826,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+1077,1827,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+1078,1828,1,['0764Safadi.AcyanCasr']
+1079,1829,0,[]
+1080,1830,0,[]
+1081,1831,1,['0911Suyuti.HusnMuhadara']
+1082,1832,2,"['0911Suyuti.HusnMuhadara', '0930IbnIyas.BadaicZuhur']"
+1083,1833,0,[]
+1084,1834,3,"['0874IbnTaghribirdi.NujumZahira', '0874IbnTaghribirdi.ManhalSafi', '0874IbnTaghribirdi.MawridLatafa']"
+1085,1835,1,['0874IbnTaghribirdi.NujumZahira']
+1086,1836,0,[]
+1087,1837,0,[]
+1088,1838,0,[]
+1089,1839,4,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0626YaqutHamawi.MucjamUdaba', '0764IbnShakirKutubi.FawatWafayat']"
+1090,1840,1,['0775IbnAbiWafa.JawahirMudiya']
+1091,1841,1,['0845Maqrizi.DurarCuqud']
+1092,1842,1,['0845Maqrizi.DurarCuqud']
+1093,1843,2,"['0845Maqrizi.Suluk', '0845Maqrizi.DurarCuqud']"
+1094,1844,1,['0845Maqrizi.DurarCuqud']
+1095,1845,1,['0845Maqrizi.DurarCuqud']
+1096,1846,1,['0845Maqrizi.DurarCuqud']
+1097,1847,1,['0845Maqrizi.DurarCuqud']
+1098,1848,0,[]
+1099,1849,4,"['0748Dhahabi.TarikhIslam', '0845Maqrizi.DurarCuqud', '0843IbnKhatibNasiriyya.DurrMuntakhab', '0911Suyuti.HusnMuhadara']"
+1100,1850,11,"['0733Nuwayri.NihayatArab', '0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0874IbnTaghribirdi.NujumZahira', '0764IbnShakirKutubi.FawatWafayat', '0807IbnFurat.TarikhDuwal', '0855BadrDinCayni.CiqdJuman', '0837IbnHijjaHamawi.KhizanatAdab', '0930IbnIyas.BadaicZuhur', '0726IbnSuqaci.TaliWafayat', '0685IbnSacidMaghribi.MurqisatWaMutribat']"
+1101,1851,0,[]
+1102,1852,0,[]
+1103,1853,0,[]
+1104,1854,0,[]
+1105,1855,0,[]
+1106,1856,2,"['0889IbnAhmadSakhawi.TuhfatAhbab', '0685IbnSacidMaghribi.Mughrib']"
+1107,1857,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1108,1858,7,"['0874IbnTaghribirdi.NujumZahira', '0902Sakhawi.DawLamic', '0950IbnSabat.SidqAkhbar', '0855BadrDinCayni.CiqdJuman', '0852IbnHajarCasqalani.InbaGhumr', '0902Sakhawi.JawahirWaDurar', '0911Suyuti.HusnMuhadara']"
+1109,1860,0,[]
+1110,1861,0,[]
+1111,1862,0,[]
+1112,1863,1,['0456IbnHazm.IhkamFiUsulAhkam']
+1113,1864,4,"['0488IbnFutuhHumaydi.JamcBaynaSahihayn', '0726CallamaHilli.NihayatWusul', '0456IbnHazm.IhkamFiUsulAhkam', '0751IbnQayyimJawziyya.SawaciqMursala']"
+1114,1866,8,"['0764Safadi.WafiBiWafayat', '0488IbnFutuhHumaydi.JamcBaynaSahihayn', '0463KhatibBaghdadi.JamicLiAkhlaqRawiWaAdabSamic', '0911Suyuti.BahrAlladhiZakhar', '0456IbnHazm.IhkamFiUsulAhkam', '0751IbnQayyimJawziyya.SawaciqMursala', '0795IbnRajabHanbali.SharhCilalTirmidhi', '0360Ramhurmuzi.MuhaddithFasil']"
+1115,1867,1,['0456IbnHazm.IhkamFiUsulAhkam']
+1116,1870,11,"['0571IbnCasakir.TarikhDimashq', '0733Nuwayri.NihayatArab', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0630IbnAthirCizzDin.Kamil', '0808IbnKhaldun.Tarikh', '0654SibtIbnJawzi.MiratZaman', '0310Tabari.Tarikh', '0421Miskawayh.Tajarib', '0360AbuBakrAjurri.Sharica', '0741IbnYahyaAndalusiMalaqi.TamhidWaBayan', '0200SayfIbnCumar.Fitna']"
+1117,1871,5,"['0845Maqrizi.Muqaffa', '0845Maqrizi.MusawwadatMawaciz', '0874IbnTaghribirdi.NujumZahira', '0852IbnHajarCasqalani.IsabaFiTamyiz', '0350MuhammadKindi.WulatMisr']"
+1118,1872,4,"['0571IbnCasakir.TarikhDimashq', '0845Maqrizi.Muqaffa', '0262CumarIbnShabba.TarikhMadina', '0350MuhammadKindi.WulatMisr']"
+1119,1873,6,"['0571IbnCasakir.TarikhDimashq', '0711IbnManzurIfriqi.MukhtasarTarikhDimashq', '0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0852IbnHajarCasqalani.IsabaFiTamyiz', '0350MuhammadKindi.WulatMisr']"
+1120,1875,1,['0350MuhammadKindi.WulatMisr']
+1121,1876,1,['0350MuhammadKindi.WulatMisr']
+1122,1877,1,['0350MuhammadKindi.WulatMisr']
+1123,1878,1,['0350MuhammadKindi.WulatMisr']
+1124,1879,2,"['0845Maqrizi.Muqaffa', '0350MuhammadKindi.WulatMisr']"
+1125,1880,2,"['0845Maqrizi.Muqaffa', '0350MuhammadKindi.WulatMisr']"
+1126,1881,3,"['0845Maqrizi.Rasail', '0845Maqrizi.NizacWaTakhasum', '0350MuhammadKindi.WulatMisr']"
+1127,1882,3,"['0845Maqrizi.Muqaffa', '0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+1128,1883,2,"['0845Maqrizi.Muqaffa', '0350MuhammadKindi.WulatMisr']"
+1129,1884,1,['0845Maqrizi.ItticazHunafa']
+1130,1885,1,['0845Maqrizi.Muqaffa']
+1131,1886,1,['0845Maqrizi.Muqaffa']
+1132,1887,1,['0845Maqrizi.ItticazHunafa']
+1133,1888,2,"['0808IbnKhaldun.Tarikh', '0845Maqrizi.ItticazHunafa']"
+1134,1889,2,"['0808IbnKhaldun.Tarikh', '0845Maqrizi.ItticazHunafa']"
+1135,1890,1,['0845Maqrizi.ItticazHunafa']
+1136,1891,3,"['0845Maqrizi.Muqaffa', '0821Qalqashandi.Maathir', '0845Maqrizi.ItticazHunafa']"
+1137,1892,1,['0726CallamaHilli.NihayatWusul']
+1138,1893,0,[]
+1139,1894,0,[]
+1140,1896,1,['0385IbnNadim.Fihrist']
+1141,1897,4,"['0816IbnMuhammadSharifJurjani.SharhMawaqif', '0415QadiCabdJabbar.ManiyyaWaAmal', '0631SayfDinAmidi.AbkarAfkar', '0548Shahrastani.MilalWaNihal']"
+1142,1898,5,"['0816IbnMuhammadSharifJurjani.SharhMawaqif', '0756CadudDinIji.Mawaqif', '0816IbnMuhammadSharifJurjani.Tacrifat', '0631SayfDinAmidi.AbkarAfkar', '0548Shahrastani.MilalWaNihal']"
+1143,1899,0,[]
+1144,1900,0,[]
+1145,1901,4,"['0415QadiCabdJabbar.ManiyyaWaAmal', '0436SharifMurtada.JumalCilm', '0548Shahrastani.MilalWaNihal', '0570AbuCammarCabdKafiIbadi.Mujaz']"
+1146,1902,1,['0606FakhrDinRazi.Ictiqadat']
+1147,1903,0,[]
+1148,1904,1,['0429IbnTahirBaghdadi.FarqBaynaFiraq']
+1149,1905,0,[]
+1150,1906,1,['0764Safadi.WafiBiWafayat']
+1151,1908,1,['0745MuayyadYahyaIbnHamzaCalawi.TamhidFiSharh']
+1152,1909,3,"['0728IbnTaymiyya.MinhajSunna', '0775Anonymous.InsafFiIntisaf', '0324Ashcari.MaqalatIslamiyyin']"
+1153,1910,0,[]
+1154,1911,7,"['0816IbnMuhammadSharifJurjani.SharhMawaqif', '0764Safadi.WafiBiWafayat', '0756CadudDinIji.Mawaqif', '0319AbuQasimBalkhi.Maqalat', '0324Ashcari.MaqalatIslamiyyin', '0548Shahrastani.MilalWaNihal', '0573NashwanHimyari.HurCin']"
+1155,1912,6,"['0816IbnMuhammadSharifJurjani.SharhMawaqif', '0764Safadi.WafiBiWafayat', '0756CadudDinIji.Mawaqif', '0816IbnMuhammadSharifJurjani.Tacrifat', '0631SayfDinAmidi.AbkarAfkar', '0548Shahrastani.MilalWaNihal']"
+1156,1913,0,[]
+1157,1915,0,[]
+1158,1916,0,[]
+1159,1917,1,['0429IbnTahirBaghdadi.FarqBaynaFiraq']
+1160,1918,0,[]
+1161,1919,0,[]
+1162,1920,0,[]
+1163,1921,0,[]
+1164,1922,0,[]
+1165,1923,0,[]
+1166,1924,5,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0774IbnKathir.Bidaya', '0808IbnKhaldun.Tarikh', '0732AbuFida.MukhtasarFiAkhbar']"
+1167,1925,0,[]
+1168,1926,0,[]
+1169,1927,29,"['0562Samcani.Ansab', '0768Yafici.MiratJinan', '0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0463KhatibBaghdadi.TarikhBaghdad', '0681IbnKhallikan.WafayatAcyan', '0774IbnKathir.Bidaya', '0748Dhahabi.SiyarAclamNubala', '0597IbnJawzi.Muntazam', '0654SibtIbnJawzi.MiratZaman', '0831ShamsDinBirmawi.FawaidSaniyya', '0874IbnTaghribirdi.NujumZahira', '0772IbnHasanJamalDinIsnawi.TabaqatShaficiyya', '0771TajDinSubki.TabaqatShaficiyyaKubra', '0774IbnKathir.TabaqatFuqahaShaficiyyin', '0775IbnAbiWafa.JawahirMudiya', '0799IbnFarhun.DibajMudhahhab', '0334Azdi.TarikhMawsil', '0783IbnHadida.MisbahMudi', '0979CaliIbnAmrAllahHinai.TabaqatHanafiyya', '0911Suyuti.KawkabSatic', '0851IbnQadiShuhba.TabaqatShaficiyya', '0945ShamsDinDawudi.TabaqatMufassirin', '0792IbnCumarTaftazani.SharhMaqasid', '0643IbnSalahShahrazuri.TabaqatFuqaha', '0571IbnCasakir.TabyinKadhib', '0691IbnYusufLabli.Fihrist', '0909IbnMabrid.JamcJuyushWaDasakir', '0895AbuCabdAllahSanusi.SharhMuqaddimat']"
+1170,1928,9,"['0562Samcani.Ansab', '0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0681IbnKhallikan.WafayatAcyan', '0774IbnKathir.TabaqatFuqahaShaficiyyin', '0385IbnNadim.Fihrist', '0548Shahrastani.MilalWaNihal', '0571IbnCasakir.TabyinKadhib', '0691IbnYusufLabli.Fihrist']"
+1171,1929,2,"['0764Safadi.WafiBiWafayat', '0548Shahrastani.MilalWaNihal']"
+1172,1930,2,"['0764Safadi.WafiBiWafayat', '0548Shahrastani.MilalWaNihal']"
+1173,1931,1,['0764Safadi.WafiBiWafayat']
+1174,1932,0,[]
+1175,1933,0,[]
+1176,1934,1,['0456IbnHazm.FisalFiMilal']
+1177,1935,1,['0456IbnHazm.FisalFiMilal']
+1178,1937,0,[]
+1179,1939,0,[]
+1180,1940,0,[]
+1181,1941,2,"['0730QasimTujibi.Barnamaj', '0656IbnCabdQawiMundhiri.TakmilaLiWafayatNaqala']"
+1182,1942,0,[]
+1183,1945,4,"['0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0748Dhahabi.SiyarAclamNubala', '0927Nucaymi.DarisFiMadaris']"
+1184,1948,2,"['0845Maqrizi.Muqaffa', '0902Sakhawi.DawLamic']"
+1185,1949,3,"['0845Maqrizi.Suluk', '0726Yunini.DhaylMiratZaman', '0807IbnFurat.TarikhDuwal']"
+1186,1950,0,[]
+1187,1951,1,['0845Maqrizi.Suluk']
+1188,1952,5,"['0748Dhahabi.TarikhIslam', '0845Maqrizi.Suluk', '0726Yunini.DhaylMiratZaman', '0843IbnKhatibNasiriyya.DurrMuntakhab', '0759MufaddalIbnAbiFadail.NahjSadid']"
+1189,1953,2,"['0764Safadi.WafiBiWafayat', '0726Yunini.DhaylMiratZaman']"
+1190,1955,2,"['0845Maqrizi.Suluk', '0845Maqrizi.Muqaffa']"
+1191,1956,5,"['0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0764IbnShakirKutubi.FawatWafayat', '0953IbnTulun.InbaUmara']"
+1192,1957,5,"['0748Dhahabi.TarikhIslam', '0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0764IbnShakirKutubi.FawatWafayat', '0953IbnTulun.InbaUmara']"
+1193,1960,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1194,1961,0,[]
+1195,1962,2,"['0911Suyuti.HusnMuhadara', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1196,1963,1,['0845Maqrizi.Suluk']
+1197,1964,6,"['0748Dhahabi.TarikhIslam', '0845Maqrizi.Suluk', '0774IbnKathir.Bidaya', '0855BadrDinCayni.SayfMuhannad', '0927Nucaymi.DarisFiMadaris', '0750PseudoIbnFuwati.Hawadith']"
+1198,1965,1,['0845Maqrizi.Suluk']
+1199,1966,0,[]
+1200,1967,2,"['0845Maqrizi.Suluk', '0809IbnDuqmaq.NuzhatAnam']"
+1201,1968,3,"['0748Dhahabi.TarikhIslam', '0845Maqrizi.Suluk', '0726Yunini.DhaylMiratZaman']"
+1202,1969,5,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Suluk', '0692IbnCabdZahir.RawdZahir', '0889IbnAhmadSakhawi.TuhfatAhbab', '0730ShaficIbnCali.HusnManaqib']"
+1203,1971,13,"['0748Dhahabi.TarikhIslam', '0630IbnAthirCizzDin.Kamil', '0774IbnKathir.Bidaya', '0597IbnJawzi.Muntazam', '0654SibtIbnJawzi.MiratZaman', '0626YaqutHamawi.MucjamUdaba', '0855BadrDinCayni.CiqdJuman', '0700MuhammadCibdariHahi.Rihla', '0911Suyuti.BughyatWucat', '0676Nawawi.IdahFiManasikHajj', '0981IbnMusaMuwaqqitDimashqi.CiqdTalid', '0790IbnMusaGharnatiShatibi.Ifadat', '0854IbnCarabshah.CajaibMaqdur']"
+1204,1972,0,[]
+1205,1973,0,[]
+1206,1974,0,[]
+1207,1975,2,"['0733Nuwayri.NihayatArab', '0739ShamsDinJazari.HawadithZaman']"
+1208,1976,1,['0845Maqrizi.Suluk']
+1209,1977,0,[]
+1210,1978,0,[]
+1211,1979,1,['0845Maqrizi.Muqaffa']
+1212,1980,0,[]
+1213,1981,0,[]
+1214,1982,0,[]
+1215,1983,0,[]
+1216,1984,0,[]
+1217,1985,1,['0807IbnFurat.TarikhDuwal']
+1218,1986,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.Suluk', '0807IbnFurat.TarikhDuwal', '0759MufaddalIbnAbiFadail.NahjSadid']"
+1219,1987,3,"['0845Maqrizi.Suluk', '0807IbnFurat.TarikhDuwal', '0855BadrDinCayni.CiqdJuman']"
+1220,1988,0,[]
+1221,1989,0,[]
+1222,1990,1,['0845Maqrizi.Suluk']
+1223,1991,0,[]
+1224,1992,0,[]
+1225,1993,1,['0845Maqrizi.Suluk']
+1226,1994,0,[]
+1227,1995,0,[]
+1228,1996,0,[]
+1229,1997,0,[]
+1230,1998,0,[]
+1231,1999,0,[]
+1232,2000,0,[]
+1233,2001,0,[]
+1234,2002,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1235,2003,0,[]
+1236,2004,0,[]
+1237,2005,0,[]
+1238,2006,0,[]
+1239,2007,0,[]
+1240,2008,0,[]
+1241,2009,0,[]
+1242,2010,3,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1243,2011,2,"['0764Safadi.AcyanCasr', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1244,2012,0,[]
+1245,2013,0,[]
+1246,2014,1,['0845Maqrizi.DurarCuqud']
+1247,2016,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1248,2017,1,['0845Maqrizi.Suluk']
+1249,2018,0,[]
+1250,2019,0,[]
+1251,2020,0,[]
+1252,2021,0,[]
+1253,2022,3,"['0845Maqrizi.Suluk', '0764Safadi.AcyanCasr', '0911Suyuti.HusnMuhadara']"
+1254,2023,1,['0764Safadi.AcyanCasr']
+1255,2024,2,"['0668IbnAbiUsaybica.CuyunAnba', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1256,2026,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1257,2027,1,['0733Nuwayri.NihayatArab']
+1258,2028,0,[]
+1259,2029,0,[]
+1260,2030,0,[]
+1261,2033,1,['0845Maqrizi.KhabarCanBashar']
+1262,2034,3,"['0845Maqrizi.Muqaffa', '0843IbnKhatibNasiriyya.DurrMuntakhab', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1263,2035,0,[]
+1264,2039,1,['0845Maqrizi.Muqaffa']
+1265,2042,4,"['0864Jazairi.IbtisamGhurus', '0465IbnHawazinQushayri.RisalaQushayriyya', '0974IbnHajarHaytami.FatawaHadithiyya', '0808IbnKhaldun.ShifaSail']"
+1266,2044,1,['0911Suyuti.HusnMuhadara']
+1267,2045,0,[]
+1268,2046,0,[]
+1269,2047,1,['0911Suyuti.HusnMuhadara']
+1270,2048,0,[]
+1271,2049,0,[]
+1272,2050,0,[]
+1273,2051,1,['0759MufaddalIbnAbiFadail.NahjSadid']
+1274,2052,0,[]
+1275,2053,0,[]
+1276,2054,0,[]
+1277,2055,2,"['0845Maqrizi.DurarCuqud', '0852IbnHajarCasqalani.InbaGhumr']"
+1278,2056,0,[]
+1279,2057,0,[]
+1280,2058,1,['0845Maqrizi.Muqaffa']
+1281,2059,0,[]
+1282,2060,0,[]
+1283,2061,3,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1284,2062,1,['0772IbnHasanJamalDinIsnawi.TabaqatShaficiyya']
+1285,2063,2,"['0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1286,2064,4,"['0764Safadi.WafiBiWafayat', '0852IbnHajarCasqalani.DurarKamina', '0764Safadi.AcyanCasr', '0874IbnTaghribirdi.ManhalSafi']"
+1287,2065,2,"['0852IbnHajarCasqalani.DurarKamina', '0764Safadi.AcyanCasr']"
+1288,2066,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+1289,2067,0,[]
+1290,2068,0,[]
+1291,2070,13,"['0310Tabari.JamicBayan', '0911Suyuti.DurrManthur', '0427AbuIshaqThaclabi.KashfWaBayan', '0468IbnAhmadWahidiNaysaburi.WasitFiTafsir', '0774IbnKathir.TafsirQuran', '0458Bayhaqi.ShucabIman', '0181IbnMubarak.Zuhd', '0405HakimNaysaburi.Mustadrak', '0804IbnMulaqqin.IclamBiFawaid', '0319IbnMundhirNaysaburi.TafsirQuran', '0656IbnCabdQawiMundhiri.TarghibWaTarhib', '0852IbnHajarCasqalani.CujabFiBayanAsbab', '0468IbnAhmadWahidiNaysaburi.AsbabNuzul']"
+1292,2071,5,"['0947BamakhramaHimyari.QiladatNahr', '0768Yafici.MiratJinan', '0748Dhahabi.CibarFiKhabar', '0748Dhahabi.DhaylCibar', '0911Suyuti.HusnMuhadara']"
+1293,2072,0,[]
+1294,2074,3,"['0902Sakhawi.DawLamic', '0911Suyuti.HusnMuhadara', '0902Sakhawi.Ilmam']"
+1295,2075,1,['0739ShamsDinJazari.HawadithZaman']
+1296,2076,6,"['0748Dhahabi.TarikhIslam', '0845Maqrizi.Muqaffa', '0749IbnFadlAllahCumari.MasalikAbsar', '0874IbnTaghribirdi.NujumZahira', '0726Yunini.DhaylMiratZaman', '0843IbnKhatibNasiriyya.DurrMuntakhab']"
+1297,2077,2,"['0845Maqrizi.Muqaffa', '0705SharafDinDimyati.MucjamShuyukh']"
+1298,2078,0,[]
+1299,2079,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1300,2080,2,"['0864Jazairi.IbtisamGhurus', '0974IbnHajarHaytami.FatawaHadithiyya']"
+1301,2081,0,[]
+1302,2082,1,['0874IbnTaghribirdi.NujumZahira']
+1303,2083,0,[]
+1304,2084,7,"['0562Samcani.Ansab', '0728IbnTaymiyya.MajmucFatawa', '0630IbnAthirCizzDin.LubabFiTahdhibAnsab', '0631SayfDinAmidi.AbkarAfkar', '0324Ashcari.MaqalatIslamiyyin', '0548Shahrastani.MilalWaNihal', '0728IbnTaymiyya.Iman']"
+1305,2085,2,"['0749IbnFadlAllahCumari.MasalikAbsar', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1306,2093,8,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0279Baladhuri.AnsabAshraf', '0597IbnJawzi.Muntazam', '0808IbnKhaldun.Tarikh', '0654SibtIbnJawzi.MiratZaman', '0310Tabari.Tarikh', '0421Miskawayh.Tajarib']"
+1307,2094,11,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0774IbnKathir.Bidaya', '0597IbnJawzi.Muntazam', '0808IbnKhaldun.Tarikh', '0654SibtIbnJawzi.MiratZaman', '0310Tabari.Tarikh', '0479MurshidYahyaJurjani.AmaliIthnayniyya', '0421Miskawayh.Tajarib', '0500Anonymous.CuyunWaHadaiq', '0362AbuFarajIsbahani.MaqatilTalibiyyin']"
+1308,2095,11,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0279Baladhuri.AnsabAshraf', '0808IbnKhaldun.Tarikh', '0654SibtIbnJawzi.MiratZaman', '0310Tabari.Tarikh', '0652Mahalli.HadaiqWardiyya', '0479MurshidYahyaJurjani.AmaliIthnayniyya', '0421Miskawayh.Tajarib', '0500Anonymous.CuyunWaHadaiq', '0362AbuFarajIsbahani.MaqatilTalibiyyin']"
+1309,2096,7,"['0733Nuwayri.NihayatArab', '0630IbnAthirCizzDin.Kamil', '0774IbnKathir.Bidaya', '0310Tabari.Tarikh', '0479MurshidYahyaJurjani.AmaliIthnayniyya', '0421Miskawayh.Tajarib', '0500Anonymous.CuyunWaHadaiq']"
+1310,2097,1,['0479MurshidYahyaJurjani.AmaliIthnayniyya']
+1311,2099,8,"['0571IbnCasakir.TarikhDimashq', '0463KhatibBaghdadi.TarikhBaghdad', '0845Maqrizi.Muqaffa', '0597IbnJawzi.Muntazam', '0742Mizzi.TahdhibKamal', '0333AbuCarabTamimi.Mihan', '0277IbnSufyanFasawi.MacrifaWaTarikh', '0615MuwaffaqDinShafici.MurshidZuwwar']"
+1312,2100,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1313,2101,31,"['0748Dhahabi.TarikhIslam', '0821Qalqashandi.SubhAcsha', '0665AbuShama.Rawdatayn', '0677IbnMuyassar.AkhbarMisr', '0748Dhahabi.SiyarAclamNubala', '0845Maqrizi.Muqaffa', '0597IbnJawzi.Muntazam', '0928MujirDinCulaymi.TarikhMuctabar', '0654SibtIbnJawzi.MiratZaman', '0749IbnFadlAllahCumari.MasalikAbsar', '0874IbnTaghribirdi.NujumZahira', '0310Tabari.Tarikh', '0821Qalqashandi.Maathir', '0697IbnWasil.TarikhSalihi', '0448HilalSabi.TuhfatUmara', '0697IbnWasil.MufarrijKurub', '0732AbuFida.MukhtasarFiAkhbar', '0749IbnFadlAllahCumari.TacrifBiMustalahSharif', '0911Suyuti.HusnMuhadara', '0845Maqrizi.ItticazHunafa', '0384IbnCaliTanukhi.NishwarMuhadara', '0889IbnAhmadSakhawi.TuhfatAhbab', '0615MuwaffaqDinShafici.MurshidZuwwar', '0470MuayyadFiDinShirazi.Sira', '0338AbuJacfarNahhas.CumdatKuttab', '0550AnonymousCompiler.SijillatMustansiriyya', '0420Musabbihi.AkhbarMisr', '0335Suli.AdabKuttab', '0542IbnMunjibTajRiyasaIbnSayrafi.Afdaliyyat', '0542IbnMunjibTajRiyasaIbnSayrafi.Ishara', '0448HilalSabi.RusumDarKhilafa']"
+1314,2108,3,"['0814IbnZayyat.KawakibSayyara', '0845Maqrizi.Muqaffa', '0889IbnAhmadSakhawi.TuhfatAhbab']"
+1315,2109,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1316,2110,0,[]
+1317,2111,0,[]
+1318,2114,0,[]
+1319,2115,0,[]
+1320,2116,0,[]
+1321,2117,0,[]
+1322,2118,0,[]
+1323,2119,1,['0845Maqrizi.ItticazHunafa']
+1324,2120,1,['0845Maqrizi.ItticazHunafa']
+1325,2121,0,[]
+1326,2122,0,[]
+1327,2123,0,[]
+1328,2125,0,[]
+1329,2127,0,[]
+1330,2128,2,"['0845Maqrizi.Muqaffa', '0615MuwaffaqDinShafici.MurshidZuwwar']"
+1331,2131,1,['0350MuhammadKindi.WulatMisr']
+1332,2132,0,[]
+1333,2134,3,"['0660IbnCadim.BughyatTalab', '0845Maqrizi.Muqaffa', '0945ShamsDinDawudi.TabaqatMufassirin']"
+1334,2135,0,[]
+1335,2136,10,"['0597CimadDinKatibIsfahani.KharidatQasr', '0749IbnFadlAllahCumari.MasalikAbsar', '0626YaqutHamawi.MucjamBuldan', '0626YaqutHamawi.MucjamUdaba', '0668IbnAbiUsaybica.CuyunAnba', '0528HakamIbnAbiSalt.Diwan', '0911Suyuti.HusnMuhadara', '0613CaliIbnZafir.BadaicBadaih', '0930IbnIyas.BadaicZuhur', '0930IbnIyas.NuzhatUmam']"
+1336,2137,0,[]
+1337,2138,0,[]
+1338,2141,5,"['0764Safadi.WafiBiWafayat', '0845Maqrizi.Muqaffa', '0911Suyuti.Muhadarat', '0902Sakhawi.Buldaniyyat', '0696SharafDinBusiri.Diwan']"
+1339,2142,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1340,2143,1,['0889IbnAhmadSakhawi.TuhfatAhbab']
+1341,2144,0,[]
+1342,2145,1,['0845Maqrizi.KhabarCanBashar']
+1343,2146,2,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar']"
+1344,2147,4,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0487AbuCubaydBakri.MasalikWaMamalik', '0596IbnWasifShah.MukhtasarCajaibDunya']"
+1345,2148,5,"['0733Nuwayri.NihayatArab', '0845Maqrizi.KhabarCanBashar', '0487AbuCubaydBakri.MasalikWaMamalik', '0930IbnIyas.NuzhatUmam', '0600PseudoMascudi.AkhbarZaman']"
+1346,2149,5,"['0733Nuwayri.NihayatArab', '0808IbnKhaldun.Tarikh', '0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0600PseudoMascudi.AkhbarZaman']"
+1347,2150,2,"['0808IbnKhaldun.Tarikh', '0845Maqrizi.KhabarCanBashar']"
+1348,2151,4,"['0845Maqrizi.KhabarCanBashar', '0736IbnDawadari.KanzDurar', '0596IbnWasifShah.MukhtasarCajaibDunya', '0600PseudoMascudi.AkhbarZaman']"
+1349,2152,2,"['0845Maqrizi.KhabarCanBashar', '0600PseudoMascudi.AkhbarZaman']"
+1350,2153,2,"['0808IbnKhaldun.Tarikh', '0845Maqrizi.KhabarCanBashar']"
+1351,2154,2,"['0808IbnKhaldun.Tarikh', '0845Maqrizi.KhabarCanBashar']"
+1352,2155,1,['0845Maqrizi.KhabarCanBashar']
+1353,2158,1,['0845Maqrizi.KhabarCanBashar']
+1354,2159,2,"['0845Maqrizi.KhabarCanBashar', '0375AnonymousTranslator.TarikhCalamUrusiyus']"
+1355,2160,1,['0845Maqrizi.KhabarCanBashar']
+1356,2161,0,[]
+1357,2162,2,"['0845Maqrizi.KhabarCanBashar', '0440AbuRayhanBiruni.AtharBaqiya']"
+1358,2163,2,"['0845Maqrizi.KhabarCanBashar', '0440AbuRayhanBiruni.AtharBaqiya']"
+1359,2164,3,"['0733Nuwayri.NihayatArab', '0821Qalqashandi.SubhAcsha', '0845Maqrizi.KhabarCanBashar']"
+1360,2165,0,[]
+1361,2166,0,[]
+1362,2167,0,[]
+1363,2168,0,[]
+1364,2169,0,[]
+1365,2170,0,[]
+1366,2171,0,[]
+1367,2172,0,[]
+1368,2173,0,[]
+1369,2174,0,[]
+1370,2176,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1371,2177,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1372,2178,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1373,2179,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1374,2180,2,"['0845Maqrizi.KhabarCanBashar', '0845Maqrizi.DawSari']"
+1375,2185,0,[]
+1376,2186,0,[]
+1377,2187,0,[]
+1378,2188,0,[]
+1379,2189,0,[]
+1380,2190,0,[]
+1381,2191,0,[]
+1382,2192,5,"['0845Maqrizi.KhabarCanBashar', '0751IbnQayyimJawziyya.HidayatHayara', '0728IbnTaymiyya.JawabSahih', '0751IbnQayyimJawziyya.IghathatLahfan', '0724IbnKabar.MisbahZulma']"
+1383,2193,1,['0845Maqrizi.KhabarCanBashar']
+1384,2194,0,[]
+1385,2195,0,[]
+1386,2196,0,[]
+1387,2197,0,[]
+1388,2198,0,[]
+1389,2199,0,[]
+1390,2200,2,"['0821Qalqashandi.SubhAcsha', '0808IbnKhaldun.Tarikh']"
+1391,2201,0,[]
+1392,2202,0,[]
+1393,2203,0,[]
+1394,2204,0,[]
+1395,2205,0,[]
+1396,2206,0,[]
+1397,2207,1,['0821Qalqashandi.SubhAcsha']
+1398,2208,1,['0845Maqrizi.Muqaffa']
+1399,2209,0,[]
+1400,2210,1,['0821Qalqashandi.SubhAcsha']
+1401,2211,9,"['0733Nuwayri.NihayatArab', '0947BamakhramaHimyari.QiladatNahr', '0630IbnAthirCizzDin.Kamil', '0654SibtIbnJawzi.MiratZaman', '0633IbnDihyaJumayyilKalbi.NibrasFiTarikh', '0310Tabari.Tarikh', '0613CaliIbnZafir.AkhbarDuwalMunqatica', '0763IbnNaqqash.Madhamma', '0421Miskawayh.Tajarib']"
+1402,2212,1,['0821Qalqashandi.SubhAcsha']
+1403,2213,1,['0821Qalqashandi.SubhAcsha']
+1404,2214,0,[]
+1405,2215,1,['0821Qalqashandi.SubhAcsha']
+1406,2216,1,['0821Qalqashandi.SubhAcsha']
+1407,2217,2,"['0845Maqrizi.Suluk', '0821Qalqashandi.SubhAcsha']"
+1408,2218,2,"['0845Maqrizi.Suluk', '0821Qalqashandi.SubhAcsha']"
+1409,2219,0,[]
+1410,2220,1,['0855BadrDinCayni.CiqdJuman']
+1411,2221,0,[]
+1412,2222,2,"['0764Safadi.WafiBiWafayat', '0764Safadi.AcyanCasr']"
+1413,2223,0,[]
+1414,2224,0,[]
+1415,2225,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1416,2226,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1417,2227,1,['0400IbnTahirMaqdisi.BadWaTarikh']
+1418,2228,0,[]
+1419,2229,1,['0388Shabushti.Diyarat']
+1420,2236,0,[]
+1421,2237,0,[]
+1422,2238,0,[]
+1423,2239,0,[]
+1424,2241,0,[]
+1425,2242,0,[]
+1426,2246,0,[]
+1427,2247,2,"['0874IbnTaghribirdi.NujumZahira', '0350MuhammadKindi.WulatMisr']"
+1428,2248,1,['0350MuhammadKindi.WulatMisr']
+1429,2249,0,[]
+1430,2250,1,['0845Maqrizi.Suluk']
+1431,2251,1,['0902Sakhawi.AjwibaMurdiyya']
+1432,2252,0,[]
+1433,2253,0,[]
+1434,2254,1,['0845Maqrizi.Suluk']
+1435,2255,2,"['0845Maqrizi.Suluk', '0874IbnTaghribirdi.NujumZahira']"
+1436,2256,0,[]
+1437,2257,0,[]
+1438,2258,2,"['0845Maqrizi.Suluk', '0874IbnTaghribirdi.NujumZahira']"
+1439,2259,1,['0845Maqrizi.Suluk']
+1440,2260,0,[]
+1441,2261,0,[]
+1442,2262,0,[]
+1443,2263,0,[]
+1444,2264,0,[]
+1445,2265,1,['0845Maqrizi.MusawwadatMawaciz']
+1446,2266,0,[]
+1447,2267,0,[]

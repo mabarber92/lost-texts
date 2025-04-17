@@ -13,9 +13,6 @@ def fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main
     ms_list = pd.DataFrame(ms_dict)["ms"].to_list()
     ms_matched = citation_df["ms"].to_list()
 
-    print(ms_list[0:10])
-    print(ms_matched[0:10])
-
     # Create a dictionary listing main_text milestones for each reuser
     reuser_dict = {}
     non_reuse = []
@@ -24,7 +21,7 @@ def fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main
         if not ms in ms_matched:
             book_df = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, int(ms))
             book_df = book_df[book_df["book"] != main_book_uri]
-            book_list = book_df["book"].to_list()            
+            book_list = book_df["book"].drop_duplicates().to_list()            
             if len(book_list) == 0:
                 non_reuse.append(ms)
             else:
@@ -111,7 +108,7 @@ def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_boo
     fetch_source_counts(citation_df).to_csv("outputs_2/cited_source_counts.csv")
     top_reusers, ms_reusers = fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri)
     top_reusers.to_csv("outputs_2/uncited_ms_reusers.csv")
-    ms_reusers.to_csv("uncited_ms_reuser_counts.csv")
+    ms_reusers.to_csv("outputs_2/uncited_ms_reuser_counts.csv")
 
     for i in range(2,5):
         agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
