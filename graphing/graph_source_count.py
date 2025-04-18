@@ -24,6 +24,7 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
     group_by_count = pd.concat([group_by_count, new_row])
     group_by_count.to_csv(summary_csv_out)
 
+    ms_citations_df = ms_citations_df[["uri", "ms", "origin"]].drop_duplicates()
     # use_agreement - if a number is specified, filter the df so that we only take sources that are either supported by self (i.e. they're cited in the text) or where more than one author agrees this is the source
     if use_agreement is not None:
         print("Filtering the data to only use cases where reuse is used as evidence {} or more authors agree on the attribution".format(use_agreement))
@@ -34,13 +35,17 @@ def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, 
             filtered_ms_df = ms_citations_df[ms_citations_df["ms"] == ms]
             non_self = filtered_ms_df[filtered_ms_df["origin"] != 'self']
             sources = non_self["uri"].drop_duplicates().to_list()
+            
             for source in sources:
-                source_filtered = non_self[non_self["uri"] == "source"]
-                if len(source_filtered["origin"].drop_duplicates()) > 1:
+                source_filtered = non_self[non_self["uri"] == source]
+                
+                if len(source_filtered["origin"].drop_duplicates()) >= use_agreement:                    
                     new_df = pd.concat([new_df, source_filtered])
-            new_df = pd.concat([new_df, filtered_ms_df[filtered_ms_df["origin"] == 'self']])
+            new_df = pd.concat([new_df, filtered_ms_df[filtered_ms_df["origin"] == 'self']])            
+            
         ms_citations_df = new_df.drop_duplicates()
-
+        reuse_evidence_count = len(ms_citations_df[ms_citations_df["origin"] != "self"])
+        print("With applied filter: {} attributions based on reuse evidence".format(reuse_evidence_count))
 
 
     # Manually create a histogram-type graph using patches - group together frequencies into 'bins' to create wider, easier to see bars
@@ -194,5 +199,5 @@ if __name__ == "__main__":
     print(lost_sources)
 
 
-    csv = "../outputs_2/citations_with_aligned.csv"
-    graph_source_count(csv, "group-by-10-lost-sources-agreement-2.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, lost_source_list=lost_sources, bin_size=10, use_agreement=2)
+    csv = "../outputs_3/citations_with_aligned.csv"
+    graph_source_count(csv, "group-by-10-lost-sources-agreement-3.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, lost_source_list=lost_sources, bin_size=10, use_agreement=3)
