@@ -44,7 +44,7 @@ def loop_through_ms(text, fn=None, arg1=None, arg2=None, arg3=None, splitter = r
             if type(results) == list and separate_lists:
                 for result in results:
                     output.append({'ms': split, 'result': result})
-            elif len(results) > 1:
+            elif len(results) > 0:
                 output.append({'ms': split, 'result': results})
     
     return output
