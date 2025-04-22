@@ -6,8 +6,9 @@ import os
 class clusterDf():
     def __init__ (self, cluster_path, meta_path, min_date=0, max_date = 1500, cluster_cap = 500, drop_strings = True, columns = ["uid", "gid", "cluster", "size", "seq", "series", "text", "begin", "end"]):
         self.cluster_df = load_all_cls(cluster_path, meta_path, drop_strings=drop_strings, columns = columns, drop_dates=False, max_date = max_date, min_date=min_date, cluster_cap = cluster_cap)
-        if len(pd.read_csv(cluster_path)) > len(self.cluster_df):
-            self.cluster_df = self.clean_single_clusters(self.cluster_df)
+        if cluster_path.split(".")[-1] == "csv":
+            if len(pd.read_csv(cluster_path)) > len(self.cluster_df):
+                self.cluster_df = self.clean_single_clusters(self.cluster_df)
         self.print_aggregated_stats()
         
 
