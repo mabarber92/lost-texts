@@ -58,7 +58,13 @@ def fetch_source_counts(citation_df):
     source_counts_df = source_counts_df.rename(columns={"uri": "source_uri", "ms": "ms count"})
     return source_counts_df
 
-def filter_on_ms_agreement(citation_df, agreement_limit = 2):
+def filter_on_ms_agreement(citation_df, agreement_limit = 2, discount_references = True):
+    evidence_self = citation_df[citation_df["origin"] == "self"]["ms"].drop_duplicates().to_list()
+    evidence_non_self = citation_df[citation_df["origin"] != "self"]["ms"].drop_duplicates().to_list()
+    evidence_non_self = [ms for ms in evidence_non_self if ms not in evidence_self]
+    
+    print("Number of milestones with sources identified without evidence from the corpus is {}".format(len(evidence_self)))
+    print("Number of milestones for which a source was identified using only text reuse alignment is {}".format(len(evidence_non_self)))
     ms_list = citation_df["ms"].drop_duplicates().to_list()
     final_df = pd.DataFrame()
     for ms in ms_list:
@@ -67,8 +73,13 @@ def filter_on_ms_agreement(citation_df, agreement_limit = 2):
         for source in sources:
             source_df = filtered_df[filtered_df["uri"] == source]
             origins = source_df["origin"].drop_duplicates().to_list()
-            if 'self' in origins or len(origins) >= agreement_limit:
-                final_df = pd.concat([final_df, source_df])
+            
+            if discount_references:
+                if 'self' in origins or len(origins) >= agreement_limit:
+                    final_df = pd.concat([final_df, source_df])
+            else:
+                if len(origins) >= agreement_limit:
+                    final_df = pd.concat([final_df, source_df])
     
     print("Number of milestones with sources with agreement of {} is {}".format(agreement_limit, len(final_df["ms"].drop_duplicates())))
     return final_df
@@ -110,8 +121,8 @@ def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_boo
     top_reusers.to_csv("outputs_3/uncited_ms_reusers.csv")
     ms_reusers.to_csv("outputs_3/uncited_ms_reuser_counts.csv")
 
-    for i in range(2,5):
-        agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i)
+    for i in range(1,5):
+        agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i, discount_references=False)
         agreement_df.to_csv("outputs_3/citations_filtered_by_agreement_of_{}.csv".format(i))
 
     count_lost_sources(citation_df, meta_df)
@@ -119,8 +130,8 @@ def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_boo
 if __name__ == "__main__":
     
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "E:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
     citation_csv = "outputs_3/citations_with_aligned.csv"
 
