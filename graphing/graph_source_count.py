@@ -199,5 +199,5 @@ if __name__ == "__main__":
     print(lost_sources)
 
 
-    csv = "../outputs_3/citations_with_aligned.csv"
-    graph_source_count(csv, "group-by-10-lost-sources-agreement-3.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, lost_source_list=lost_sources, bin_size=10, use_agreement=3)
+    csv = "../outputs_4/citations_with_aligned.csv"
+    graph_source_count(csv, "group-by-10-sources-by-period-agreement-2.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, period_map = period_map, bin_size=10, use_agreement = 2)

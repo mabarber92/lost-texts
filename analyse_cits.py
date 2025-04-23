@@ -116,24 +116,24 @@ def analyse_cits(citation_csv, cluster_path, meta_path, main_text_path, main_boo
     citation_df = pd.read_csv(citation_csv)
     meta_df = pd.read_csv(meta_path, sep='\t')
 
-    fetch_source_counts(citation_df).to_csv("outputs_3/cited_source_counts.csv")
+    fetch_source_counts(citation_df).to_csv("outputs_4/cited_source_counts.csv")
     top_reusers, ms_reusers = fetch_top_reusers_for_uncited(citation_df, cluster_obj, main_text_path, main_book_uri)
-    top_reusers.to_csv("outputs_3/uncited_ms_reusers.csv")
-    ms_reusers.to_csv("outputs_3/uncited_ms_reuser_counts.csv")
+    top_reusers.to_csv("outputs_4/uncited_ms_reusers.csv")
+    ms_reusers.to_csv("outputs_4/uncited_ms_reuser_counts.csv")
 
     for i in range(1,5):
         agreement_df = filter_on_ms_agreement(citation_df, agreement_limit=i, discount_references=False)
-        agreement_df.to_csv("outputs_3/citations_filtered_by_agreement_of_{}.csv".format(i))
+        agreement_df.to_csv("outputs_4/citations_filtered_by_agreement_of_{}.csv".format(i))
 
     count_lost_sources(citation_df, meta_df)
 
 if __name__ == "__main__":
     
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "E:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
-    citation_csv = "outputs_3/citations_with_aligned.csv"
+    citation_csv = "outputs_4/citations_with_aligned.csv"
 
     analyse_cits(citation_csv, minified_clusters, meta_path, main_text, main_book_uri)
 

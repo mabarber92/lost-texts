@@ -71,7 +71,7 @@ def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri, all_cits=T
             
             all_ms_df = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, cit_mss, input_type="list")
             # Go through each cited ms and perform series of checks
-            for cit_ms in tqdm(cit_mss):
+            for cit_ms in cit_mss:
                 # If one of the previous processes has resolved the ms then skip
                 if cit_ms not in resolved_ms:
                     continued_quote = True
