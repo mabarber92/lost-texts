@@ -374,7 +374,7 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
     else:        
         unmatched_ms = find_unresolved_ms(ms_df, cit_dict, data_type='cit_map')
         verified_df = identify_continuous_cited_ms(cit_dict, cluster_obj, main_book_uri)
-        verified_df.to_csv("outputs_2/verified{}.csv".format(main_book_uri))
+        verified_df.to_csv("outputs_4/verified{}.csv".format(main_book_uri))
     
     # Fetch ms that have no verified source
     unmatched_ms = find_unresolved_ms(ms_df, verified_df)
@@ -382,7 +382,7 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
     # Search aligned text for verified citations
     if not corpus_citations:
         corpus_citations_df = query_cit_map_corpus(main_book_uri, cit_dict, cluster_obj, corpus_base_path, meta_path)
-        corpus_citations_df.to_csv("outputs_2/corpus_citations.csv")
+        corpus_citations_df.to_csv("outputs_4/corpus_citations.csv")
     else:
         print("Loading corpus citations...")
         corpus_citations_df = pd.read_csv(corpus_citations)
@@ -392,11 +392,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
         corpus_citations_df = pd.read_csv(corpus_citations_continuous)
     else:
         corpus_citations_df = identify_continuous_corpus_df(corpus_citations_df, cluster_obj)
-        corpus_citations_df.to_csv("outputs_2/continuous_corpus_citations.csv")
+        corpus_citations_df.to_csv("outputs_4/continuous_corpus_citations.csv")
 
     # Use clusters and corpus citations to suggest sources for texts
     aligned_cit_df = infer_source_from_aligned_citation(corpus_citations_df, verified_df, cluster_obj, main_book_uri)
-    aligned_cit_df.to_csv("outputs_3/citations_with_aligned.csv")
+    aligned_cit_df.to_csv("outputs_4/citations_with_aligned.csv")
 
     unmatched_ms = find_unresolved_ms(ms_df, aligned_cit_df)
 
@@ -409,12 +409,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 if __name__ == '__main__':
     cit_map = "citation_resolution/outputs/data/uri_cit_map3.json"
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "E:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
     corpus_citations = "outputs_2/corpus_citations.csv"
-    corpus_base_path = "F:/OpenITI Corpus/corpus_2023_1_8/"
+    corpus_base_path = "E:/OpenITI Corpus/corpus_2023_1_8/"
     continuous_corpus_citations = "outputs_2/continuous_corpus_citations.csv"
     verified_csv = "outputs_2/verified0845Maqrizi.Mawaciz.csv"
-    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path, 
-    corpus_citations = corpus_citations, corpus_citations_continuous = continuous_corpus_citations, verified_csv = verified_csv)
+    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path)
