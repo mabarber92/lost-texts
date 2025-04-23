@@ -69,17 +69,17 @@ def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri, all_cits=T
         # Only treat citations that reference texts or authors in the corpus
         elif data["in_corpus"] or all_cits == True:
             
+            all_ms_df = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, cit_mss, input_type="list")
             # Go through each cited ms and perform series of checks
-            for cit_ms in cit_mss:
+            for cit_ms in tqdm(cit_mss):
                 # If one of the previous processes has resolved the ms then skip
                 if cit_ms not in resolved_ms:
                     continued_quote = True
-                    current_ms = cit_ms
-                    
+                    current_ms = cit_ms                    
                     # If we keep finding ms that match the criteria then continued_quote is true - as soon as we find an ms without a match we break the while loop
                     while continued_quote == True:                                              
-                        book_list = cluster_obj.return_cluster_df_for_uri_ms(main_book_uri, current_ms)["book"].to_list()
-                                               
+                        book_list = all_ms_df[all_ms_df["seq"] == current_ms]["book"].to_list()
+                                              
                         
                         # If the URI is just an author URI (when split on a . it produces a list of 1) - then create a list for checking a matching author URI - otherwise initiate that list empty
                         if len(uri.split(".")) == 1:
@@ -95,19 +95,22 @@ def identify_continuous_cited_ms(cit_map, cluster_obj, main_book_uri, all_cits=T
                                 if book.split(".")[0] == uri:
                                     out_dict_list.append({"uri": book, "ms": current_ms})       
                             resolved_ms.append(current_ms)
-                            current_ms = current_ms + 1                                
+                            current_ms = current_ms + 1
+                                                          
                                 
                         # Otherwise if the book is in the reuse data - easy resolution - just take this URI
                         elif uri in book_list:                          
                             out_dict_list.append({"uri": uri, "ms": current_ms})                            
                             resolved_ms.append(current_ms)
-                            current_ms = current_ms + 1                         
+                            current_ms = current_ms + 1
+                                              
                     
                         # If neither criteria is met - see if the ms has a verified citation already                                                    
                         elif current_ms in cit_mss:
                             out_dict_list.append({"uri": uri, "ms": current_ms})                            
                             resolved_ms.append(current_ms)
                             current_ms = current_ms + 1
+                            
                             
                         # Non of the criteria have been met - so the ms does not have a match - end the while loop - move on to the next cited ms
                         else:                            
@@ -409,11 +412,11 @@ def analyse_cit_map(cit_map, main_text, cluster_data, meta_path, main_book_uri, 
 if __name__ == '__main__':
     cit_map = "citation_resolution/outputs/data/uri_cit_map3.json"
     main_text = "./data/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
-    minified_clusters = "E:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "E:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
+    minified_clusters = "F:/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
+    meta_path = "F:/Corpus Stats/2023/OpenITI_metadata_2023-1-8.csv"
     main_book_uri = "0845Maqrizi.Mawaciz"
-    corpus_citations = "outputs_2/corpus_citations.csv"
-    corpus_base_path = "E:/OpenITI Corpus/corpus_2023_1_8/"
+    corpus_citations = "outputs_4/corpus_citations.csv"
+    corpus_base_path = "F:/OpenITI Corpus/corpus_2023_1_8/"
     continuous_corpus_citations = "outputs_2/continuous_corpus_citations.csv"
-    verified_csv = "outputs_2/verified0845Maqrizi.Mawaciz.csv"
-    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path)
+    verified_csv = "outputs_4/verified0845Maqrizi.Mawaciz.csv"
+    analyse_cit_map(cit_map, main_text, minified_clusters, meta_path, main_book_uri, corpus_base_path, verified_csv = verified_csv, corpus_citations=corpus_citations)

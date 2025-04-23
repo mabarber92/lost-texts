@@ -143,7 +143,7 @@ class clusterDf():
                 else:
                     print("Range specified but list is greater than two - for a range supply only start and end ms... treating input ms as list of ms")
                     input_type = "list"
-            elif input_type == "list":
+            if input_type == "list":
                 ms_list = ms[:]
             else:
                 ms_list = [ms]
