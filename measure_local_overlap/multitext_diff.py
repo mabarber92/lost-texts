@@ -73,6 +73,8 @@ class multitextDiffMap():
             openiti_text = openitiTextMs(self.openiti_paths[book])
             for ms_range in row["ms_ranges"]:
                 print(f"Book: {book}, range start: {ms_range[0]}, range_end {ms_range[-1]}")
+                
+                # Need to check if ms already in list - overwise we get re-gen for each independent range that's part of same section
                 new_cluster_df = self.clusters_for_sections(openiti_text, book, ms_range[0], ms_range[-1])
                 
                 # Remove clusters that we've already checked - so we don't check again
