@@ -266,10 +266,11 @@ class openitiTextMs():
         
         return sections_list
     
-    def check_regex(self, regex):
-        """See if a regex applied to the full text returns something to avoid endlessly querying for regex you won't find"""
+    def check_regex(self, regex, min_results=2):
+        """See if a regex applied to the full text returns something to avoid endlessly querying for regex you won't find
+        or splitting a text that's not fully annotated (has low result count)"""
         results = re.findall(regex, self.mARkdown_text)
-        if len(results) > 0:
+        if len(results) > min_results:
             return True
         else:
             return False

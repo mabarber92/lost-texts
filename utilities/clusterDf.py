@@ -129,6 +129,14 @@ class clusterDf():
             self.cluster_df = self.cluster_df[self.cluster_df["book"].isin(book_list)]
         self.cluster_df = self.clean_single_clusters(self.cluster_df)
 
+    def remove_clusters_by_uri_ms(self, primary_book, ms_list):
+        """Remove all clusters from the internal df self.cluster_df associated with the
+        the primary_book and list of ms in that book.
+        Used for operations where you're binning clusters and only want to consider a set of
+        clusters once"""
+        clusters = self.fetch_clusters_by_uri_mslist(primary_book, ms_list)
+        self.cluster_df = self.cluster_df[~self.cluster_df["cluster"].isin(clusters)]
+
     def return_cluster_df_for_uri_ms(self, primary_book, ms = None, input_type = "range"):
         # None type allows this function to be used to fetch all of the clusters for an entire text (rather than specified milestones)
         if ms == None:

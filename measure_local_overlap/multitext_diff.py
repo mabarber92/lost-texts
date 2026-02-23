@@ -2,6 +2,7 @@ from utilities.clusterDf import clusterDf
 from py_kitab_diff import kitab_diff
 from utilities.openitiTexts import openitiTextMs, openitiCorpus
 import pandas as pd
+import json
 
 
 class multitextDiffMap():
@@ -12,7 +13,9 @@ class multitextDiffMap():
     Approach will only work fully if markdown headings are available, but can force a limit based on an ms boundary"""
     def __init__ (self, meta_tsv, corpus_base_path, cluster_path):
         
-        self.cluster_obj = clusterDf(cluster_path, meta_tsv)
+        self.cluster_path = cluster_path
+        self.meta_tsv_path = meta_tsv
+        
         self.openiti_paths = openitiCorpus(meta_tsv, corpus_base_path, language="ara").path_dict
 
 
@@ -45,13 +48,14 @@ class multitextDiffMap():
         """
         data_out = []
         book_uris = cluster_df["book"].drop_duplicates().to_list()
-        print(book_uris)
         for book in book_uris:
             book_data = cluster_df[cluster_df["book"] == book]
             ms_unique = book_data["seq"].drop_duplicates().to_list()
             data_out.append({"book": book, "ms_ranges": self.bin_contiguous(ms_unique)})
         
         return data_out
+
+    # Prior to recursion - filter on alignment length or count - remove insignificant cases from recursion entirely so we don't keep growing
 
     def recurse_all_clusters(self, cluster_df, log=False):
 
@@ -68,6 +72,7 @@ class multitextDiffMap():
             book = row["book"]
             openiti_text = openitiTextMs(self.openiti_paths[book])
             for ms_range in row["ms_ranges"]:
+                print(f"Book: {book}, range start: {ms_range[0]}, range_end {ms_range[-1]}")
                 new_cluster_df = self.clusters_for_sections(openiti_text, book, ms_range[0], ms_range[-1])
                 
                 # Remove clusters that we've already checked - so we don't check again
@@ -79,9 +84,10 @@ class multitextDiffMap():
                 updated_cluster_df = pd.concat([updated_cluster_df, new_cluster_df])
         if log:
             self.recurse_log += 1
-            print(f"Recursed for {self.recurse_log} time, latest df length: {len(updated_cluster_df)}")
+            print(f"Recursion number: {self.recurse_log}, latest df length: {len(updated_cluster_df)}")
+            print(self.internal_data)
         # Recurse - run the function again with whatever clusters we have left to check (with the new clusters picked up by checking context)
-        self.recurse_all_clusters(updated_cluster_df)
+        self.recurse_all_clusters(updated_cluster_df, log=log)
 
         
 
@@ -108,15 +114,24 @@ class multitextDiffMap():
             self.internal_data[book_uri] = sections_list
         
  
-
+        ms_list = self.get_uri_ms(book_uri)
+        
         # Get a df of all data 
-        cluster_df = self.cluster_obj.return_cluster_df_for_uri_ms(book_uri, self.get_uri_ms(book_uri), input_type="list")
+        cluster_df = self.cluster_obj.return_cluster_df_for_uri_ms(book_uri, ms_list, input_type="list")
+        
+        # Filter the original cluster df to ensure we don't treat the same clusters twice
+        self.cluster_obj.remove_clusters_by_uri_ms(book_uri, ms_list)
 
         # Remove this book from the df - as we don't want to consider those rows again
         cluster_df = cluster_df[cluster_df["book"] != book_uri]
 
         return cluster_df
     
+    def write_json(self, data, export_path, indent=2):
+        json_string = json.dumps(data, ensure_ascii=False, indent=indent)
+        with open(export_path, "w", encoding='utf-8') as f:
+            f.write(json_string)   
+
     def run_diff_pipeline(self, base_uri, start_ms, end_ms):
         
         # Initiate a place to store ms_ranges used as internal memory across functions - move these down to a pipeline func so we don't accidently store them after running
@@ -124,8 +139,16 @@ class multitextDiffMap():
         self.clusters_checked = []
         self.recurse_log = 0
 
+        # As the pipeline run will shrink the data as it goes - initiate a new cluster_obj with the pipeline
+        self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
+        
+        # On later runs we're checking ms over and over - need to clean out ms we've already checked
         maintext = openitiTextMs(self.openiti_paths[base_uri])
         initial_df = self.clusters_for_sections(maintext, base_uri, start_ms, end_ms)
         self.recurse_all_clusters(initial_df, log=True)
 
-        print(self.internal_data)
+        output_data = []
+        for key, value in self.internal_data.items():
+            output_data.append({"book_uri": key, "ms_sections": value})
+        self.write_json(output_data, "test_data.json")
+        
