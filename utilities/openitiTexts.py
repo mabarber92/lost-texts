@@ -213,7 +213,7 @@ class openitiTextMs():
         # print(f"Starting with {ms_no}")
         # print(f"End pos is: {end}")
         ms_no = ms_no - step
-        while not match_status or ms_no == end: # Need to set a way of ending this
+        while not match_status or ms_no == end: # Need to set a way of ending this - this isn't working
             ms_no = ms_no + step
             match_status, match = self._check_ms_regex(ms_no, md_regex, return_index)
             
