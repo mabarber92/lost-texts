@@ -111,7 +111,11 @@ class multitextDiffMap():
         
         # As the recursion may add more sections as it expands need to use an updating strategy
         if book_uri in self.internal_data.keys():
-            self.internal_data[book_uri].extend(sections_list)
+            existing_sections = [item["tag_text"] for item in self.internal_data[book_uri]]
+            for section in sections_list:
+                if section["tag_text"] not in existing_sections:
+                    self.internal_data[book_uri].append(section)
+
         else:
             self.internal_data[book_uri] = sections_list
         

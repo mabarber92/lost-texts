@@ -6,23 +6,24 @@ import seaborn as sns
 import re
 import json
 
-def graph_source_count(ms_citations_csv, png_out, summary_csv_out, source_name, total_milestones, bin_size = 5, period_map = None, lost_source_list = None, use_agreement = None):
+def graph_source_count(ms_citations_csv, png_out, source_name, total_milestones, summary_csv_out=None, bin_size = 5, period_map = None, lost_source_list = None, use_agreement = None):
     """period_map_example = [{"period_name": "Fatimid", "start": 350, "end": 580, colour: "green"}]"""
 
     sns.set_style("whitegrid")    
     # Read in csv
     ms_citations_df = pd.read_csv(ms_citations_csv)
 
+    if summary_csv_out is not None:
     # Get source counts using groupby
-    group_by_ms = ms_citations_df.groupby('ms')['uri'].nunique().reset_index()
+        group_by_ms = ms_citations_df.groupby('ms')['uri'].nunique().reset_index()
 
 
-    group_by_count = group_by_ms.groupby('uri')['ms'].nunique().reset_index()
-    group_by_count = group_by_count.rename(columns = {"uri": "count_of_sources", "ms": "count_of_ms"})
-    unsourced_ms = total_milestones - len(ms_citations_df["ms"].drop_duplicates())
-    new_row = pd.DataFrame([{"count_of_sources": 0, "count_of_ms": unsourced_ms}])
-    group_by_count = pd.concat([group_by_count, new_row])
-    group_by_count.to_csv(summary_csv_out)
+        group_by_count = group_by_ms.groupby('uri')['ms'].nunique().reset_index()
+        group_by_count = group_by_count.rename(columns = {"uri": "count_of_sources", "ms": "count_of_ms"})
+        unsourced_ms = total_milestones - len(ms_citations_df["ms"].drop_duplicates())
+        new_row = pd.DataFrame([{"count_of_sources": 0, "count_of_ms": unsourced_ms}])
+        group_by_count = pd.concat([group_by_count, new_row])
+        group_by_count.to_csv(summary_csv_out)
 
     ms_citations_df = ms_citations_df[["uri", "ms", "origin"]].drop_duplicates()
     # use_agreement - if a number is specified, filter the df so that we only take sources that are either supported by self (i.e. they're cited in the text) or where more than one author agrees this is the source
@@ -200,4 +201,4 @@ if __name__ == "__main__":
 
 
     csv = "../outputs_4/citations_with_aligned.csv"
-    graph_source_count(csv, "group-by-10-sources-by-period-agreement-2.png", "milestones-count-by-sources-found.csv", "Khiṭaṭ", ms_count, period_map = period_map, bin_size=10, use_agreement = 2)
+    graph_source_count(csv, "group-by-10-sources-lost-texts.png", "Khiṭaṭ", ms_count, lost_source_list=lost_sources, bin_size=10)
