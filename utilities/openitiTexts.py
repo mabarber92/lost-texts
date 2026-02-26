@@ -5,7 +5,7 @@ import pandas as pd
 
 class openitiTextMs():
     """A class for handling an OpenITI text as a group of milestones and applying various functions to it"""
-    def __init__ (self, file_path, report=False):
+    def __init__ (self, file_path, report=False, pre_process_ms=True):
         """Read the text into the object using a file. Store the fulltext and store the milestone splits
         as a special type of dictionary:
         {22: "...كتابة..."}
@@ -21,7 +21,10 @@ class openitiTextMs():
         self.mARkdown_text = read_text(file_path, remove_header=True)
         
         # Run the init pipeline that populates the ms_dict
-        self.init_process_milestones()
+        if pre_process_ms:
+            self.init_process_milestones()
+
+        self.section_map = None
 
         if report:
             self.report_stats()
@@ -182,62 +185,121 @@ class openitiTextMs():
         return match_status, match
 
 
-    def nearest_md_tag(self, ms_no, md_regex, limit=100, approach="backward"):
-        """Using an ms number iterate backwards or forwards through milestones up to a set limit
-        until the regex is found in the milestone.
-        Arguments:
-        ms_no : the milestone to start from
-        md_regex: the regex for the md tag (could be any regex in fact)
-        limit: when to stop iterating - if we hit our limit, return none - if None go until there are no ms left
-        approach: 'forward' - go to the next milestone and so on until match is found 'backward' go to previous until match found
-        Returns:
-        match: if 'forward', the first match in the ms, if 'backward' the last match in the ms
-        ms_no : the milestone number where the match was found, as an int"""
+    # def nearest_md_tag(self, ms_no, md_regex, limit=100, approach="backward"):
+    #     """Using an ms number iterate backwards or forwards through milestones up to a set limit
+    #     until the regex is found in the milestone.
+    #     Arguments:
+    #     ms_no : the milestone to start from
+    #     md_regex: the regex for the md tag (could be any regex in fact)
+    #     limit: when to stop iterating - if we hit our limit, return none - if None go until there are no ms left
+    #     approach: 'forward' - go to the next milestone and so on until match is found 'backward' go to previous until match found
+    #     Returns:
+    #     match: if 'forward', the first match in the ms, if 'backward' the last match in the ms
+    #     ms_no : the milestone number where the match was found, as an int"""
 
-        if approach =="backward":
-            step = -1
-            return_index = -1
-            if limit is None:
-                end = 0
-            else:
-                end = ms_no - limit
-        if approach == "forward":
-            step = +1
-            return_index = 1
-            if limit is None:
-                end = len(self.ms_dict)
-            else:
-                end = ms_no + limit
+    #     if approach =="backward":
+    #         step = -1
+    #         return_index = -1
+    #         if limit is None:
+    #             end = 0
+    #         else:
+    #             end = ms_no - limit
+    #     if approach == "forward":
+    #         step = +1
+    #         return_index = 1
+    #         if limit is None:
+    #             end = len(self.ms_dict)
+    #         else:
+    #             end = ms_no + limit
 
-        match_status = False
-        # print(f"Starting with {ms_no}")
-        # print(f"End pos is: {end}")
-        ms_no = ms_no - step
-        while not match_status or ms_no == end: # Need to set a way of ending this - this isn't working
-            ms_no = ms_no + step
-            match_status, match = self._check_ms_regex(ms_no, md_regex, return_index)
+    #     match_status = False
+    #     # print(f"Starting with {ms_no}")
+    #     # print(f"End pos is: {end}")
+    #     ms_no = ms_no - step
+    #     while not match_status or ms_no == end: # Need to set a way of ending this - this isn't working
+    #         ms_no = ms_no + step
+    #         match_status, match = self._check_ms_regex(ms_no, md_regex, return_index)
             
 
             
             
         
-        return match, ms_no
+    #     return match, ms_no
     
-    def surrounding_md_tags(self, ms_no, md_regex, limit=100):
-        """Go backwards from an ms and forwards to find the ms start and end boundaries corresponding to
-        a regex for an md heading
-        returns:
-        match: the matching heading at the start of the range (the title of the heading retrieved)
-        start_ms: the first ms of the range
-        end_ms: the last ms of the range"""
+    # def surrounding_md_tags(self, ms_no, md_regex, limit=100):
+    #     """Go backwards from an ms and forwards to find the ms start and end boundaries corresponding to
+    #     a regex for an md heading
+    #     returns:
+    #     match: the matching heading at the start of the range (the title of the heading retrieved)
+    #     start_ms: the first ms of the range
+    #     end_ms: the last ms of the range"""
 
-        first_match, start_ms = self.nearest_md_tag(ms_no, md_regex, limit=limit, approach="backward")
-        # As we accept the given milestone as a location, we have to advanced 1 for one of the checks or we keep checking the same ms over and over
-        last_match, end_ms = self.nearest_md_tag(ms_no+1, md_regex, limit=limit, approach="forward")
+    #     first_match, start_ms = self.nearest_md_tag(ms_no, md_regex, limit=limit, approach="backward")
+    #     # As we accept the given milestone as a location, we have to advanced 1 for one of the checks or we keep checking the same ms over and over
+    #     last_match, end_ms = self.nearest_md_tag(ms_no+1, md_regex, limit=limit, approach="forward")
 
-        return first_match, start_ms, end_ms
+    #     return first_match, start_ms, end_ms
     
-    def retrieve_md_tags_range(self, ms_start, ms_end, md_regex, limit=100):
+    # def retrieve_md_tags_range(self, ms_start, ms_end, md_regex, limit=100):
+    #     """For a range of ms retrieve the milestones up to the nearest headings until the
+    #     ms range is exhausted
+    #     Arguments:
+    #     ms_start: the first ms to look backwards from
+    #     ms_end: the ms while the search stops - we go until we reach a boundary defined by md_regex
+    #     md_regex: the regex for the md tag that defines a section region
+    #     Returns:
+    #     sections (list of dict) of format:
+    #      [{"tag_text": "", "ms_nos": []}] """
+        
+    #     # If the tag is not in the text at all - just return the ms_start, ms_end range as list
+    #     tag_exists = self.check_regex(md_regex)
+    #     if not tag_exists:
+    #         return [{"tag_text": "Not found", "ms_nos": list(range(ms_start, ms_end+1))}]
+
+
+    #     sections_list = []
+    #     last_found = ms_end-1
+    #     while last_found <= ms_end:
+    #         tag_text, start_ms, last_found = self.surrounding_md_tags(ms_start, md_regex, limit)
+    #         ms_start = last_found
+    #         sections_list.append({
+    #             "tag_text": tag_text,
+    #             "ms_nos": list(range(start_ms, last_found+1))
+    #         })
+        
+    #     return sections_list
+    
+    def find_nearest_section(self, ms_no, direction="forwards"):
+        """Get the nearest section, going either forwards or backwards"""
+
+        self.ms_head_map()
+
+        if direction == "forwards":
+            increment = 1
+            
+        if direction == "backwards":
+            increment = -1
+        
+        ms_list = [ms_no]
+        while ms_no not in self.section_map.keys():
+            
+            ms_no = ms_no + increment
+            ms_list.append(ms_no)
+        
+        return self.section_map[ms_no][increment], ms_list
+
+    def retrieve_section_for_ms(self, ms_no):
+
+        self.ms_head_map()
+
+        section_name, ms_list_before = self.find_nearest_section(ms_no, "backwards")
+        section_name_after, ms_list_after = self.find_nearest_section(ms_no, "forwards")
+
+        full_ms_list = list(set(ms_list_before + ms_list_after))
+
+        return section_name, full_ms_list 
+
+    def retrieve_md_tags_from_range(self, ms_start, ms_end, limit=100):
         """For a range of ms retrieve the milestones up to the nearest headings until the
         ms range is exhausted
         Arguments:
@@ -247,25 +309,30 @@ class openitiTextMs():
         Returns:
         sections (list of dict) of format:
          [{"tag_text": "", "ms_nos": []}] """
+
         
-        # If the tag is not in the text at all - just return the ms_start, ms_end range as list
-        tag_exists = self.check_regex(md_regex)
-        if not tag_exists:
-            return [{"tag_text": "Not found", "ms_nos": list(range(ms_start, ms_end+1))}]
-
-
+        
+        self.ms_head_map()
+        
+        found_ms = []
         sections_list = []
-        last_found = ms_end-1
-        while last_found <= ms_end:
-            tag_text, start_ms, last_found = self.surrounding_md_tags(ms_start, md_regex, limit)
-            ms_start = last_found
-            sections_list.append({
-                "tag_text": tag_text,
-                "ms_nos": list(range(start_ms, last_found+1))
-            })
-        
+
+        for i in range(ms_start, ms_end+1):
+            if i in found_ms:
+                continue
+            section_name, full_ms_list = self.retrieve_section_for_ms(i)
+            
+            # If we get an ms list that is smaller than our limit, then write it out
+            if len(full_ms_list) < limit:
+                sections_list.append({"tag_text": section_name,
+                                            "ms_nos": full_ms_list})
+            found_ms.extend(full_ms_list)
+
         return sections_list
-    
+
+
+
+
     def check_regex(self, regex, min_results=2):
         """See if a regex applied to the full text returns something to avoid endlessly querying for regex you won't find
         or splitting a text that's not fully annotated (has low result count)"""
@@ -274,6 +341,27 @@ class openitiTextMs():
             return True
         else:
             return False
+
+    def ms_head_map(self, ms_head_regex = r"#{3} [|$][^\n]+", overwrite=False):
+        """Produce a section map {ms_no: [head_1, head_2]}"""
+        full_regex = fr"{ms_head_regex}|{self.ms_pattern}"
+        results_list = re.findall(full_regex, self.mARkdown_text)
+
+        if self.section_map is None or overwrite:
+
+            self.section_map = {}
+
+            for idx, result in enumerate(results_list):
+                if re.match(ms_head_regex, result):
+                    ms_idx = idx
+                    while not re.match(self.ms_pattern, results_list[ms_idx]):                    
+                        ms_idx += 1
+                    ms_no = self.fetch_ms_number(results_list[ms_idx])
+                    if ms_no in self.section_map.keys():
+                        self.section_map[ms_no].append(result)
+                    else:
+                        self.section_map[ms_no] = [result] 
+        
 
     def fetch_ms_list_clean(self, ms_list, start=0, end=-1, ms_joins=True, padding=0, trim=0):
         """Take a list of consecutive milestones and return a complete cleaned text according to offsets. start is the offset into the first milestone
@@ -373,12 +461,19 @@ if __name__ == "__main__":
     # Run the class on its own for testing and error checking
     openiti_text_path = "D:/OpenITI Corpus/corpus_2023_1_8/data/0310Tabari/0310Tabari.Tarikh/0310Tabari.Tarikh.Shamela0009783BK1-ara1.mARkdown"
     openiti_ms_obj = openitiTextMs(openiti_text_path, report=True)
-    print("---")
-    print(openiti_ms_obj.fetch_milestone(20))
-    print("---")
-    print(openiti_ms_obj.fetch_ms_list_clean([20,21], start = 20, end=60, ms_joins=False))
-    print("---")
-    print(openiti_ms_obj.fetch_ms_list_clean([20,21], start = 20, end=60))
-    print("---")
-    print(openiti_ms_obj.fetch_ms_list_clean([20,21,22], start = 20, end=60))
+    
+    matching_sections = openiti_ms_obj.retrieve_md_tags_from_range(3233, 3252)
+
+
+    print(matching_sections)
+
+    # print("---")
+    # print(openiti_ms_obj.fetch_milestone(20))
+    # print("---")
+    # print(openiti_ms_obj.fetch_ms_list_clean([20,21], start = 20, end=60, ms_joins=False))
+    # print("---")
+    # print(openiti_ms_obj.fetch_ms_list_clean([20,21], start = 20, end=60))
+    # print("---")
+    # print(openiti_ms_obj.fetch_ms_list_clean([20,21,22], start = 20, end=60))
+
 
