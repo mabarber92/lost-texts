@@ -1,0 +1,223 @@
+[
+  {
+    "book_uri": "0845Maqrizi.Mawaciz",
+    "ms_sections": [
+      {
+        "tag_text": "### | ذكر بساتين الوزير",
+        "ms_nos": [
+          1472,
+          1473,
+          1467,
+          1468,
+          1469,
+          1470,
+          1471
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0748Dhahabi.TarikhIslam",
+    "ms_sections": [
+      {
+        "tag_text": "### $BIO_MAN$ ",
+        "ms_nos": [
+          6288,
+          6286,
+          6287
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0660IbnCadim.BughyatTalab",
+    "ms_sections": [
+      {
+        "tag_text": "### $ الحسين بن علي بن الحسين",
+        "ms_nos": [
+          1955,
+          1956,
+          1957,
+          1958,
+          1959,
+          1960,
+          1961,
+          1962,
+          1963,
+          1964,
+          1965,
+          1966,
+          1967,
+          1968,
+          1969,
+          1970,
+          1971,
+          1972,
+          1973,
+          1974,
+          1975,
+          1976
+        ]
+      },
+      {
+        "tag_text": "### $ الحسين بن علي بن نصر:",
+        "ms_nos": [
+          2117,
+          2118
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0748Dhahabi.SiyarAclamNubala",
+    "ms_sections": [
+      {
+        "tag_text": "### $ 258 - المستكفي محمد بن عبد الرحمن بن عبيد الله *",
+        "ms_nos": [
+          5701,
+          5702
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0845Maqrizi.Muqaffa",
+    "ms_sections": [
+      {
+        "tag_text": "### $ 1176 - أبو الفتوح الحسني [- 430]",
+        "ms_nos": [
+          1236,
+          1237,
+          1238
+        ]
+      },
+      {
+        "tag_text": "### $ 1246 - الوزير المغربي [370 - 418]",
+        "ms_nos": [
+          1376,
+          1377,
+          1378,
+          1361,
+          1362,
+          1363,
+          1364,
+          1365,
+          1366,
+          1367,
+          1368,
+          1369,
+          1370,
+          1371,
+          1372,
+          1373,
+          1374,
+          1375
+        ]
+      },
+      {
+        "tag_text": "### $ 1996 - ابن المارستاني [354 - 427]",
+        "ms_nos": [
+          2338,
+          2339
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0542IbnBassamShantarini.Dhakhira",
+    "ms_sections": [
+      {
+        "tag_text": "### || ( فصل في ذكر الوزير أبي القاسم الحسين بن علي المغربي ) واجتلاب سابق أشعاره ، ورائق أخباره |",
+        "ms_nos": [
+          1552,
+          1553,
+          1554,
+          1555
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0619AbuCabbasSharishi.SharhMaqamatHariri",
+    "ms_sections": [
+      {
+        "tag_text": "### | AUTO المقامة الثامنة والأربعون وتعرف بالحرامية",
+        "ms_nos": [
+          1248,
+          1239,
+          1240,
+          1241,
+          1242,
+          1243,
+          1244,
+          1245,
+          1246,
+          1247
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0470MuayyadFiDinShirazi.Sira",
+    "ms_sections": [
+      {
+        "tag_text": "None found",
+        "ms_nos": [
+          235
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0606IbnMamati.LataifDhakhira",
+    "ms_sections": [
+      {
+        "tag_text": "### ||| فصل",
+        "ms_nos": [
+          137,
+          138
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0658IbnAbbar.IctabKitab",
+    "ms_sections": [
+      {
+        "tag_text": "None found",
+        "ms_nos": [
+          80
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0420Musabbihi.AkhbarMisr",
+    "ms_sections": [
+      {
+        "tag_text": "### ||| ومنهم أبو القاسم الحسن بن على المعرى فمن قوله فى الغزل :",
+        "ms_nos": [
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82
+        ]
+      }
+    ]
+  },
+  {
+    "book_uri": "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara",
+    "ms_sections": [
+      {
+        "tag_text": "None found",
+        "ms_nos": [
+          19
+        ]
+      }
+    ]
+  }
+]

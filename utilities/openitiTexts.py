@@ -28,6 +28,8 @@ class openitiTextMs():
 
         if report:
             self.report_stats()
+        
+        self.file_path = file_path
       
     
     def report_stats(self):
@@ -116,8 +118,39 @@ class openitiTextMs():
         text = self.ms_dict.get(number)
         if clean and text is not None:
             text = text_cleaner(text)
+        if text is None:
+            print("Invalid ms given for text. Ms given: {number}")
+            exit()
         return text
     
+    def calculate_tag_offset_clean(self, ms_number, tag="#{3} [|$][^\nms]+", regex=True):
+        """Use a specified tag or search term to calculate a cleaned offset
+        Returns cleaned offsets for each place where tag is located"""
+        
+        tag_offsets = []
+        ms_number = int(ms_number)
+        ms_text = self.fetch_milestone(ms_number)
+
+        # When looping splits, exclude the last split, so offsets mirror heading pos not length of last section
+        if regex:
+            splits = re.split(tag, ms_text)
+            offset = 0
+            for split in splits[:-1]:
+                if not re.match(tag, split):
+                    offset += len(text_cleaner(split))
+                    tag_offsets.append(offset)
+        
+        else:
+            splits = ms_text.split(tag)
+            offset = 0
+            for split in splits[:-1]:
+                offset += len(text_cleaner(split))
+                tag_offsets.append(offset)
+        
+        
+        
+        return tag_offsets
+
     def fetch_offset_clean(self, ms_number, start = 0, end = -1, padding=0, trim=0):
         """Clean the ms text using the same OpenITI cleaning process used to pre-process passim inputs
         Return a character offset of the ms text between specified start and end characters. If no start is given
@@ -126,9 +159,16 @@ class openitiTextMs():
         expanded to the start or end of the nearest token to the start or end +/- padding
         trim is used for attaching context and it trims a set number of characters from the start (to the nearest token)"""
         
+        # Ensure arguments are integers
+        ms_number = int(ms_number)
+        start = int(start)
+        end = int(end)
+
         # Fetch a cleaned version of the milestone text
         text = self.fetch_milestone(ms_number, clean=True)
         
+
+
         # If adding padding - find end or start of nearest token to offset - to avoid word splitting
         if padding != 0:
                         
@@ -269,37 +309,43 @@ class openitiTextMs():
         
     #     return sections_list
     
-    def find_nearest_section(self, ms_no, direction="forwards"):
+    def get_ms_count(self):
+        last_ms = re.findall(self.ms_pattern, self.mARkdown_text)[-1]
+        last_ms = self.fetch_ms_number(last_ms)
+        return last_ms
+
+    def find_nearest_section(self, ms_no, last_ms, direction="forwards"):
         """Get the nearest section, going either forwards or backwards"""
 
         self.ms_head_map()
 
         if direction == "forwards":
             increment = 1
+            head_index = 0
             
         if direction == "backwards":
             increment = -1
+            head_index = -1
         
         ms_list = [ms_no]
-        while ms_no not in self.section_map.keys():
-            
+        while ms_no not in self.section_map.keys() and ms_no != 1 and ms_no <= last_ms:
             ms_no = ms_no + increment
             ms_list.append(ms_no)
         
-        return self.section_map[ms_no][increment], ms_list
+        return self.section_map.get(ms_no, ["None found"])[head_index], ms_list
 
-    def retrieve_section_for_ms(self, ms_no):
+    def retrieve_section_for_ms(self, ms_no, last_ms):
 
         self.ms_head_map()
 
-        section_name, ms_list_before = self.find_nearest_section(ms_no, "backwards")
-        section_name_after, ms_list_after = self.find_nearest_section(ms_no, "forwards")
+        section_name, ms_list_before = self.find_nearest_section(ms_no, last_ms, "backwards")
+        section_name_after, ms_list_after = self.find_nearest_section(ms_no+1, last_ms, "forwards")
 
         full_ms_list = list(set(ms_list_before + ms_list_after))
 
         return section_name, full_ms_list 
 
-    def retrieve_md_tags_from_range(self, ms_start, ms_end, limit=100):
+    def retrieve_md_tags_range(self, ms_start, ms_end, limit=50):
         """For a range of ms retrieve the milestones up to the nearest headings until the
         ms range is exhausted
         Arguments:
@@ -314,13 +360,24 @@ class openitiTextMs():
         
         self.ms_head_map()
         
+        # If the ms_head_map produces nothing - then other funcs won't work - just return the ms_range
+
+        if len(self.section_map) == 0:
+            return [{"tag_text": "None found",
+                     "ms_nos": list(range(ms_start, ms_end+1))
+                     }]
+        
+
+        last_ms = self.get_ms_count()
+
         found_ms = []
         sections_list = []
+
 
         for i in range(ms_start, ms_end+1):
             if i in found_ms:
                 continue
-            section_name, full_ms_list = self.retrieve_section_for_ms(i)
+            section_name, full_ms_list = self.retrieve_section_for_ms(i, last_ms)
             
             # If we get an ms list that is smaller than our limit, then write it out
             if len(full_ms_list) < limit:
@@ -342,12 +399,13 @@ class openitiTextMs():
         else:
             return False
 
-    def ms_head_map(self, ms_head_regex = r"#{3} [|$][^\n]+", overwrite=False):
+    def ms_head_map(self, ms_head_regex = r"#{3} [|$][^\nms]+", overwrite=False):
         """Produce a section map {ms_no: [head_1, head_2]}"""
-        full_regex = fr"{ms_head_regex}|{self.ms_pattern}"
-        results_list = re.findall(full_regex, self.mARkdown_text)
-
         if self.section_map is None or overwrite:
+
+            full_regex = fr"{ms_head_regex}|{self.ms_pattern}"
+           
+            results_list = re.findall(full_regex, self.mARkdown_text)
 
             self.section_map = {}
 
@@ -453,6 +511,24 @@ class openitiCorpus():
             for book in book_uris:
                 file_paths.append(self.path_dict[book])
             return file_paths
+    
+    def reassign_paths(self, uri_path_dict, allow_new_uris=False):
+        """Use a dictionary to map alternative paths to the dictionary
+        For use if you want to specify a path to a text that has changed
+        since the release (e.g. for improve md or to use tags)
+        For this to work paths must be absolute
+        Arguments:
+        uri_path_dict: {"0000Author.Book": "absolute_path"}
+        allow_new_uris: if True, it will allow the addition of a URI not in the dictionary
+                        only set to True if your pipeline can handle URIs not in the metadata """
+        for uri, path in uri_path_dict.items():
+            if allow_new_uris or uri in self.path_dict.keys():
+                self.path_dict[uri] = path
+            else:
+                print("URI not found in the metadata: {uri}") 
+                print("Provide a valid URI or set allow_new_uris to True")
+                exit()
+                
 
 
 
@@ -462,7 +538,7 @@ if __name__ == "__main__":
     openiti_text_path = "D:/OpenITI Corpus/corpus_2023_1_8/data/0310Tabari/0310Tabari.Tarikh/0310Tabari.Tarikh.Shamela0009783BK1-ara1.mARkdown"
     openiti_ms_obj = openitiTextMs(openiti_text_path, report=True)
     
-    matching_sections = openiti_ms_obj.retrieve_md_tags_from_range(3233, 3252)
+    matching_sections = openiti_ms_obj.retrieve_md_tags_range(3233, 3252)
 
 
     print(matching_sections)
