@@ -116,6 +116,52 @@ class multitextGraph():
             
             return patch_list, color_list
 
+    # GPT solution - works better, but still whitespace issue
+    # def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height,
+    #                         height_increase, column_pos, intensity=None, color=None):
+
+    #     if color is None and intensity is None:
+    #         raise ValueError("Color or intensity must be passed to _write_data_to_patch()")
+
+    #     patches, colors = [], []
+    #     width = end_offset - start_offset
+
+    #     if self.line_length <= 0:
+    #         raise ValueError(f"line_length must be > 0, got {self.line_length}")
+    #     if width < 0:
+    #         raise ValueError(f"end_offset < start_offset: start={start_offset}, end={end_offset}, width={width}")
+
+    #     # We'll move through the interval left-to-right
+    #     remaining = width
+    #     offset_cursor = start_offset
+
+    #     while remaining > 0:
+    #         # position within the current line (0..line_length-1)
+    #         pos_in_line = (offset_cursor + current_wrap) % self.line_length
+
+    #         # actual x coordinate includes the column offset
+    #         x = column_pos + pos_in_line
+
+    #         # how much space left on this line from pos_in_line
+    #         space = self.line_length - pos_in_line
+
+    #         patch_len = min(remaining, space)  # always > 0 if remaining > 0
+
+    #         patches, colors = self._add_patch_data(
+    #             x, patch_len, current_height, height_increase,
+    #             patches, colors, intensity, color
+    #         )
+
+    #         remaining -= patch_len
+    #         offset_cursor += patch_len
+
+    #         # if we exactly filled to line end, go to next row
+    #         if patch_len == space:
+    #             current_height += height_increase
+
+    #     new_wrap = (start_offset + width + current_wrap) % self.line_length
+    #     return patches, colors, new_wrap, current_height
+
     def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height, height_increase, column_pos, intensity=None, color=None):
         """Take a data point and write as many patches as needed to deal with the length of the given data point
         To use for empty lines - give start_offset as 0 and end_offset as line length
@@ -133,7 +179,7 @@ class multitextGraph():
         
         
         while width > self.line_length:
-            patch_len = self.line_length + column_pos - start_pos
+            patch_len = self.line_length + column_pos - start_pos # This fix is the issue
             patches, colors = self._add_patch_data(start_pos, patch_len, current_height, height_increase, patches, colors, intensity, color)
             
             
