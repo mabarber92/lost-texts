@@ -6,6 +6,7 @@ import pandas as pd
 import json
 from itertools import combinations
 from tqdm import tqdm
+from collections import defaultdict
 
 class multitextDiffMap():
     """Take clusters for a defined range of milestones, fetch all clusters across all
@@ -171,11 +172,28 @@ class multitextDiffMap():
         
         return pairs_data
 
+    def _map_ms_sections(self, section_ms_dict):
+        """Take the dictionary of uri: ["tag_text": "", "ms_nos": []] and
+        transform it into {"uri": "ms": "tag_text"}"""
+        out_dict = {}
+        
+        for uri, sections in section_ms_dict.items():
+            for section in sections:
+                for ms in section["ms_nos"]:
+                    if uri in out_dict.keys():
+                        out_dict[uri][ms] = section["tag_text"]
+                    else:
+                        out_dict[uri] = {ms : section["tag_text"]}
+        
+        return out_dict
+
     def produce_pairwise_diffs(self):
         
         # Load all books as openiti_obj - as dict uri: book_obj
         book_uris = list(self.internal_data.keys())
         obj_dict = self.openiti_objs_dict(book_uris)
+        ms_sections_map = self._map_ms_sections(self.internal_data)
+       
 
         # Reload clusters - to be sure we've got everything
         self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
@@ -265,15 +283,111 @@ class multitextDiffMap():
                                                  "end": offset["end"],
                                                  "first_ms": first_ms,
                                                  "book2": book_2,
-                                                 "ms2": ms2})
+                                                 "ms2": ms2,
+                                                 "section2": ms_sections_map[book_2].get(ms2, "Section outside dict")})
                     section_position += ms_len
         
         return diff_offsets
 
-                    
+    def contributor_union_chars_exclusive(self, sub: pd.DataFrame, group_data_by_section=True):
+        """
+        sub: rows for ONE (book, section)
+        Returns: DataFrame with book2, ms2, chars (union length), sorted desc.
+        """
+        sub = sub.copy()
+        if group_data_by_section:
+            sub["rid"] = list(zip(sub["book2"], sub["section2"]))
+        else:
+            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
+        sub = sub.sort_values(["rid", "start", "end"])
+
+        sub["run_end"] = sub.groupby("rid")["end"].cummax()
+        prev = sub.groupby("rid")["run_end"].shift(1)
+
+        # touching merges (start == prev) => same cluster; new only if start > prev
+        sub["new"] = prev.isna() | (sub["start"] > prev)
+        sub["rid_cluster"] = sub.groupby("rid")["new"].cumsum().astype(int)
+
+        unions = (sub.groupby(["rid", "rid_cluster"], as_index=False)
+                    .agg(start=("start","min"), end=("end","max")))
+
+        unions["chars"] = unions["end"] - unions["start"]  # exclusive end ✅
+
+        contrib = (unions.groupby("rid", as_index=False)["chars"].sum()
+                        .sort_values("chars", ascending=False))
+
+        contrib[["book2","ms2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
+        return contrib.drop(columns=["rid"])
+    
+
+    def make_patches_exclusive(self, sub: pd.DataFrame, group_data_by_section=True):
+        """
+        sub: rows for ONE (book, section)
+        Returns: list of dict patches with start, end, intensity
+                where intensity = number of unique (book2, ms2) covering [start, end)
+        """
+        sub = sub.copy()
+        # Add option to build "rid" out of the section title to use that to amalgamate
+        if group_data_by_section:
+            sub["rid"] = list(zip(sub["book2"], sub["section2"]))
+        else:
+            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
+
+        starts = defaultdict(list)
+        ends = defaultdict(list)
+
+        for s, e, rid in sub[["start", "end", "rid"]].itertuples(index=False, name=None):
+            s = int(s); e = int(e)
+            if e <= s:
+                continue
+            starts[s].append(rid)
+            ends[e].append(rid)
+
+        points = sorted(set(starts) | set(ends))
+        if len(points) < 2:
+            return []
+
+        active = set()
+        patches = []
+
+        # Sweep boundaries; starts-before-ends gives "touching counts as overlap" behavior.
+        for i, x in enumerate(points[:-1]):
+            for rid in starts.get(x, []):
+                active.add(rid)
+
+            next_x = points[i + 1]
+            if next_x > x and active:
+                patches.append({
+                    "start": x,
+                    "end": next_x,
+                    "intensity": len(active),
+                    # optional if you want later drill-down per patch:
+                    # "active": sorted(active),
+                })
+
+            for rid in ends.get(x, []):
+                active.discard(rid)
+
+        return patches
+
+    def build_mapping_dictionary(self, pairwise_df, group_data_by_section=True):
+        # drop unnamed index if present
+        pairwise_df = pairwise_df.drop(columns=[c for c in pairwise_df.columns if c.startswith("Unnamed")], errors="ignore")
+
+        out = {}
+        for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
+            patches = self.make_patches_exclusive(sub, group_data_by_section=group_data_by_section)
+            contrib = self.contributor_union_chars_exclusive(sub, group_data_by_section=group_data_by_section)
+
+            out.setdefault(book, {})[section] = {
+                "patches": patches,
+                "contributors": contrib.to_dict("records"),
+            }
+        return out    
 
 
-    def build_multi_diff_map(self):
+
+    def build_multi_diff_map(self, group_data_by_section=True):
         """Take the internal data and use it to build a diff map
         This pass only takes diffs on passim-aligned data - we could
         expand to explore shared gaps too"""
@@ -283,6 +397,10 @@ class multitextDiffMap():
         df = pd.DataFrame(pairwise_map)
         df.to_csv("outputs_check.csv")
 
+        # Following code - from ChatGPT - creates a dictionary mapping the overlaps - need to update to ensure we feed in sections in order in which they're in the book
+        mapping_dict = self.build_mapping_dictionary(df, group_data_by_section=group_data_by_section)
+
+        return mapping_dict
 
         # Concatenate pairs and write to map at char level
 
@@ -300,8 +418,10 @@ class multitextDiffMap():
         maintext = openitiTextMs(self.openiti_paths[base_uri], pre_process_ms=False)
         initial_df = self.clusters_for_sections(maintext, base_uri, start_ms, end_ms)
         self.recurse_all_clusters(initial_df, log=True, max_recursions=max_recursions)
-        self.build_multi_diff_map()
-        
+        mapping_dict = self.build_multi_diff_map()
+        self.write_json(mapping_dict, "mapping_test.json")
+
+        # Add func to export a csv meta template (uri, sections, translation) - to allow for easy label customisation in graph
         output_data = []
         for key, value in self.internal_data.items():
             output_data.append({"book_uri": key, "ms_sections": value})
