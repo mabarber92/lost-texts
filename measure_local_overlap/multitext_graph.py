@@ -27,6 +27,7 @@ class multitextGraph():
 
         # Get the highest number of characters and number of books
         self._get_summary_data()
+        self.patch_log = []
 
     def load_json(self, json_path):
 
@@ -101,11 +102,15 @@ class multitextGraph():
 
             df_out = pd.concat([df_out, annotation_df, patches_df])
 
+            char_pos = patches_df["end"].max()
+            
+
+        df_out.to_csv("data_check.csv")
         return df_out
 
     def _add_patch_data(self, start, width, current_height, height_increase, patch_list, color_list,  intensity = None, color=None):
             """Function to update patch lists"""
-            
+            self.patch_log.append({"start": start, "width": width, "height": current_height, "height_increase": height_increase, "color": color, "intensity": intensity})
             patch = self._create_rectangle(start, width, current_height, height_increase)
             patch_list.append(patch)
             # Write intensity or color
@@ -117,89 +122,92 @@ class multitextGraph():
             return patch_list, color_list
 
     # GPT solution - works better, but still whitespace issue
-    # def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height,
-    #                         height_increase, column_pos, intensity=None, color=None):
+    def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height,
+                            height_increase, column_pos, intensity=None, color=None):
 
-    #     if color is None and intensity is None:
-    #         raise ValueError("Color or intensity must be passed to _write_data_to_patch()")
+        if color is None and intensity is None:
+            raise ValueError("Color or intensity must be passed to _write_data_to_patch()")
 
-    #     patches, colors = [], []
-    #     width = end_offset - start_offset
-
-    #     if self.line_length <= 0:
-    #         raise ValueError(f"line_length must be > 0, got {self.line_length}")
-    #     if width < 0:
-    #         raise ValueError(f"end_offset < start_offset: start={start_offset}, end={end_offset}, width={width}")
-
-    #     # We'll move through the interval left-to-right
-    #     remaining = width
-    #     offset_cursor = start_offset
-
-    #     while remaining > 0:
-    #         # position within the current line (0..line_length-1)
-    #         pos_in_line = (offset_cursor + current_wrap) % self.line_length
-
-    #         # actual x coordinate includes the column offset
-    #         x = column_pos + pos_in_line
-
-    #         # how much space left on this line from pos_in_line
-    #         space = self.line_length - pos_in_line
-
-    #         patch_len = min(remaining, space)  # always > 0 if remaining > 0
-
-    #         patches, colors = self._add_patch_data(
-    #             x, patch_len, current_height, height_increase,
-    #             patches, colors, intensity, color
-    #         )
-
-    #         remaining -= patch_len
-    #         offset_cursor += patch_len
-
-    #         # if we exactly filled to line end, go to next row
-    #         if patch_len == space:
-    #             current_height += height_increase
-
-    #     new_wrap = (start_offset + width + current_wrap) % self.line_length
-    #     return patches, colors, new_wrap, current_height
-
-    def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height, height_increase, column_pos, intensity=None, color=None):
-        """Take a data point and write as many patches as needed to deal with the length of the given data point
-        To use for empty lines - give start_offset as 0 and end_offset as line length
-        Returns: list of written patches, list of related colors or intensities, depending on which is given
-        new_height, new_wrap"""
-        patches = []
-        colors = []
-        # Offsets still not working - creating a staggered result.
-        # Set the start pos using the current wrap + column_pos (which column are we in) - with all additional cols we're getting stuck in infinite loop
-        start_pos = (start_offset % self.line_length) + current_wrap + column_pos
-        # print(f"Start pos: {start_pos}")
-        # print(f"Line max: {self.line_length + column_pos}")
+        patches, colors = [], []
         width = end_offset - start_offset
-        # Write patches until the width is less than line length
-        
-        
-        while width > self.line_length:
-            patch_len = self.line_length + column_pos - start_pos # This fix is the issue
-            patches, colors = self._add_patch_data(start_pos, patch_len, current_height, height_increase, patches, colors, intensity, color)
-            
-            
-            # Update width by removing patch_len (giving us remainder) - if width is longer than patch_len
-            if width > patch_len:
-                width -= patch_len
-            
-            # Update the start_pos to start of column - as we'll carry the wrap at the very end
-            start_pos = column_pos
-            # Augment current height
-            current_height += height_increase
-        
-        # Once the width is down to under the line length, write out the final patch with remaining width
-        patches, colors = self._add_patch_data(start_pos, width, current_height, height_increase, patches, colors, intensity, color)
-        # Increase the height ready for next pass
-        current_height += height_increase
-        # The new wrap is the outstanding width
-        new_wrap = width
 
+        if self.line_length <= 0:
+            raise ValueError(f"line_length must be > 0, got {self.line_length}")
+        if width < 0:
+            raise ValueError(f"end_offset < start_offset: start={start_offset}, end={end_offset}, width={width}")
+
+        # We'll move through the interval left-to-right
+        remaining = width
+        offset_cursor = start_offset
+
+        while remaining > 0:
+            # position within the current line (0..line_length-1)
+            pos_in_line = (offset_cursor + current_wrap) % self.line_length
+
+            # actual x coordinate includes the column offset
+            x = column_pos + pos_in_line
+
+            # how much space left on this line from pos_in_line
+            space = self.line_length - pos_in_line
+
+            patch_len = min(remaining, space)  # always > 0 if remaining > 0
+
+            patches, colors = self._add_patch_data(
+                x, patch_len, current_height, height_increase,
+                patches, colors, intensity, color
+            )
+
+            remaining -= patch_len
+            offset_cursor += patch_len
+
+            # if we exactly filled to line end, go to next row
+            if patch_len == space:
+                current_height += height_increase
+
+        new_wrap = (start_offset + width + current_wrap) % self.line_length
         return patches, colors, new_wrap, current_height
+
+    # def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height, height_increase, column_pos, intensity=None, color=None):
+    #     """Take a data point and write as many patches as needed to deal with the length of the given data point
+    #     To use for empty lines - give start_offset as 0 and end_offset as line length
+    #     Returns: list of written patches, list of related colors or intensities, depending on which is given
+    #     new_height, new_wrap"""
+    #     patches = []
+    #     colors = []
+    #     # Offsets still not working - creating a staggered result.
+    #     # Set the start pos using the current wrap + column_pos (which column are we in) - with all additional cols we're getting stuck in infinite loop
+    #     start_pos = current_wrap + column_pos
+    #     # print(f"Start pos: {start_pos}")
+    #     # print(f"Line max: {self.line_length + column_pos}")
+    #     width = end_offset - start_offset
+    #     # Write patches until the width is less than line length
+        
+        
+    #     while width >= self.line_length:
+    #         patch_len = self.line_length + column_pos - start_pos # This fix is the issue
+    #         patches, colors = self._add_patch_data(start_pos, patch_len, current_height, height_increase, patches, colors, intensity, color)
+    #         print(f"Patch written of length{patch_len}")
+            
+    #         # Update width by removing patch_len (giving us remainder) - if width is longer than patch_len
+    #         if width >= patch_len:
+    #             width -= patch_len
+            
+    #         # Update the start_pos to start of column - as we'll carry the wrap at the very end
+    #         start_pos = column_pos
+    #         # Augment current height
+    #         current_height += height_increase
+            
+        
+    #     # Once the width is down to under the line length, write out the final patch with remaining width if it's above 0
+    #     if width > 0:
+    #         patches, colors = self._add_patch_data(start_pos, width, current_height, height_increase, patches, colors, intensity, color)
+    #         print(f"Patch written of length{width}")
+    #     # # Increase the height ready for next pass
+    #     # current_height += height_increase
+    #     # The new wrap is the outstanding width
+    #     new_wrap = width
+
+    #     return patches, colors, new_wrap, current_height
 
 
 
@@ -238,13 +246,15 @@ class multitextGraph():
             data_df = self._create_patches_df(data)
 
             # Add book title to annotation?
-            
+            # annot_count = 0
             # Loop up to max_chars with steps of line_length
             for i in range(0, book_lines*self.line_length, self.line_length):
                 # Calculate the line end - deduct 1 to avoid overlap and double counting
                 line_end = i + self.line_length - 1
                 # Filter the df for the relevant sections
+
                 line_data = data_df[data_df["start"].between(i, line_end)]
+                print(line_data)
                 # If line_data is empty, then add a noreuse_color to the empty line and reset the wrap to zero
                 if len(line_data) == 0:
                     
@@ -260,8 +270,13 @@ class multitextGraph():
                 
                     types = line_data["type"].drop_duplicates().tolist()
                     if "annotation" in types and "reuse" not in types:
-                        height += height_increase
-                        wrap = 0
+                        height += height_increase*10
+                        wrap = 0                      
+                        print(f"Added annotation at line: {height}")
+                        # annot_count +=1
+                        # if annot_count > 1:
+                        #     exit()
+                        
                         # Add annotation to our annotations list
                     # This is an error check - if logic of _create_patches_df correct, then this shouldn't trip
                     elif "annotation" in types and "reuse" in types:
@@ -365,6 +380,9 @@ class multitextGraph():
 
         # Add a colorbar
         plt.colorbar(patch_collection, ax=ax)
+        
+        log_df = pd.DataFrame(self.patch_log)
+        log_df.to_csv("patch_log.csv")
 
         if export_path is not None:
             fig.savefig(export_path, bbox_inches="tight", dpi=300)
