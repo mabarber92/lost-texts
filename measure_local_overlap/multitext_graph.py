@@ -21,6 +21,9 @@ class multitextGraph():
             self.meta_df = pd.read_csv(metadata_csv)
             # Filter the data
             # Map the metadata into the json
+        else:
+            self.meta_df = None
+            self.meta = None
         
         
 
@@ -236,7 +239,7 @@ class multitextGraph():
 
 
 
-    def _write_patches(self, max_lines, nonreuse_color = "lightgrey", annotation_gap=30):
+    def _write_patches(self, max_lines, nonreuse_color = "lightgrey", annotation_gap=30, annotate_stats=True):
         """Create a list of rectangular patches using the line length and the data dict"""
         # Will need to return the locations for labels alongside the gaps (or even just an annotation-compliant format that we can pass to matplotlib)
         print("Writing patches...")
@@ -339,7 +342,8 @@ class multitextGraph():
                         annotation = {
                             "label_text": data["label"],
                             "y": height-4, 
-                            "x": horizontal_pos+self.line_length+1
+                            "x": horizontal_pos+self.line_length+1,
+                            "va": "bottom"
                         }
                         annotations_list.append(annotation)
 
@@ -369,6 +373,34 @@ class multitextGraph():
                                     new_gap_patches, new_gap_colors, wrap, height = self._write_data_to_patch(row["end"], next_start, wrap, height, height_increase, horizontal_pos, color=nonreuse_color)
                                     gap_patches_list.extend(new_gap_patches)
                                     gap_colors.extend(new_gap_colors)
+            
+            # Add the annotation stats to the bottom of the diff
+            if annotate_stats:
+                height += annotation_gap
+                annotation_text = ["Aligned books:"]
+                           
+                for section, book_data in self.mapping_dict[book].items():
+                    
+                    for book2 in book_data["contributors"]:
+                        # If metadata has been given - fetch from pre-processed metadata
+                        
+                        if self.meta:
+                            book = self.meta[book2["book2"]]
+                        else:
+                            book = book2["book2"]
+                        
+                        label = [book, f"{book2['chars']} chars"]
+
+                        annotation_text.extend(label)
+                
+                annotation_text = "\n".join(annotation_text)
+                
+                annotations_list.append({"label_text": annotation_text,
+                                        "y" : height,
+                                        "x" : horizontal_pos+self.line_length+1,
+                                        "va": "top"
+                                        })
+
 
             # Update horizontal for next book - use + 1 to create a gap
             
@@ -481,7 +513,7 @@ class multitextGraph():
         print(f"Font size for {self.book_count} books is {font_size}")
         for annotation in annotation_list:
             wrapped = self._wrap_text_to_data_width(ax, annotation["label_text"], annotation["x"], annotation["y"], self.line_length*0.75 , fontsize=font_size)
-            ax.text(annotation["x"], annotation["y"], wrapped, size = font_size, wrap=True
+            ax.text(annotation["x"], annotation["y"], wrapped, size = font_size, wrap=True, va=annotation["va"]
                      )
 
 
@@ -512,9 +544,11 @@ class multitextGraph():
 
         # Add a colorbar
         plt.colorbar(patch_collection, ax=ax)
+        ax.set_axis_off()
         
-        log_df = pd.DataFrame(self.patch_log)
-        log_df.to_csv("patch_log.csv")
+        if self.log:
+            log_df = pd.DataFrame(self.patch_log)
+            log_df.to_csv("patch_log.csv")
 
         if export_path is not None:
             fig.savefig(export_path, bbox_inches="tight", dpi=300)
