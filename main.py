@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     data_json = "mapping_test.json"
     uri_list = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab"]
-    uri_list = ["0845Maqrizi.Muqaffa"]
+    # uri_list = ["0845Maqrizi.Muqaffa"]
     graph_obj = multitextGraph(data_json)
-    graph_obj.filter_uris(uri_list)
-    graph_obj.draw_diff_graph(export_path = "diff_test.png")
+    # graph_obj.filter_uris(uri_list)
+    graph_obj.draw_diff_graph(export_path = "diff_test_all.png", chars_per_line=100)
