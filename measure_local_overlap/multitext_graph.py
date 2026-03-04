@@ -11,7 +11,7 @@ import numpy as np
 
 class multitextGraph():
 
-    def __init__ (self, mapping_json, metadata_csv=None):
+    def __init__ (self, mapping_json, metadata_csv=None, log=False):
         self.mapping_dict = self.load_json(mapping_json)
 
 
@@ -27,8 +27,11 @@ class multitextGraph():
 
         # Get the highest number of characters and number of books
         self._get_summary_data()
+        
+        # Set up log
+        self.log=log
         self.patch_log = []
-        self.log_count = 1
+        
 
     def load_json(self, json_path):
 
@@ -119,13 +122,13 @@ class multitextGraph():
             char_pos = patches_df["end"].max() 
             
 
-        df_out.to_csv(f"data_check_{self.log_count}.csv")
-        self.log_count += 1
         return df_out
 
     def _add_patch_data(self, start, width, current_height, height_increase, patch_list, color_list,  intensity = None, color=None, wrap=None):
             """Function to update patch lists"""
-            self.patch_log.append({"start": start, "width": width, "height": current_height, "height_increase": height_increase, "color": color, "intensity": intensity, "data": wrap})
+            
+            if self.log:
+                self.patch_log.append({"start": start, "width": width, "height": current_height, "height_increase": height_increase, "color": color, "intensity": intensity, "data": wrap})
             patch = self._create_rectangle(start, width, current_height, height_increase)
             patch_list.append(patch)
             # Write intensity or color
@@ -268,8 +271,8 @@ class multitextGraph():
             data_df = self._create_patches_df(data)
 
             # Df above takes account of metadata for section lens - if that data exists - so we just take max end of that data
-            max_book_chars = data_df["end"].max()
-            print(max_book_chars) # Use this as the maximum for the range
+            max_book_chars = data_df["end"].max() # Use this as the maximum for the range
+            
             # Use that data to calculate maximum number of lines for that book - just for ylim
             line_length, book_lines = self._calculate_line_length(chars_per_line=self.line_length, max_chars=max_book_chars)
             book_lines = book_lines + (len(data.keys()) *annotation_gap)
