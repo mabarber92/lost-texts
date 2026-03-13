@@ -15,9 +15,14 @@ class multitextDiffMap():
     Produce a mapping json that will allow for the drawing of a viz showing overlaps and unique sources
     within the source set.
     Approach will only work fully if markdown headings are available, but can force a limit based on an ms boundary"""
-    def __init__ (self, meta_tsv, corpus_base_path, cluster_path):
+    def __init__ (self, meta_tsv, corpus_base_path, cluster_path=None, pairwise_dir=None):
         
+        if cluster_path == None and pairwise_dir == None:
+            print("A cluster_path or pairwise_path must be given. If both are provided then clusters are used for grouping and pairwise for writing diffs")
+            exit()
+
         self.cluster_path = cluster_path
+        self.pairwise_dir = pairwise_dir
         self.meta_tsv_path = meta_tsv
         
         self.openiti_paths = openitiCorpus(meta_tsv, corpus_base_path, language="ara").path_dict
@@ -195,30 +200,45 @@ class multitextDiffMap():
         obj_dict = self.openiti_objs_dict(book_uris)
         ms_sections_map = self._map_ms_sections(self.internal_data)
        
+        # If a pairwise_dir has been given - use existing pairwise data (as it will have more comprehensive offsets)
+        if self.pairwise_dir is not None:
+            pairwise_csvs = os.listdir(self.pairwise_dir)
+            # Compile the csvs into one df
 
-        # Reload clusters - to be sure we've got everything
-        self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
+            # Filter the df to get bidir for each book
 
-        # Loop through each combination uni-laterally - once a pair is done that's it - get all clusters for that pair and calculate diffs
-        # When writing out pairs, we write that out bidirectionally - so we can capture all reuse for each for the map
-        # Just fetch data for each b1 - get all the b2s and offsets
-        # Could use pairwise data for this - perhaps get a better representation of diff
-        
-        pairs_data = {}
-        print("Fetching pairwise data")
-        for book_1 in tqdm(book_uris):
-            book_2_list = book_uris.copy()
-            book_2_list.remove(book_1)
-            # print(book_1)
-            # print(f"Book 2s: {book_2_list}")
-            book_1_ms = self.get_uri_ms(book_1)
-            clusters = self.cluster_obj.return_cluster_df_for_uri_ms(book_1, book_1_ms, input_type="list")[["book", "seq", "begin", "end", "cluster"]]
+            # Need to populate bi-directionally - for each book1 create a df concatenating all book2s
+            
 
-            b2_clusters = clusters[clusters["book"].isin(book_2_list)][["book", "cluster", "seq", "begin", "end"]]
-            b2_clusters = b2_clusters.rename(columns= {"book": "book2", "seq": "seq2", "begin": "begin2", "end": "end2"})
-            clusters = clusters[clusters["book"] == book_1]
-            pairs = pd.merge(clusters, b2_clusters, on="cluster", how="inner")
-            pairs_data[book_1] = pairs
+            # Rename col names so they accord with results if we use clusters
+
+            # As with cluster approach - return a dict with uri as key and dataframe as value
+
+        else:
+            # Otherwise build pairwise from the clusters
+            # Reload clusters - to be sure we've got everything
+            self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
+
+            # Loop through each combination uni-laterally - once a pair is done that's it - get all clusters for that pair and calculate diffs
+            # When writing out pairs, we write that out bidirectionally - so we can capture all reuse for each for the map
+            # Just fetch data for each b1 - get all the b2s and offsets
+            # Could use pairwise data for this - perhaps get a better representation of diff
+            
+            pairs_data = {}
+            print("Fetching pairwise data")
+            for book_1 in tqdm(book_uris):
+                book_2_list = book_uris.copy()
+                book_2_list.remove(book_1)
+                # print(book_1)
+                # print(f"Book 2s: {book_2_list}")
+                book_1_ms = self.get_uri_ms(book_1)
+                clusters = self.cluster_obj.return_cluster_df_for_uri_ms(book_1, book_1_ms, input_type="list")[["book", "seq", "begin", "end", "cluster"]]
+
+                b2_clusters = clusters[clusters["book"].isin(book_2_list)][["book", "cluster", "seq", "begin", "end"]]
+                b2_clusters = b2_clusters.rename(columns= {"book": "book2", "seq": "seq2", "begin": "begin2", "end": "end2"})
+                clusters = clusters[clusters["book"] == book_1]
+                pairs = pd.merge(clusters, b2_clusters, on="cluster", how="inner")
+                pairs_data[book_1] = pairs
         
         diff_offsets = []
 
