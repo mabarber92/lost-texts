@@ -11,25 +11,29 @@ import numpy as np
 
 class multitextGraph():
 
-    def __init__ (self, mapping_json, metadata_csv=None, log=False):
+    def __init__ (self, mapping_json, uri_meta=None, section_meta=None, log=False, uri_filter=None):
         self.mapping_dict = self.load_json(mapping_json)
 
 
-        # metadata_csv allows to provide transliterations or translations of the data and URI mappings
-        # if given, only the uris in the meta are used for the analysis
-        if metadata_csv is not None:
-            self.meta_df = pd.read_csv(metadata_csv)
-            # Filter the data
-            # Map the metadata into the json
-        else:
-            self.meta_df = None
-            self.meta = None
+        # # metadata_csv allows to provide transliterations or translations of the data and URI mappings
+        # # if given, only the uris in the meta are used for the analysis
+        # if metadata_csv is not None:
+        #     self.meta_df = pd.read_csv(metadata_csv)
+        #     # Filter the data
+        #     # Map the metadata into the json
+        # else:
+        #     self.meta_df = None
+        #     self.meta = None
         
         
-
+        if uri_filter is not None:
+            self.filter_uris(uri_filter)
 
         # Get the highest number of characters and number of books
         self._get_summary_data()
+
+        if uri_meta is not None:
+            self._map_metadata(uri_meta, section_meta)
         
         # Set up log
         self.log=log
@@ -76,7 +80,48 @@ class multitextGraph():
 
         self.max_chars = max_chars
         self.max_intensity = max_intensity
-        self.book_count = len(self.mapping_dict.keys()) 
+        self.book_count = len(self.mapping_dict.keys())
+
+    def _match_meta(self, df, datapoint, matching_field, meta_field="meta"):
+        matching_data = df[df[matching_field] == datapoint].dropna().to_dict("records")
+        if len(matching_data) > 0:
+            text = matching_data[0][meta_field]
+            if len(text) == 0:
+                text = datapoint
+        else:
+            text= datapoint
+        
+        return text
+
+    def _map_metadata(self, uri_csv, section_csv=None):
+        """Take metadata mapping files and modify the incoming data to have metadata rather than original data"""
+        
+        print("Mapping metadata")
+        uri_df = pd.read_csv(uri_csv)
+        if section_csv is not None:
+            section_df = pd.read_csv(section_csv)
+        else:
+            # to avoid lots of nested ifs - use empty dataframe - which _meta_meta will force to populate with existing data
+            section_df = pd.DataFrame()
+        
+        new_mapping_dict = {}
+
+        for book, data in tqdm(self.mapping_dict.items()):
+            book_meta = self._match_meta(uri_df, book, "uri")
+            new_data = {}            
+            for section, section_data in data.items():                
+                section_meta = self._match_meta(section_df, section, "section")
+
+                for book2_data in section_data["contributors"]:
+                    book2_meta = self._match_meta(uri_df, book2_data["book2"], "uri")
+                    book2_data["book2"] = book2_meta
+                
+                new_data[section_meta] = section_data
+            
+            new_mapping_dict[book_meta] = new_data
+
+        self.mapping_dict = new_mapping_dict
+
 
     def _calculate_line_length(self, max_lines=None, chars_per_line=None, max_chars=None):
         if max_chars is None:
@@ -142,51 +187,6 @@ class multitextGraph():
             
             return patch_list, color_list
 
-    # # GPT solution - works better, but still whitespace issue
-    # def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height,
-    #                         height_increase, column_pos, intensity=None, color=None):
-
-    #     if color is None and intensity is None:
-    #         raise ValueError("Color or intensity must be passed to _write_data_to_patch()")
-
-    #     patches, colors = [], []
-    #     width = end_offset - start_offset
-
-    #     if self.line_length <= 0:
-    #         raise ValueError(f"line_length must be > 0, got {self.line_length}")
-    #     if width < 0:
-    #         raise ValueError(f"end_offset < start_offset: start={start_offset}, end={end_offset}, width={width}")
-
-    #     # We'll move through the interval left-to-right
-    #     remaining = width
-    #     offset_cursor = start_offset
-
-    #     while remaining > 0:
-    #         # position within the current line (0..line_length-1)
-    #         pos_in_line = (offset_cursor + current_wrap) % self.line_length
-
-    #         # actual x coordinate includes the column offset
-    #         x = column_pos + pos_in_line
-
-    #         # how much space left on this line from pos_in_line
-    #         space = self.line_length - pos_in_line
-
-    #         patch_len = min(remaining, space)  # always > 0 if remaining > 0
-
-    #         patches, colors = self._add_patch_data(
-    #             x, patch_len, current_height, height_increase,
-    #             patches, colors, intensity, color
-    #         )
-
-    #         remaining -= patch_len
-    #         offset_cursor += patch_len
-
-    #         # if we exactly filled to line end, go to next row
-    #         if patch_len == space:
-    #             current_height += height_increase
-
-    #     new_wrap = (start_offset + width + current_wrap) % self.line_length
-    #     return patches, colors, new_wrap, current_height
 
     def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height, height_increase, column_pos, intensity=None, color=None):
         """Take a data point and write as many patches as needed to deal with the length of the given data point
@@ -384,14 +384,13 @@ class multitextGraph():
                     for book2 in book_data["contributors"]:
                         # If metadata has been given - fetch from pre-processed metadata
                         
-                        if self.meta:
-                            book = self.meta[book2["book2"]]
-                        else:
-                            book = book2["book2"]
+
+                        book = book2["book2"]
                         
                         label = [book, f"{book2['chars']} chars"]
 
                         annotation_text.extend(label)
+                
                 
                 annotation_text = "\n".join(annotation_text)
                 

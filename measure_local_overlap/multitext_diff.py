@@ -7,6 +7,7 @@ import json
 from itertools import combinations
 from tqdm import tqdm
 from collections import defaultdict
+import os
 
 class multitextDiffMap():
     """Take clusters for a defined range of milestones, fetch all clusters across all
@@ -327,7 +328,7 @@ class multitextDiffMap():
                 where intensity = number of unique (book2, ms2) covering [start, end)
         """
         sub = sub.copy()
-        # Add option to build "rid" out of the section title to use that to amalgamate
+        # If set to true build "rid" out of the section title to use that to amalgamate
         if group_data_by_section:
             sub["rid"] = list(zip(sub["book2"], sub["section2"]))
         else:
@@ -372,7 +373,7 @@ class multitextDiffMap():
 
     def build_mapping_dictionary(self, pairwise_df, group_data_by_section=True):
         # drop unnamed index if present
-        pairwise_df = pairwise_df.drop(columns=[c for c in pairwise_df.columns if c.startswith("Unnamed")], errors="ignore")
+        # pairwise_df = pairwise_df.drop(columns=[c for c in pairwise_df.columns if c.startswith("Unnamed")], errors="ignore")
 
         out = {}
         for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
@@ -404,7 +405,43 @@ class multitextDiffMap():
 
         # Concatenate pairs and write to map at char level
 
-    def run_diff_pipeline(self, base_uri, start_ms, end_ms, max_recursions=None):
+    def _export_metadata_mapping(self, out_dir):
+        """Create a csv that allows for manual mapping of metadata to uri, section fields
+        returns two csvs: one for section mappings and one for uri mappings"""
+
+        # Build mappings
+        uri_meta = []
+        sections_meta = []
+        for uri, sections in self.internal_data.items():
+            uri_meta.append({"uri": uri,
+                             "meta": ""})
+            for section in sections:
+                sections_meta.append({"uri": uri,
+                                      "section": section["tag_text"],
+                                      "meta": ""})
+
+        # Create paths
+        uri_path = os.path.join(out_dir, "uri_meta.csv")
+        sections_path = os.path.join(out_dir, "sections_meta.csv")
+        
+        # Convert dict lists to df and export
+        pd.DataFrame(uri_meta).to_csv(uri_path, encoding='utf-8-sig')
+        pd.DataFrame(sections_meta).to_csv(sections_path, encoding='utf-8-sig')
+
+    def _export_data(self, mapping_dict, out_dir):
+        """Perform all exports once data has been created"""
+
+        print("Writing data")
+        if not os.path.exists(out_dir):
+            os.mkdir(out_dir)
+        
+        self._export_metadata_mapping(out_dir)
+
+        mapping_json_path = os.path.join(out_dir, "verbatim_mapping.json")
+        self.write_json(mapping_dict, mapping_json_path) 
+
+
+    def run_diff_pipeline(self, base_uri, start_ms, end_ms, out_dir, max_recursions=None):
         
         # Initiate a place to store ms_ranges used as internal memory across functions - move these down to a pipeline func so we don't accidently store them after running
         self.internal_data = {}
@@ -419,11 +456,11 @@ class multitextDiffMap():
         initial_df = self.clusters_for_sections(maintext, base_uri, start_ms, end_ms)
         self.recurse_all_clusters(initial_df, log=True, max_recursions=max_recursions)
         mapping_dict = self.build_multi_diff_map()
-        self.write_json(mapping_dict, "mapping_test.json")
+        self._export_data(mapping_dict, out_dir)
 
-        # Add func to export a csv meta template (uri, sections, translation) - to allow for easy label customisation in graph
-        output_data = []
-        for key, value in self.internal_data.items():
-            output_data.append({"book_uri": key, "ms_sections": value})
-        self.write_json(output_data, "test_data.json")
+        # # Add func to export a csv meta template (uri, sections, translation) - to allow for easy label customisation in graph
+        # output_data = []
+        # for key, value in self.internal_data.items():
+        #     output_data.append({"book_uri": key, "ms_sections": value})
+        # self.write_json(output_data, "test_data.json")
         
