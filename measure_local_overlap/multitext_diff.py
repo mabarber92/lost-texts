@@ -15,8 +15,8 @@ class multitextDiffMap():
     Produce a mapping json that will allow for the drawing of a viz showing overlaps and unique sources
     within the source set.
     Approach will only work fully if markdown headings are available, but can force a limit based on an ms boundary"""
-    def __init__ (self, meta_tsv, corpus_base_path, cluster_path=None, pairwise_dir=None):
-        
+    def __init__ (self, meta_tsv, corpus_base_path, cluster_path=None, pairwise_dir=None, uri_text_paths=None):
+        """uri_text_paths: a dict mapping book URIs to specific absolute paths to a text - to allow us to drop in a custom annotated text (need to ensure that milestoning still matches the data being used)"""
         if cluster_path == None and pairwise_dir == None:
             print("A cluster_path or pairwise_path must be given. If both are provided then clusters are used for grouping and pairwise for writing diffs")
             exit()
@@ -27,6 +27,8 @@ class multitextDiffMap():
         
         self.openiti_paths = openitiCorpus(meta_tsv, corpus_base_path, language="ara").path_dict
 
+        if uri_text_paths is not None:
+            self.openiti_paths.reassign_paths(uri_text_paths)
 
     # If we want to pull out all possible matches for the supplied ranges - we're going to need to recurse - with each new ms range fetched, its possible new clusters will emerge - should go until we exchaust and that will need to account for incomplete md
 
@@ -106,6 +108,44 @@ class multitextDiffMap():
         # Recurse - run the function again with whatever clusters we have left to check (with the new clusters picked up by checking context)
         self.recurse_all_clusters(updated_cluster_df, log=log, max_recursions=max_recursions)
 
+    def _update_internal_data(self, book_uri, sections_data):
+        # As the recursion may add more sections as it expands need to use an updating strategy
+        if book_uri in self.internal_data.keys():
+            existing_sections = [item["tag_text"] for item in self.internal_data[book_uri]]
+            for section in sections_data:
+                if section["tag_text"] not in existing_sections:
+                    self.internal_data[book_uri].append(section)
+
+        else:
+            self.internal_data[book_uri] = sections_data
+    
+    def _get_all_book2_sections(self, openiti_dict, filtered_pairwise)
+
+    def pairwise_for_sections(self, book_uri, ms_start, ms_end, nearest_head = "### [|$][^\n]+"):
+        """Using a set of pairwise files and a specific ms range for one book in the set, search the pairwise data
+        exhaustively to identify all aligned sections"""    
+        all_pairwise_df = self._concatenate_pairwise_data(make_bidir=True) # Make bidir and then we only have to query one half of the relationship to fetch the aligned ms
+
+        # Get all of the books in the data and keep unique
+        books = all_pairwise_df["book"].tolist()
+        books = list(set(books))
+
+        # Get openiti objs for all books in data as dict
+        openiti_dict = self.openiti_objs_dict(books)
+
+        # Check the given book uri is in the data
+        if not book_uri in books:
+            print(f"Given book uri {book_uri} is not in the supplied pairwise data")
+            exit()
+        
+        sections_data = openiti_dict[book_uri].retrieve_md_tags_range(ms_start, ms_end)
+
+        self._update_internal_data(book_uri, sections_data)
+
+        main_ms_list = self.get_uri_ms(book_uri)
+
+        # Get all pairs that match with the main ms - will need to do this exchausively - recurse until we capture all pairs for pairs and run out of data
+        pairs = 
         
 
 
@@ -124,15 +164,7 @@ class multitextDiffMap():
         else:
             sections_list = [{"tag_text": "Not found", "ms_nos": list(range(ms_start, ms_end+1))}]
         
-        # As the recursion may add more sections as it expands need to use an updating strategy
-        if book_uri in self.internal_data.keys():
-            existing_sections = [item["tag_text"] for item in self.internal_data[book_uri]]
-            for section in sections_list:
-                if section["tag_text"] not in existing_sections:
-                    self.internal_data[book_uri].append(section)
-
-        else:
-            self.internal_data[book_uri] = sections_list
+        self._update_internal_data(book_uri, sections_list)
         
  
         ms_list = self.get_uri_ms(book_uri)
@@ -199,6 +231,41 @@ class multitextDiffMap():
         book_uri = ".".join(uri_parts[:2])
         return book_uri
 
+    def _concatenate_pairwise_data(self, make_bidir = False):
+        pairwise_csvs = os.listdir(self.pairwise_dir)
+        # Compile the csvs into one df
+        all_unidir = pd.DataFrame()
+        for csv in pairwise_csvs:
+            csv_path = os.path.join(self.pairwise_dir, csv)
+            df = pd.read_csv(csv_path, sep="\t")
+            all_unidir = pd.concat([all_unidir, df])
+        
+        # Create book columns
+        all_unidir["book"] = all_unidir["series_b1"].apply(self._fetch_book_from_id)
+        all_unidir["book2"] = all_unidir["series_b2"].apply(self._fetch_book_from_id)
+
+        # Drop uneeded data
+        all_unidir = all_unidir.drop(columns=["gid", "gid2", "id", "id2", "matches", "s1", "s2", "uid", "uid2", "ch_match", "align_len", "matches_percentage", "w_match", "series_b1", "series_b2"])
+
+        if make_bidir:
+            other_dir = all_unidir.copy().rename({
+                                                "book": "book2",
+                                                "book2": "book",
+                                                "begin": "begin2",
+                                                "begin2": "begin",
+                                                "end": "end2",
+                                                "end2": "end",
+                                                "seq": "seq2",
+                                                "seq2": "seq"
+                                                   })
+            all_pairs = pd.concat([all_unidir, other_dir])
+            all_pairs = all_pairs.drop_duplicates()
+
+        else:
+            all_pairs = all_unidir
+
+        return all_pairs
+
     def produce_pairwise_diffs(self):
         # If using pairwise you'll only get a map populated for the pairwise data that have been provided
         # Load all books as openiti_obj - as dict uri: book_obj
@@ -206,24 +273,14 @@ class multitextDiffMap():
         obj_dict = self.openiti_objs_dict(book_uris)
         ms_sections_map = self._map_ms_sections(self.internal_data)
 
+        
+
         pairs_data = {}
         # If a pairwise_dir has been given - use existing pairwise data (as it will have more comprehensive offsets)
         if self.pairwise_dir is not None:
             print("Populating map from pairwise data")
-            pairwise_csvs = os.listdir(self.pairwise_dir)
-            # Compile the csvs into one df
-            all_unidir = pd.DataFrame()
-            for csv in pairwise_csvs:
-                csv_path = os.path.join(self.pairwise_dir, csv)
-                df = pd.read_csv(csv_path, sep="\t")
-                all_unidir = pd.concat([all_unidir, df])
 
-            # Create book columns
-            all_unidir["book"] = all_unidir["series_b1"].apply(self._fetch_book_from_id)
-            all_unidir["book2"] = all_unidir["series_b2"].apply(self._fetch_book_from_id)
-
-            # Drop unused cols
-            all_unidir = all_unidir.drop(columns=["gid", "gid2", "id", "id2", "matches", "s1", "s2", "uid", "uid2", "ch_match", "align_len", "matches_percentage", "w_match", "series_b1", "series_b2"])
+            all_unidir = self._concatenate_pairwise_data()
 
             # Filter the df to get bidir for each book
             for book in tqdm(book_uris):
