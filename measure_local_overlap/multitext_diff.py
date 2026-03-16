@@ -193,26 +193,63 @@ class multitextDiffMap():
         
         return out_dict
 
+    def _fetch_book_from_id(self, data):
+        """Function to pass to .apply() to get a book uri from an id"""
+        uri_parts = data.split(".")
+        book_uri = ".".join(uri_parts[:2])
+        return book_uri
+
     def produce_pairwise_diffs(self):
         
         # Load all books as openiti_obj - as dict uri: book_obj
         book_uris = list(self.internal_data.keys())
         obj_dict = self.openiti_objs_dict(book_uris)
         ms_sections_map = self._map_ms_sections(self.internal_data)
-       
+
+        pairs_data = {}
         # If a pairwise_dir has been given - use existing pairwise data (as it will have more comprehensive offsets)
         if self.pairwise_dir is not None:
             pairwise_csvs = os.listdir(self.pairwise_dir)
             # Compile the csvs into one df
+            all_unidir = pd.DataFrame()
+            for csv in pairwise_csvs:
+                df = pd.read_csv(csv, sep="\t")
+                all_unidir = pd.concat([all_unidir, df])
+
+            # Create book columns
+            all_unidir["book1"] = all_unidir["series_b1"].apply(self._fetch_book_from_id)
+            all_unidir["book2"] = all_unidir["series_b2"].apply(self._fetch_book_from_id)
+
+            # Drop unused cols
+            all_unidir = all_unidir.drop(columns=["gid", "gid2", "id", "id2", "matches", "s1", "s2", "uid", "uid2", "ch_match", "align_len", "matches_percentage", "w_match", "series_b1", "series_b2"])
 
             # Filter the df to get bidir for each book
+            for book in tqdm(book_uris):
 
-            # Need to populate bi-directionally - for each book1 create a df concatenating all book2s
-            
+                # Get a df for cases where book is in the book_1 position         
+                book1_df = all_unidir[all_unidir["book"] == book]
 
-            # Rename col names so they accord with results if we use clusters
+                # Get a df for cases where book is in the book_2 position
+                book2_df = all_unidir[all_unidir["book2"] == book]
 
-            # As with cluster approach - return a dict with uri as key and dataframe as value
+                # Rename columns for book2_df so book is in book_1 position according to our data structure and fields are correctly named - hopefully renamer will handle swaps correctly internally
+                book2_df = book2_df.rename(columns= {
+                                                    "book2": "book", 
+                                                    "seq2": "seq", 
+                                                    "begin2": "begin", 
+                                                    "end2":"end",
+                                                    "seq": "seq2",
+                                                    "book": "book2",
+                                                    "begin": "begin2",
+                                                    "end": "end2"
+                                                     })
+                # Concatenate two dfs (owing to shared col names book will be in book_1 pos across the data)
+                full_df = pd.concat([book1_df, book2_df])
+                # Drop duplicates (just in case some bidirectional data slipped into the input data)
+                full_df = full_df.drop_duplicates()
+                
+                # Add to pairs_data
+                pairs_data[book] = full_df
 
         else:
             # Otherwise build pairwise from the clusters
@@ -224,7 +261,7 @@ class multitextDiffMap():
             # Just fetch data for each b1 - get all the b2s and offsets
             # Could use pairwise data for this - perhaps get a better representation of diff
             
-            pairs_data = {}
+            
             print("Fetching pairwise data")
             for book_1 in tqdm(book_uris):
                 book_2_list = book_uris.copy()
