@@ -200,7 +200,7 @@ class multitextDiffMap():
         return book_uri
 
     def produce_pairwise_diffs(self):
-        
+        # If using pairwise you'll only get a map populated for the pairwise data that have been provided
         # Load all books as openiti_obj - as dict uri: book_obj
         book_uris = list(self.internal_data.keys())
         obj_dict = self.openiti_objs_dict(book_uris)
@@ -209,15 +209,17 @@ class multitextDiffMap():
         pairs_data = {}
         # If a pairwise_dir has been given - use existing pairwise data (as it will have more comprehensive offsets)
         if self.pairwise_dir is not None:
+            print("Populating map from pairwise data")
             pairwise_csvs = os.listdir(self.pairwise_dir)
             # Compile the csvs into one df
             all_unidir = pd.DataFrame()
             for csv in pairwise_csvs:
-                df = pd.read_csv(csv, sep="\t")
+                csv_path = os.path.join(self.pairwise_dir, csv)
+                df = pd.read_csv(csv_path, sep="\t")
                 all_unidir = pd.concat([all_unidir, df])
 
             # Create book columns
-            all_unidir["book1"] = all_unidir["series_b1"].apply(self._fetch_book_from_id)
+            all_unidir["book"] = all_unidir["series_b1"].apply(self._fetch_book_from_id)
             all_unidir["book2"] = all_unidir["series_b2"].apply(self._fetch_book_from_id)
 
             # Drop unused cols
@@ -254,6 +256,7 @@ class multitextDiffMap():
         else:
             # Otherwise build pairwise from the clusters
             # Reload clusters - to be sure we've got everything
+            print("Populating map from cluster data")
             self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
 
             # Loop through each combination uni-laterally - once a pair is done that's it - get all clusters for that pair and calculate diffs
