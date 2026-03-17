@@ -119,7 +119,22 @@ class multitextDiffMap():
         else:
             self.internal_data[book_uri] = sections_data
     
-    def _get_all_book2_sections(self, openiti_dict, filtered_pairwise)
+    def _recurse_pairwise(self, section_dict, openiti_dict, full_pairwise, filtered_pairwise):
+
+        # Remove any b2 rows from the filtered pairwise where the milestone matches what we already have in internal_data
+
+
+        # If there are no remaining rows of data, we've exhausted the data - close the recursion
+        if len(filtered_pairwise) == 0:
+            return section_dict
+
+        
+
+        # For remaining b2 rows - fetch relevant sections - create a new filtered df using those book ms sets (filtering on the b1 side this time)
+
+
+        # Recurse with the updated filtered_data
+        return self._recurse_pairwise(section_dict, openiti_dict, full_pairwise, filtered_pairwise)
 
     def pairwise_for_sections(self, book_uri, ms_start, ms_end, nearest_head = "### [|$][^\n]+"):
         """Using a set of pairwise files and a specific ms range for one book in the set, search the pairwise data
@@ -145,7 +160,7 @@ class multitextDiffMap():
         main_ms_list = self.get_uri_ms(book_uri)
 
         # Get all pairs that match with the main ms - will need to do this exchausively - recurse until we capture all pairs for pairs and run out of data
-        pairs = 
+        self.internal_data = self._recurse_pairwise(self.internal_data, openiti_dict, )
         
 
 
