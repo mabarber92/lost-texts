@@ -25,16 +25,21 @@ class multitextDiffMap():
         self.pairwise_dir = pairwise_dir
         self.meta_tsv_path = meta_tsv
         
-        self.openiti_paths = openitiCorpus(meta_tsv, corpus_base_path, language="ara").path_dict
+        self.openiti_paths = openitiCorpus(meta_tsv, corpus_base_path, language="ara")
 
         if uri_text_paths is not None:
             self.openiti_paths.reassign_paths(uri_text_paths)
+            self.openiti_paths = self.openiti_paths.path_dict
+        else:
+            self.openiti_paths = self.openiti_paths.path_dict
 
     # If we want to pull out all possible matches for the supplied ranges - we're going to need to recurse - with each new ms range fetched, its possible new clusters will emerge - should go until we exchaust and that will need to account for incomplete md
 
-    def get_uri_ms(self, book_uri):
+    def get_uri_ms(self, book_uri, section_dict=None):
         all_ms = set()
-        for data in self.internal_data[book_uri]:
+        if section_dict is None:
+            section_dict = self.internal_data
+        for data in section_dict[book_uri]:
             all_ms.update(data["ms_nos"])
         return list(all_ms)
 
@@ -110,33 +115,88 @@ class multitextDiffMap():
 
     def _update_internal_data(self, book_uri, sections_data):
         # As the recursion may add more sections as it expands need to use an updating strategy
-        if book_uri in self.internal_data.keys():
-            existing_sections = [item["tag_text"] for item in self.internal_data[book_uri]]
+        # if book_uri in self.internal_data.keys():
+        #     existing_sections = [item["tag_text"] for item in self.internal_data[book_uri]]
+        #     for section in sections_data:
+        #         if section["tag_text"] not in existing_sections:
+        #             self.internal_data[book_uri].append(section)
+
+        # else:
+        #     self.internal_data[book_uri] = sections_data
+        self.internal_data = self._update_section_data(book_uri, sections_data, self.internal_data)
+    
+    def _update_section_data(self, book_uri, sections_data, sections_dict):
+        # As the recursion may add more sections as it expands need to use an updating strategy
+        if book_uri in sections_dict:
+            existing_sections = [item["tag_text"] for item in sections_dict[book_uri]]
             for section in sections_data:
                 if section["tag_text"] not in existing_sections:
-                    self.internal_data[book_uri].append(section)
+                    sections_dict[book_uri].append(section)
 
         else:
-            self.internal_data[book_uri] = sections_data
-    
-    def _recurse_pairwise(self, section_dict, openiti_dict, full_pairwise, filtered_pairwise):
+            sections_dict[book_uri] = sections_data
+        
+        return sections_dict
 
-        # Remove any b2 rows from the filtered pairwise where the milestone matches what we already have in internal_data
+    def _filter_pairwise_on_sections(self, sections_data, pairwise_df, book_uri=None, concat_on_df=None):
+        """concat_on_df allows to supply existing dataframe to add to"""
+        if concat_on_df is None:
+            new_pairwise = pd.DataFrame()
+        else:
+            new_pairwise = concat_on_df
+        if book_uri is not None:
+            pairwise_df = pairwise_df[pairwise_df["book"] == book_uri] 
+        
+        for section in sections_data:
+            pairwise_update = pairwise_df[pairwise_df["seq"].isin(section["ms_nos"])]
+            new_pairwise = pd.concat([new_pairwise, pairwise_update])
+        
+        new_pairwise = new_pairwise.drop_duplicates()
+        
+        return new_pairwise
 
+    def _recurse_pairwise(self, section_dict, openiti_dict, full_pairwise, filtered_pairwise, log=False):
 
+        # Remove any b2 rows from the filtered pairwise where the milestone matches what we already have in section_dict
+        books = filtered_pairwise["book2"].drop_duplicates().tolist()
+        unmatched_data = pd.DataFrame()
+        for book in books:
+            book_data = filtered_pairwise[filtered_pairwise["book2"] == book]
+            if book in section_dict.keys():                
+                section_ms = self.get_uri_ms(book, section_dict=section_dict)
+                book_data = book_data[~book_data["seq2"].isin(section_ms)]
+            
+            unmatched_data = pd.concat([unmatched_data, book_data])
+
+        if log:
+            self.recurse_log += 1
+            print(f"Recursion number: {self.recurse_log}, unmatched data: {len(unmatched_data)} ")
         # If there are no remaining rows of data, we've exhausted the data - close the recursion
-        if len(filtered_pairwise) == 0:
+        if len(unmatched_data) == 0:
             return section_dict
 
-        
+        # Otherwise For remaining b2 rows - fetch relevant sections - create a new filtered df using those book ms sets (filtering on the b1 side this time)
+        new_pairwise = pd.DataFrame()
+        remaining_books = unmatched_data["book2"].drop_duplicates().tolist()
+        for book in remaining_books:
+            openiti_obj = openiti_dict[book]
+            book_data = unmatched_data[unmatched_data["book2"] == book]
+            ms_bins = self.bin_contiguous(book_data["seq2"].tolist())
 
-        # For remaining b2 rows - fetch relevant sections - create a new filtered df using those book ms sets (filtering on the b1 side this time)
+            new_book_data = full_pairwise[full_pairwise["book"] == book]
+
+            for ms_bin in ms_bins:
+                sections_data = openiti_obj.retrieve_md_tags_range(ms_bin[0], ms_bin[-1])
+                new_pairwise = self._filter_pairwise_on_sections(sections_data, new_book_data, new_pairwise)
+                section_dict = self._update_section_data(book_uri, sections_data, section_dict)
+
+        new_pairwise = new_pairwise.drop_duplicates()
 
 
         # Recurse with the updated filtered_data
-        return self._recurse_pairwise(section_dict, openiti_dict, full_pairwise, filtered_pairwise)
+        return self._recurse_pairwise(section_dict, openiti_dict, full_pairwise, new_pairwise)
 
-    def pairwise_for_sections(self, book_uri, ms_start, ms_end, nearest_head = "### [|$][^\n]+"):
+    def pairwise_for_sections(self, book_uri, ms_start, ms_end, nearest_head = "### [|$][^\n]+", log=False):
         """Using a set of pairwise files and a specific ms range for one book in the set, search the pairwise data
         exhaustively to identify all aligned sections"""    
         all_pairwise_df = self._concatenate_pairwise_data(make_bidir=True) # Make bidir and then we only have to query one half of the relationship to fetch the aligned ms
@@ -144,6 +204,7 @@ class multitextDiffMap():
         # Get all of the books in the data and keep unique
         books = all_pairwise_df["book"].tolist()
         books = list(set(books))
+        print(books)
 
         # Get openiti objs for all books in data as dict
         openiti_dict = self.openiti_objs_dict(books)
@@ -157,10 +218,10 @@ class multitextDiffMap():
 
         self._update_internal_data(book_uri, sections_data)
 
-        main_ms_list = self.get_uri_ms(book_uri)
+        filtered_pairwise = self._filter_pairwise_on_sections(sections_data, all_pairwise_df, book_uri=book_uri)
 
         # Get all pairs that match with the main ms - will need to do this exchausively - recurse until we capture all pairs for pairs and run out of data
-        self.internal_data = self._recurse_pairwise(self.internal_data, openiti_dict, )
+        self.internal_data = self._recurse_pairwise(self.internal_data, openiti_dict, all_pairwise_df, filtered_pairwise, log=log)
         
 
 
@@ -262,8 +323,10 @@ class multitextDiffMap():
         # Drop uneeded data
         all_unidir = all_unidir.drop(columns=["gid", "gid2", "id", "id2", "matches", "s1", "s2", "uid", "uid2", "ch_match", "align_len", "matches_percentage", "w_match", "series_b1", "series_b2"])
 
+        # This bidi function not working - prob need to rename in two stages
         if make_bidir:
-            other_dir = all_unidir.copy().rename({
+            other_dir = all_unidir.copy()
+            other_dir = other_dir.rename({
                                                 "book": "book2",
                                                 "book2": "book",
                                                 "begin": "begin2",
@@ -273,6 +336,10 @@ class multitextDiffMap():
                                                 "seq": "seq2",
                                                 "seq2": "seq"
                                                    })
+            print("Direction 1:")
+            print(all_unidir)
+            print("Direction 2:")
+            print(other_dir)
             all_pairs = pd.concat([all_unidir, other_dir])
             all_pairs = all_pairs.drop_duplicates()
 
@@ -285,6 +352,7 @@ class multitextDiffMap():
         # If using pairwise you'll only get a map populated for the pairwise data that have been provided
         # Load all books as openiti_obj - as dict uri: book_obj
         book_uris = list(self.internal_data.keys())
+
         obj_dict = self.openiti_objs_dict(book_uris)
         ms_sections_map = self._map_ms_sections(self.internal_data)
 
@@ -573,20 +641,26 @@ class multitextDiffMap():
         self.write_json(mapping_dict, mapping_json_path) 
 
 
-    def run_diff_pipeline(self, base_uri, start_ms, end_ms, out_dir, max_recursions=None):
+    def run_diff_pipeline(self, base_uri, start_ms, end_ms, out_dir, max_recursions=None, log=False):
         
         # Initiate a place to store ms_ranges used as internal memory across functions - move these down to a pipeline func so we don't accidently store them after running
         self.internal_data = {}
         self.clusters_checked = []
         self.recurse_log = 0
 
-        # As the pipeline run will shrink the data as it goes - initiate a new cluster_obj with the pipeline
-        self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
+        if self.cluster_path is not None:
+            # As the pipeline run will shrink the data as it goes - initiate a new cluster_obj with the pipeline
+            self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
+            
+            # On later runs we're checking ms over and over - need to clean out ms we've already checked
+            maintext = openitiTextMs(self.openiti_paths[base_uri], pre_process_ms=False)
+            initial_df = self.clusters_for_sections(maintext, base_uri, start_ms, end_ms)
+            self.recurse_all_clusters(initial_df, log=log, max_recursions=max_recursions)
         
-        # On later runs we're checking ms over and over - need to clean out ms we've already checked
-        maintext = openitiTextMs(self.openiti_paths[base_uri], pre_process_ms=False)
-        initial_df = self.clusters_for_sections(maintext, base_uri, start_ms, end_ms)
-        self.recurse_all_clusters(initial_df, log=True, max_recursions=max_recursions)
+        else:
+            self.pairwise_for_sections(base_uri, start_ms, end_ms, log=log)
+            
+        
         mapping_dict = self.build_multi_diff_map()
         self._export_data(mapping_dict, out_dir)
 
