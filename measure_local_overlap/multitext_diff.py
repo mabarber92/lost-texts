@@ -187,8 +187,8 @@ class multitextDiffMap():
 
             for ms_bin in ms_bins:
                 sections_data = openiti_obj.retrieve_md_tags_range(ms_bin[0], ms_bin[-1])
-                new_pairwise = self._filter_pairwise_on_sections(sections_data, new_book_data, new_pairwise)
-                section_dict = self._update_section_data(book_uri, sections_data, section_dict)
+                new_pairwise = self._filter_pairwise_on_sections(sections_data, new_book_data, concat_on_df=new_pairwise)
+                section_dict = self._update_section_data(book, sections_data, section_dict)
 
         new_pairwise = new_pairwise.drop_duplicates()
 
@@ -307,6 +307,60 @@ class multitextDiffMap():
         book_uri = ".".join(uri_parts[:2])
         return book_uri
 
+    def _rename_col_list(self, df, col_list, a_replacement_dict, b_replacement_dict):
+        """Take a list of columns and replace the original end with the new append"""
+        a_end = list(a_replacement_dict.keys())[0]
+        a_append = list(a_replacement_dict.values())[0]
+
+        b_end = list(b_replacement_dict.keys())[0]
+        b_append = list(b_replacement_dict.values())[0]
+        
+        for col in col_list:
+            pos_1 = f"{col}{a_end}"
+            replace_1 = f"{col}{a_append}"
+
+            pos_2 = f"{col}{b_end}"
+            replace_2 = f"{col}{b_append}"
+            
+            df = df.rename(columns={pos_1: replace_1, pos_2: replace_2})
+        
+        print(df)
+        
+        return df
+
+    def _flip_pairs(self, pairs_df, concat_bidi=True, end_pattern=["", "2"]):
+        """Take a pairs_df and flip the direction of the columns (so b1 becomes b2 and viceversa) for any column with a numeral 2
+        or no numeral. concat_bidi adds the original df to the new flipped df, creating a full bidi df"""
+        
+        original_df = pairs_df.copy()
+        
+        all_cols = pairs_df.columns
+
+        end_pat_1 = end_pattern[0]
+        end_pat_2 = end_pattern[1]
+        # Get the cols with numbers
+        numeral_cols = []
+        for col in all_cols:            
+            
+            if end_pat_2 in col:
+                base_name = col.split(end_pat_2)[0]
+                numeral_cols.append(base_name)
+        
+        dummy_a = "a"
+        dummy_b = "b"
+        # Rename each col with dummy a, b
+        pairs_df = self._rename_col_list(pairs_df, numeral_cols, {end_pat_1:dummy_b}, {end_pat_2:dummy_a})
+
+        # Reset a to 1 and b to 2
+        pairs_df = self._rename_col_list(pairs_df, numeral_cols, {dummy_a:end_pat_1}, {dummy_b:end_pat_2})
+
+        if concat_bidi:
+            pairs_df = pd.concat([original_df, pairs_df])
+        
+        pairs_df = pairs_df.drop_duplicates()
+
+        return pairs_df
+
     def _concatenate_pairwise_data(self, make_bidir = False):
         pairwise_csvs = os.listdir(self.pairwise_dir)
         # Compile the csvs into one df
@@ -323,25 +377,16 @@ class multitextDiffMap():
         # Drop uneeded data
         all_unidir = all_unidir.drop(columns=["gid", "gid2", "id", "id2", "matches", "s1", "s2", "uid", "uid2", "ch_match", "align_len", "matches_percentage", "w_match", "series_b1", "series_b2"])
 
-        # This bidi function not working - prob need to rename in two stages
+        # This bidi function not working
         if make_bidir:
-            other_dir = all_unidir.copy()
-            other_dir = other_dir.rename({
-                                                "book": "book2",
-                                                "book2": "book",
-                                                "begin": "begin2",
-                                                "begin2": "begin",
-                                                "end": "end2",
-                                                "end2": "end",
-                                                "seq": "seq2",
-                                                "seq2": "seq"
-                                                   })
+            other_dir = self._flip_pairs(all_unidir, concat_bidi=False)
+            # Just to check the dir flipping works
             print("Direction 1:")
             print(all_unidir)
             print("Direction 2:")
             print(other_dir)
-            all_pairs = pd.concat([all_unidir, other_dir])
-            all_pairs = all_pairs.drop_duplicates()
+            # Final line of code - flip and concat in one func
+            all_pairs = self._flip_pairs(all_unidir)
 
         else:
             all_pairs = all_unidir
@@ -356,7 +401,7 @@ class multitextDiffMap():
         obj_dict = self.openiti_objs_dict(book_uris)
         ms_sections_map = self._map_ms_sections(self.internal_data)
 
-        
+        self.used_rows= pd.DataFrame()
 
         pairs_data = {}
         # If a pairwise_dir has been given - use existing pairwise data (as it will have more comprehensive offsets)
@@ -364,6 +409,8 @@ class multitextDiffMap():
             print("Populating map from pairwise data")
 
             all_unidir = self._concatenate_pairwise_data()
+            self.all_data_len = len(all_unidir)
+            
 
             # Filter the df to get bidir for each book
             for book in tqdm(book_uris):
@@ -375,16 +422,17 @@ class multitextDiffMap():
                 book2_df = all_unidir[all_unidir["book2"] == book]
 
                 # Rename columns for book2_df so book is in book_1 position according to our data structure and fields are correctly named - hopefully renamer will handle swaps correctly internally
-                book2_df = book2_df.rename(columns= {
-                                                    "book2": "book", 
-                                                    "seq2": "seq", 
-                                                    "begin2": "begin", 
-                                                    "end2":"end",
-                                                    "seq": "seq2",
-                                                    "book": "book2",
-                                                    "begin": "begin2",
-                                                    "end": "end2"
-                                                     })
+                book2_df = self._flip_pairs(book2_df, concat_bidi=False)
+                # book2_df = book2_df.rename(columns= {
+                #                                     "book2": "book", 
+                #                                     "seq2": "seq", 
+                #                                     "begin2": "begin", 
+                #                                     "end2":"end",
+                #                                     "seq": "seq2",
+                #                                     "book": "book2",
+                #                                     "begin": "begin2",
+                #                                     "end": "end2"
+                #                                      })
                 # Concatenate two dfs (owing to shared col names book will be in book_1 pos across the data)
                 full_df = pd.concat([book1_df, book2_df])
                 # Drop duplicates (just in case some bidirectional data slipped into the input data)
@@ -452,9 +500,11 @@ class multitextDiffMap():
                 # To get an offset into the section we need to calculate cumulative offsets and augment - for later ordering, need to store first ms in output
                 # Note - b/c we returned pairwise bi-dir data - we're calculating these diffs twice once for each direction - a little expensive
                 section_position = 0
+                pairwise_data = pairs_data[book] 
                 for ms in section_ms:
-                    pairwise_data = pairs_data[book]                    
+                                     
                     pairwise_data = pairwise_data[pairwise_data["seq"] == ms]
+                    self.used_rows = pd.concat([self.used_rows, pairwise_data])
                     ms_len = len(openiti_obj_b1.fetch_milestone(ms, clean=True))
                 
                     if ms == first_ms:
@@ -662,8 +712,12 @@ class multitextDiffMap():
             
         
         mapping_dict = self.build_multi_diff_map()
+        
         self._export_data(mapping_dict, out_dir)
 
+        if self.pairwise_dir is not None:
+            used_len = len(self.used_rows.drop_duplicates())
+            print(f"total pairwise input: {self.all_data_len}, rows used: {used_len}")
         # # Add func to export a csv meta template (uri, sections, translation) - to allow for easy label customisation in graph
         # output_data = []
         # for key, value in self.internal_data.items():
