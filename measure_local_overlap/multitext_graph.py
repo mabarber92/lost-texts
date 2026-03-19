@@ -68,7 +68,7 @@ class multitextGraph():
                 for patches in section_data["patches"]:
                     for k, v in patches.items():
                         res[k] = max(res[k], v)                
-                book_max += res["end"]
+                book_max += section_data["char_total"]
                 book_intensity_max += res["intensity"]
                
                 
@@ -154,6 +154,7 @@ class multitextGraph():
                            "type": "annotation",
                            "label": section}]
             annotation_df = pd.DataFrame(annotation)
+
             
             # Augment the char pos in the patches to account for current char pos + annotation row
             char_pos += self.line_length
@@ -164,11 +165,20 @@ class multitextGraph():
             patches_df["start"] += char_pos
             patches_df["end"] += char_pos
 
-            df_out = pd.concat([df_out, annotation_df, patches_df])
+            
+            # Prepare the end row
+            end_row = [{"start": patches_df["end"].max(),
+                         "end": data["char_total"] + char_pos,
+                        "intensity": 0,
+                        "type": "end",
+                        }]
+            end_df = pd.DataFrame(end_row)
+
+            df_out = pd.concat([df_out, annotation_df, patches_df, end_df])
 
             
             char_pos = patches_df["end"].max() 
-            
+
 
         return df_out
 
@@ -346,14 +356,17 @@ class multitextGraph():
                             "va": "bottom"
                         }
                         annotations_list.append(annotation)
-
+                    
                     # This is an error check - if logic of _create_patches_df correct, then this shouldn't trip
                     elif "annotation" in types and "reuse" in types:
                         print("Offset alignment is misaligned - mixed annotation and data in a row")
                         print(f"Current offset: {i}")
                         print("Filtered dataframe:")
                         print(line_data)
-                    
+                    elif "end" in types:
+                        print("Writing patch for end")
+                        # Need to ammend to handle where nonreuse_color is None - this is writing with white gap (issue not in the mapping df)
+                        new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, color=nonreuse_color)
                     else:
                         # Else - loop through the data and produce the patch rectangles
                         listed_data = line_data.sort_values(by=["start"]).to_dict("records")

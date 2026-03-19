@@ -138,6 +138,14 @@ class multitextDiffMap():
         
         return sections_dict
 
+    def _filter_ms_offsets(self, df, section_data, ms_no):
+        ms_offsets = section_data["ms_offsets"][ms_no]
+        df = df[df["seq"] == ms_no]
+        df = df[df["begin"] > ms_offsets[0]]
+        df = df[df["end"] < ms_offsets[1]]
+        return df
+
+
     def _filter_pairwise_on_sections(self, sections_data, pairwise_df, book_uri=None, concat_on_df=None):
         """concat_on_df allows to supply existing dataframe to add to"""
         if concat_on_df is None:
@@ -148,14 +156,22 @@ class multitextDiffMap():
             pairwise_df = pairwise_df[pairwise_df["book"] == book_uri] 
         
         for section in sections_data:
-            pairwise_update = pairwise_df[pairwise_df["seq"].isin(section["ms_nos"])]
-            new_pairwise = pd.concat([new_pairwise, pairwise_update])
+            # To avoid overcomputing - just use offsets for start and end
+            ms_nos = section["ms_nos"]
+            ms_nos.sort()
+            
+            first_ms_df = self._filter_ms_offsets(pairwise_df, section, ms_nos[0])
+            last_ms_df = self._filter_ms_offsets(pairwise_df, section, ms_nos[-1])
+            remaining_ms = pairwise_df[pairwise_df["seq"].isin(ms_nos[1:-1])] 
+            new_pairwise = pd.concat([new_pairwise, first_ms_df, remaining_ms, last_ms_df])
         
         new_pairwise = new_pairwise.drop_duplicates()
         
+
+        
         return new_pairwise
 
-    def _recurse_pairwise(self, section_dict, openiti_dict, full_pairwise, filtered_pairwise, log=False):
+    def _recurse_pairwise(self, section_dict, openiti_dict, full_pairwise, filtered_pairwise, log=False, max_recursions=None):
 
         # Remove any b2 rows from the filtered pairwise where the milestone matches what we already have in section_dict
         books = filtered_pairwise["book2"].drop_duplicates().tolist()
@@ -168,11 +184,15 @@ class multitextDiffMap():
             
             unmatched_data = pd.concat([unmatched_data, book_data])
 
+
         if log:
             self.recurse_log += 1
             print(f"Recursion number: {self.recurse_log}, unmatched data: {len(unmatched_data)} ")
+            
         # If there are no remaining rows of data, we've exhausted the data - close the recursion
-        if len(unmatched_data) == 0:
+        if len(unmatched_data) == 0 or self.recurse_log >= max_recursions:
+            
+            
             return section_dict
 
         # Otherwise For remaining b2 rows - fetch relevant sections - create a new filtered df using those book ms sets (filtering on the b1 side this time)
@@ -181,8 +201,8 @@ class multitextDiffMap():
         for book in remaining_books:
             openiti_obj = openiti_dict[book]
             book_data = unmatched_data[unmatched_data["book2"] == book]
-            ms_bins = self.bin_contiguous(book_data["seq2"].tolist())
 
+            ms_bins = self.bin_contiguous(book_data["seq2"].tolist())
             new_book_data = full_pairwise[full_pairwise["book"] == book]
 
             for ms_bin in ms_bins:
@@ -191,12 +211,12 @@ class multitextDiffMap():
                 section_dict = self._update_section_data(book, sections_data, section_dict)
 
         new_pairwise = new_pairwise.drop_duplicates()
-
+        
 
         # Recurse with the updated filtered_data
-        return self._recurse_pairwise(section_dict, openiti_dict, full_pairwise, new_pairwise)
+        return self._recurse_pairwise(section_dict, openiti_dict, full_pairwise, new_pairwise, log=log, max_recursions=max_recursions)
 
-    def pairwise_for_sections(self, book_uri, ms_start, ms_end, nearest_head = "### [|$][^\n]+", log=False):
+    def pairwise_for_sections(self, book_uri, ms_start, ms_end, nearest_head = "### [|$][^\n]+", log=False, max_recursions=None):
         """Using a set of pairwise files and a specific ms range for one book in the set, search the pairwise data
         exhaustively to identify all aligned sections"""    
         all_pairwise_df = self._concatenate_pairwise_data(make_bidir=True) # Make bidir and then we only have to query one half of the relationship to fetch the aligned ms
@@ -221,7 +241,7 @@ class multitextDiffMap():
         filtered_pairwise = self._filter_pairwise_on_sections(sections_data, all_pairwise_df, book_uri=book_uri)
 
         # Get all pairs that match with the main ms - will need to do this exchausively - recurse until we capture all pairs for pairs and run out of data
-        self.internal_data = self._recurse_pairwise(self.internal_data, openiti_dict, all_pairwise_df, filtered_pairwise, log=log)
+        self.internal_data = self._recurse_pairwise(self.internal_data, openiti_dict, all_pairwise_df, filtered_pairwise, log=log, max_recursions=max_recursions)
         
 
 
@@ -379,13 +399,7 @@ class multitextDiffMap():
 
         # This bidi function not working
         if make_bidir:
-            other_dir = self._flip_pairs(all_unidir, concat_bidi=False)
-            # Just to check the dir flipping works
-            print("Direction 1:")
-            print(all_unidir)
-            print("Direction 2:")
-            print(other_dir)
-            # Final line of code - flip and concat in one func
+            # - flip and concat in one func
             all_pairs = self._flip_pairs(all_unidir)
 
         else:
@@ -500,25 +514,26 @@ class multitextDiffMap():
                 # To get an offset into the section we need to calculate cumulative offsets and augment - for later ordering, need to store first ms in output
                 # Note - b/c we returned pairwise bi-dir data - we're calculating these diffs twice once for each direction - a little expensive
                 section_position = 0
-                pairwise_data = pairs_data[book] 
+                pairwise_data = pairs_data[book]
+                
                 for ms in section_ms:
                                      
-                    pairwise_data = pairwise_data[pairwise_data["seq"] == ms]
-                    self.used_rows = pd.concat([self.used_rows, pairwise_data])
-                    ms_len = len(openiti_obj_b1.fetch_milestone(ms, clean=True))
+                    ms_data = pairwise_data[pairwise_data["seq"] == ms]
+                    self.used_rows = pd.concat([self.used_rows, ms_data])
+                    ms_len = section["ms_offsets"][ms][1]
                 
                     if ms == first_ms:
-                        pairwise_data = pairwise_data[pairwise_data["end"] > start_offset]
+                        ms_data = ms_data[ms_data["end"] > start_offset]
                         # Make the augmentation negative if it's the first ms
                         offset_augment = 0 - start_offset
                     elif ms == last_ms:
-                        pairwise_data = pairwise_data[pairwise_data["begin"] < end_offset]
+                        ms_data = ms_data[ms_data["begin"] < end_offset]
                         offset_augment = section_position
                     else:
                         offset_augment = section_position
                     
-                    pairwise_data = pairwise_data.to_dict("records")
-                    for data in pairwise_data:
+                    ms_data = ms_data.to_dict("records")
+                    for data in ms_data:
                         # print(data)
                         book_2 = data["book2"]
                         ms2 = data["seq2"]
@@ -621,6 +636,16 @@ class multitextDiffMap():
 
         return patches
 
+    def _get_total_section_len(self, book, section):
+        for section_data in self.internal_data[book]:
+            if section_data["tag_text"] == section:
+                ms_offsets = section_data["ms_offsets"]
+
+        char_total= list(ms_offsets.values())[0][0]
+        for key, offset in ms_offsets.items():
+            char_total += offset[1]
+        return char_total
+
     def build_mapping_dictionary(self, pairwise_df, group_data_by_section=True):
         # drop unnamed index if present
         # pairwise_df = pairwise_df.drop(columns=[c for c in pairwise_df.columns if c.startswith("Unnamed")], errors="ignore")
@@ -629,10 +654,12 @@ class multitextDiffMap():
         for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
             patches = self.make_patches_exclusive(sub, group_data_by_section=group_data_by_section)
             contrib = self.contributor_union_chars_exclusive(sub, group_data_by_section=group_data_by_section)
+            char_len = self._get_total_section_len(book, section)
 
             out.setdefault(book, {})[section] = {
                 "patches": patches,
                 "contributors": contrib.to_dict("records"),
+                "char_total": char_len
             }
         return out    
 
@@ -708,7 +735,7 @@ class multitextDiffMap():
             self.recurse_all_clusters(initial_df, log=log, max_recursions=max_recursions)
         
         else:
-            self.pairwise_for_sections(base_uri, start_ms, end_ms, log=log)
+            self.pairwise_for_sections(base_uri, start_ms, end_ms, log=log, max_recursions=max_recursions)
             
         
         mapping_dict = self.build_multi_diff_map()
