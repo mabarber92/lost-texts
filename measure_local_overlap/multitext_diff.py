@@ -92,7 +92,7 @@ class multitextDiffMap():
             book = row["book"]
 
 
-            openiti_text = openitiTextMs(self.openiti_paths[book], pre_process_ms=False)
+            openiti_text = openitiTextMs(self.openiti_paths[book])
             for ms_range in row["ms_ranges"]:
                 # print(f"Book: {book}, range start: {ms_range[0]}, range_end {ms_range[-1]}")
                 
@@ -703,7 +703,7 @@ class multitextDiffMap():
             self.cluster_obj = clusterDf(self.cluster_path, self.meta_tsv_path)
             
             # On later runs we're checking ms over and over - need to clean out ms we've already checked
-            maintext = openitiTextMs(self.openiti_paths[base_uri], pre_process_ms=False)
+            maintext = openitiTextMs(self.openiti_paths[base_uri])
             initial_df = self.clusters_for_sections(maintext, base_uri, start_ms, end_ms)
             self.recurse_all_clusters(initial_df, log=log, max_recursions=max_recursions)
         

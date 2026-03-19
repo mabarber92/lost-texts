@@ -313,6 +313,63 @@ class openitiTextMs():
         last_ms = re.findall(self.ms_pattern, self.mARkdown_text)[-1]
         last_ms = self.fetch_ms_number(last_ms)
         return last_ms
+    
+    def get_ms_len(self, ms_no):
+        return len(self.fetch_milestone(ms_no, clean=True))
+
+    def get_clean_len(self, splits):
+        text = "".join(splits)
+        cleaned = text_cleaner(text)
+        return len(cleaned)
+
+    def fetch_section_offset(self, ms_no, position, ms_head_regex = r"(#{3} [|$][^\nms]+)"):
+        """position: 'first' or 'last' - if first take first section if last take last section"""
+        # Get ms and split it on the regex - don't clean
+        splits = re.split(ms_head_regex, self.fetch_milestone(ms_no))
+        # Get the offset position
+        # If the split doesn't work - we return the len of the ms if it's in the last pos and zero if first
+        if len(splits) == 1:
+            if position == "last":
+                offset = self.get_ms_len(ms_no)
+            if position == "first":
+                offset = 0
+        else:
+            if position == "last":
+                offset = self.get_clean_len([splits[0]])
+            if position == "first":
+                offset = self.get_clean_len(splits[:-1])
+        return offset
+
+        
+
+
+    def get_ms_range_len(self, ms_start, ms_end, get_section_offsets=False):
+        """Take a range and return a dict where ms: [start, end], where start always 0 (start of ms)
+        If get_section_offsets, check for section boundaries at start and end"""
+        ms_lens = {}
+
+        # Handle first and last ms - in case we're getting section offsets
+        if get_section_offsets:
+            offset_start = self.fetch_section_offset(ms_start, "first")
+            offset_end = self.fetch_section_offset(ms_end, "last")
+        
+        else:
+            offset_start = 0
+            offset_end = self.get_ms_len(ms_end)
+        
+        ms_lens[ms_start] = [offset_start, self.get_ms_len(ms_start)]
+        ms_lens[ms_end] = [0, offset_end]
+
+        
+        # Handle the remaining ms
+        for i in range(ms_start+1, ms_end):
+            
+            ms_len = self.get_ms_len(i)
+            ms_lens[i] = [0, ms_len]
+        
+        return ms_lens
+
+
 
     def find_nearest_section(self, ms_no, last_ms, direction="forwards"):
         """Get the nearest section, going either forwards or backwards"""
@@ -354,7 +411,8 @@ class openitiTextMs():
         md_regex: the regex for the md tag that defines a section region
         Returns:
         sections (list of dict) of format:
-         [{"tag_text": "", "ms_nos": []}] """
+         [{"tag_text": "", "ms_nos": []}]
+         Refactor to bring back offsets return: [{"tag_text": "ms_nos": [335], "ms_offsets": {335:[0, 4000] } }] """
 
         
         
@@ -363,8 +421,11 @@ class openitiTextMs():
         # If the ms_head_map produces nothing - then other funcs won't work - just return the ms_range
 
         if len(self.section_map) == 0:
+            # Use ms_nos to populate offsets
+
             return [{"tag_text": "None found",
-                     "ms_nos": list(range(ms_start, ms_end+1))
+                     "ms_nos": list(range(ms_start, ms_end+1)),
+                     "ms_offsets": self.get_ms_range_len(ms_start, ms_end)
                      }]
         
 
@@ -377,12 +438,20 @@ class openitiTextMs():
         for i in range(ms_start, ms_end+1):
             if i in found_ms:
                 continue
+            # Otherwise this func will capture offsets
             section_name, full_ms_list = self.retrieve_section_for_ms(i, last_ms)
             
             # If we get an ms list that is smaller than our limit, then write it out
             if len(full_ms_list) < limit:
+
+                # Process full_ms_list to get the exact offsets for the start and end and char lens for rest
+                full_ms_list.sort()
+                
+                ms_offsets = self.get_ms_range_len(full_ms_list[0], full_ms_list[-1], get_section_offsets=True)
+
                 sections_list.append({"tag_text": section_name,
-                                            "ms_nos": full_ms_list})
+                                            "ms_nos": full_ms_list,
+                                            "ms_offsets": ms_offsets})
             found_ms.extend(full_ms_list)
 
         return sections_list
@@ -535,10 +604,10 @@ class openitiCorpus():
 if __name__ == "__main__":
 
     # Run the class on its own for testing and error checking
-    openiti_text_path = "D:/OpenITI Corpus/corpus_2023_1_8/data/0310Tabari/0310Tabari.Tarikh/0310Tabari.Tarikh.Shamela0009783BK1-ara1.mARkdown"
+    openiti_text_path = "../diff_pipeline_test/corpus//0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown"
     openiti_ms_obj = openitiTextMs(openiti_text_path, report=True)
     
-    matching_sections = openiti_ms_obj.retrieve_md_tags_range(3233, 3252)
+    matching_sections = openiti_ms_obj.retrieve_md_tags_range(1467, 1471)
 
 
     print(matching_sections)
