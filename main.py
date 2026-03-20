@@ -18,6 +18,6 @@ if __name__ == "__main__":
     section_meta = "diff_pipeline_test/sections_meta.csv"
     uri_list = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab", "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara"]
     # uri_list = ["0845Maqrizi.Muqaffa"]
-    graph_obj = multitextGraph(data_json, uri_meta, section_meta, uri_filter=uri_list)
+    graph_obj = multitextGraph(data_json, uri_meta, section_meta, uri_filter=uri_list, log=True)
     # graph_obj.filter_uris(uri_list)
-    graph_obj.draw_diff_graph(export_path = "diff_test_final_data_2_iter.png", chars_per_line=100)
+    graph_obj.draw_diff_graph(export_path = "diff_test_final_data_2_iter.png", chars_per_line=100, color_map='Greys')

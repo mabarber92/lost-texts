@@ -276,12 +276,14 @@ class multitextGraph():
         horizontal_markers = []
 
         max_book_lines = []
+
+        heatmap_log = {}
         
         # Set horizontal position at zero - will increase by char len + 1 with each book
         horizontal_pos = 0
         # Loop through each book
         for book, data in tqdm(self.mapping_dict.items()):
-
+            heatmap_log[book] = {}
             # Reset the checked chars for each book
             self.checked_chars = []
             
@@ -361,6 +363,7 @@ class multitextGraph():
                         new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(i, line_end, wrap, height, height_increase, horizontal_pos, intensity=0)
                         patches_list.extend(new_gap_patches)
                         patch_intensity.extend(new_intensities)
+                        heatmap_log[book][0] = heatmap_log[book].get(0, 0) + line_end-i
                     
         
 
@@ -407,9 +410,10 @@ class multitextGraph():
                                 print("Writing patch for end")
                                 new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity=0)
                                 patch_intensity.extend(new_intensities)
+                                heatmap_log[book][0] = heatmap_log[book].get(0, 0) + row["end"]- row["start"]
 
                                 # Set section end and write out section_patch
-                                section_height = height+1 - section_start
+                                section_height = height+2 - section_start
                                 section_box = self._create_rectangle(horizontal_pos, self.line_length, section_start, section_height, section_box=True)
                                 section_boxes.append(section_box)
 
@@ -417,6 +421,7 @@ class multitextGraph():
                             else:
                                 new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity = row["intensity"])
                                 patch_intensity.extend(new_intensities)
+                                heatmap_log[book][row["intensity"]] = heatmap_log[book].get(row["intensity"], 0) + row["end"]- row["start"]
                             
                             patches_list.extend(new_patches)
                             
@@ -428,6 +433,7 @@ class multitextGraph():
                                     new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(row["end"], next_start, wrap, height, height_increase, horizontal_pos, intensity=0)
                                     patches_list.extend(new_gap_patches)
                                     patch_intensity.extend(new_intensities)
+                                    heatmap_log[book][0] = heatmap_log[book].get(0, 0) + next_start - row["end"]
             
             # Add the annotation stats to the bottom of the diff
             if annotate_stats:
@@ -472,6 +478,8 @@ class multitextGraph():
             horizontal_pos += self.line_length + 4
             horizontal_markers.append(horizontal_pos)
 
+            
+
             # Check data validity and export results
             # missed_data = data_df.merge(patched_data, how="left", indicator=True).query('_merge == "left_only"')
             # print(f"{len(missed_data)} rows of data missing for book {book}")
@@ -482,6 +490,8 @@ class multitextGraph():
                   
         
         # Create a collection from the patches
+        if self.log:
+            print(heatmap_log)
         
         patch_collection = PatchCollection(patches_list, cmap=self.cmap, norm=self.norm, edgecolor='none')
         patch_collection.set_array(np.asarray(patch_intensity))
@@ -525,10 +535,14 @@ class multitextGraph():
         return rect
 
 
-    def _set_color_mapping(self, color_map="YlOrBr"):
+    def _set_color_mapping(self, color_map="Greys"):
         """ Initiate a sequential color heatmap - using max intensity as top of scale"""
         print(f"Max intensity: {self.max_intensity}")
-        self.cmap = plt.get_cmap(color_map)
+        base_cmap = plt.get_cmap(color_map)
+
+        self.cmap = mcolors.LinearSegmentedColormap.from_list(
+                "truncated", base_cmap(np.linspace(0.15, 1.0, 256))
+        )
         self.norm = mcolors.Normalize(vmin=0, vmax=self.max_intensity)
 
     def _fetch_color_mapping(self, intensity):
