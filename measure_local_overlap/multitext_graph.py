@@ -67,9 +67,13 @@ class multitextGraph():
                 res = Counter()
                 for patches in section_data["patches"]:
                     for k, v in patches.items():
-                        res[k] = max(res[k], v)                
+                        
+                        if type(v) == int:
+                            res[k] = max(res[k], v)                
                 book_max += section_data["char_total"]
-                book_intensity_max += res["intensity"]
+                if res["intensity"] > book_intensity_max:
+                    book_intensity_max = res["intensity"]
+            
                
                 
             if book_max > max_chars:
@@ -175,27 +179,34 @@ class multitextGraph():
             end_df = pd.DataFrame(end_row)
 
             df_out = pd.concat([df_out, annotation_df, patches_df, end_df])
-
             
-            char_pos = patches_df["end"].max() 
+            char_pos = df_out["end"].max() 
+            
 
+        # df_out.to_csv("test_patch_df.csv")
 
         return df_out
 
     def _add_patch_data(self, start, width, current_height, height_increase, patch_list, color_list,  intensity = None, color=None, wrap=None):
             """Function to update patch lists"""
             
-            if self.log:
-                self.patch_log.append({"start": start, "width": width, "height": current_height, "height_increase": height_increase, "color": color, "intensity": intensity, "data": wrap})
+
+
+            
             patch = self._create_rectangle(start, width, current_height, height_increase)
             patch_list.append(patch)
             # Write intensity or color
             if intensity is not None:
                 color_list.append(intensity)
-            elif color is not None:
-                color_list.append(color)
+            # elif color is not None:
+            #     color_list.append(color)
             
+            if self.log:
+                log_data = {"start": start, "width": width, "height": current_height, "height_increase": height_increase, "color": color, "intensity": intensity, "data": wrap}
+                self.patch_log.append(log_data)
+
             return patch_list, color_list
+
 
 
     def _write_data_to_patch(self, start_offset, end_offset, current_wrap, current_height, height_increase, column_pos, intensity=None, color=None):
@@ -258,6 +269,7 @@ class multitextGraph():
         patch_intensity = []
         gap_patches_list = []
         gap_colors = []
+        section_boxes = []
         
         annotations_list = []
   
@@ -291,13 +303,31 @@ class multitextGraph():
             book_lines = book_lines + (len(data.keys()) *annotation_gap)
             
             
-            max_book_lines.append(book_lines)
+            
+
 
             # # To check all data has been added to patches and for duplicate data
             # patched_data = pd.DataFrame()
 
-            # Add book title to annotation?
-            # annot_count = 0
+            # Add book title to annotation        
+            height += height_increase*(annotation_gap*1.5)
+            wrap = 0                      
+            print(f"Added title at line: {height}")
+            # annot_count +=1
+            # if annot_count > 1:
+            #     exit()
+            
+            # Add annotation to our annotations list
+            annotation = {
+                "label_text": book,
+                "y": height-20, 
+                "x": horizontal_pos+self.line_length-1,
+                "va": "top",
+                "font_multiple": 1.2
+            }
+            annotations_list.append(annotation)
+
+            
             # Loop up to max_chars with steps of line_length
             for i in range(0, max_book_chars, self.line_length):
                 
@@ -314,6 +344,7 @@ class multitextGraph():
                 # print(f"Char list: {char_list}, Filter chars: {filter_chars}")
                 # If resulting filter list empty - continue - to avoid adding duplicate gap lines
                 if len(filter_chars) == 0:
+                    
                     continue
                 # Filter starts
                 line_data = data_df[data_df["start"].isin(filter_chars)]
@@ -327,9 +358,9 @@ class multitextGraph():
                 if len(line_data) == 0:
                     
                     if nonreuse_color is not None:
-                        new_gap_patches, new_gap_colors, wrap, height = self._write_data_to_patch(i, line_end, wrap, height, height_increase, horizontal_pos, color=nonreuse_color)
-                        gap_patches_list.extend(new_gap_patches)
-                        gap_colors.extend(new_gap_colors)
+                        new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(i, line_end, wrap, height, height_increase, horizontal_pos, intensity=0)
+                        patches_list.extend(new_gap_patches)
+                        patch_intensity.extend(new_intensities)
                     
         
 
@@ -352,10 +383,13 @@ class multitextGraph():
                         annotation = {
                             "label_text": data["label"],
                             "y": height-4, 
-                            "x": horizontal_pos+self.line_length+1,
+                            "x": horizontal_pos+self.line_length-3,
                             "va": "bottom"
                         }
                         annotations_list.append(annotation)
+                        
+                        # Set section start height for wrapping box
+                        section_start = height-(annotation_gap/1.5)
                     
                     # This is an error check - if logic of _create_patches_df correct, then this shouldn't trip
                     elif "annotation" in types and "reuse" in types:
@@ -363,60 +397,79 @@ class multitextGraph():
                         print(f"Current offset: {i}")
                         print("Filtered dataframe:")
                         print(line_data)
-                    elif "end" in types:
-                        print("Writing patch for end")
-                        # Need to ammend to handle where nonreuse_color is None - this is writing with white gap (issue not in the mapping df)
-                        new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, color=nonreuse_color)
                     else:
                         # Else - loop through the data and produce the patch rectangles
                         listed_data = line_data.sort_values(by=["start"]).to_dict("records")
                         row_count = len(listed_data)
                         for idx, row in enumerate(listed_data):
-                            
+
+                            if row["type"] == "end":
+                                print("Writing patch for end")
+                                new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity=0)
+                                patch_intensity.extend(new_intensities)
+
+                                # Set section end and write out section_patch
+                                section_height = height+1 - section_start
+                                section_box = self._create_rectangle(horizontal_pos, self.line_length, section_start, section_height, section_box=True)
+                                section_boxes.append(section_box)
+
                             # Write the data to a patch - the function will handle lines longer than line length and wrap
+                            else:
+                                new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity = row["intensity"])
+                                patch_intensity.extend(new_intensities)
                             
-                            new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity = row["intensity"])
                             patches_list.extend(new_patches)
-                            patch_intensity.extend(new_intensities)
+                            
                             # If nonreuse_color is not None - check if there is a gap between this offset and the next one - if there is create a gap patch
                             if nonreuse_color is not None and idx < row_count-1:
                                 next_start = listed_data[idx+1]["start"]
                                 
                                 if next_start - row["end"] > 0:
-                                    new_gap_patches, new_gap_colors, wrap, height = self._write_data_to_patch(row["end"], next_start, wrap, height, height_increase, horizontal_pos, color=nonreuse_color)
-                                    gap_patches_list.extend(new_gap_patches)
-                                    gap_colors.extend(new_gap_colors)
+                                    new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(row["end"], next_start, wrap, height, height_increase, horizontal_pos, intensity=0)
+                                    patches_list.extend(new_gap_patches)
+                                    patch_intensity.extend(new_intensities)
             
             # Add the annotation stats to the bottom of the diff
             if annotate_stats:
-                height += annotation_gap
-                annotation_text = ["Aligned books:"]
-                           
+                height += 4
+                annotation_text = "Aligned books:"
+                annotations_list.append({"label_text": annotation_text,
+                    "y" : height,
+                    "x" : horizontal_pos+self.line_length-3,
+                    "va": "top",
+                    "font_multiple": 0.7
+                    })
+                height += annotation_gap/3
+
+                concatenated_stats = {}           
                 for section, book_data in self.mapping_dict[book].items():
                     
+                    # Concatenate the data
                     for book2 in book_data["contributors"]:
                         # If metadata has been given - fetch from pre-processed metadata
-                        
-
                         book = book2["book2"]
+                        concatenated_stats[book] = concatenated_stats.get(book, 0) + book2['chars']
+
                         
-                        label = [book, f"{book2['chars']} chars"]
+                for book, stat in concatenated_stats.items():
+                    annotation_text = []
+                    label = [f"{book} - {stat} chars"]
+                    annotation_text.extend(label)
 
-                        annotation_text.extend(label)
+                    annotation_text = "\n".join(annotation_text)
                 
-                
-                annotation_text = "\n".join(annotation_text)
-                
-                annotations_list.append({"label_text": annotation_text,
+                    annotations_list.append({"label_text": annotation_text,
                                         "y" : height,
-                                        "x" : horizontal_pos+self.line_length+1,
-                                        "va": "top"
+                                        "x" : horizontal_pos+self.line_length-3,
+                                        "va": "top",
+                                        "font_multiple": 0.6
                                         })
+                    height += annotation_gap/4
 
-
+            max_book_lines.append(height)
             # Update horizontal for next book - use + 1 to create a gap
             
-            horizontal_pos += self.line_length + 1
+            horizontal_pos += self.line_length + 4
             horizontal_markers.append(horizontal_pos)
 
             # Check data validity and export results
@@ -426,12 +479,13 @@ class multitextGraph():
             # duplicate_data = patched_data[patched_data.duplicated(keep=False)]
             # print(f"{len(duplicate_data)} rows duplicated or more for book {book}")
             # duplicate_data.to_csv(f"{book}_duplicate_data.csv")
-                    
+                  
         
         # Create a collection from the patches
         
         patch_collection = PatchCollection(patches_list, cmap=self.cmap, norm=self.norm, edgecolor='none')
         patch_collection.set_array(np.asarray(patch_intensity))
+        section_collection = PatchCollection(section_boxes, match_original=True)
 
         # Set max lines to max of list of lines
         self.max_lines = max(max_book_lines)
@@ -440,7 +494,7 @@ class multitextGraph():
         gap_patch_collection = PatchCollection(gap_patches_list, facecolors=gap_colors)
 
         # Return the patch collections and the annotation
-        return patch_collection, gap_patch_collection, annotations_list, horizontal_markers
+        return patch_collection, gap_patch_collection, annotations_list, horizontal_markers, section_collection
     
     def _set_horizontal_position(self, data_offset, absolute_pos, horizontal_pos, wrap):
         """Calculate the position of an offset based on the current position in the 
@@ -450,20 +504,30 @@ class multitextGraph():
         
         return position
 
-    def _create_rectangle(self, start, width, current_height, height_increase, data=None):
+    def _create_rectangle(self, start, width, current_height, height_increase, section_box=False, data=None):
         """Use data about start, end position and height to create a rectangle using that data"""
         
         xy = (start, current_height)
         # width = end-start
         # if width > self.line_length or width < 0:
         #     print(width)
+
+        if section_box:
+            linestyle = "-"
+            linewidth = 0.5
             
-        rect = Rectangle(xy, width, height_increase)
+        else:
+            linestyle = None
+            linewidth = None
+            
+
+        rect = Rectangle(xy, width, height_increase, facecolor='none', linestyle=linestyle, edgecolor='black', linewidth=linewidth)
         return rect
 
 
     def _set_color_mapping(self, color_map="YlOrBr"):
         """ Initiate a sequential color heatmap - using max intensity as top of scale"""
+        print(f"Max intensity: {self.max_intensity}")
         self.cmap = plt.get_cmap(color_map)
         self.norm = mcolors.Normalize(vmin=0, vmax=self.max_intensity)
 
@@ -520,21 +584,25 @@ class multitextGraph():
 
         return "\n".join(lines)
 
-    def _add_col_annotations(self, ax, annotation_list, font_size=10):
-        font_size = math.ceil((font_size/self.book_count)*3)
+    def _add_col_annotations(self, ax, annotation_list, font_size=9):
+        base_font_size = math.ceil((font_size/self.book_count)*3)
         print(f"Font size for {self.book_count} books is {font_size}")
         for annotation in annotation_list:
+            if "font_multiple" in annotation.keys():
+                font_size = base_font_size * annotation["font_multiple"]
+            else:
+                font_size = base_font_size
             wrapped = self._wrap_text_to_data_width(ax, annotation["label_text"], annotation["x"], annotation["y"], self.line_length*0.75 , fontsize=font_size)
             ax.text(annotation["x"], annotation["y"], wrapped, size = font_size, wrap=True, va=annotation["va"]
                      )
 
 
     # Overall graphing function
-    def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = "YlOrBr", export_path=None):
+    def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = "YlOrBr", export_path=None, add_explan=True):
         """Main func for drawing the graph - max lines is the number of lines to go to for the longest book"""
         self.line_length, max_lines = self._calculate_line_length(max_lines, chars_per_line)
         self._set_color_mapping(color_map)
-        patch_collection, gap_patch_collection, annotation_list, horizontal_markers = self._write_patches(max_lines=max_lines)
+        patch_collection, gap_patch_collection, annotation_list, horizontal_markers, section_boxes = self._write_patches(max_lines=max_lines)
         print(horizontal_markers)
         
         px = 1/plt.rcParams['figure.dpi']  # pixel in inches
@@ -542,22 +610,28 @@ class multitextGraph():
         ax = fig.add_subplot(1, 1, 1)
         
         ax.add_collection(patch_collection)
-        ax.add_collection(gap_patch_collection)
+        ax.add_collection(section_boxes)
+        # ax.add_collection(gap_patch_collection)
         
         
 
         # Set axis as flipped - so that we have rtl and top to bottom display
-        ax.set_xlim((self.line_length+1) * self.book_count, 0)     # or your max end offset
+        ax.set_xlim((self.line_length+4) * self.book_count, 0)     # or your max end offset
         
-        ax.set_ylim(self.max_lines, 0) 
+        ax.set_ylim(self.max_lines+10, 0) 
 
         # Add annotations - below xlim and ylim to allow for wrapping
         self._add_col_annotations(ax, annotation_list)
 
         # Add a colorbar
-        plt.colorbar(patch_collection, ax=ax)
+        plt.colorbar(patch_collection, ax=ax, aspect=40, ticks=list(range(0, self.max_intensity+1)))
         ax.set_axis_off()
         
+        # Add annotation to bottom for number of chars per row
+        if add_explan:
+            annotation_text = f"A heatmap of verbatim overlap between {self.book_count} books, where each vertical line is equivalent to {self.line_length} characters"
+            ax.text((self.line_length+4) * self.book_count, self.max_lines+10, annotation_text, size=6)
+
         if self.log:
             log_df = pd.DataFrame(self.patch_log)
             log_df.to_csv("patch_log.csv")

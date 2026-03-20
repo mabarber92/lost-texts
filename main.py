@@ -11,7 +11,7 @@ if __name__ == "__main__":
                             "0845Maqrizi.Mawaciz": "./diff_pipeline_test/corpus/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown",
                             "0845Maqrizi.Muqaffa": "./diff_pipeline_test/corpus/0845Maqrizi.Muqaffa.Sham19Y0145334-ara1.completed"}
     # diff_mapper = multitextDiffMap(meta_path, corpus_base_path, pairwise_dir=pairwise_path, uri_text_paths=custom_openiti_path)
-    # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, "./diff_pipeline_test", log=True, max_recursions=3)
+    # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, "./diff_pipeline_test", group_data_by_section=False, log=True, max_recursions=1)
 
     data_json = "diff_pipeline_test/verbatim_mapping.json"
     uri_meta = "diff_pipeline_test/uri_meta.csv"
@@ -20,4 +20,4 @@ if __name__ == "__main__":
     # uri_list = ["0845Maqrizi.Muqaffa"]
     graph_obj = multitextGraph(data_json, uri_meta, section_meta, uri_filter=uri_list)
     # graph_obj.filter_uris(uri_list)
-    graph_obj.draw_diff_graph(export_path = "diff_test_final_data.png", chars_per_line=100)
+    graph_obj.draw_diff_graph(export_path = "diff_test_final_data_2_iter.png", chars_per_line=100)

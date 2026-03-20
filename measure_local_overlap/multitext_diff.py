@@ -27,6 +27,8 @@ class multitextDiffMap():
         
         self.openiti_paths = openitiCorpus(meta_tsv, corpus_base_path, language="ara")
 
+        self.recurse_log = 0
+
         if uri_text_paths is not None:
             self.openiti_paths.reassign_paths(uri_text_paths)
             self.openiti_paths = self.openiti_paths.path_dict
@@ -106,8 +108,9 @@ class multitextDiffMap():
 
                 # Concatenate whatever is left
                 updated_cluster_df = pd.concat([updated_cluster_df, new_cluster_df])
+        self.recurse_log += 1
         if log:
-            self.recurse_log += 1
+            
             print(f"Recursion number: {self.recurse_log}, latest df length: {len(updated_cluster_df)}")
             print(self.internal_data)
         # Recurse - run the function again with whatever clusters we have left to check (with the new clusters picked up by checking context)
@@ -184,13 +187,12 @@ class multitextDiffMap():
             
             unmatched_data = pd.concat([unmatched_data, book_data])
 
-
+        self.recurse_log += 1
         if log:
-            self.recurse_log += 1
             print(f"Recursion number: {self.recurse_log}, unmatched data: {len(unmatched_data)} ")
             
         # If there are no remaining rows of data, we've exhausted the data - close the recursion
-        if len(unmatched_data) == 0 or self.recurse_log >= max_recursions:
+        if len(unmatched_data) == 0 or self.recurse_log > max_recursions:
             
             
             return section_dict
@@ -344,7 +346,7 @@ class multitextDiffMap():
             
             df = df.rename(columns={pos_1: replace_1, pos_2: replace_2})
         
-        print(df)
+        
         
         return df
 
@@ -411,7 +413,6 @@ class multitextDiffMap():
         # If using pairwise you'll only get a map populated for the pairwise data that have been provided
         # Load all books as openiti_obj - as dict uri: book_obj
         book_uris = list(self.internal_data.keys())
-
         obj_dict = self.openiti_objs_dict(book_uris)
         ms_sections_map = self._map_ms_sections(self.internal_data)
 
@@ -564,7 +565,7 @@ class multitextDiffMap():
         if group_data_by_section:
             sub["rid"] = list(zip(sub["book2"], sub["section2"]))
         else:
-            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
+            sub["rid"] = list(sub["book2"])
         sub = sub.sort_values(["rid", "start", "end"])
 
         sub["run_end"] = sub.groupby("rid")["end"].cummax()
@@ -582,7 +583,10 @@ class multitextDiffMap():
         contrib = (unions.groupby("rid", as_index=False)["chars"].sum()
                         .sort_values("chars", ascending=False))
 
-        contrib[["book2","ms2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
+        if group_data_by_section:
+            contrib[["book2","ms2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
+        else:
+            contrib[["book2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
         return contrib.drop(columns=["rid"])
     
 
@@ -597,7 +601,9 @@ class multitextDiffMap():
         if group_data_by_section:
             sub["rid"] = list(zip(sub["book2"], sub["section2"]))
         else:
-            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
+            sub["rid"] = list(sub["book2"])
+
+
 
         starts = defaultdict(list)
         ends = defaultdict(list)
@@ -628,7 +634,7 @@ class multitextDiffMap():
                     "end": next_x,
                     "intensity": len(active),
                     # optional if you want later drill-down per patch:
-                    # "active": sorted(active),
+                    "active": sorted(active),
                 })
 
             for rid in ends.get(x, []):
@@ -649,7 +655,7 @@ class multitextDiffMap():
     def build_mapping_dictionary(self, pairwise_df, group_data_by_section=True):
         # drop unnamed index if present
         # pairwise_df = pairwise_df.drop(columns=[c for c in pairwise_df.columns if c.startswith("Unnamed")], errors="ignore")
-
+        # Revisit - it is possible that section grouping not working here as expected
         out = {}
         for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
             patches = self.make_patches_exclusive(sub, group_data_by_section=group_data_by_section)
@@ -661,6 +667,9 @@ class multitextDiffMap():
                 "contributors": contrib.to_dict("records"),
                 "char_total": char_len
             }
+        
+
+        
         return out    
 
 
@@ -718,7 +727,7 @@ class multitextDiffMap():
         self.write_json(mapping_dict, mapping_json_path) 
 
 
-    def run_diff_pipeline(self, base_uri, start_ms, end_ms, out_dir, max_recursions=None, log=False):
+    def run_diff_pipeline(self, base_uri, start_ms, end_ms, out_dir, group_data_by_section=True, max_recursions=None, log=False):
         
         # Initiate a place to store ms_ranges used as internal memory across functions - move these down to a pipeline func so we don't accidently store them after running
         self.internal_data = {}
@@ -738,7 +747,7 @@ class multitextDiffMap():
             self.pairwise_for_sections(base_uri, start_ms, end_ms, log=log, max_recursions=max_recursions)
             
         
-        mapping_dict = self.build_multi_diff_map()
+        mapping_dict = self.build_multi_diff_map(group_data_by_section=group_data_by_section)
         
         self._export_data(mapping_dict, out_dir)
 
