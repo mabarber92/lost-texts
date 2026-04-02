@@ -238,7 +238,8 @@ class multitextGraph():
             char_pos = df_out["end"].max() 
             
         self.df_log += 1
-        df_out.to_csv(f"test_patch_df-{self.df_log}.csv")
+        if self.log:
+            df_out.to_csv(f"test_patch_df-{self.df_log}.csv")
 
         return df_out
 

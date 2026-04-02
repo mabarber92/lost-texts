@@ -3,22 +3,26 @@ from measure_local_overlap.multitext_graph import multitextGraph
 
 if __name__ == "__main__":
     clusters_path = "mnt/d/Corpus Stats/2023/v8-clusters/minified_clusters_pre-1000AH_under500_2.csv"
-    meta_path = "diff_pipeline_test/OpenITI_metadata_2023-1-8.csv"
+    meta_path = "./measure_local_overlap/input_data/OpenITI_metadata_2023-1-8.csv"
     corpus_base_path = "mnt/d/OpenITI Corpus/corpus_2023_1_8/"
-    pairwise_path = "diff_pipeline_test/pairwise_files"
-    custom_openiti_path = {"0542IbnMunjibTajRiyasaIbnSayrafi.Ishara": "./diff_pipeline_test/corpus/0542IbnMunjibTajRiyasaIbnSayrafi.Ishara.MAB09032026-ara1",
-                           "0660IbnCadim.BughyatTalab": "./diff_pipeline_test/corpus/0660IbnCadim.BughyatTalab.Shamela0010798-ara1.mARkdown",
-                            "0845Maqrizi.Mawaciz": "./diff_pipeline_test/corpus/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown",
-                            "0845Maqrizi.Muqaffa": "./diff_pipeline_test/corpus/0845Maqrizi.Muqaffa.Sham19Y0145334-ara1.completed"}
-    out_dir = "./diff_pipeline_test_flip_dir"
+    pairwise_path = "./measure_local_overlap/input_data/pairwise_lost_texts"
+    custom_openiti_path = {"0542IbnMunjibTajRiyasaIbnSayrafi.Ishara": "./measure_local_overlap/input_data/corpus/0542IbnMunjibTajRiyasaIbnSayrafi.Ishara.MAB09032026-ara1",
+                           "0660IbnCadim.BughyatTalab": "./measure_local_overlap/input_data/corpus/0660IbnCadim.BughyatTalab.Shamela0010798-ara1.mARkdown",
+                            "0845Maqrizi.Mawaciz": "./measure_local_overlap/input_data/corpus/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown",
+                            "0845Maqrizi.Muqaffa": "./measure_local_overlap/input_data/corpus/0845Maqrizi.Muqaffa.Sham19Y0145334-ara1.completed"}
+    
+    uri_list = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab", "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara"]
+
+    out_dir = "./measure_local_overlap/output_data/lost_texts_data/"
     # diff_mapper = multitextDiffMap(meta_path, corpus_base_path, pairwise_dir=pairwise_path, uri_text_paths=custom_openiti_path)
     # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, out_dir, group_data_by_section=False,  max_recursions=1)
 
-    data_json = "diff_pipeline_test_flip_dir/verbatim_mapping.json"
-    uri_meta = "diff_pipeline_test_flip_dir/uri_meta.csv"
-    section_meta = "diff_pipeline_test_flip_dir/sections_meta.csv"
-    uri_list = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab", "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara"]
+    data_json = "./measure_local_overlap/output_data/lost_texts_data/verbatim_mapping.json"
+    uri_meta = "./measure_local_overlap/output_data/lost_texts_data/uri_meta.csv"
+    section_meta = "./measure_local_overlap/output_data/lost_texts_data/sections_meta.csv"
+    # uri_list = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab", "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara"]
     # uri_list = ["0845Maqrizi.Muqaffa"]
-    graph_obj = multitextGraph(data_json, uri_meta, section_meta, uri_filter=uri_list, log=True)
+    graph_obj = multitextGraph(data_json, uri_meta, section_meta)
     # graph_obj.filter_uris(uri_list)
-    graph_obj.draw_diff_graph(export_path = "diff_test_check_heat_no_sect.png", chars_per_line=50)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_50_chars.png", chars_per_line=50)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_50_chars.png", map_type="categorical", chars_per_line=50)

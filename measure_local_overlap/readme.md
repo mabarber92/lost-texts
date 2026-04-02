@@ -24,3 +24,8 @@ Offsets can be taken directly from passim (coarse offsets) or computed using kit
 - Support mapping of coarse offsets directly from the passim data (make the computation of the diff optional)
 - Investigate the single-link clustering of sections more carefully - can the approach to recursion be refined (larger task)
 - Build set of modules that allow for a plotly output - for interactively browsing viz
+
+# Example graphs
+
+![heatmap](/sample_graphs/heatmap_50_chars.png)
+![categorical heatmap](/sample_graphs/catmap_50_chars.png)

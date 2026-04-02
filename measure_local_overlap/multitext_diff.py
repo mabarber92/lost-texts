@@ -674,7 +674,7 @@ class multitextDiffMap():
         for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
             # Remove any rows where parralel data is outside of the sections being compared
             sub = sub[sub["section2"] != "Section outside dict"]
-            sub.to_csv(f"testing-sub-{book}.csv", encoding='utf-8-sig')
+
             patches = self.make_patches_exclusive(sub, group_data_by_section=group_data_by_section)
             contrib = self.contributor_union_chars_exclusive(sub, group_data_by_section=group_data_by_section)
             char_len = self._get_total_section_len(book, section)
@@ -699,7 +699,7 @@ class multitextDiffMap():
         # Produce the pairwise diffs
         pairwise_map = self.produce_pairwise_diffs()
         df = pd.DataFrame(pairwise_map)
-        df.to_csv("outputs_check.csv")
+        # df.to_csv("outputs_check.csv")
 
         # Following code - from ChatGPT - creates a dictionary mapping the overlaps - need to update to ensure we feed in sections in order in which they're in the book
         mapping_dict = self.build_mapping_dictionary(df, group_data_by_section=group_data_by_section)
