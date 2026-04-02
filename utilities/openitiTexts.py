@@ -137,6 +137,7 @@ class openitiTextMs():
             offset = 0
             for split in splits[:-1]:
                 if not re.match(tag, split):
+                    
                     offset += len(text_cleaner(split))
                     tag_offsets.append(offset)
         

@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.patches import Rectangle
+import matplotlib.patches as mpatches
 from matplotlib.collections import PatchCollection
 from collections import Counter
 import math
@@ -29,15 +30,18 @@ class multitextGraph():
         if uri_filter is not None:
             self.filter_uris(uri_filter)
 
-        # Get the highest number of characters and number of books
-        self._get_summary_data()
+
 
         if uri_meta is not None:
             self._map_metadata(uri_meta, section_meta)
         
+        # Get the highest number of characters and number of books
+        self._get_summary_data()
+
         # Set up log
         self.log=log
         self.patch_log = []
+        self.df_log=0
         
 
     def load_json(self, json_path):
@@ -57,19 +61,41 @@ class multitextGraph():
 
     # Function to get max chars
     def _get_summary_data(self):
+        print("Getting summary data")
         max_chars = 0
         max_intensity = 0
-        
+        all_combinations = []
         for book, data in self.mapping_dict.items():
             book_max = 0
             book_intensity_max = 0
             for section, section_data in data.items():                
                 res = Counter()
                 for patches in section_data["patches"]:
+                    # Hack to fix group-by issues in input data
+                    # print(patches)
+                    # if "active" in patches.keys():
+                    #     active = patches["active"]
+                    #     print(active)
+                    #     if type(active[0]) == list:
+                    #         joined_items = []
+                    #         for item in active:
+                    #             new_item = item[0]
+                    #             print(new_item)
+                    #             joined_items.append(new_item)
+                    #         print(joined_items)
+                    #         joined_items = list(set(joined_items))
+                    #         patches["active"] = joined_items
+                    #         patches["intensity"] = len(joined_items)
+
                     for k, v in patches.items():
                         
+                        
                         if type(v) == int:
-                            res[k] = max(res[k], v)                
+                            res[k] = max(res[k], v)
+                        if k == "active":
+                            # Handle cases where sections outputted into active with book title
+                            
+                            all_combinations.append(patches[k])                
                 book_max += section_data["char_total"]
                 if res["intensity"] > book_intensity_max:
                     book_intensity_max = res["intensity"]
@@ -80,6 +106,12 @@ class multitextGraph():
                 max_chars = book_max
             if book_intensity_max > max_intensity:
                 max_intensity = book_intensity_max
+        
+        # Using all possible combinations create a set of unique combinations
+        self.unique_combos = sorted(set(
+            tuple(sorted(combo)) for combo in all_combinations
+        ))
+        print(self.unique_combos)
                 
 
         self.max_chars = max_chars
@@ -109,8 +141,9 @@ class multitextGraph():
             section_df = pd.DataFrame()
         
         new_mapping_dict = {}
-
+        print(self.mapping_dict.keys())
         for book, data in tqdm(self.mapping_dict.items()):
+            
             book_meta = self._match_meta(uri_df, book, "uri")
             new_data = {}            
             for section, section_data in data.items():                
@@ -119,12 +152,26 @@ class multitextGraph():
                 for book2_data in section_data["contributors"]:
                     book2_meta = self._match_meta(uri_df, book2_data["book2"], "uri")
                     book2_data["book2"] = book2_meta
+
+                for patch_data in section_data["patches"]:
+                    new_active = []
+                    for active_book in patch_data["active"]:
+                        active_meta = self._match_meta(uri_df, active_book, "uri")
+                        new_active.append(active_meta)
+                    patch_data["active"] = new_active
+   
+                        
                 
                 new_data[section_meta] = section_data
-            
+           
             new_mapping_dict[book_meta] = new_data
 
         self.mapping_dict = new_mapping_dict
+        print(self.mapping_dict.keys())
+        
+
+
+
 
 
     def _calculate_line_length(self, max_lines=None, chars_per_line=None, max_chars=None):
@@ -152,13 +199,14 @@ class multitextGraph():
 
             
             # Prepare the annotation row
+            annot_end = char_pos+self.line_length
             annotation = [{"start": char_pos,
-                           "end": char_pos+self.line_length,
+                           "end": annot_end,
                            "intensity": 0,
                            "type": "annotation",
                            "label": section}]
             annotation_df = pd.DataFrame(annotation)
-
+            
             
             # Augment the char pos in the patches to account for current char pos + annotation row
             char_pos += self.line_length
@@ -169,6 +217,13 @@ class multitextGraph():
             patches_df["start"] += char_pos
             patches_df["end"] += char_pos
 
+            # Prepare the start row
+            start_row = [{"start": annot_end,
+                         "end": patches_df["start"].min(),
+                        "intensity": 0,
+                        "type": "start",
+                        }]
+            start_df = pd.DataFrame(start_row)
             
             # Prepare the end row
             end_row = [{"start": patches_df["end"].max(),
@@ -178,12 +233,12 @@ class multitextGraph():
                         }]
             end_df = pd.DataFrame(end_row)
 
-            df_out = pd.concat([df_out, annotation_df, patches_df, end_df])
+            df_out = pd.concat([df_out, annotation_df, start_df, patches_df, end_df])
             
             char_pos = df_out["end"].max() 
             
-
-        # df_out.to_csv("test_patch_df.csv")
+        self.df_log += 1
+        df_out.to_csv(f"test_patch_df-{self.df_log}.csv")
 
         return df_out
 
@@ -257,7 +312,21 @@ class multitextGraph():
 
 
 
-
+    def _set_intensity(self, data=None):
+        if self.mode == "sequential":
+            if data is None:
+                return 0
+            else:
+                return data["intensity"]
+        elif self.mode == "categorical":
+            if data is None:
+                return tuple([None])
+            elif type(data["active"]) == list:
+                return tuple(sorted(data["active"]))
+            else:
+                print("Appropriate data type not found for a categorical map in:")
+                print(data)
+                exit()
 
 
     def _write_patches(self, max_lines, nonreuse_color = "lightgrey", annotation_gap=30, annotate_stats=True):
@@ -360,7 +429,8 @@ class multitextGraph():
                 if len(line_data) == 0:
                     
                     if nonreuse_color is not None:
-                        new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(i, line_end, wrap, height, height_increase, horizontal_pos, intensity=0)
+                        intensity = self._set_intensity()
+                        new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(i, line_end, wrap, height, height_increase, horizontal_pos, intensity=intensity)
                         patches_list.extend(new_gap_patches)
                         patch_intensity.extend(new_intensities)
                         heatmap_log[book][0] = heatmap_log[book].get(0, 0) + line_end-i
@@ -406,20 +476,23 @@ class multitextGraph():
                         row_count = len(listed_data)
                         for idx, row in enumerate(listed_data):
 
-                            if row["type"] == "end":
-                                print("Writing patch for end")
-                                new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity=0)
+                            if row["type"] == "end" or row["type"] == "start":
+                                print(f"Writing patch for {row['type']}")
+                                intensity = self._set_intensity()
+                                new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity=intensity)
                                 patch_intensity.extend(new_intensities)
                                 heatmap_log[book][0] = heatmap_log[book].get(0, 0) + row["end"]- row["start"]
 
-                                # Set section end and write out section_patch
-                                section_height = height+2 - section_start
-                                section_box = self._create_rectangle(horizontal_pos, self.line_length, section_start, section_height, section_box=True)
-                                section_boxes.append(section_box)
+                                # If 'end' Set section end and write out section_patch
+                                if row["type"] == "end":
+                                    section_height = height+2 - section_start
+                                    section_box = self._create_rectangle(horizontal_pos, self.line_length, section_start, section_height, section_box=True)
+                                    section_boxes.append(section_box)
 
                             # Write the data to a patch - the function will handle lines longer than line length and wrap
                             else:
-                                new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity = row["intensity"])
+                                intensity = self._set_intensity(row)
+                                new_patches, new_intensities, wrap, height = self._write_data_to_patch(row["start"], row["end"], wrap, height, height_increase, horizontal_pos, intensity = intensity)
                                 patch_intensity.extend(new_intensities)
                                 heatmap_log[book][row["intensity"]] = heatmap_log[book].get(row["intensity"], 0) + row["end"]- row["start"]
                             
@@ -430,7 +503,8 @@ class multitextGraph():
                                 next_start = listed_data[idx+1]["start"]
                                 
                                 if next_start - row["end"] > 0:
-                                    new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(row["end"], next_start, wrap, height, height_increase, horizontal_pos, intensity=0)
+                                    intensity = self._set_intensity()
+                                    new_gap_patches, new_intensities, wrap, height = self._write_data_to_patch(row["end"], next_start, wrap, height, height_increase, horizontal_pos, intensity=intensity)
                                     patches_list.extend(new_gap_patches)
                                     patch_intensity.extend(new_intensities)
                                     heatmap_log[book][0] = heatmap_log[book].get(0, 0) + next_start - row["end"]
@@ -493,8 +567,21 @@ class multitextGraph():
         if self.log:
             print(heatmap_log)
         
+        
         patch_collection = PatchCollection(patches_list, cmap=self.cmap, norm=self.norm, edgecolor='none')
-        patch_collection.set_array(np.asarray(patch_intensity))
+        
+        self._apply_patch_colors(patch_collection, patch_intensity)
+        # if self.mode == "categorical":
+        #     combo_index = {combo: i+1 for i, combo in enumerate(self.unique_combos)}
+        #     mapped = [combo_index.get(v, 0) for v in patch_intensity]
+        #     patch_collection.set_array(np.asarray(mapped))
+        #     patch_collection.set_clim(0, len(self.unique_combos) + 1)  # fix the scale globally
+
+        # else:
+        #     patch_collection.set_array(np.asarray(patch_intensity))
+        #     patch_collection.set_clim(0, self.max_intensity)
+
+        
         section_collection = PatchCollection(section_boxes, match_original=True)
 
         # Set max lines to max of list of lines
@@ -506,6 +593,14 @@ class multitextGraph():
         # Return the patch collections and the annotation
         return patch_collection, gap_patch_collection, annotations_list, horizontal_markers, section_collection
     
+    def _apply_patch_colors(self, patch_collection, patch_intensity):
+        if self.mode == "categorical":
+            mapped = [self.combo_index.get(v, 0) for v in patch_intensity]
+        else:
+            mapped = patch_intensity
+        patch_collection.set_array(np.asarray(mapped))
+        patch_collection.set_clim(0, len(self.cmap.colors)-1 if self.mode == "categorical" else self.max_intensity)
+
     def _set_horizontal_position(self, data_offset, absolute_pos, horizontal_pos, wrap):
         """Calculate the position of an offset based on the current position in the 
         data (absolute_pos) and the horizontal_pos of the graph and adjustment for wrapping"""
@@ -534,16 +629,46 @@ class multitextGraph():
         rect = Rectangle(xy, width, height_increase, facecolor='none', linestyle=linestyle, edgecolor='black', linewidth=linewidth)
         return rect
 
+    def _build_categorical_colors(self, base_map="tab10"):
+        """Build a custom categorical colour set that allows for intuitive reading of category combinations"""
+        lead_books = sorted(set(combo[0] for combo in self.unique_combos))
+        base_hues = plt.get_cmap(base_map)
+        
+        # Index 0 reserved for no-reuse
+        color_list = [(0.85, 0.85, 0.85, 1)]
+        self.combo_index = {}
+        
+        for book_idx, lead in enumerate(lead_books):
+            group = [c for c in self.unique_combos if c[0] == lead]
+            for shade_idx, combo in enumerate(group):
+                base = np.array(base_hues(book_idx))
+                factor = 1.0 - 0.5 * (shade_idx / max(len(group) - 1, 1))
+                color_list.append(tuple(base[:3] * factor) + (1.0,))
+                self.combo_index[combo] = len(color_list) - 1
+        print(color_list)
+        return mcolors.ListedColormap(color_list)
 
     def _set_color_mapping(self, color_map="Greys"):
         """ Initiate a sequential color heatmap - using max intensity as top of scale"""
-        print(f"Max intensity: {self.max_intensity}")
-        base_cmap = plt.get_cmap(color_map)
+        if self.mode == "sequential":
+            print(f"Max intensity: {self.max_intensity}")
+            base_cmap = plt.get_cmap(color_map)
 
-        self.cmap = mcolors.LinearSegmentedColormap.from_list(
-                "truncated", base_cmap(np.linspace(0.15, 1.0, 256))
-        )
-        self.norm = mcolors.Normalize(vmin=0, vmax=self.max_intensity)
+            self.cmap = mcolors.LinearSegmentedColormap.from_list(
+                    "truncated", base_cmap(np.linspace(0.15, 1.0, 256))
+            )
+            self.norm = mcolors.Normalize(vmin=0, vmax=self.max_intensity)
+            
+        if self.mode == "categorical":
+            
+            self.cmap = self._build_categorical_colors()
+            n = len(self.cmap.colors)
+            self.norm = mcolors.NoNorm()
+            # Above suggested - below worked before
+            # self.norm = mcolors.BoundaryNorm(boundaries=range(n + 1), ncolors=n)
+            
+            
+
 
     def _fetch_color_mapping(self, intensity):
         """Function to allow less verbose code for passing the color to the patches"""
@@ -610,17 +735,50 @@ class multitextGraph():
             ax.text(annotation["x"], annotation["y"], wrapped, size = font_size, wrap=True, va=annotation["va"]
                      )
 
+    def _build_legend(self, ax, patch_collection, book_joiner= " ; "):
+        # Add a colorbar or legend
+        if self.mode == "categorical":
+            col_count = math.ceil(len(self.unique_combos)/3)
+            handles = [
+                mpatches.Patch(
+                    facecolor=self.cmap(self.norm(self.combo_index[combo])),
+                    label=book_joiner.join(combo)  # or however you want to format the combo label
+                )
+                for combo in self.unique_combos
+            ]
+            handles.insert(0, mpatches.Patch(facecolor=self.cmap(self.norm(0)), label="No reuse"))
+            ax.legend(
+                handles=handles,
+                loc="upper center",
+                bbox_to_anchor=(0.5, -0.01),
+                fontsize=6,
+                title="Aligned texts",
+                borderaxespad=0,
+                ncols=col_count
+            )
+            
+        else:
+            plt.colorbar(patch_collection, ax=ax, aspect=40, ticks=list(range(0, self.max_intensity+1)))
+
 
     # Overall graphing function
-    def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = "YlOrBr", export_path=None, add_explan=True):
+    def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = "YlOrBr", export_path=None, add_explan=True, map_type="heatmap"):
         """Main func for drawing the graph - max lines is the number of lines to go to for the longest book"""
         self.line_length, max_lines = self._calculate_line_length(max_lines, chars_per_line)
+        
+        
+        # Set the mode to be used by the cmap, patch builder and collection mapper
+        if map_type == "heatmap":
+            self.mode = "sequential"
+        else:
+            self.mode = "categorical"
         self._set_color_mapping(color_map)
+
         patch_collection, gap_patch_collection, annotation_list, horizontal_markers, section_boxes = self._write_patches(max_lines=max_lines)
         print(horizontal_markers)
         
         px = 1/plt.rcParams['figure.dpi']  # pixel in inches
-        fig = plt.figure(figsize=(1200*px, 600*px))
+        fig = plt.figure(figsize=(1200*px, 800*px))
         ax = fig.add_subplot(1, 1, 1)
         
         ax.add_collection(patch_collection)
@@ -637,8 +795,10 @@ class multitextGraph():
         # Add annotations - below xlim and ylim to allow for wrapping
         self._add_col_annotations(ax, annotation_list)
 
-        # Add a colorbar
-        plt.colorbar(patch_collection, ax=ax, aspect=40, ticks=list(range(0, self.max_intensity+1)))
+        # Add the correct legend
+        self._build_legend(ax, patch_collection)
+
+        
         ax.set_axis_off()
         
         # Add annotation to bottom for number of chars per row
@@ -649,6 +809,7 @@ class multitextGraph():
         if self.log:
             log_df = pd.DataFrame(self.patch_log)
             log_df.to_csv("patch_log.csv")
+            print(self.max_intensity)
 
         if export_path is not None:
             fig.savefig(export_path, bbox_inches="tight", dpi=300)

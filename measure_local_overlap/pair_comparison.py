@@ -64,7 +64,7 @@ class pairComparison():
                     "offsets_b": verbatim_b}
         else:
             return {"offsets_a": verbatim_a,
-                    "offets_b": verbatim_b}
+                    "offsets_b": verbatim_b}
         
 
 

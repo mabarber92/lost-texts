@@ -10,14 +10,15 @@ if __name__ == "__main__":
                            "0660IbnCadim.BughyatTalab": "./diff_pipeline_test/corpus/0660IbnCadim.BughyatTalab.Shamela0010798-ara1.mARkdown",
                             "0845Maqrizi.Mawaciz": "./diff_pipeline_test/corpus/0845Maqrizi.Mawaciz.Shamela0011566-ara1.mARkdown",
                             "0845Maqrizi.Muqaffa": "./diff_pipeline_test/corpus/0845Maqrizi.Muqaffa.Sham19Y0145334-ara1.completed"}
+    out_dir = "./diff_pipeline_test_flip_dir"
     # diff_mapper = multitextDiffMap(meta_path, corpus_base_path, pairwise_dir=pairwise_path, uri_text_paths=custom_openiti_path)
-    # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, "./diff_pipeline_test", group_data_by_section=False, log=True, max_recursions=1)
+    # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, out_dir, group_data_by_section=False,  max_recursions=1)
 
-    data_json = "diff_pipeline_test/verbatim_mapping.json"
-    uri_meta = "diff_pipeline_test/uri_meta.csv"
-    section_meta = "diff_pipeline_test/sections_meta.csv"
+    data_json = "diff_pipeline_test_flip_dir/verbatim_mapping.json"
+    uri_meta = "diff_pipeline_test_flip_dir/uri_meta.csv"
+    section_meta = "diff_pipeline_test_flip_dir/sections_meta.csv"
     uri_list = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab", "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara"]
     # uri_list = ["0845Maqrizi.Muqaffa"]
     graph_obj = multitextGraph(data_json, uri_meta, section_meta, uri_filter=uri_list, log=True)
     # graph_obj.filter_uris(uri_list)
-    graph_obj.draw_diff_graph(export_path = "diff_test_final_data_2_iter.png", chars_per_line=100, color_map='Greys')
+    graph_obj.draw_diff_graph(export_path = "diff_test_check_heat_no_sect.png", chars_per_line=50)

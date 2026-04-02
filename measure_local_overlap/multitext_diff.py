@@ -495,10 +495,15 @@ class multitextDiffMap():
                 section_title = section["tag_text"]
                 first_ms = section_ms[0]
                 last_ms = section_ms[-1]
+                
+                offsets = openiti_obj_b1.calculate_tag_offset_clean(first_ms, section_title, regex=False)
+                # print(f"Book: {book}, section: {section_title}, first_ms: {first_ms}, offsets returned: {offsets}")
                 if section_title == "None found":
                     start_offset = 0
                     end_offset = len(openiti_obj_b1.fetch_milestone(last_ms, clean=True))
+                # Issue of Ibn al-Sayrafi data starting too early - likely here - (data states starts at 0, when it begins at 621 chars - need that minus the section position)
                 else:
+
                     if first_ms == last_ms:
                         start_offset = openiti_obj_b1.calculate_tag_offset_clean(first_ms, section_title, regex=False)[0]
                         end_offset = openiti_obj_b1.calculate_tag_offset_clean(last_ms)[-1]
@@ -525,8 +530,7 @@ class multitextDiffMap():
                 
                     if ms == first_ms:
                         ms_data = ms_data[ms_data["end"] > start_offset]
-                        # Make the augmentation negative if it's the first ms
-                        offset_augment = 0 - start_offset
+
                     elif ms == last_ms:
                         ms_data = ms_data[ms_data["begin"] < end_offset]
                         offset_augment = section_position
@@ -535,6 +539,10 @@ class multitextDiffMap():
                     
                     ms_data = ms_data.to_dict("records")
                     for data in ms_data:
+                        if ms == first_ms:
+                            offset_augment = data["begin"] - start_offset
+                        else:
+                            offset_augment = section_position
                         # print(data)
                         book_2 = data["book2"]
                         ms2 = data["seq2"]
@@ -544,6 +552,8 @@ class multitextDiffMap():
                         text_b = text_b_obj.fetch_offset_clean(ms2, start=data["begin2"], end=data["end2"])
                         offset_data = pairComparison(text_a, text_b).fetch_verbatim_offsets(augment_offset_a= offset_augment, return_text=False)
                         for offset in offset_data["offsets_a"]:
+                            # if book == "0542IbnMunjibTajRiyasaIbnSayrafi.Ishara":
+                            #     print(f"Begin: {data['begin']}, End: {data['end']}, augment: {offset_augment}, offset: {offset}" )
                             diff_offsets.append({"section": section_title,
                                                 "book": book,
                                                  "start": offset["start"],
@@ -552,6 +562,7 @@ class multitextDiffMap():
                                                  "book2": book_2,
                                                  "ms2": ms2,
                                                  "section2": ms_sections_map[book_2].get(ms2, "Section outside dict")})
+                        
                     section_position += ms_len
         
         return diff_offsets
@@ -565,7 +576,7 @@ class multitextDiffMap():
         if group_data_by_section:
             sub["rid"] = list(zip(sub["book2"], sub["section2"]))
         else:
-            sub["rid"] = list(sub["book2"])
+            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
         sub = sub.sort_values(["rid", "start", "end"])
 
         sub["run_end"] = sub.groupby("rid")["end"].cummax()
@@ -584,9 +595,9 @@ class multitextDiffMap():
                         .sort_values("chars", ascending=False))
 
         if group_data_by_section:
-            contrib[["book2","ms2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
+            contrib[["book2","section"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
         else:
-            contrib[["book2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
+            contrib[["book2", "ms2"]] = pd.DataFrame(contrib["rid"].tolist(), index=contrib.index)
         return contrib.drop(columns=["rid"])
     
 
@@ -601,7 +612,7 @@ class multitextDiffMap():
         if group_data_by_section:
             sub["rid"] = list(zip(sub["book2"], sub["section2"]))
         else:
-            sub["rid"] = list(sub["book2"])
+            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
 
 
 
@@ -626,19 +637,22 @@ class multitextDiffMap():
         for i, x in enumerate(points[:-1]):
             for rid in starts.get(x, []):
                 active.add(rid)
+            
+            for rid in ends.get(x, []):
+                active.discard(rid)
 
             next_x = points[i + 1]
+            active_out = sorted(set(rid[0] if isinstance(rid, tuple) else rid for rid in active))
             if next_x > x and active:
                 patches.append({
                     "start": x,
                     "end": next_x,
-                    "intensity": len(active),
+                    "intensity": len(active_out),
                     # optional if you want later drill-down per patch:
-                    "active": sorted(active),
+                    "active": active_out,
                 })
 
-            for rid in ends.get(x, []):
-                active.discard(rid)
+
 
         return patches
 
@@ -656,8 +670,11 @@ class multitextDiffMap():
         # drop unnamed index if present
         # pairwise_df = pairwise_df.drop(columns=[c for c in pairwise_df.columns if c.startswith("Unnamed")], errors="ignore")
         # Revisit - it is possible that section grouping not working here as expected
-        out = {}
+        out = {}        
         for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
+            # Remove any rows where parralel data is outside of the sections being compared
+            sub = sub[sub["section2"] != "Section outside dict"]
+            sub.to_csv(f"testing-sub-{book}.csv", encoding='utf-8-sig')
             patches = self.make_patches_exclusive(sub, group_data_by_section=group_data_by_section)
             contrib = self.contributor_union_chars_exclusive(sub, group_data_by_section=group_data_by_section)
             char_len = self._get_total_section_len(book, section)
