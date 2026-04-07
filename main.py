@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     out_dir = "./measure_local_overlap/output_data/lost_texts_data/"
     # diff_mapper = multitextDiffMap(meta_path, corpus_base_path, pairwise_dir=pairwise_path, uri_text_paths=custom_openiti_path)
-    # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, out_dir, group_data_by_section=False,  max_recursions=1)
+    # diff_mapper.run_diff_pipeline("0845Maqrizi.Mawaciz", 1467, 1471, out_dir, group_data_by_section=False, log=True,  max_recursions=1)
 
     data_json = "./measure_local_overlap/output_data/lost_texts_data/verbatim_mapping.json"
     uri_meta = "./measure_local_overlap/output_data/lost_texts_data/uri_meta.csv"
@@ -24,5 +24,9 @@ if __name__ == "__main__":
     # uri_list = ["0845Maqrizi.Muqaffa"]
     graph_obj = multitextGraph(data_json, uri_meta, section_meta)
     # graph_obj.filter_uris(uri_list)
-    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_50_chars.png", chars_per_line=50)
-    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_50_chars.png", map_type="categorical", chars_per_line=50)
+    book_order = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab"]
+    cat_order = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab"]
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_50_chars.png", chars_per_line=50, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_50_chars.png", map_type="categorical", chars_per_line=50, book_order=book_order, cat_order=cat_order)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_100_chars.png", chars_per_line=100, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_100_chars.png", map_type="categorical", chars_per_line=100, book_order=book_order, cat_order=cat_order)

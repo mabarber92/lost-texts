@@ -571,6 +571,7 @@ class multitextDiffMap():
         """
         sub: rows for ONE (book, section)
         Returns: DataFrame with book2, ms2, chars (union length), sorted desc.
+        
         """
         sub = sub.copy()
         if group_data_by_section:
@@ -602,55 +603,107 @@ class multitextDiffMap():
     
 
     def make_patches_exclusive(self, sub: pd.DataFrame, group_data_by_section=True):
-        """
-        sub: rows for ONE (book, section)
-        Returns: list of dict patches with start, end, intensity
-                where intensity = number of unique (book2, ms2) covering [start, end)
-        """
         sub = sub.copy()
-        # If set to true build "rid" out of the section title to use that to amalgamate
         if group_data_by_section:
             sub["rid"] = list(zip(sub["book2"], sub["section2"]))
         else:
-            sub["rid"] = list(zip(sub["book2"], sub["ms2"]))
+            sub["rid"] = sub["book2"]
 
+        # Alternative implementation - loop through rows one-by-one checking on following, merging or splitting
+        data = sub.to_dict("records")
+        # Using dict - accumulate number of active books for each char
+        char_pos = {}
+        for row in data:
+            active_chars = list(range(row["start"], row["end"]))
+            for char in active_chars:
+                if char in char_pos.keys():
+                    if row["rid"] not in char_pos[char]:
+                        char_pos[char].append(row["rid"])
+                else:
+                    char_pos[char] = [row["rid"]]
+                # char_pos[char] = char_pos.get(char, list()).append(row["rid"])
 
-
-        starts = defaultdict(list)
-        ends = defaultdict(list)
-
-        for s, e, rid in sub[["start", "end", "rid"]].itertuples(index=False, name=None):
-            s = int(s); e = int(e)
-            if e <= s:
-                continue
-            starts[s].append(rid)
-            ends[e].append(rid)
-
-        points = sorted(set(starts) | set(ends))
-        if len(points) < 2:
-            return []
-
-        active = set()
+        # Merge adjacent chars - output to patches
         patches = []
+        used_chars = []
+        all_chars = list(char_pos.keys())
+        all_chars.sort()
 
-        # Sweep boundaries; starts-before-ends gives "touching counts as overlap" behavior.
-        for i, x in enumerate(points[:-1]):
-            for rid in starts.get(x, []):
-                active.add(rid)
+        for char in all_chars:
             
-            for rid in ends.get(x, []):
-                active.discard(rid)
+            # If char has already been merged into a range - skip over it
+            if char in used_chars:
+                continue
+            active = char_pos[char]
+            used_chars.append(char)
+            next_char = char + 1
+            if next_char in char_pos.keys():
+                next_active = char_pos[next_char]
+                progress = True
+                # Keep augmenting until run out of options
+                while progress and next_active == active:
+                    used_chars.append(next_char)
+                    next_char += 1
+                    if next_char in char_pos.keys():
+                        next_active = char_pos[next_char]
+                    else:
+                        progress = False
+            
+            active.sort()
 
-            next_x = points[i + 1]
-            active_out = sorted(set(rid[0] if isinstance(rid, tuple) else rid for rid in active))
-            if next_x > x and active:
-                patches.append({
-                    "start": x,
-                    "end": next_x,
-                    "intensity": len(active_out),
-                    # optional if you want later drill-down per patch:
-                    "active": active_out,
-                })
+            patches.append({
+                "start": char,
+                "end": next_char,
+                "intensity": len(active),  # count unique books
+                "active": active,  # output book URIs only
+            })
+
+
+        
+
+        # # Merge shared char pos - combined book2 data
+
+
+        # # Output as spans
+
+        # if group_data_by_section:
+        #     sub["rid"] = list(zip(sub["book2"], sub["section2"]))
+        # else:
+        #     sub["rid"] = sub["book2"]
+
+        # starts = defaultdict(list)
+        # ends = defaultdict(list)
+
+        # for s, e, rid in sub[["start", "end", "rid"]].itertuples(index=False, name=None):
+        #     s = int(s); e = int(e)
+        #     if e <= s:
+        #         continue
+        #     starts[s].append(rid)
+        #     ends[e].append(rid)
+
+        # points = sorted(set(starts) | set(ends))
+        # if len(points) < 2:
+        #     return []
+
+        # active = set()
+        # patches = []
+
+        # # Original order: starts before ends = touching spans merge correctly
+        # for i, x in enumerate(points[:-1]):
+        #     for rid in starts.get(x, []):
+        #         active.add(rid)
+            
+        #     for rid in ends.get(x, []):
+        #         active.discard(rid)
+
+        #     next_x = points[i + 1]
+        #     if next_x > x and active:
+        #         patches.append({
+        #             "start": x,
+        #             "end": next_x,
+        #             "intensity": len(set(rid for rid in active)),  # count unique books
+        #             "active": sorted(set(rid for rid in active)),  # output book URIs only
+        #         })
 
 
 
@@ -674,6 +727,8 @@ class multitextDiffMap():
         for (book, section), sub in pairwise_df.groupby(["book", "section"], sort=False):
             # Remove any rows where parralel data is outside of the sections being compared
             sub = sub[sub["section2"] != "Section outside dict"]
+            if self.log:
+                sub.to_csv(f"sub-{book}.csv")
 
             patches = self.make_patches_exclusive(sub, group_data_by_section=group_data_by_section)
             contrib = self.contributor_union_chars_exclusive(sub, group_data_by_section=group_data_by_section)
@@ -750,6 +805,7 @@ class multitextDiffMap():
         self.internal_data = {}
         self.clusters_checked = []
         self.recurse_log = 0
+        self.log = log
 
         if self.cluster_path is not None:
             # As the pipeline run will shrink the data as it goes - initiate a new cluster_obj with the pipeline

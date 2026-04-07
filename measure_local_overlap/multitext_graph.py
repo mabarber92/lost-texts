@@ -34,6 +34,8 @@ class multitextGraph():
 
         if uri_meta is not None:
             self._map_metadata(uri_meta, section_meta)
+        else:
+            self.uri_map = None
         
         # Get the highest number of characters and number of books
         self._get_summary_data()
@@ -111,9 +113,9 @@ class multitextGraph():
         self.unique_combos = sorted(set(
             tuple(sorted(combo)) for combo in all_combinations
         ))
-        print(self.unique_combos)
+        
                 
-
+        self.all_combinations = all_combinations
         self.max_chars = max_chars
         self.max_intensity = max_intensity
         self.book_count = len(self.mapping_dict.keys())
@@ -129,6 +131,16 @@ class multitextGraph():
         
         return text
 
+    def _resolve_uri_meta(self, uri_list):
+        """Take a uri_list and resolve them to a list of corresponding uri metadata"""
+        if self.uri_map is None:
+            return uri_list
+        else:
+            mapped_list = []
+            for uri in uri_list:
+                mapped_list.append(self.uri_map[uri])
+            return mapped_list
+
     def _map_metadata(self, uri_csv, section_csv=None):
         """Take metadata mapping files and modify the incoming data to have metadata rather than original data"""
         
@@ -140,11 +152,15 @@ class multitextGraph():
             # to avoid lots of nested ifs - use empty dataframe - which _meta_meta will force to populate with existing data
             section_df = pd.DataFrame()
         
+        # For use elsewhere in the script - create a metadata mapping
+        self.uri_map = {}
+
         new_mapping_dict = {}
         print(self.mapping_dict.keys())
         for book, data in tqdm(self.mapping_dict.items()):
             
             book_meta = self._match_meta(uri_df, book, "uri")
+            self.uri_map[book] = book_meta
             new_data = {}            
             for section, section_data in data.items():                
                 section_meta = self._match_meta(section_df, section, "section")
@@ -330,7 +346,7 @@ class multitextGraph():
                 exit()
 
 
-    def _write_patches(self, max_lines, nonreuse_color = "lightgrey", annotation_gap=30, annotate_stats=True):
+    def _write_patches(self, max_lines, nonreuse_color = "lightgrey", annotation_gap=30, annotate_stats=True, book_order = None):
         """Create a list of rectangular patches using the line length and the data dict"""
         # Will need to return the locations for labels alongside the gaps (or even just an annotation-compliant format that we can pass to matplotlib)
         print("Writing patches...")
@@ -351,8 +367,15 @@ class multitextGraph():
         
         # Set horizontal position at zero - will increase by char len + 1 with each book
         horizontal_pos = 0
+        # If a book_order has been set, use that as an order for a book, otherwise just take dict items
+        if book_order is not None:
+            books = book_order[:]
+            books = self._resolve_uri_meta(books)
+        else:
+            books = self.mapping_dict.keys()
         # Loop through each book
-        for book, data in tqdm(self.mapping_dict.items()):
+        for book in tqdm(books):
+            data = self.mapping_dict[book]
             heatmap_log[book] = {}
             # Reset the checked chars for each book
             self.checked_chars = []
@@ -630,15 +653,68 @@ class multitextGraph():
         rect = Rectangle(xy, width, height_increase, facecolor='none', linestyle=linestyle, edgecolor='black', linewidth=linewidth)
         return rect
 
-    def _build_categorical_colors(self, base_map="tab10"):
+    def _reorder_unique_combinations(self, lead_books):
+        """Use a set of lead books to create a set of custom
+        combinations prioritising order of lead books"""
+
+        def check_combination(book, combo, index, new_combinations, checked_combinations):
+            sorted_combo = combo.sort()
+            if combo[index] == book and sorted_combo not in checked_combinations:
+                new_combinations.append(tuple(combo))
+                checked_combinations.append(sorted_combo)
+            return new_combinations, checked_combinations
+            
+
+        new_combinations = []
+        checked_combinations = []
+        for book in lead_books:
+            print(book)
+            for combo in self.all_combinations:
+                for i in range(len(combo)):
+                    new_combinations, checked_combinations = check_combination(book, combo, i, new_combinations, checked_combinations)
+                    
+
+        self.unique_combos = new_combinations
+        print(self.unique_combos)
+    
+    def _sort_combos_by_priority(self, priority_order):
+        def combo_sort_key(combo):
+            # Find the highest priority book in this combo
+            # (lowest index in priority_order)
+            priorities = [
+                priority_order.index(book) 
+                if book in priority_order else len(priority_order)
+                for book in combo
+            ]
+            lead_priority = min(priorities)
+            lead_book = combo[priorities.index(lead_priority)]
+            return (lead_priority, lead_book, len(combo), combo)
+        
+
+        return sorted(set(
+            tuple(sorted(combo, key=combo_sort_key)) for combo in self.all_combinations
+            ))
+
+    def _build_categorical_colors(self, base_map=None, cat_order=None):
         """Build a custom categorical colour set that allows for intuitive reading of category combinations"""
-        lead_books = sorted(set(combo[0] for combo in self.unique_combos))
+        
+        # If a category order is specified, then the lead books are populated from that
+        if cat_order:
+            lead_books = cat_order
+        else:
+            lead_books = sorted(set(combo[0] for combo in self.unique_combos))
+        
+        # Default for colour mapping
+        if base_map is None:
+            base_map = "tab10"
         base_hues = plt.get_cmap(base_map)
         
         # Index 0 reserved for no-reuse
         color_list = [(0.85, 0.85, 0.85, 1)]
         self.combo_index = {}
         
+        
+
         for book_idx, lead in enumerate(lead_books):
             group = [c for c in self.unique_combos if c[0] == lead]
             for shade_idx, combo in enumerate(group):
@@ -646,13 +722,15 @@ class multitextGraph():
                 factor = 1.0 - 0.5 * (shade_idx / max(len(group) - 1, 1))
                 color_list.append(tuple(base[:3] * factor) + (1.0,))
                 self.combo_index[combo] = len(color_list) - 1
-        print(color_list)
+        
         return mcolors.ListedColormap(color_list)
 
-    def _set_color_mapping(self, color_map="Greys"):
+    def _set_color_mapping(self, color_map=None, cat_order=None):
         """ Initiate a sequential color heatmap - using max intensity as top of scale"""
         if self.mode == "sequential":
             print(f"Max intensity: {self.max_intensity}")
+            if color_map is None:
+                color_map="Greys"
             base_cmap = plt.get_cmap(color_map)
 
             self.cmap = mcolors.LinearSegmentedColormap.from_list(
@@ -662,7 +740,7 @@ class multitextGraph():
             
         if self.mode == "categorical":
             
-            self.cmap = self._build_categorical_colors()
+            self.cmap = self._build_categorical_colors(base_map=color_map, cat_order=cat_order)
             n = len(self.cmap.colors)
             self.norm = mcolors.NoNorm()
             # Above suggested - below worked before
@@ -763,7 +841,8 @@ class multitextGraph():
 
 
     # Overall graphing function
-    def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = "YlOrBr", export_path=None, add_explan=True, map_type="heatmap"):
+    def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = None, export_path=None, add_explan=True, map_type="heatmap",
+        book_order = None, cat_order=None):
         """Main func for drawing the graph - max lines is the number of lines to go to for the longest book"""
         self.line_length, max_lines = self._calculate_line_length(max_lines, chars_per_line)
         
@@ -773,9 +852,14 @@ class multitextGraph():
             self.mode = "sequential"
         else:
             self.mode = "categorical"
-        self._set_color_mapping(color_map)
+        
+        if cat_order is not None:
+            cat_order = self._resolve_uri_meta(cat_order)
+            self.unique_combos = self._reorder_unique_combinations(cat_order)
 
-        patch_collection, gap_patch_collection, annotation_list, horizontal_markers, section_boxes = self._write_patches(max_lines=max_lines)
+        self._set_color_mapping(color_map, cat_order)
+
+        patch_collection, gap_patch_collection, annotation_list, horizontal_markers, section_boxes = self._write_patches(max_lines=max_lines, book_order = book_order)
         print(horizontal_markers)
         
         px = 1/plt.rcParams['figure.dpi']  # pixel in inches
