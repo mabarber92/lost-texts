@@ -26,7 +26,16 @@ if __name__ == "__main__":
     # graph_obj.filter_uris(uri_list)
     book_order = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab"]
     cat_order = ["0845Maqrizi.Mawaciz", "0845Maqrizi.Muqaffa", "0660IbnCadim.BughyatTalab"]
-    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_50_chars.png", chars_per_line=50, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order)
-    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_50_chars.png", map_type="categorical", chars_per_line=50, book_order=book_order, cat_order=cat_order)
-    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_100_chars.png", chars_per_line=100, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order)
-    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_100_chars.png", map_type="categorical", chars_per_line=100, book_order=book_order, cat_order=cat_order)
+    # graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_50_chars.png", chars_per_line=50, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order)
+    # graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_50_chars.png", map_type="categorical", chars_per_line=50, book_order=book_order, cat_order=cat_order)
+    # graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/heatmap_100_chars.png", chars_per_line=100, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order)
+    # graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/sample_graphs/catmap_100_chars.png", map_type="categorical", chars_per_line=100, book_order=book_order, cat_order=cat_order)
+
+    # Export new size
+    cm = 1/2.54
+    new_figsize = (15.6-(0.25+0.2)*cm, 18-(0.3-0.2)*cm)
+    # graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/graphs/heatmap_50_chars.png", chars_per_line=50, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order, figsize=new_figsize)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/graphs/catmap_50_chars_ver.png", map_type="categorical", chars_per_line=50, book_order=book_order, cat_order=cat_order, figsize=new_figsize, font_size=18)
+    # graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/graphs/heatmap_100_chars.png", chars_per_line=100, color_map = "YlOrBr", book_order=book_order, cat_order=cat_order, figsize=new_figsize)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/graphs/catmap_100_chars_ver.png", map_type="categorical", chars_per_line=100, book_order=book_order, cat_order=cat_order, figsize=new_figsize, font_size=18)
+    graph_obj.draw_diff_graph(export_path = "./measure_local_overlap/graphs/catmap_200_chars_ver.png", map_type="categorical", chars_per_line=200, book_order=book_order, cat_order=cat_order, figsize=new_figsize, font_size=18)

@@ -9,11 +9,15 @@ from collections import Counter
 import math
 from tqdm import tqdm
 import numpy as np
+import colorsys
 
 class multitextGraph():
 
     def __init__ (self, mapping_json, uri_meta=None, section_meta=None, log=False, uri_filter=None):
         self.mapping_dict = self.load_json(mapping_json)
+
+        # Set the default graph spacing
+        self.set_spacing_parameters()
 
 
         # # metadata_csv allows to provide transliterations or translations of the data and URI mappings
@@ -44,6 +48,8 @@ class multitextGraph():
         self.log=log
         self.patch_log = []
         self.df_log=0
+
+        self._priority_index = {}
         
 
     def load_json(self, json_path):
@@ -66,10 +72,20 @@ class multitextGraph():
         print("Getting summary data")
         max_chars = 0
         max_intensity = 0
+        max_sections = 0
+        max_contributors = 0
         all_combinations = []
         for book, data in self.mapping_dict.items():
+            book_contributors = 0
+            for section, section_data in data.items():
+                book_contributors += len(section_data["contributors"])
+            if book_contributors > max_contributors:
+                max_contributors = book_contributors
             book_max = 0
             book_intensity_max = 0
+            book_sections = len(data.keys())  # ADD THIS
+            if book_sections > max_sections:  # ADD THIS
+                max_sections = book_sections  # ADD THIS
             for section, section_data in data.items():                
                 res = Counter()
                 for patches in section_data["patches"]:
@@ -115,6 +131,8 @@ class multitextGraph():
         ))
         
                 
+        self.max_sections = max_sections
+        self.max_contributors = max_contributors
         self.all_combinations = all_combinations
         self.max_chars = max_chars
         self.max_intensity = max_intensity
@@ -328,6 +346,11 @@ class multitextGraph():
         return patches, colors, new_wrap, current_height
 
 
+    def _normalise_combo(self, combo):
+        if self._priority_index:
+            return tuple(sorted(combo, key=lambda b: (self._priority_index.get(b, float('inf')), b)))
+        else:
+            return tuple(sorted(combo))
 
     def _set_intensity(self, data=None):
         if self.mode == "sequential":
@@ -339,7 +362,7 @@ class multitextGraph():
             if data is None:
                 return tuple([None])
             elif type(data["active"]) == list:
-                return tuple(sorted(data["active"]))
+                return self._normalise_combo(data["active"])  # was: tuple(sorted(data["active"]))
             else:
                 print("Appropriate data type not found for a categorical map in:")
                 print(data)
@@ -350,7 +373,10 @@ class multitextGraph():
         """Create a list of rectangular patches using the line length and the data dict"""
         # Will need to return the locations for labels alongside the gaps (or even just an annotation-compliant format that we can pass to matplotlib)
         print("Writing patches...")
-        height_increase = +1 # A bit basic - multiplying the increase by the book count
+        height_increase = 1 # A bit basic - multiplying the increase by the book count
+
+        # Set annotation gap as a unit of height increases - so that it's uniform
+   
         patches_list = []
         patch_intensity = []
         gap_patches_list = []
@@ -375,6 +401,9 @@ class multitextGraph():
             books = self.mapping_dict.keys()
         # Loop through each book
         for book in tqdm(books):
+            
+            section_ended=False
+
             data = self.mapping_dict[book]
             heatmap_log[book] = {}
             # Reset the checked chars for each book
@@ -405,7 +434,7 @@ class multitextGraph():
             # patched_data = pd.DataFrame()
 
             # Add book title to annotation        
-            height += height_increase*(annotation_gap*1.5)
+            height += (annotation_gap*self.title_gap)
             wrap = 0                      
             print(f"Added title at line: {height}")
             # annot_count +=1
@@ -415,7 +444,7 @@ class multitextGraph():
             # Add annotation to our annotations list
             annotation = {
                 "label_text": book,
-                "y": height-20, 
+                "y": height-(annotation_gap*self.title_height), 
                 "x": horizontal_pos+self.line_length-1,
                 "va": "top",
                 "font_multiple": 1.2
@@ -464,11 +493,15 @@ class multitextGraph():
                 else:
                 # If only annotation in the row skip and just reset overlap and height - as check, throw error if annotation and data in the row
                     # patched_data = pd.concat([patched_data, line_data])
+                    if section_ended:
+                        # If we've reached the end of a section add an additional 2 to the height after completing all relevant patches    
+                        height += self.section_gap*height_increase
+                        section_ended=False
                     types = line_data["type"].drop_duplicates().tolist()
                     if "annotation" in types and "reuse" not in types:
                         
                         
-                        height += height_increase*annotation_gap
+                        height += annotation_gap * self.section_title_gap
                         wrap = 0                      
                         print(f"Added annotation at line: {height}")
                         # annot_count +=1
@@ -479,14 +512,14 @@ class multitextGraph():
                         data = line_data.to_dict("records")[0]
                         annotation = {
                             "label_text": data["label"],
-                            "y": height-4, 
+                            "y": height- (self.section_title_adjust*height_increase), 
                             "x": horizontal_pos+self.line_length-3,
                             "va": "bottom"
                         }
                         annotations_list.append(annotation)
                         
                         # Set section start height for wrapping box
-                        section_start = height-(annotation_gap/1.5)
+                        section_start = height-annotation_gap+height_increase*self.section_box_top
                     
                     # This is an error check - if logic of _create_patches_df correct, then this shouldn't trip
                     elif "annotation" in types and "reuse" in types:
@@ -509,9 +542,12 @@ class multitextGraph():
 
                                 # If 'end' Set section end and write out section_patch
                                 if row["type"] == "end":
-                                    section_height = height+2 - section_start
+                                    section_height = height+(self.section_box_bottom*height_increase) - section_start
                                     section_box = self._create_rectangle(horizontal_pos, self.line_length, section_start, section_height, section_box=True)
                                     section_boxes.append(section_box)
+                                    section_ended = True
+                                    
+                                    
 
                             # Write the data to a patch - the function will handle lines longer than line length and wrap
                             else:
@@ -532,18 +568,20 @@ class multitextGraph():
                                     patches_list.extend(new_gap_patches)
                                     patch_intensity.extend(new_intensities)
                                     heatmap_log[book][0] = heatmap_log[book].get(0, 0) + next_start - row["end"]
+
+                        
             
             # Add the annotation stats to the bottom of the diff
             if annotate_stats:
-                height += 4
+                height += self.annot_gap * height_increase
                 annotation_text = "Aligned books:"
                 annotations_list.append({"label_text": annotation_text,
                     "y" : height,
                     "x" : horizontal_pos+self.line_length-3,
                     "va": "top",
-                    "font_multiple": 0.7
+                    "font_multiple": 1
                     })
-                height += annotation_gap/3
+                height += annotation_gap*self.annot_title_space
 
                 concatenated_stats = {}           
                 for section, book_data in self.mapping_dict[book].items():
@@ -566,9 +604,9 @@ class multitextGraph():
                                         "y" : height,
                                         "x" : horizontal_pos+self.line_length-3,
                                         "va": "top",
-                                        "font_multiple": 0.6
+                                        "font_multiple": 0.7
                                         })
-                    height += annotation_gap/4
+                    height += annotation_gap*self.annot_spacing
 
             max_book_lines.append(height)
             # Update horizontal for next book - use + 1 to create a gap
@@ -590,6 +628,8 @@ class multitextGraph():
         # Create a collection from the patches
         if self.log:
             print(heatmap_log)
+        
+
         
         
         patch_collection = PatchCollection(patches_list, cmap=self.cmap, norm=self.norm, edgecolor='none')
@@ -653,76 +693,152 @@ class multitextGraph():
         rect = Rectangle(xy, width, height_increase, facecolor='none', linestyle=linestyle, edgecolor='black', linewidth=linewidth)
         return rect
 
-    def _reorder_unique_combinations(self, lead_books):
-        """Use a set of lead books to create a set of custom
-        combinations prioritising order of lead books"""
+    # def _reorder_unique_combinations(self, lead_books):
+    #     """Use a set of lead books to create a set of custom
+    #     combinations prioritising order of lead books"""
 
-        def check_combination(book, combo, index, new_combinations, checked_combinations):
-            sorted_combo = combo.sort()
-            if combo[index] == book and sorted_combo not in checked_combinations:
-                new_combinations.append(tuple(combo))
-                checked_combinations.append(sorted_combo)
-            return new_combinations, checked_combinations
+    #     def check_combination(book, combo, index, new_combinations, checked_combinations):
+    #         sorted_combo = combo.sort()
+    #         if combo[index] == book and sorted_combo not in checked_combinations:
+    #             new_combinations.append(tuple(combo))
+    #             checked_combinations.append(sorted_combo)
+    #         return new_combinations, checked_combinations
             
 
-        new_combinations = []
-        checked_combinations = []
-        for book in lead_books:
-            print(book)
-            for combo in self.all_combinations:
-                for i in range(len(combo)):
-                    new_combinations, checked_combinations = check_combination(book, combo, i, new_combinations, checked_combinations)
+    #     new_combinations = []
+    #     checked_combinations = []
+    #     for book in lead_books:
+    #         print(book)
+    #         for combo in self.all_combinations:
+    #             for i in range(len(combo)):
+    #                 new_combinations, checked_combinations = check_combination(book, combo, i, new_combinations, checked_combinations)
                     
 
-        self.unique_combos = new_combinations
-        print(self.unique_combos)
+    #     self.unique_combos = new_combinations
+    #     print(self.unique_combos)
     
     def _sort_combos_by_priority(self, priority_order):
-        def combo_sort_key(combo):
-            # Find the highest priority book in this combo
-            # (lowest index in priority_order)
-            priorities = [
-                priority_order.index(book) 
-                if book in priority_order else len(priority_order)
-                for book in combo
-            ]
-            lead_priority = min(priorities)
-            lead_book = combo[priorities.index(lead_priority)]
-            return (lead_priority, lead_book, len(combo), combo)
-        
+        priority_index = {book: i for i, book in enumerate(priority_order)}
 
-        return sorted(set(
-            tuple(sorted(combo, key=combo_sort_key)) for combo in self.all_combinations
-            ))
+        def normalise(combo):
+            # Canonical within-combo order: by priority, then alphabetically
+            return tuple(sorted(combo, key=lambda b: (priority_index.get(b, float('inf')), b)))
+
+        def get_lead_and_key(combo):
+            hits = [(priority_index[b], b) for b in combo if b in priority_index]
+            if hits:
+                lead_priority, lead_book = min(hits)
+            else:
+                lead_priority = len(priority_order)
+                lead_book = combo[0]
+            return (lead_priority, lead_book, len(combo), combo)
+
+        # Deduplicate using priority-normalised form (not alphabetical)
+        normalised = sorted(set(normalise(c) for c in self.all_combinations))
+        return sorted(normalised, key=get_lead_and_key)
 
     def _build_categorical_colors(self, base_map=None, cat_order=None):
         """Build a custom categorical colour set that allows for intuitive reading of category combinations"""
         
         # If a category order is specified, then the lead books are populated from that
         if cat_order:
-            lead_books = cat_order
+            self.unique_combos = self._sort_combos_by_priority(cat_order)
+            self._priority_index = {book: i for i, book in enumerate(cat_order)}
+            def get_lead(combo):
+                hits = [(self._priority_index[b], b) for b in combo if b in self._priority_index]
+                return min(hits)[1] if hits else combo[0]
         else:
-            lead_books = sorted(set(combo[0] for combo in self.unique_combos))
+            self.unique_combos = sorted(set(tuple(sorted(c)) for c in self.all_combinations))
+            self._priority_index = {}
+            def get_lead(combo):
+                return combo[0]
         
-        # Default for colour mapping
+
+        # Group combos by lead to calculate shade steps
+        from collections import defaultdict
+        lead_groups = defaultdict(list)
+        for combo in self.unique_combos:
+            lead_groups[get_lead(combo)].append(combo)
+        
+        # Decide colormap strategy
+        max_group_size = max((len(g) for g in lead_groups.values()), default=1)
+        use_tab20b = base_map is None and max_group_size <= 3
+        
+        # Assign one base hue per unique lead book, in the order they first appear
+        seen_leads = []
+        for combo in self.unique_combos:
+            lead = get_lead(combo)
+            if lead not in seen_leads:
+                seen_leads.append(lead)
+
+        lead_hue_index = {lead: i for i, lead in enumerate(seen_leads)}
+        
+        # If parameters met and no specific map given - tab20c as a default
+        if use_tab20b:
+            base_index = 0
+            tab20b = plt.get_cmap("tab20c")
+            # tab20c is laid out as 5 hue groups * 4 shades, light to dark
+            # Each group of 4 starts at indices 0, 4, 8, 12, 16
+            color_list = [(0.85, 0.85, 0.85, 1)]
+            self.combo_index = {}
+            for combo in self.unique_combos:
+                lead = get_lead(combo)
+                group = lead_groups[lead]
+                hue_idx = lead_hue_index[lead]
+                shade_idx = group.index(combo)
+                
+                # Each hue block is 4 colours starting at hue_idx * 4
+                # shade_idx 0 = lightest, 3 = darkest - add 4 and deduct to go from lighter to darker shades
+                color = tab20b.colors[hue_idx * 4 + 2 - shade_idx]
+                color_list.append(color)
+                self.combo_index[combo] = len(color_list) - 1
+            return mcolors.ListedColormap(color_list)    
+
+
+        # Default for colour mapping if number larger
         if base_map is None:
             base_map = "tab10"
         base_hues = plt.get_cmap(base_map)
-        
-        # Index 0 reserved for no-reuse
+        # Index 0 = no-reuse grey
         color_list = [(0.85, 0.85, 0.85, 1)]
         self.combo_index = {}
-        
-        
 
-        for book_idx, lead in enumerate(lead_books):
-            group = [c for c in self.unique_combos if c[0] == lead]
-            for shade_idx, combo in enumerate(group):
-                base = np.array(base_hues(book_idx))
-                factor = 1.0 - 0.5 * (shade_idx / max(len(group) - 1, 1))
-                color_list.append(tuple(base[:3] * factor) + (1.0,))
-                self.combo_index[combo] = len(color_list) - 1
-        
+
+
+        max_group_size = max(len(g) for g in lead_groups.values())
+
+        for combo in self.unique_combos:
+            lead = get_lead(combo)
+            group = lead_groups[lead]
+            shade_idx = group.index(combo)
+
+            # Different shading logic
+            # base = base_hues(lead_hue_index[lead] / 10.0)  # RGBA
+    
+            # # Convert to HLS, darken by reducing lightness only
+            # r, g, b = base[0], base[1], base[2]
+            # h, l, s = colorsys.rgb_to_hls(r, g, b)
+            
+            # light_ceiling = min(0.65, l + 0.25)  # relative to base, not absolute
+            # sat_floor = 0.3  # how desaturated the lightest shade gets
+
+            # t = shade_idx / max(max_group_size - 1, 1)  # 0.0 = lightest, 1.0 = base
+            # l_new = light_ceiling + t * (l - light_ceiling)
+            # s_new = sat_floor + t * (s - sat_floor)
+
+            # r_new, g_new, b_new = colorsys.hls_to_rgb(h, l_new, s_new)
+            # color_list.append((r_new, g_new, b_new, 1.0))
+            # self.combo_index[combo] = len(color_list) - 1
+
+            # Old shading logic
+            base = np.array(base_hues(lead_hue_index[lead]))
+            factor = 1.0 - 0.5 * (shade_idx / max(max_group_size - 1, 1))
+            color_list.append(tuple(base[:3] * factor) + (1.0,))
+            self.combo_index[combo] = len(color_list) - 1
+
+        for lead, group in lead_groups.items():
+            print(f"{lead}: {len(group)} combos")
+
         return mcolors.ListedColormap(color_list)
 
     def _set_color_mapping(self, color_map=None, cat_order=None):
@@ -739,6 +855,8 @@ class multitextGraph():
             self.norm = mcolors.Normalize(vmin=0, vmax=self.max_intensity)
             
         if self.mode == "categorical":
+            if cat_order is not None:
+                cat_order = self._resolve_uri_meta(cat_order)
             
             self.cmap = self._build_categorical_colors(base_map=color_map, cat_order=cat_order)
             n = len(self.cmap.colors)
@@ -810,11 +928,11 @@ class multitextGraph():
                 font_size = base_font_size * annotation["font_multiple"]
             else:
                 font_size = base_font_size
-            wrapped = self._wrap_text_to_data_width(ax, annotation["label_text"], annotation["x"], annotation["y"], self.line_length*0.75 , fontsize=font_size)
+            wrapped = self._wrap_text_to_data_width(ax, annotation["label_text"], annotation["x"], annotation["y"], self.line_length , fontsize=font_size)
             ax.text(annotation["x"], annotation["y"], wrapped, size = font_size, wrap=True, va=annotation["va"]
                      )
 
-    def _build_legend(self, ax, patch_collection, book_joiner= " ; "):
+    def _build_legend(self, ax, patch_collection, book_joiner= " ; ", font_size=9):
         # Add a colorbar or legend
         if self.mode == "categorical":
             col_count = math.ceil(len(self.unique_combos)/3)
@@ -830,8 +948,9 @@ class multitextGraph():
                 handles=handles,
                 loc="upper center",
                 bbox_to_anchor=(0.5, -0.01),
-                fontsize=6,
-                title="Aligned texts",
+                fontsize=font_size,
+                title_fontsize = font_size*0.9,
+                title="Aligned Books",
                 borderaxespad=0,
                 ncols=col_count
             )
@@ -839,13 +958,58 @@ class multitextGraph():
         else:
             plt.colorbar(patch_collection, ax=ax, aspect=40, ticks=list(range(0, self.max_intensity+1)))
 
+    def set_spacing_parameters(self, title_gap=2, title_height=1.25, section_gap=4, 
+        section_title_gap=1, section_title_adjust=3, section_box_top = 1, section_box_bottom=3, annot_gap=4,
+        annot_title_space = 0.5, annot_spacing=0.35):
+        """Function that sets the spacing globally - applied at init with defaults - can be adjusted prior to drawing"""
+        # Multiples of annotation gap
+        self.title_gap = title_gap
+        self.title_height = title_height
+        self.section_title_gap = section_title_gap
+        self.annot_title_space = annot_title_space
+        self.annot_spacing = annot_spacing
 
+        # Multiples of height
+        self.section_gap = section_gap
+        self.section_title_adjust = section_title_adjust
+        self.section_box_top = section_box_top
+        self.section_box_bottom = section_box_bottom
+        self.annot_gap = annot_gap
+    
+    def apply_spacing_parameters(self, fig, ax, figsize, max_lines, font_size):
+        
+        fig_height_pixels = figsize[1] * fig.dpi
+        
+        k = (
+            self.title_gap +
+            self.max_sections * self.section_title_gap +
+            self.annot_title_space +
+            self.annot_spacing * self.max_contributors
+        )
+        fixed = (
+            self.annot_gap +
+            self.max_sections * self.section_gap +
+            self.explan_space
+        )
+        
+        estimated_ylim = (max_lines + fixed) / (1 - (font_size * 2 * k) / fig_height_pixels)
+        
+        ax.set_xlim((self.line_length + 4) * self.book_count, 0)
+        ax.set_ylim(estimated_ylim, 0)
+
+        fig.canvas.draw()
+        y0 = ax.transData.inverted().transform((0, 0))[1]
+        y1 = ax.transData.inverted().transform((0, 1))[1]
+        data_units_per_pixel = abs(y1 - y0)
+        data_units_per_point = data_units_per_pixel * (fig.dpi / 72)
+
+        return data_units_per_point
     # Overall graphing function
     def draw_diff_graph(self, max_lines=500, chars_per_line=None, color_map = None, export_path=None, add_explan=True, map_type="heatmap",
-        book_order = None, cat_order=None):
+        book_order = None, cat_order=None, figsize=None, font_size=9):
         """Main func for drawing the graph - max lines is the number of lines to go to for the longest book"""
         self.line_length, max_lines = self._calculate_line_length(max_lines, chars_per_line)
-        
+        print(f"max_lines: {max_lines}")
         
         # Set the mode to be used by the cmap, patch builder and collection mapper
         if map_type == "heatmap":
@@ -853,23 +1017,70 @@ class multitextGraph():
         else:
             self.mode = "categorical"
         
-        if cat_order is not None:
-            cat_order = self._resolve_uri_meta(cat_order)
-            self.unique_combos = self._reorder_unique_combinations(cat_order)
+        if add_explan:
+            self.explan_space = 10
+        else:
+            self.explan_space = 0
+        
+        # if cat_order is not None:
+        #     cat_order = self._resolve_uri_meta(cat_order)
+        #     self.unique_combos = self._reorder_unique_combinations(cat_order)
 
         self._set_color_mapping(color_map, cat_order)
 
-        patch_collection, gap_patch_collection, annotation_list, horizontal_markers, section_boxes = self._write_patches(max_lines=max_lines, book_order = book_order)
+        # annotation_gap - changes depending on font size and chars-per-line - this might need to have a col adjust too later
+            # Create figure FIRST so we can use transforms
+        if figsize is None:
+            px = 1/plt.rcParams['figure.dpi']
+            figsize = (1200*px, 800*px)
+        fig = plt.figure(figsize=figsize)
+        ax = fig.add_subplot(1, 1, 1)
+
+        # Set axis limits before transform — use estimated ylim from max_lines
+        # This will be corrected after _write_patches
+        # annotation_contribution = (
+        #     annotation_gap * 2 +                                    # title
+        #     annotation_gap * self.max_sections +                    # section labels
+        #     6 +                                                     # stats header fixed gap
+        #     annotation_gap / 3 +                                    # "Aligned books:" label
+        #     annotation_gap / 4 * self.max_contributors              # per stat line
+        # )
+        # estimated_ylim = max_lines + annotation_contribution + 10 # for bottom of graph
+        # fig_height_pixels = figsize[1] * fig.dpi
+        # k = 3 + self.max_sections + 1/3 + self.max_contributors / 4 + 10
+        # estimated_ylim = (max_lines + 4) / (1 - (font_size * 2 * k) / fig_height_pixels)
+        
+        # ax.set_xlim((self.line_length+4) * self.book_count, 0)
+        # ax.set_ylim(estimated_ylim, 0)
+
+        # # Now get stable data-units-per-point using the transform
+        # fig.canvas.draw()
+        # y0 = ax.transData.inverted().transform((0, 0))[1]
+        # y1 = ax.transData.inverted().transform((0, 1))[1]  # 1 pixel up
+        # data_units_per_pixel = abs(y1 - y0)
+        # data_units_per_point = data_units_per_pixel * (fig.dpi / 72)
+        data_units_per_point = self.apply_spacing_parameters(fig, ax, figsize, max_lines, font_size)
+        # annotation_gap is now font_size * 4 expressed in stable physical units
+        annotation_gap = font_size * 2 * data_units_per_point
+        
+
+
+        patch_collection, gap_patch_collection, annotation_list, horizontal_markers, section_boxes = self._write_patches(max_lines=max_lines, book_order = book_order, annotation_gap=annotation_gap)
         print(horizontal_markers)
         
-        px = 1/plt.rcParams['figure.dpi']  # pixel in inches
-        fig = plt.figure(figsize=(1200*px, 800*px))
-        ax = fig.add_subplot(1, 1, 1)
+        # if figsize is None:
+        #     px = 1/plt.rcParams['figure.dpi']  # pixel in inches
+        #     figsize = (1200*px, 800*px)
+        # fig = plt.figure(figsize=figsize)
+        # ax = fig.add_subplot(1, 1, 1)
         
         ax.add_collection(patch_collection)
         ax.add_collection(section_boxes)
         # ax.add_collection(gap_patch_collection)
         
+        print(f"annotation gap: {annotation_gap}")
+        print(f"chars per line: {chars_per_line}")
+        print(f"ylim: {self.max_lines}")
         
 
         # Set axis as flipped - so that we have rtl and top to bottom display
@@ -878,18 +1089,17 @@ class multitextGraph():
         ax.set_ylim(self.max_lines+10, 0) 
 
         # Add annotations - below xlim and ylim to allow for wrapping
-        self._add_col_annotations(ax, annotation_list)
+        self._add_col_annotations(ax, annotation_list, font_size = font_size)
 
         # Add the correct legend
-        self._build_legend(ax, patch_collection)
-
-        
+        self._build_legend(ax, patch_collection, font_size=font_size)
+                
         ax.set_axis_off()
         
         # Add annotation to bottom for number of chars per row
         if add_explan:
             annotation_text = f"A heatmap of verbatim overlap between {self.book_count} books, where each vertical line is equivalent to {self.line_length} characters"
-            ax.text((self.line_length+4) * self.book_count, self.max_lines+10, annotation_text, size=6)
+            ax.text((self.line_length+4) * self.book_count, self.max_lines+10, annotation_text, size=font_size*0.9)
 
         if self.log:
             log_df = pd.DataFrame(self.patch_log)
